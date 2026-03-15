@@ -1,0 +1,85 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "color": {
+      "palette": [
+        {
+          "slug": "gvb-green",
+          "color": "#2B4A38",
+          "name": "GVB Green"
+        },
+        {
+          "slug": "gvb-green-dark",
+          "color": "#1E3529",
+          "name": "GVB Green Dark"
+        },
+        {
+          "slug": "gvb-orange",
+          "color": "#E8792A",
+          "name": "GVB Orange"
+        },
+        {
+          "slug": "gvb-orange-hover",
+          "color": "#D0661A",
+          "name": "GVB Orange Hover"
+        },
+        {
+          "slug": "gvb-cream",
+          "color": "#EDE8DC",
+          "name": "GVB Cream"
+        },
+        {
+          "slug": "gvb-black",
+          "color": "#1A1A1A",
+          "name": "GVB Black"
+        },
+        {
+          "slug": "gvb-white",
+          "color": "#FFFFFF",
+          "name": "GVB White"
+        }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "slug": "syne",
+          "name": "Syne",
+          "fontFamily": "'Syne', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Syne",
+              "fontStyle": "normal",
+              "fontWeight": "600 700",
+              "src": ["https://fonts.googleapis.com/css2?family=Syne:wght@600;700&display=swap"]
+            }
+          ]
+        },
+        {
+          "slug": "dm-sans",
+          "name": "DM Sans",
+          "fontFamily": "'DM Sans', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "DM Sans",
+              "fontStyle": "normal",
+              "fontWeight": "400 500",
+              "src": ["https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap"]
+            }
+          ]
+        }
+      ]
+    },
+    "spacing": {
+      "spacingSizes": [
+        { "slug": "xs",  "size": "8px",  "name": "XS" },
+        { "slug": "sm",  "size": "16px", "name": "SM" },
+        { "slug": "md",  "size": "32px", "name": "MD" },
+        { "slug": "lg",  "size": "64px", "name": "LG" },
+        { "slug": "xl",  "size": "80px", "name": "XL" }
+      ]
+    }
+  },
+  "styles": {}
+}
