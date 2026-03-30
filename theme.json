@@ -1,100 +1,194 @@
 {
-  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "$schema": "https://schemas.wp.org/wp/6.7/theme.json",
   "version": 3,
   "settings": {
+    "appearanceTools": true,
+    "useRootPaddingAwareAlignments": true,
     "color": {
+      "defaultPalette": false,
+      "defaultGradients": false,
       "palette": [
-        {
-          "slug": "gvb-green",
-          "color": "#459271",
-          "name": "Green"
-        },
-        {
-          "slug": "gvb-orange",
-          "color": "#F28C3B",
-          "name": "Orange"
-        },
-        {
-          "slug": "gvb-orange-hover",
-          "color": "#E65620",
-          "name": "Orange Hover"
-        },
-        {
-          "slug": "gvb-linen",
-          "color": "#EDE8DB",
-          "name": "Linen"
-        },
-        {
-          "slug": "gvb-graphite",
-          "color": "#2B2B2B",
-          "name": "Graphite"
-        },
-        {
-          "slug": "gvb-white",
-          "color": "#FFFFFF",
-          "name": "White"
-        },
-        {
-          "slug": "gvb-black",
-          "color": "#000000",
-          "name": "Black"
-        },
-        {
-          "slug": "gvb-divider",
-          "color": "#E9E9E9",
-          "name": "Divider"
-        }
+        { "slug": "gvb-green",        "color": "#459271", "name": "Green" },
+        { "slug": "gvb-orange",       "color": "#F28C3B", "name": "Orange" },
+        { "slug": "gvb-orange-hover", "color": "#E65620", "name": "Orange Hover" },
+        { "slug": "gvb-linen",        "color": "#EDE8DB", "name": "Linen" },
+        { "slug": "gvb-graphite",     "color": "#2B2B2B", "name": "Graphite" },
+        { "slug": "gvb-white",        "color": "#FFFFFF", "name": "White" },
+        { "slug": "gvb-black",        "color": "#000000", "name": "Black" },
+        { "slug": "gvb-divider",      "color": "#E9E9E9", "name": "Divider" }
       ]
     },
     "typography": {
+      "defaultFontSizes": false,
       "fontFamilies": [
         {
-          "slug": "scale-vf",
-          "name": "Scale VF",
-          "fontFamily": "'Scale VF', sans-serif",
-          "fontFace": [
-            {
-              "fontFamily": "Scale VF",
-              "fontStyle": "normal",
-              "fontWeight": "400",
-              "src": ["file:./assets/fonts/ScaleVF-Regular.woff2"]
-            },
-            {
-              "fontFamily": "Scale VF",
-              "fontStyle": "normal",
-              "fontWeight": "700",
-              "src": ["file:./assets/fonts/ScaleVF-Bold.woff2"]
-            }
-          ]
+          "slug": "gvb-heading",
+          "name": "GVB Heading",
+          "fontFamily": "scale-variable, sans-serif"
         }
       ],
       "fontSizes": [
-        { "slug": "display", "size": "65px", "name": "Display" },
-        { "slug": "h1",      "size": "60px", "name": "Heading 1" },
-        { "slug": "h2",      "size": "40px", "name": "Heading 2" },
-        { "slug": "h3",      "size": "32px", "name": "Heading 3" },
-        { "slug": "h4",      "size": "24px", "name": "Heading 4" },
-        { "slug": "h5",      "size": "18px", "name": "Heading 5" },
-        { "slug": "h6",      "size": "30px", "name": "Heading 6" },
-        { "slug": "body",    "size": "16px", "name": "Body" },
-        { "slug": "label",   "size": "15px", "name": "Label" },
-        { "slug": "label-sm","size": "12px", "name": "Label Small" }
+        { "slug": "display",  "size": "65px", "name": "Display" },
+        { "slug": "h1",       "size": "60px", "name": "Heading 1" },
+        { "slug": "h2",       "size": "40px", "name": "Heading 2" },
+        { "slug": "h3",       "size": "32px", "name": "Heading 3" },
+        { "slug": "h4",       "size": "24px", "name": "Heading 4" },
+        { "slug": "h5",       "size": "18px", "name": "Heading 5" },
+        { "slug": "h6",       "size": "30px", "name": "Heading 6" },
+        { "slug": "body",     "size": "16px", "name": "Body" },
+        { "slug": "label",    "size": "15px", "name": "Label" },
+        { "slug": "label-sm", "size": "12px", "name": "Label Small" }
       ]
     },
     "spacing": {
+      "defaultSpacingSizes": false,
       "spacingSizes": [
-        { "slug": "xs",  "size": "8px",   "name": "XS" },
-        { "slug": "sm",  "size": "16px",  "name": "SM" },
-        { "slug": "md",  "size": "32px",  "name": "MD" },
-        { "slug": "lg",  "size": "64px",  "name": "LG" },
-        { "slug": "xl",  "size": "80px",  "name": "XL" },
-        { "slug": "xxl", "size": "100px", "name": "XXL" }
-      ]
+        { "slug": "xs", "size": "8px",  "name": "XS" },
+        { "slug": "sm", "size": "16px", "name": "SM" },
+        { "slug": "md", "size": "32px", "name": "MD" },
+        { "slug": "lg", "size": "64px", "name": "LG" },
+        { "slug": "xl", "size": "80px", "name": "XL" }
+      ],
+      "units": ["%", "px", "em", "rem", "vh", "vw"]
     },
     "layout": {
       "contentSize": "1200px",
       "wideSize": "1440px"
     }
   },
-  "styles": {}
+  "customTemplates": [
+    {
+      "name": "front-page",
+      "title": "Homepage",
+      "postTypes": ["page"]
+    }
+  ],
+  "templateParts": [
+    {
+      "name": "header",
+      "title": "Header",
+      "area": "header"
+    },
+    {
+      "name": "footer",
+      "title": "Footer",
+      "area": "footer"
+    }
+  ],
+  "styles": {
+    "color": {
+      "background": "var:preset|color|gvb-linen",
+      "text": "var:preset|color|gvb-graphite"
+    },
+    "typography": {
+      "fontFamily": "var:preset|font-family|gvb-heading",
+      "fontSize": "var:preset|font-size|body",
+      "fontWeight": "400",
+      "lineHeight": "1.2",
+      "letterSpacing": "0.08px"
+    },
+    "spacing": {
+      "blockGap": "1.5rem",
+      "padding": {
+        "left": "var:preset|spacing|sm",
+        "right": "var:preset|spacing|sm"
+      }
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|gvb-heading",
+          "fontWeight": "700",
+          "lineHeight": "1.1"
+        },
+        "color": {
+          "text": "var:preset|color|gvb-graphite"
+        }
+      },
+      "h1": {
+        "typography": {
+          "fontSize": "var:preset|font-size|h1",
+          "fontWeight": "700",
+          "lineHeight": "1.03"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontSize": "var:preset|font-size|h2",
+          "fontWeight": "700",
+          "lineHeight": "1.08",
+          "letterSpacing": "0.2px"
+        }
+      },
+      "h3": {
+        "typography": {
+          "fontSize": "var:preset|font-size|h3",
+          "fontWeight": "400",
+          "lineHeight": "1.15",
+          "letterSpacing": "0.16px"
+        }
+      },
+      "h4": {
+        "typography": {
+          "fontSize": "var:preset|font-size|h4",
+          "fontWeight": "400",
+          "lineHeight": "1.2",
+          "letterSpacing": "0.12px"
+        }
+      },
+      "h5": {
+        "typography": {
+          "fontSize": "var:preset|font-size|h5",
+          "fontWeight": "400",
+          "lineHeight": "1.15",
+          "letterSpacing": "0.09px"
+        }
+      },
+      "h6": {
+        "typography": {
+          "fontSize": "var:preset|font-size|h6",
+          "fontWeight": "700",
+          "lineHeight": "1.05",
+          "letterSpacing": "0.15px"
+        }
+      },
+      "button": {
+        "color": {
+          "background": "var:preset|color|gvb-orange",
+          "text": "var:preset|color|gvb-white"
+        },
+        ":hover": {
+          "color": {
+            "background": "var:preset|color|gvb-orange-hover",
+            "text": "var:preset|color|gvb-white"
+          }
+        },
+        "typography": {
+          "fontSize": "var:preset|font-size|body",
+          "fontWeight": "700"
+        },
+        "border": {
+          "radius": "50px"
+        },
+        "spacing": {
+          "padding": {
+            "top": "0.875rem",
+            "bottom": "0.875rem",
+            "left": "2rem",
+            "right": "2rem"
+          }
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var:preset|color|gvb-green"
+        },
+        ":hover": {
+          "typography": {
+            "textDecoration": "none"
+          }
+        }
+      }
+    }
+  }
 }

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 3200" preserveAspectRatio="none" fill-rule="evenodd">
+  <!--
+    Bottom wave: organic S-curve entering from upper-right, sweeping left,
+    covering contact form → FAQ → brand promise → footer.
+    Circular cutout at lower-center (decorative element visible behind brand promise).
+    Based on Figma page 6122px tall; bottom wave starts ~y=3004 (contact form).
+  -->
+  <path d="
+    M1440,0
+    C1440,100 1380,200 1280,330
+    C1160,480 980,580 880,720
+    C780,860 760,1020 680,1160
+    C580,1340 380,1500 160,1700
+    C80,1780 20,1860 0,1960
+    L0,3200 H1440 Z
+
+    M720,3380
+    m -310,0
+    a 310,310 0 1,0 620,0
+    a 310,310 0 1,0 -620,0
+  " fill="#459271"/>
+</svg>
