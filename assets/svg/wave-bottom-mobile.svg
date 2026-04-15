@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 3200" preserveAspectRatio="none" fill-rule="evenodd">
+  <!--
+    Mobile bottom wave: full-width concave arc from left edge to right edge.
+    Boundary sits at ~y=1600 on both sides, arching up to ~y=1200 at centre.
+    Fills everything below the arc with green — no S-curve from the corner.
+  -->
+  <path d="
+    M0,1600
+    Q720,1200 1440,1600
+    L1440,3200 H0 Z
+  " fill="#459271"/>
+</svg>

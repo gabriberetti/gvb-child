@@ -51,7 +51,7 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 				<!-- wp:column -->
 				<div class="wp-block-column">
 					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"16px"}}}} -->
-					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:15px;font-weight:400;letter-spacing:-0.3px;line-height:1">Unsere Flaschen</h6>
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:15px;font-weight:400;letter-spacing:-0.3px;line-height:1"><a href="/unsere-flaschen/">Unsere Flaschen</a></h6>
 					<!-- /wp:heading -->
 					<!-- wp:list {"className":"gvb-footer__nav-list","textColor":"gvb-green","style":{"typography":{"fontSize":"16px","lineHeight":"1.2","letterSpacing":"0.08px"},"spacing":{"blockGap":"8px"}}} -->
 					<ul class="wp-block-list gvb-footer__nav-list has-gvb-green-color has-text-color" style="font-size:16px;line-height:1.2;letter-spacing:0.08px">
@@ -66,7 +66,7 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 				<!-- wp:column -->
 				<div class="wp-block-column">
 					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"16px"}}}} -->
-					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:15px;font-weight:400;letter-spacing:-0.3px;line-height:1">Unsere Lösungen</h6>
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:15px;font-weight:400;letter-spacing:-0.3px;line-height:1"><a href="/unsere-losungen/">Unsere Lösungen</a></h6>
 					<!-- /wp:heading -->
 					<!-- wp:list {"className":"gvb-footer__nav-list","textColor":"gvb-green","style":{"typography":{"fontSize":"16px","lineHeight":"1.2","letterSpacing":"0.08px"},"spacing":{"blockGap":"8px"}}} -->
 					<ul class="wp-block-list gvb-footer__nav-list has-gvb-green-color has-text-color" style="font-size:16px;line-height:1.2;letter-spacing:0.08px">
@@ -84,24 +84,32 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 				<!-- wp:column -->
 				<div class="wp-block-column">
 					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"16px"}}}} -->
-					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:15px;font-weight:400;letter-spacing:-0.3px;line-height:1">Über uns</h6>
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:15px;font-weight:400;letter-spacing:-0.3px;line-height:1"><a href="/uber-uns/">Über uns</a></h6>
 					<!-- /wp:heading -->
 				</div>
 				<!-- /wp:column -->
 
 				<!-- wp:column -->
 				<div class="wp-block-column">
-					<!-- wp:paragraph {"textColor":"gvb-green","style":{"typography":{"fontSize":"15px","letterSpacing":"-0.3px","lineHeight":"1"}}} -->
-					<p class="has-gvb-green-color has-text-color" style="font-size:15px;letter-spacing:-0.3px;line-height:1"><a href="/blog/">Blog</a></p>
-					<!-- /wp:paragraph -->
+					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:15px;font-weight:400;line-height:1"><a href="/blog/">Blog</a></h6>
+					<!-- /wp:heading -->
 				</div>
 				<!-- /wp:column -->
 
 				<!-- wp:column -->
 				<div class="wp-block-column">
-					<!-- wp:paragraph {"textColor":"gvb-green","style":{"typography":{"fontSize":"15px","letterSpacing":"-0.3px","lineHeight":"1"}}} -->
-					<p class="has-gvb-green-color has-text-color" style="font-size:15px;letter-spacing:-0.3px;line-height:1"><a href="/impressum/">Impressum</a></p>
-					<!-- /wp:paragraph -->
+					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:15px;font-weight:400;line-height:1"><a href="/impressum/">Impressum</a></h6>
+					<!-- /wp:heading -->
+				</div>
+				<!-- /wp:column -->
+
+				<!-- wp:column -->
+				<div class="wp-block-column">
+					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:15px;font-weight:400;line-height:1"><a href="/faq/">FAQ</a></h6>
+					<!-- /wp:heading -->
 				</div>
 				<!-- /wp:column -->
 

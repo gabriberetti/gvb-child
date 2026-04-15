@@ -25,9 +25,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<!-- wp:group {"className":"gvb-cases__panels","layout":{"type":"default"}} -->
 	<div class="wp-block-group gvb-cases__panels">
 
-		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow is-active" data-panel="0">
+		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow is-active" data-panel="0" data-bg="<?php echo esc_url( $img . '/cases-bg.png' ); ?>">
 			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"32px","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
-			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut zusammen.</h3>
+			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
 			<!-- /wp:heading -->
 
 			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
@@ -35,9 +35,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<!-- /wp:heading -->
 		</div>
 
-		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="1">
+		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="1" data-bg="<?php echo esc_url( $img . '/cases-bg.png' ); ?>">
 			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"32px","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
-			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut zusammen.</h3>
+			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
 			<!-- /wp:heading -->
 
 			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
@@ -45,9 +45,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<!-- /wp:heading -->
 		</div>
 
-		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="2">
+		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="2" data-bg="<?php echo esc_url( $img . '/cases-bg.png' ); ?>">
 			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"32px","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
-			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut zusammen.</h3>
+			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
 			<!-- /wp:heading -->
 
 			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
@@ -55,9 +55,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<!-- /wp:heading -->
 		</div>
 
-		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="3">
+		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="3" data-bg="<?php echo esc_url( $img . '/cases-bg.png' ); ?>">
 			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"32px","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
-			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut zusammen.</h3>
+			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
 			<!-- /wp:heading -->
 
 			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
@@ -65,9 +65,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<!-- /wp:heading -->
 		</div>
 
-		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="4">
+		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="4" data-bg="<?php echo esc_url( $img . '/cases-bg.png' ); ?>">
 			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"32px","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
-			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut zusammen.</h3>
+			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
 			<!-- /wp:heading -->
 
 			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
@@ -77,6 +77,11 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 	</div>
 	<!-- /wp:group -->
+
+	<div class="gvb-cases__mobile-nav" aria-hidden="true">
+		<button class="gvb-cases__nav gvb-cases__nav--prev" aria-label="Vorheriger Case">&#8249;</button>
+		<button class="gvb-cases__nav gvb-cases__nav--next" aria-label="Nächster Case">&#8250;</button>
+	</div>
 
 </div>
 <!-- /wp:group -->

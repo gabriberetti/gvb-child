@@ -10,11 +10,11 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <!-- wp:html -->
 <section class="gvb-borosilikat-features">
 
-	<h3 class="gvb-borosilikat-features__heading">Wieso Borosilikat überzeugt</h3>
+	<h3 class="gvb-borosilikat-features__heading gvb-fade-up">Wieso Borosilikat überzeugt</h3>
 
 	<ul class="gvb-borosilikat-features__cards">
 
-		<li class="gvb-borosilikat-feature-card">
+		<li class="gvb-borosilikat-feature-card gvb-fade-up">
 			<div class="gvb-borosilikat-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/borosilikat-feature-1.jpg' ); ?>" alt="100 % Borosilikat. Geschmack pur." />
 			</div>
@@ -24,7 +24,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-borosilikat-feature-card">
+		<li class="gvb-borosilikat-feature-card gvb-fade-up">
 			<div class="gvb-borosilikat-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/borosilikat-feature-2.jpg' ); ?>" alt="Bereit für den Alltag." />
 			</div>
@@ -34,7 +34,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-borosilikat-feature-card">
+		<li class="gvb-borosilikat-feature-card gvb-fade-up">
 			<div class="gvb-borosilikat-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/borosilikat-feature-3.jpg' ); ?>" alt="Klare Optik. Zeitloses Design." />
 			</div>
@@ -44,7 +44,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-borosilikat-feature-card">
+		<li class="gvb-borosilikat-feature-card gvb-fade-up">
 			<div class="gvb-borosilikat-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/borosilikat-feature-4.jpg' ); ?>" alt="Deine Flasche. Dein Vibe." />
 			</div>

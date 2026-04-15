@@ -108,6 +108,10 @@ Text Domain: gvb
   overflow: visible !important;
 }
 
+.gvb-header__logo {
+  flex-shrink: 0;
+}
+
 .gvb-header__logo img {
   width: 167px;
   height: 51px;
@@ -187,6 +191,7 @@ Text Domain: gvb
 .gvb-footer__nav-heading {
   font-weight: 400 !important;
   line-height: 1 !important;
+  width: fit-content;
 }
 
 .gvb-footer__nav-list {
@@ -201,6 +206,7 @@ Text Domain: gvb
 .gvb-footer__nav-list a {
   color: var(--wp--preset--color--gvb-green);
   text-decoration: none;
+  white-space: nowrap;
   transition: opacity var(--gvb-transition);
 }
 
@@ -394,6 +400,11 @@ Text Domain: gvb
   flex-direction: column;
 }
 
+.gvb-cases__h3-break,
+.gvb-mobile-br {
+  display: none;
+}
+
 .gvb-cases__bg {
   position: absolute;
   inset: 0;
@@ -402,33 +413,44 @@ Text Domain: gvb
   object-fit: cover;
   z-index: 0;
   border-radius: 20px;
+  transition: opacity 0.15s ease;
 }
 
 .gvb-cases__tabs {
   position: relative;
   z-index: 2;
   display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--wp--preset--color--gvb-linen);
+  gap: 8px;
+  border-bottom: 1px solid rgba(237, 232, 219, 0.2);
+  padding-bottom: 12px;
 }
 
 .gvb-cases__tab {
   flex: 1;
   text-align: center;
   background: none;
-  border: none;
-  color: var(--wp--preset--color--gvb-linen);
+  border: 1.5px solid transparent;
+  border-radius: 50px;
+  color: rgba(237, 232, 219, 0.55);
   font-size: 16px;
   font-weight: 400;
   padding: 8px 16px;
   cursor: pointer;
   letter-spacing: 0.08px;
   line-height: 1.2;
-  transition: font-weight var(--gvb-transition);
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
 }
 
 .gvb-cases__tab.is-active {
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--wp--preset--color--gvb-linen);
+  border-color: rgba(237, 232, 219, 0.55);
+  background: rgba(237, 232, 219, 0.08);
+}
+
+.gvb-cases__tab:hover:not(.is-active) {
+  color: rgba(237, 232, 219, 0.85);
+  border-color: rgba(237, 232, 219, 0.2);
 }
 
 .gvb-cases__tab:focus,
@@ -456,6 +478,11 @@ Text Domain: gvb
   flex: 1;
 }
 
+/* Mobile arrow nav — hidden on desktop */
+.gvb-cases__mobile-nav {
+  display: none;
+}
+
 /* ══════════════════════════════════════════════════════════════
    10. PRODUCT CARDS
    ══════════════════════════════════════════════════════════════ */
@@ -473,7 +500,12 @@ Text Domain: gvb
   border-radius: 20px;
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.gvb-product-card__media {
+  display: contents;
 }
 
 .gvb-product-card__bg {
@@ -495,7 +527,7 @@ Text Domain: gvb
 .gvb-product-card__content {
   position: relative;
   z-index: 2;
-  padding: 32px 60px 32px 32px;
+  padding: 0 60px 32px 32px;
 }
 
 .gvb-product-card__content--center {
@@ -509,12 +541,15 @@ Text Domain: gvb
 }
 
 .gvb-product-card__title {
+  position: relative;
+  z-index: 2;
   font-size: 40px;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
   color: var(--wp--preset--color--gvb-linen);
   margin: 0 0 12px;
+  padding: 0 60px 0 32px;
 }
 
 .gvb-product-card__title--light {
@@ -811,9 +846,16 @@ Text Domain: gvb
   box-shadow: none !important;
 }
 
+.gvb-contact__form-col .ff-btn-md,
+.gvb-contact__form-col .ff-btn {
+  will-change: transform;
+  transition: background-color 0.2s ease, transform 0.3s ease !important;
+}
+
 .gvb-contact__form-col .ff-btn-md:hover,
 .gvb-contact__form-col .ff-btn:hover {
   background-color: var(--wp--preset--color--gvb-orange-hover) !important;
+  transform: scale(1.08) !important;
 }
 
 .gvb-contact__form-col .ff-submit-container,
@@ -1227,7 +1269,7 @@ Text Domain: gvb
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 784px) {
   .gvb-header {
     padding-left: 24px !important;
     padding-right: 24px !important;
@@ -1258,43 +1300,122 @@ Text Domain: gvb
   }
 
   .gvb-cases {
-    margin-left: 12px !important;
-    margin-right: 12px !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 
+  /* Hide text tabs on mobile — replaced by arrow nav */
   .gvb-cases__tabs {
-    overflow-x: auto;
-    justify-content: flex-start;
+    display: none !important;
   }
 
-  .gvb-cases__tab {
-    padding: 8px 20px;
-    white-space: nowrap;
+  /* Arrow nav: absolutely centered on left/right edges of the card */
+  .gvb-cases__mobile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 3;
+    pointer-events: none;
+    padding: 0 12px;
+  }
+
+  .gvb-cases__nav {
+    pointer-events: all;
+    background: rgba(255, 255, 255, 0.20);
+    border: none;
+    color: var(--wp--preset--color--gvb-linen);
+    font-size: 28px;
+    line-height: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .gvb-cases__nav:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .gvb-cases__nav:not(:disabled):active {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  .gvb-cases__panel h3.wp-block-heading {
+    font-size: 18px !important;
+  }
+
+  .gvb-cases__h3-break,
+  .gvb-mobile-br {
+    display: block;
+  }
+
+  .gvb-cases__panel h4.wp-block-heading {
+    font-size: 24px !important;
+    margin-top: 0;
+  }
+
+  /* Lösungen intro: reduce side padding + font size so text fills the width */
+  .gvb-losungen-intro {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .gvb-losungen-intro p {
+    font-size: 18px !important;
+    text-align: left !important;
+    line-height: 1.5 !important;
   }
 
   .gvb-product-cards__track {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
 
   .gvb-product-card {
-    flex: 0 0 280px;
-    height: 420px;
-    scroll-snap-align: start;
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .gvb-testimonials {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    overflow-x: hidden;
   }
 
   .gvb-testimonials__cards {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    flex-wrap: nowrap;
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    overflow-x: visible;
   }
 
   .gvb-testimonial-card {
-    flex: 0 0 280px;
-    scroll-snap-align: start;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .gvb-testimonial-card__quote {
+    font-size: clamp(16px, 4.5vw, 20px);
+  }
+
+  .gvb-testimonial-card__name,
+  .gvb-testimonial-card__role {
+    font-size: 14px;
   }
 
   .gvb-contact__portrait img {
@@ -1470,23 +1591,34 @@ Text Domain: gvb
   line-height: 1.08;
   letter-spacing: 0.2px;
   color: var(--wp--preset--color--gvb-graphite);
-  margin: 0 0 32px;
+  max-width: 1400px;
+  margin: 0 auto 32px;
 }
 
 .gvb-personalisieren__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  max-width: 1320px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .gvb-personalisieren-card {
+  position: relative;
   border-radius: 20px;
   overflow: hidden;
-  position: relative;
   aspect-ratio: 1 / 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 0 60px 36px 32px;
+}
+
+.gvb-personalisieren-card__media {
+  display: contents;
 }
 
 .gvb-personalisieren-card__img {
@@ -1498,19 +1630,9 @@ Text Domain: gvb
   z-index: 0;
 }
 
-.gvb-personalisieren-card__content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 32px 60px 40px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 2;
-}
-
 .gvb-personalisieren-card__title {
+  position: relative;
+  z-index: 2;
   font-size: 40px;
   font-weight: 700;
   line-height: 1;
@@ -1518,22 +1640,103 @@ Text Domain: gvb
   margin: 0;
 }
 
+.gvb-personalisieren-card__content {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+}
+
 .gvb-personalisieren-card__desc {
   font-size: 16px;
   line-height: 1.2;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.08px;
   color: #fff;
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .gvb-personalisieren__grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
+@media (max-width: 1024px) {
+  /* ── Personalisieren cards: stacked layout from 769–1024px ──
+     Same split as mobile (image block on top, coloured text block below)
+     so text never overflows the image. Sizes are slightly larger than
+     the ≤768px rules, which override them for smaller screens. */
   .gvb-personalisieren-card {
-    aspect-ratio: 4 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 0;
+    aspect-ratio: unset;
+    border-radius: 20px;
+    overflow: hidden;
   }
+
+  .gvb-personalisieren-card--dark {
+    background: var(--wp--preset--color--gvb-graphite);
+  }
+
+  .gvb-personalisieren-card--orange {
+    background: var(--wp--preset--color--gvb-orange);
+  }
+
+  /* Media becomes a real positioned block — the image fills it, title sits at the bottom.
+     display: block !important overrides the base display: contents so the media wrapper
+     becomes the containing block for the absolutely positioned image.
+     Without this, inset: 0 on the image anchors to the card and fills the entire card,
+     making the content appear overlaid on the image.
+     aspect-ratio: 4/3 lets the image block resize proportionally with the card width
+     in the 2-column grid (769–1024px). At ≤768px the mobile block overrides with a
+     fixed height so the image doesn't become huge in single-column layout. */
+  .gvb-personalisieren-card__media {
+    display: block !important;
+    position: relative !important;
+    aspect-ratio: 4 / 3;
+    height: auto;
+    width: 100%;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .gvb-personalisieren-card__img {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .gvb-personalisieren-card__title {
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    right: 24px;
+    padding: 0;
+    font-size: clamp(24px, 3vw, 30px);
+    line-height: 1.1;
+  }
+
+  /* Content: colour block below image — inherits card background.
+     z-index reset to auto: the base rule has z-index:2 (needed for the desktop
+     overlay layout), but in the stacked layout the content is physically below
+     the media block so z-index:2 would paint it above the image layer. */
+  .gvb-personalisieren-card__content {
+    position: relative;
+    z-index: auto;
+    padding: 20px 24px 32px;
+    min-height: 0;
+  }
+
+  .gvb-personalisieren-card__desc {
+    font-size: 15px;
+    line-height: 1.4;
+    letter-spacing: 0.1px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* grid stays 2-column at tablet — the ≤1024px card layout handles the stacked image+content */
+  /* aspect-ratio is handled by the ≤1024px block above (unset) — no override needed here */
 }
 
 /* ── Branding section ── */
@@ -1541,7 +1744,7 @@ Text Domain: gvb
   display: flex;
   gap: 52px;
   align-items: center;
-  margin-left: 100px;
+  justify-content: center;
 }
 
 .gvb-branding__image {
@@ -2099,7 +2302,8 @@ Text Domain: gvb
   line-height: 1.08;
   letter-spacing: 0.2px;
   color: #2b2b2b;
-  margin: 0 0 40px;
+  max-width: 1392px;
+  margin: 0 auto 40px;
   padding: 0 20px;
 }
 
@@ -2516,6 +2720,9 @@ Text Domain: gvb
 /* ── All Articles Grid (Zone 2) ─────────────────────────────── */
 .gvb-blog-grid .wp-block-post-template {
   gap: 16px !important;
+  /* Reserve space for 3 rows of cards so all pages have consistent height */
+  min-height: 520px;
+  align-content: start;
 }
 
 .gvb-blog-card {
@@ -2594,19 +2801,50 @@ Text Domain: gvb
 /* Pagination */
 .gvb-blog-grid .wp-block-query-pagination {
   margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
 .gvb-blog-grid .wp-block-query-pagination a,
-.gvb-blog-grid .wp-block-query-pagination .page-numbers {
+.gvb-blog-grid .wp-block-query-pagination .wp-block-query-pagination-numbers a,
+.gvb-blog-grid .wp-block-query-pagination .wp-block-query-pagination-previous a,
+.gvb-blog-grid .wp-block-query-pagination .wp-block-query-pagination-next a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 50px;
+  background: transparent;
+  border: 2px solid var(--wp--preset--color--gvb-green);
   color: var(--wp--preset--color--gvb-green);
   font-size: 16px;
   font-weight: 700;
   text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .gvb-blog-grid .wp-block-query-pagination a:hover {
-  color: var(--wp--preset--color--gvb-orange);
+  background: var(--wp--preset--color--gvb-green);
+  color: var(--wp--preset--color--gvb-linen);
+}
+
+.gvb-blog-grid .wp-block-query-pagination .wp-block-query-pagination-numbers .current {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 50px;
+  background: var(--wp--preset--color--gvb-green);
+  border: 2px solid var(--wp--preset--color--gvb-green);
+  color: var(--wp--preset--color--gvb-linen);
+  font-size: 16px;
+  font-weight: 700;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -2690,30 +2928,136 @@ Text Domain: gvb
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
+
+  /* Featured: stack image above content, gap between articles */
+  .gvb-blog-featured__list {
+    gap: 48px;
+  }
+
   .gvb-blog-featured__row,
   .gvb-blog-featured__list > li:nth-child(even) .gvb-blog-featured__row,
   .gvb-blog-featured__list > div:nth-child(even) .gvb-blog-featured__row {
     flex-direction: column !important;
-    gap: 24px;
+    gap: 0 !important;
+    padding: 0 20px !important;
+  }
+
+  /* Image first in visual order, rounded + not full-bleed */
+  .gvb-blog-featured .wp-block-post-featured-image,
+  .gvb-blog-featured .wp-block-post-featured-image a {
+    order: -1;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
   }
 
   .gvb-blog-featured .wp-block-post-featured-image img {
     width: 100% !important;
     max-width: 100% !important;
-    height: 260px !important;
+    height: 220px !important;
+    border-radius: 16px !important;
+    box-shadow: 0px 3px 17px 0px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .gvb-blog-featured__content {
+    gap: 16px;
+    order: 0;
+    padding-top: 16px;
+    padding-bottom: 32px;
   }
 
   .gvb-blog-featured__content .wp-block-post-title {
-    font-size: 28px !important;
+    font-size: 26px !important;
   }
 
+  /* "Mehr erfahren" button: meet 44pt touch target (Apple HIG), below image */
+  .wp-block-read-more.gvb-btn--orange {
+    min-height: 44px !important;
+    font-size: 14px !important;
+    padding: 12px 24px !important;
+    align-self: flex-start;
+  }
+
+  /* ── All articles section ── */
+  .gvb-blog-all {
+    padding: 40px 20px 64px !important;
+    overflow-x: hidden;
+  }
+
+  .gvb-blog-all > .wp-block-heading {
+    font-size: 36px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .gvb-blog-all > .wp-block-spacer {
+    height: 24px !important;
+  }
+
+  /* 1-column layout — covers both CSS Grid and Flex WP layouts */
+  .gvb-blog-grid,
+  .gvb-blog-grid .wp-block-post-template {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .gvb-blog-grid .wp-block-post-template {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    grid-template-columns: unset !important;
+  }
+
+  /* Each post item: full width, no horizontal overflow */
+  .gvb-blog-grid .wp-block-post-template > li,
+  .gvb-blog-grid .wp-block-post-template > .wp-block-post {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Card: stack thumb above body, full width */
   .gvb-blog-card {
     flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  .gvb-blog-card__thumb,
+  .gvb-blog-card__thumb a {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin-right: 0 !important;
+    display: block !important;
+    box-sizing: border-box !important;
   }
 
   .gvb-blog-card__thumb img {
     width: 100% !important;
     height: 200px !important;
+    object-fit: cover !important;
+    border-radius: 16px 16px 0 0 !important;
+    display: block !important;
+  }
+
+  .gvb-blog-card__body {
+    padding: 16px 20px 24px;
+    gap: 6px;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .gvb-blog-card__body .wp-block-post-title {
+    font-size: 20px !important;
   }
 }
 
@@ -2726,12 +3070,11 @@ Text Domain: gvb
 }
 
 .gvb-impressum-card__inner {
-  background-color: var(--wp--preset--color--gvb-green);
+  background-color: var(--wp--preset--color--gvb-orange);
   color: #fff;
   border-radius: 20px;
   padding: 48px 52px;
   box-shadow: 0 25px 33px -15px rgba(149, 149, 149, 0.25);
-  border: 2px solid #000;
 }
 
 .gvb-impressum-card__company {
@@ -2739,6 +3082,7 @@ Text Domain: gvb
   font-weight: 700;
   line-height: 1.26;
   letter-spacing: 0.2px;
+  color: var(--wp--preset--color--gvb-linen);
   margin: 0 0 24px;
 }
 
@@ -2870,7 +3214,8 @@ Text Domain: gvb
   line-height: 1;
   letter-spacing: -1.2px;
   color: var(--wp--preset--color--gvb-linen);
-  margin: 0 0 32px;
+  max-width: 1392px;
+  margin: 0 auto 32px;
 }
 
 /* ── Warum section ── */
@@ -2936,9 +3281,8 @@ Text Domain: gvb
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--wp--preset--color--gvb-green);
+  background: var(--wp--preset--color--gvb-orange);
   border-radius: 20px;
-  border: 2px solid #000;
   margin: 0 20px;
   padding: 0 32px;
   height: 76px;
@@ -2947,7 +3291,7 @@ Text Domain: gvb
 }
 
 .gvb-download-bar:hover {
-  background: #3a7d61;
+  background: var(--wp--preset--color--gvb-orange-hover);
 }
 
 .gvb-download-bar__label {
@@ -2993,4 +3337,1151 @@ Text Domain: gvb
   letter-spacing: -1.2px;
   color: var(--wp--preset--color--gvb-graphite);
   margin: 0 20px 32px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   16. MOBILE FIXES (comprehensive — Apple HIG aligned)
+   Touch targets ≥ 44px, no horizontal scroll, stacked layouts
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Touch targets: colour swatches (Apple HIG: 44pt minimum) ── */
+.gvb-edelstahl-product__color-btn {
+  width: 44px;
+  height: 44px;
+}
+
+/* ── Cases tabs: ensure 44px tap height ── */
+.gvb-cases__tab {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Steps: fluid scaling at 769–1199px ──────────────────────────
+   This block must live AFTER the base .gvb-steps__number rule so
+   the clamp() font-size isn't silently overridden by the 180px base.
+   vw denominators match the desktop values at exactly 1200px:
+     180px / 1200px = 15vw   60px / 1200px = 5vw   240px / 1200px = 20vw  */
+@media (max-width: 1199px) {
+  .gvb-steps__row {
+    height: auto;
+    align-items: stretch;
+  }
+
+  .gvb-steps__image {
+    flex: 0 0 42%;
+    height: auto;
+    min-height: 260px;
+  }
+
+  .gvb-steps__number {
+    font-size: clamp(60px, 15vw, 180px);
+    left: clamp(16px, 5vw, 60px);
+  }
+
+  .gvb-steps__content {
+    padding: 36px 36px 36px clamp(90px, 20vw, 240px);
+  }
+
+  /* Scale heading down so long German words never overflow the narrower card */
+  .gvb-steps__text h3 {
+    font-size: clamp(20px, 2.6vw, 32px);
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* ── Hero: override 55% content offset on all hero types ──
+     Generic .gvb-hero__content { margin-left: 0 } (section 15) is
+     overridden by the more-specific !important rules below, so we
+     must re-declare each selector at this breakpoint.            */
+  .gvb-hero--losungen .gvb-hero__content,
+  .gvb-hero--bedrucken .gvb-hero__content,
+  .gvb-hero--industrie .gvb-hero__content,
+  .gvb-hero--faq .gvb-hero__content,
+  .gvb-hero--uberuns .gvb-hero__content,
+  .gvb-hero--blog .gvb-hero__content--blog {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Slightly stronger overlay so text stays legible when
+     content moves over the image centre on small screens    */
+  .gvb-hero__overlay {
+    background: rgba(0, 0, 0, 0.28);
+  }
+
+  /* ── Contact: reduce section padding ── */
+  .gvb-contact {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .gvb-contact__portrait img {
+    height: 280px;
+    border-radius: 20px;
+  }
+
+  /* ── Logos: compact spacing ── */
+  .gvb-logos {
+    padding: 32px 20px;
+  }
+
+  .gvb-logos__track {
+    gap: 24px;
+  }
+
+  /* ── Branding section: stack image + text vertically ── */
+  .gvb-branding {
+    padding-top: 20px !important;
+  }
+
+  .gvb-branding__inner {
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 0;
+    gap: 20px;
+    padding: 0;
+  }
+
+  /* display:contents flattens __content children into __inner's flex flow */
+  .gvb-branding__content {
+    display: contents;
+  }
+
+  .gvb-branding__heading {
+    order: 1;
+    font-size: 28px;
+    text-align: left;
+  }
+
+  .gvb-branding__image {
+    order: 2;
+    flex: none;
+    width: 100%;
+    height: 280px;
+  }
+
+  .gvb-branding__text {
+    order: 3;
+  }
+
+  .gvb-branding__inner .gvb-btn-primary {
+    order: 4;
+    align-self: flex-start;
+  }
+
+  /* ── Industry grid: single column ── */
+  .gvb-industry-grid,
+  .gvb-industry-grid--left-stacked,
+  .gvb-industry-grid--two-tall {
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .gvb-industry-grid--left-stacked .gvb-industry-card--tall {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .gvb-industry-card {
+    min-height: 280px;
+  }
+
+  /* ── Overlay cards: stack vertically ── */
+  .gvb-overlay-cards {
+    flex-direction: column;
+  }
+
+  .gvb-overlay-cards--2x2 .gvb-overlay-card {
+    flex: 1 1 100%;
+  }
+
+  .gvb-overlay-card {
+    min-height: 280px;
+  }
+
+  .gvb-overlay-card__title {
+    font-size: 28px;
+  }
+
+  /* ── Bedrucken sections ── */
+  .gvb-bedrucken-anlass {
+    margin: 0 20px 20px;
+    padding: 32px 20px 40px;
+  }
+
+  .gvb-bedrucken-anlass__heading {
+    font-size: 28px;
+  }
+
+  /* Content below image (not overlaid) on mobile */
+  .gvb-bedrucken-anlass .gvb-overlay-card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    min-height: 0;
+    gap: 4px;
+    overflow: visible;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-card__img {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 280px;
+    border-radius: 20px;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-card__content {
+    position: relative;
+    background: none;
+    border-radius: 0;
+    padding: 16px 0 8px;
+    gap: 10px;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-card__title {
+    font-size: 24px;
+  }
+
+  .gvb-bedrucken-warum {
+    padding: 48px 20px;
+  }
+
+  .gvb-bedrucken-warum__heading {
+    font-size: 28px;
+  }
+
+  .gvb-bedrucken-warum__text p {
+    font-size: 22px;
+  }
+
+  /* ── Druckverfahren ── */
+  .gvb-druckverfahren {
+    padding: 48px 20px;
+  }
+
+  .gvb-druckverfahren__heading {
+    font-size: 28px;
+  }
+
+  .gvb-druckverfahren__intro {
+    font-size: 20px;
+  }
+
+  /* ── Flaschen intro (Unsere Flaschen + Bedrucken) ── */
+  .gvb-flaschen-intro {
+    padding: 48px 20px !important;
+  }
+
+  .gvb-flaschen-intro p {
+    font-size: 20px;
+  }
+
+  /* ── Flaschen cards: stack vertically ── */
+  .gvb-flaschen-cards {
+    padding: 0 20px 48px;
+  }
+
+  .gvb-flaschen-cards__list {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* 4-col Bedrucken variant: 2-column on tablet */
+  .gvb-flaschen-cards__list--4 {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .gvb-flaschen-cards__list--4 .gvb-flaschen-cards__item {
+    flex: 1 1 calc(50% - 10px);
+  }
+
+  /* ── Edelstahl product: stack image + content ── */
+  .gvb-edelstahl-product {
+    flex-direction: column;
+    min-height: auto;
+    margin: 0 20px 40px;
+  }
+
+  .gvb-edelstahl-product__image-col {
+    flex: none;
+    width: 100%;
+    height: 280px;
+  }
+
+  .gvb-edelstahl-product__image-col img {
+    width: 60%;
+    left: 20%;
+  }
+
+  .gvb-edelstahl-product__content {
+    padding: 32px 24px;
+  }
+
+  .gvb-edelstahl-product__title {
+    font-size: 38px;
+  }
+
+  /* Feature cards: 2-col wrap on tablet */
+  .gvb-edelstahl-features__cards {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .gvb-edelstahl-feature-card {
+    flex: 0 0 calc(50% - 10px);
+    align-items: center;
+  }
+
+  .gvb-edelstahl-feature-card__image {
+    width: 140px;
+    height: 140px;
+    align-self: center;
+  }
+
+  .gvb-edelstahl-feature-card__text {
+    text-align: center;
+    align-items: center;
+  }
+
+  /* ── Borosilikat product: stack image + content ── */
+  .gvb-borosilikat-product {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .gvb-borosilikat-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .gvb-borosilikat-card__image {
+    height: 280px;
+  }
+
+  .gvb-borosilikat-card__content {
+    padding: 32px 24px;
+  }
+
+  .gvb-borosilikat-card__title {
+    font-size: 38px;
+  }
+
+  /* Verschluss cards: single column, responsive image */
+  .gvb-borosilikat-verschluesse__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .gvb-verschluss-card {
+    padding: 28px 20px;
+  }
+
+  .gvb-verschluss-card__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .gvb-borosilikat-features__cards {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .gvb-borosilikat-feature-card {
+    flex: 0 0 calc(50% - 10px);
+  }
+
+  .gvb-borosilikat-feature-card__image {
+    width: 140px;
+    height: 140px;
+    align-self: center;
+  }
+
+  .gvb-borosilikat-feature-card__text {
+    text-align: center;
+    align-items: center;
+  }
+
+  /* ── Product cards: stack vertically (Apple HIG) ── */
+  .gvb-product-cards__track {
+    overflow-x: visible;
+    scroll-snap-type: none;
+    flex-wrap: wrap;
+  }
+
+  .gvb-product-card {
+    flex: 0 0 auto !important;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    scroll-snap-align: none;
+  }
+
+  .gvb-product-card--dark {
+    background: var(--wp--preset--color--gvb-graphite);
+  }
+
+  .gvb-product-card--orange {
+    background: var(--wp--preset--color--gvb-orange);
+  }
+
+  .gvb-product-card__media {
+    display: block;
+    position: relative;
+    height: 280px;
+    flex-shrink: 0;
+  }
+
+  .gvb-product-card__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gvb-product-card__title {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    right: 20px;
+    padding: 0;
+    margin: 0;
+    font-size: clamp(22px, 5.5vw, 28px);
+    line-height: 1.1;
+  }
+
+  .gvb-product-card__content {
+    padding: 8px 20px 28px;
+  }
+
+  .gvb-product-card__text {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* ── Steps (Bedrucken / Lösungen): stack vertically ── */
+  .gvb-steps {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .gvb-steps__rows {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .gvb-steps__row {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* Force step text always above its image regardless of DOM order
+     (Step 2 has image first in HTML for desktop alternation)       */
+  .gvb-steps__content {
+    order: 1;
+    padding: 40px 32px 40px 120px;
+    min-height: 200px;
+  }
+
+  .gvb-steps__image {
+    order: 2;
+  }
+
+  .gvb-steps__number {
+    font-size: 120px;
+    left: 24px;
+  }
+
+  .gvb-steps__image {
+    flex: none;
+    width: 100%;
+    height: 240px;
+  }
+
+  .gvb-steps__text h3 {
+    font-size: 24px;
+  }
+
+  /* ── Über uns ── */
+  .gvb-uberuns-intro {
+    padding: 48px 20px;
+  }
+
+  .gvb-uberuns-intro p {
+    font-size: 20px;
+  }
+
+  .gvb-uberuns-vm__row {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .gvb-uberuns-vm__image {
+    flex: none;
+    width: 100%;
+    height: 260px;
+  }
+
+  .gvb-uberuns-vm__content {
+    padding: 40px 24px;
+  }
+
+  .gvb-uberuns-vm__text h2 {
+    font-size: 28px;
+  }
+
+  .gvb-uberuns-team {
+    padding: 20px 20px 20px;
+  }
+
+  .gvb-uberuns-personen {
+    padding: 0px 20px 60px;
+  }
+
+  .gvb-uberuns-personen h2 {
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  .gvb-uberuns-personen__text p {
+    font-size: 18px;
+  }
+
+  .gvb-ueberzeugung {
+    padding: 48px 20px 60px;
+  }
+
+  .gvb-ueberzeugung__heading {
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  /* Remove the excessive 128px side padding on the cards wrapper */
+  .gvb-ueberzeugung__cards {
+    padding: 0;
+  }
+
+  .gvb-ueberzeugung__card {
+    padding: 40px 24px;
+  }
+
+  .gvb-ueberzeugung__text {
+    font-size: 22px;
+  }
+
+  /* ── Impressum ── */
+  .gvb-impressum-card {
+    padding-bottom: 0 !important;
+  }
+
+  .gvb-impressum-card__inner {
+    padding: 32px 24px;
+  }
+
+  .gvb-impressum-card__company {
+    font-size: 28px;
+  }
+
+  /* ── Personalisieren cards ── */
+  .gvb-personalisieren__heading {
+    font-size: 28px;
+  }
+
+  /* Cards: stacked layout — photo+title on top, desc colour block below */
+  .gvb-personalisieren-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 0;
+    aspect-ratio: unset;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .gvb-personalisieren-card--dark {
+    background: var(--wp--preset--color--gvb-graphite);
+  }
+
+  .gvb-personalisieren-card--orange {
+    background: var(--wp--preset--color--gvb-orange);
+  }
+
+  /* Media: fixed height cap at mobile — single-column cards are full viewport width
+     so aspect-ratio: 4/3 (from the ≤1024px block) would make the image far too tall.
+     300px is a sensible cap; aspect-ratio is overridden by the explicit height.
+     !important on display/position mirrors the ≤1024px block — keeps the media as
+     the containing block so the image (inset:0) stays inside it, not the full card. */
+  .gvb-personalisieren-card__media {
+    display: block !important;
+    position: relative !important;
+    height: 300px;
+    aspect-ratio: unset;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .gvb-personalisieren-card__img {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .gvb-personalisieren-card__title {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    right: 20px;
+    padding: 0;
+    font-size: clamp(22px, 5.5vw, 28px);
+    line-height: 1.1;
+  }
+
+  /* Content: just the desc in the colour block */
+  .gvb-personalisieren-card__content {
+    position: relative;
+    z-index: auto;
+    padding: 16px 20px 28px;
+    min-height: 0;
+  }
+
+  .gvb-personalisieren-card__desc {
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── Contact form: consistent field spacing on mobile ── */
+  .gvb-form-expanded-container.is-open.ff-t-container {
+    flex-wrap: wrap !important;
+  }
+
+  .gvb-contact__form-col .ff-t-container {
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .gvb-contact__form-col .ff-el-group {
+    margin-bottom: 32px;
+  }
+
+  .gvb-contact__form-col .ff-t-cell .ff-el-group {
+    margin-bottom: 0;
+  }
+
+  /* ── FAQ items: lighter padding on mobile ── */
+  .gvb-faq__item {
+    padding: 20px 24px;
+  }
+
+  /* ── Bottom wave: full-width arc SVG on mobile (replaces S-curve from corner) ── */
+  .wp-site-blocks::after {
+    background-image: url('assets/svg/wave-bottom-mobile.svg');
+  }
+}
+
+@media (max-width: 425px) {
+
+  /* ── Personalisieren: single column on small phones ── */
+  .gvb-personalisieren__grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  /* ── Steps: compact number + tighter padding ── */
+  .gvb-steps__content {
+    padding: 28px 20px 28px 76px;
+    min-height: 180px;
+  }
+
+  .gvb-steps__number {
+    font-size: 80px;
+    left: 12px;
+    letter-spacing: -4px;
+  }
+
+  /* ── Bedrucken 4-col cards: single column on small phones ── */
+  .gvb-flaschen-cards__list--4 .gvb-flaschen-cards__item {
+    flex: 1 1 100%;
+  }
+
+  /* ── Feature cards: single column ── */
+  .gvb-edelstahl-feature-card,
+  .gvb-borosilikat-feature-card {
+    flex: 0 0 100%;
+    max-width: 280px;
+  }
+
+  /* ── Contact: full-bleed section ── */
+  /* ── Überzeugung cards: tightest padding ── */
+  .gvb-ueberzeugung__text {
+    font-size: 18px;
+  }
+
+  .gvb-ueberzeugung__card {
+    padding: 32px 16px;
+  }
+
+  /* ── FAQ items ── */
+  .gvb-faq__item {
+    padding: 18px 16px;
+  }
+
+  /* ── Logos: tighter gap ── */
+  .gvb-logos__track {
+    gap: 16px;
+  }
+
+  /* ── Download bars: wrap label + action ── */
+  .gvb-download-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    gap: 8px;
+    padding: 20px 24px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   17. MOBILE NAVIGATION OVERLAY
+   Targets the WP Navigation block's full-screen mobile drawer.
+   Applies only when the menu is open (is-menu-open class).
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Hide desktop nav links when hamburger is active ── */
+@media (max-width: 784px) {
+  .gvb-header__nav .wp-block-navigation__container {
+    display: none !important;
+  }
+
+  .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container {
+    display: flex !important;
+  }
+}
+
+/* ── Constrain nav wrapper to button size when hamburger is active ── */
+@media (max-width: 784px) {
+  .gvb-header__nav.wp-block-navigation {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: unset !important;
+    min-height: unset !important;
+    flex-shrink: 0;
+  }
+}
+
+/* ── Hamburger button: linen on green header (mobile only) ── */
+@media (max-width: 784px) {
+  .gvb-header .wp-block-navigation__responsive-container-open,
+  .gvb-header .wp-block-navigation__responsive-container-open button {
+    color: var(--wp--preset--color--gvb-linen) !important;
+    background: transparent !important;
+    border: none !important;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .gvb-header .wp-block-navigation__responsive-container-open svg {
+    fill: var(--wp--preset--color--gvb-linen) !important;
+    stroke: var(--wp--preset--color--gvb-linen) !important;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ── Full-screen overlay: GVB green ── */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open {
+  background-color: var(--wp--preset--color--gvb-green) !important;
+  padding: 0;
+}
+
+/* ── WP 6.5+ nesting fix: responsive-close + responsive-dialog must fill the full overlay ── */
+/* WP core gives .responsive-close margin:auto in .has-modal-open context.
+   Inside the flex-column overlay container, margin:auto overrides align-items:stretch
+   and shrinks the div to content-width — all nav items end up crammed into a narrow strip.
+   Force both intermediate layers to 100% width + height so the content wrapper spans the viewport. */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-close {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Overlay content wrapper (mobile only) ── */
+/* align-items: flex-start overrides WP's var(--navigation-layout-justification-setting)
+   which resolves to flex-end because the nav block has justifyContent:"right" in its layout.
+   Without this override the nav links are pushed to the right corner of the overlay. */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 24px 32px 48px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* ── Close (×) button: hidden by default, only shown when overlay is open ── */
+.gvb-header__nav .wp-block-navigation__responsive-container-close {
+  display: none !important;
+}
+
+/* ── Close (×) button: top-right, linen, 44px touch target (mobile only) ── */
+@media (max-width: 784px) {
+  .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close,
+  .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close-button button {
+    color: var(--wp--preset--color--gvb-linen) !important;
+    background: transparent !important;
+    border: none !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    align-self: flex-end;
+    padding: 24px 32px 0 0;
+    opacity: 0.9;
+  }
+
+  .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close svg {
+    fill: var(--wp--preset--color--gvb-linen) !important;
+    stroke: var(--wp--preset--color--gvb-linen) !important;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ── Nav list: vertical, left-aligned (overlay only) ── */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0 !important;
+  padding-top: 24px;
+  width: 100%;
+}
+
+/* ── Hide submenu toggle arrows: submenus are always shown flat (overlay only) ── */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__toggle-button {
+  display: none !important;
+}
+
+/* ── Nav items: stack link above submenu vertically (overlay only) ── */
+/* WP core sets display:flex; flex-direction:row on .wp-block-navigation-item.
+   In overlay context the submenu is position:static so it falls beside the
+   parent link in a row — links appear collapsed/overlapping. Force column. */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+/* ── Parent nav items (overlay only) ── */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item.has-child,
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:not(.has-child) {
+  width: 100%;
+  border-bottom: 1px solid rgba(237, 232, 219, 0.15);
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+
+/* ── Parent nav links: large + bold (overlay only) ── */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item > .wp-block-navigation-item__content {
+  color: var(--wp--preset--color--gvb-linen) !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.78px !important;
+  line-height: 1.05 !important;
+  padding: 14px 0 8px !important;
+  display: block;
+  text-decoration: none !important;
+}
+
+/* ── Submenu container: remove floating card, show as flat list (overlay only) ── */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container {
+  position: static !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  min-width: 0 !important;
+  padding: 0 0 12px 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+  width: 100%;
+  gap: 0;
+}
+
+/* ── Submenu links: smaller, 75% linen opacity (overlay only) ── */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+  color: rgba(237, 232, 219, 0.75) !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.17px !important;
+  line-height: 1.2 !important;
+  padding: 7px 0 !important;
+  display: block;
+  text-decoration: none !important;
+}
+
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover {
+  color: var(--wp--preset--color--gvb-linen) !important;
+  opacity: 1 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   18. ANIMATIONS
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Hover lift: industry image cards ── */
+.gvb-industry-card {
+  will-change: transform;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gvb-industry-card:hover {
+  transform: translateY(-8px);
+}
+
+/* ── Hover scale: plain primary buttons (flaschen-cards, branding, etc.) ── */
+.gvb-btn-primary {
+  will-change: transform;
+  transition: transform 0.3s ease, opacity var(--gvb-transition);
+}
+
+.gvb-btn-primary:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* ── Hover scale: small buttons inside industry cards ── */
+.gvb-btn-sm {
+  will-change: transform;
+  transition: transform 0.3s ease, opacity var(--gvb-transition);
+}
+
+.gvb-btn-sm:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* ── Hover lift: "Mehr erfahren" primary buttons ── */
+.wp-block-button.gvb-btn--primary {
+  will-change: transform;
+  transition: transform 0.3s ease, background-color var(--gvb-transition);
+}
+
+.wp-block-button.gvb-btn--primary:hover {
+  transform: scale(1.08);
+}
+
+/* ── Fade-up on scroll ── */
+.gvb-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.gvb-fade-up.gvb-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Hover scale: blog "Mehr erfahren" read-more button ── */
+.wp-block-read-more.gvb-btn--orange {
+  will-change: transform;
+  transition: background-color var(--gvb-transition), transform 0.3s ease !important;
+}
+
+.wp-block-read-more.gvb-btn--orange:hover {
+  transform: scale(1.08) !important;
+}
+
+/* ── Hover lift: blog article cards ── */
+.gvb-blog-card {
+  position: relative;
+  will-change: transform;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.gvb-blog-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0px 12px 32px 0px rgba(0, 0, 0, 0.13) !important;
+}
+
+/* ── Make the entire card clickable via the title link ── */
+/* The ::after stretches to cover the whole card (position:relative above).
+   The thumb <a> is the same URL so the overlap doesn't matter. */
+.gvb-blog-card .wp-block-post-title a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  z-index: 0;
+}
+
+/* Keep the thumb link visually on top (same destination, belt-and-braces) */
+.gvb-blog-card__thumb {
+  position: relative;
+  z-index: 1;
+}
+
+/* Restore hover scale on buttons that also carry gvb-fade-up */
+.gvb-btn-primary.gvb-in-view:hover,
+.gvb-btn-sm.gvb-in-view:hover {
+  transform: scale(1.08);
+}
+
+.wp-block-button.gvb-btn--primary.gvb-in-view:hover {
+  transform: scale(1.08);
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   19. LARGE-SCREEN ENHANCEMENTS
+   ══════════════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────────────────────────────────────
+   19a. MAX-WIDTH CONSTRAINTS — ceiling at 1440px (theme wideSize)
+   The 1200px design is the baseline. Sections scale naturally
+   with the viewport up to 1440px, then side space grows.
+   Rules are general (no media query) — only visible beyond 1440px.
+   ────────────────────────────────────────────────────────────── */
+
+/* ── Content sections — constrain and centre ── */
+.gvb-logos,
+.gvb-testimonials,
+.gvb-contact,
+.gvb-product-cards,
+.gvb-branchen,
+.gvb-steps,
+.gvb-uberuns-team,
+.gvb-uberuns-vm,
+.gvb-ueberzeugung,
+.gvb-flaschen-cards,
+.gvb-druckverfahren,
+.gvb-bedrucken-warum,
+.gvb-download-cards,
+.gvb-borosilikat-product,
+.gvb-blog-featured,
+.gvb-blog-all,
+.gvb-personalisieren,
+.gvb-edelstahl-features,
+.gvb-borosilikat-features,
+.gvb-borosilikat-verschluesse {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Update personen (had 1240px) to match ceiling */
+.gvb-uberuns-personen {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Branding inner flex container — centred within the full-width outer section */
+.gvb-branding__inner {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   19b. 1280px+ — typography scaling
+   Headings scale gently from design baseline → ceiling at 1440px.
+   ────────────────────────────────────────────────────────────── */
+
+@media (min-width: 1280px) {
+
+  /* Section headings: 40px → max 48px (caps at 1440px) */
+  .gvb-personalisieren__heading,
+  .gvb-branding__heading {
+    font-size: clamp(40px, 3.33vw, 48px);
+  }
+
+  /* Large intro paragraph: 32px → max 36px (caps at 1440px) */
+  .gvb-flaschen-intro p {
+    font-size: clamp(32px, 2.5vw, 36px);
+  }
+
+  /* Benefit card titles: 40px → max 44px (caps at 1440px) */
+  .gvb-personalisieren-card__title {
+    font-size: clamp(40px, 3.05vw, 44px);
+  }
+
+}
+
+/* ──────────────────────────────────────────────────────────────
+   19c. 1440px+ — card section centring
+   Card sections have WP inline margin: 0 20px which works
+   naturally up to 1440px. Beyond the ceiling, override to
+   auto so the card sits centred on the page.
+   ────────────────────────────────────────────────────────────── */
+
+@media (min-width: 1440px) {
+
+  /* Card sections: cap at 1400px and centre (20px each side at 1440px). */
+  .gvb-hero,
+  .gvb-cases,
+  .gvb-faq {
+    max-width: 1400px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Anlass: max-width via calc margin — margin grows with viewport so the
+     section stays at 1400px. Same mechanic as the base 20px margin that
+     naturally gives 1400px at exactly 1440px. At 1440px: (1440-1400)/2=20px. */
+  .gvb-bedrucken-anlass {
+    margin-left: calc((100% - 1400px) / 2) !important;
+    margin-right: calc((100% - 1400px) / 2) !important;
+  }
+
+  /* Edelstahl product card */
+  .gvb-edelstahl-product {
+    max-width: 1440px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Header: keep green background full-width, but push logo + nav
+     inward so they stay centred within the 1440px content column.
+     Formula: 54px (design padding) + half of the viewport excess beyond 1440px */
+  .gvb-header {
+    padding-left: calc((100% - 1440px) / 2 + 54px) !important;
+    padding-right: calc((100% - 1440px) / 2 + 54px) !important;
+  }
+
 }

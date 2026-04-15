@@ -18,7 +18,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<div class="gvb-flaschen-cards__text">
 				<h5 class="gvb-flaschen-cards__title">Edelstahl</h5>
 				<p class="gvb-flaschen-cards__desc">Entdecke unseren widerstandsfähigen Allrounder aus hochwertigem und lebensmittelechtem Edelstahl.</p>
-				<a href="#" class="gvb-btn-primary">Mehr erfahren</a>
+				<a href="<?php echo esc_url( home_url( '/edelstahl/' ) ); ?>" class="gvb-btn-primary">Mehr erfahren</a>
 			</div>
 		</li>
 
@@ -29,7 +29,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<div class="gvb-flaschen-cards__text">
 				<h5 class="gvb-flaschen-cards__title">Tritan</h5>
 				<p class="gvb-flaschen-cards__desc">Unsere Tritanflaschen sind BPA- und Mikroplastikfrei und für jeden Einsatz bestens geeignet.</p>
-				<a href="#" class="gvb-btn-primary">Mehr erfahren</a>
+				<a href="<?php echo esc_url( home_url( '/tritan/' ) ); ?>" class="gvb-btn-primary">Mehr erfahren</a>
 			</div>
 		</li>
 
@@ -40,7 +40,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<div class="gvb-flaschen-cards__text">
 				<h5 class="gvb-flaschen-cards__title">Borosilikatglas</h5>
 				<p class="gvb-flaschen-cards__desc">Unsere edlen Glasflaschen gibt es in vielen verschiedenen Modellen und mit unterschiedlichen Verschlüssen.</p>
-				<a href="#" class="gvb-btn-primary">Mehr erfahren</a>
+				<a href="<?php echo esc_url( home_url( '/borosilikat-glas/' ) ); ?>" class="gvb-btn-primary">Mehr erfahren</a>
 			</div>
 		</li>
 

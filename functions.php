@@ -46,10 +46,37 @@ function gvb_enqueue_scripts() {
         filemtime( $theme_dir . '/assets/js/cases-carousel.js' ),
         true
     );
+
+    wp_enqueue_script(
+        'gvb-scroll-animations',
+        $theme_uri . '/assets/js/scroll-animations.js',
+        array(),
+        filemtime( $theme_dir . '/assets/js/scroll-animations.js' ),
+        true
+    );
+
+    if ( is_home() ) {
+        wp_enqueue_script(
+            'gvb-blog-pagination',
+            $theme_uri . '/assets/js/blog-pagination.js',
+            array(),
+            filemtime( $theme_dir . '/assets/js/blog-pagination.js' ),
+            true
+        );
+    }
+
 }
 add_action( 'wp_enqueue_scripts', 'gvb_enqueue_scripts' );
 
-/* ── 4. Register block pattern category + explicit patterns ──── */
+/* ── 4. Ignore sticky posts in the all-articles Query Loop ──── */
+add_filter( 'query_loop_block_query_vars', function( $query ) {
+    if ( is_home() && empty( $query['post__in'] ) ) {
+        $query['ignore_sticky_posts'] = 1;
+    }
+    return $query;
+} );
+
+/* ── 5. Register block pattern category + explicit patterns ──── */
 
 function gvb_register_pattern_category() {
     register_block_pattern_category( 'gvb', array(

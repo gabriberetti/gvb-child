@@ -10,11 +10,11 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <!-- wp:html -->
 <section class="gvb-edelstahl-features">
 
-	<h3 class="gvb-edelstahl-features__heading">Bei Edelstahl stimmt der Vibe</h3>
+	<h3 class="gvb-edelstahl-features__heading gvb-fade-up">Bei Edelstahl stimmt der Vibe</h3>
 
 	<ul class="gvb-edelstahl-features__cards">
 
-		<li class="gvb-edelstahl-feature-card">
+		<li class="gvb-edelstahl-feature-card gvb-fade-up">
 			<div class="gvb-edelstahl-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/edelstahl-feature-1.jpg' ); ?>" alt="Hochwertiger Edelstahl" />
 			</div>
@@ -24,7 +24,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-edelstahl-feature-card">
+		<li class="gvb-edelstahl-feature-card gvb-fade-up">
 			<div class="gvb-edelstahl-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/edelstahl-feature-2.jpg' ); ?>" alt="Doppelwandige Isolierung" />
 			</div>
@@ -34,7 +34,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-edelstahl-feature-card">
+		<li class="gvb-edelstahl-feature-card gvb-fade-up">
 			<div class="gvb-edelstahl-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/edelstahl-feature-3.jpg' ); ?>" alt="Nachhaltigkeit mit Stil" />
 			</div>
@@ -44,7 +44,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-edelstahl-feature-card">
+		<li class="gvb-edelstahl-feature-card gvb-fade-up">
 			<div class="gvb-edelstahl-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/edelstahl-feature-4.jpg' ); ?>" alt="Deine Flasche. Dein Vibe." />
 			</div>

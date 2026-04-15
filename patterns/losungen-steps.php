@@ -17,7 +17,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<div class="gvb-steps__rows">
 
 		<!-- Step 1: content left, image right -->
-		<div class="gvb-steps__row">
+		<div class="gvb-steps__row gvb-fade-up">
 			<div class="gvb-steps__content">
 				<span class="gvb-steps__number">1</span>
 				<div class="gvb-steps__text">
@@ -31,7 +31,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		</div>
 
 		<!-- Step 2: image left, content right -->
-		<div class="gvb-steps__row">
+		<div class="gvb-steps__row gvb-fade-up">
 			<div class="gvb-steps__image">
 				<img src="<?php echo esc_url( $img . '/losungen-step-2.jpg' ); ?>" alt="Logo oder Design einsenden" />
 			</div>
@@ -45,7 +45,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		</div>
 
 		<!-- Step 3: content left, image right -->
-		<div class="gvb-steps__row">
+		<div class="gvb-steps__row gvb-fade-up">
 			<div class="gvb-steps__content">
 				<span class="gvb-steps__number">3</span>
 				<div class="gvb-steps__text">

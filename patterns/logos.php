@@ -7,7 +7,7 @@
 ?>
 
 <!-- wp:html -->
-<div class="gvb-logos">
+<div class="gvb-logos gvb-fade-up">
 	<div class="gvb-logos__track">
 
 		<!-- Logo 1: double curved arrow -->

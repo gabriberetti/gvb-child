@@ -10,11 +10,11 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <!-- wp:html -->
 <section class="gvb-borosilikat-features">
 
-	<h3 class="gvb-borosilikat-features__heading">Tritan ist ein Alleskönner</h3>
+	<h3 class="gvb-borosilikat-features__heading gvb-fade-up">Tritan ist ein Alleskönner</h3>
 
 	<ul class="gvb-borosilikat-features__cards">
 
-		<li class="gvb-borosilikat-feature-card">
+		<li class="gvb-borosilikat-feature-card gvb-fade-up">
 			<div class="gvb-borosilikat-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/tritan-feature-1.jpg' ); ?>" alt="Gut hydriert unterwegs" />
 			</div>
@@ -24,7 +24,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-borosilikat-feature-card">
+		<li class="gvb-borosilikat-feature-card gvb-fade-up">
 			<div class="gvb-borosilikat-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/tritan-feature-2.jpg' ); ?>" alt="Robust und zuverlässig" />
 			</div>
@@ -34,7 +34,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-borosilikat-feature-card">
+		<li class="gvb-borosilikat-feature-card gvb-fade-up">
 			<div class="gvb-borosilikat-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/tritan-feature-3.jpg' ); ?>" alt="Geschmacksecht genießen" />
 			</div>
@@ -44,7 +44,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-borosilikat-feature-card">
+		<li class="gvb-borosilikat-feature-card gvb-fade-up">
 			<div class="gvb-borosilikat-feature-card__image">
 				<img src="<?php echo esc_url( $img . '/tritan-feature-4.jpg' ); ?>" alt="Deine Flasche. Dein Vibe." />
 			</div>
