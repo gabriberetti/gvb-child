@@ -421,7 +421,6 @@ Text Domain: gvb
   z-index: 2;
   display: flex;
   gap: 8px;
-  border-bottom: 1px solid rgba(237, 232, 219, 0.2);
   padding-bottom: 12px;
 }
 
@@ -678,15 +677,17 @@ Text Domain: gvb
    ══════════════════════════════════════════════════════════════ */
 
 /* Section wrapper — override uneven inline padding to keep content centred */
-.gvb-contact {
-  padding-left: 52px !important;
-  padding-right: 52px !important;
+.gvb-contact,
+.gvb-blog-all {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
-/* Columns body — vertically centre portrait and form relative to each other */
+/* Columns body — image anchored to the left with 60px offset. */
 .gvb-contact__body {
   align-items: center !important;
-  justify-content: center;
+  justify-content: flex-start !important;
+  padding-left: 60px;
 }
 
 /* Portrait image
@@ -1460,21 +1461,6 @@ Text Domain: gvb
   .has-display-font-size  { font-size: 48px !important; }
 }
 
-@media (max-width: 480px) {
-  /* Further scale for mobile */
-  h1, .has-h-1-font-size { font-size: 34px !important; }
-  h2, .has-h-2-font-size { font-size: 26px !important; }
-  .has-display-font-size  { font-size: 38px !important; }
-
-  /* Full-width buttons on mobile */
-  .gvb-btn--primary,
-  .gvb-btn--secondary {
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-}
-
 /* ══════════════════════════════════════════════════════════════
    UNSERE LÖSUNGEN PAGE
    ══════════════════════════════════════════════════════════════ */
@@ -1732,11 +1718,7 @@ Text Domain: gvb
     line-height: 1.4;
     letter-spacing: 0.1px;
   }
-}
 
-@media (max-width: 768px) {
-  /* grid stays 2-column at tablet — the ≤1024px card layout handles the stacked image+content */
-  /* aspect-ratio is handled by the ≤1024px block above (unset) — no override needed here */
 }
 
 /* ── Branding section ── */
@@ -1788,11 +1770,11 @@ Text Domain: gvb
 
 /* ── Steps section ── */
 .gvb-steps {
-  padding: 0 20px 60px;
+  padding: 0 0 60px;
 }
 
 .gvb-steps__intro {
-  padding: 0 21px 19px;
+  padding: 0 0 19px;
 }
 
 .gvb-steps__heading {
@@ -1808,7 +1790,7 @@ Text Domain: gvb
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px 21px;
+  padding: 20px 0;
 }
 
 .gvb-steps__row {
@@ -1883,7 +1865,7 @@ Text Domain: gvb
 .gvb-flaschen-intro {
   padding: 80px 64px;
   text-align: center;
-  max-width: 960px;
+  box-sizing: border-box;
   margin: 0 auto;
 }
 
@@ -1937,6 +1919,11 @@ Text Domain: gvb
   flex-direction: column;
   gap: 8px;
   align-items: flex-start;
+  flex: 1;
+}
+
+.gvb-flaschen-cards__text .gvb-btn-primary {
+  margin-top: auto;
 }
 
 .gvb-flaschen-cards__title {
@@ -2000,7 +1987,7 @@ Text Domain: gvb
 
 /* ── Vision & Mission rows ── */
 .gvb-uberuns-vm {
-  padding: 0 20px 20px;
+  padding: 0 52px 20px;
 }
 
 .gvb-uberuns-vm__rows {
@@ -2064,7 +2051,7 @@ Text Domain: gvb
 
 /* ── Team photo ── */
 .gvb-uberuns-team {
-  padding: 20px 22px 40px;
+  padding: 20px 52px 40px;
 }
 
 .gvb-uberuns-team__img {
@@ -2082,8 +2069,7 @@ Text Domain: gvb
 
 /* ── Wer sind wir ── */
 .gvb-uberuns-personen {
-  padding: 60px 22px 80px;
-  max-width: 1240px;
+  padding: 60px 52px 80px;
 }
 
 .gvb-uberuns-personen h2 {
@@ -2109,7 +2095,7 @@ Text Domain: gvb
 
 /* ── Unsere Überzeugung ── */
 .gvb-ueberzeugung {
-  padding: 60px 22px 80px;
+  padding: 60px 52px 80px;
 }
 
 .gvb-ueberzeugung__heading {
@@ -2651,6 +2637,8 @@ Text Domain: gvb
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .gvb-blog-featured__content .wp-block-post-title {
@@ -2773,7 +2761,8 @@ Text Domain: gvb
   text-decoration: none !important;
 }
 
-.gvb-blog-card__body .wp-block-post-title a:hover {
+.gvb-blog-card__body .wp-block-post-title a:hover,
+.gvb-blog-card:hover .gvb-blog-card__body .wp-block-post-title a {
   color: var(--wp--preset--color--gvb-green) !important;
 }
 
@@ -2968,6 +2957,8 @@ Text Domain: gvb
     order: 0;
     padding-top: 16px;
     padding-bottom: 32px;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 
   .gvb-blog-featured__content .wp-block-post-title {
@@ -3145,7 +3136,7 @@ Text Domain: gvb
 }
 
 .gvb-overlay-card__title {
-  font-size: 40px;
+  font-size: 31px;
   font-weight: 700;
   line-height: 1;
   color: var(--wp--preset--color--gvb-linen);
@@ -3158,6 +3149,14 @@ Text Domain: gvb
   letter-spacing: 0.08px;
   color: #fff;
   margin: 0;
+}
+
+.gvb-overlay-card--dark-text .gvb-overlay-card__title {
+  color: var(--wp--preset--color--gvb-graphite);
+}
+
+.gvb-overlay-card--dark-text .gvb-overlay-card__desc {
+  color: var(--wp--preset--color--gvb-graphite);
 }
 
 /* ═══════════════════════════════════════
@@ -3211,6 +3210,75 @@ Text Domain: gvb
 .gvb-bedrucken-anlass .gvb-overlay-cards {
   padding: 0;
 }
+
+/* Desktop: card is a column — __media (image + overlaid title) on top, __content below */
+.gvb-bedrucken-anlass .gvb-overlay-card {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 0;
+  background: var(--wp--preset--color--gvb-green);
+}
+
+.gvb-bedrucken-anlass .gvb-overlay-card--dark-text {
+  background: var(--wp--preset--color--gvb-linen);
+}
+
+.gvb-bedrucken-anlass .gvb-overlay-card__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+.gvb-bedrucken-anlass .gvb-overlay-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Title overlaid at the bottom of the image */
+.gvb-bedrucken-anlass .gvb-overlay-card__title {
+  position: absolute;
+  bottom: 80px;
+  left: 24px;
+  right: 24px;
+  z-index: 1;
+  font-size: 31px;
+  line-height: 1.1;
+  color: var(--wp--preset--color--gvb-linen) !important;
+}
+
+.gvb-bedrucken-anlass .gvb-overlay-card--dark-text .gvb-overlay-card__title {
+  color: var(--wp--preset--color--gvb-graphite) !important;
+}
+
+/* Desc sits below the image area */
+.gvb-bedrucken-anlass .gvb-overlay-card__content {
+  padding: 16px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: none;
+  position: relative;
+  z-index: auto;
+  margin-top: -50px;
+}
+
+.gvb-bedrucken-anlass .gvb-overlay-card__desc {
+  color: var(--wp--preset--color--gvb-linen);
+}
+
+.gvb-bedrucken-anlass .gvb-overlay-card--dark-text .gvb-overlay-card__desc {
+  color: var(--wp--preset--color--gvb-graphite);
+}
+
 
 .gvb-bedrucken-anlass__heading {
   font-size: 40px;
@@ -3368,6 +3436,17 @@ Text Domain: gvb
    vw denominators match the desktop values at exactly 1200px:
      180px / 1200px = 15vw   60px / 1200px = 5vw   240px / 1200px = 20vw  */
 @media (max-width: 1199px) {
+  .gvb-steps,
+  .gvb-branchen {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .gvb-contact {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
   .gvb-steps__row {
     height: auto;
     align-items: stretch;
@@ -3394,6 +3473,16 @@ Text Domain: gvb
   }
 }
 
+@media (max-width: 1024px) and (min-width: 769px) {
+  .gvb-bedrucken-anlass .gvb-overlay-card__title {
+    font-size: clamp(20px, 2.3vw, 24px);
+    line-height: 1.1;
+    bottom: 40px;
+  }
+}
+
+
+
 @media (max-width: 768px) {
 
   /* ── Hero: override 55% content offset on all hero types ──
@@ -3416,10 +3505,15 @@ Text Domain: gvb
     background: rgba(0, 0, 0, 0.28);
   }
 
-  /* ── Contact: reduce section padding ── */
+  /* ── Contact: restore lateral padding on mobile ── */
   .gvb-contact {
     padding-left: 20px !important;
     padding-right: 20px !important;
+  }
+
+  .gvb-contact__body {
+    padding-left: 0;
+    justify-content: center !important;
   }
 
   .gvb-contact__portrait img {
@@ -3508,7 +3602,7 @@ Text Domain: gvb
   }
 
   .gvb-overlay-card__title {
-    font-size: 28px;
+    font-size: 22px;
   }
 
   /* ── Bedrucken sections ── */
@@ -3521,34 +3615,117 @@ Text Domain: gvb
     font-size: 28px;
   }
 
-  /* Content below image (not overlaid) on mobile */
+  /* ── Anlass overlay cards: horizontal carousel at 426–768px, 1-column at ≤425px ── */
+  .gvb-bedrucken-anlass .gvb-overlay-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-card {
+    flex: 0 0 calc(50% - 8px); /* same size as 2-column layout; third card scrolls into view */
+    scroll-snap-align: start;
+    margin: 0;
+  }
+
+  /* Scroll-hint chevron — pulses rightward to signal swipeability */
+  .gvb-bedrucken-anlass {
+    position: relative;
+  }
+
+  .gvb-bedrucken-anlass::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 55%;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--wp--preset--color--gvb-linen) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232B2B2B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E") center / 14px no-repeat;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+  }
+
   .gvb-bedrucken-anlass .gvb-overlay-card {
     flex-direction: column;
     align-items: stretch;
     padding: 0;
     min-height: 0;
-    gap: 4px;
-    overflow: visible;
-  }
-
-  .gvb-bedrucken-anlass .gvb-overlay-card__img {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: 280px;
+    height: auto;
+    gap: 0;
+    overflow: hidden;
+    background: var(--wp--preset--color--gvb-green);
     border-radius: 20px;
   }
 
-  .gvb-bedrucken-anlass .gvb-overlay-card__content {
-    position: relative;
-    background: none;
-    border-radius: 0;
-    padding: 16px 0 8px;
-    gap: 10px;
+  /* Cards 1 + 3 (--dark-text variant): linen background */
+  .gvb-bedrucken-anlass .gvb-overlay-card--dark-text {
+    background: var(--wp--preset--color--gvb-linen);
   }
 
+  /* __media becomes a real block — overrides desktop display: contents */
+  .gvb-bedrucken-anlass .gvb-overlay-card__media {
+    display: block !important;
+    position: relative;
+    aspect-ratio: unset;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-card__img {
+    position: relative !important;
+    inset: auto !important;
+    width: 100%;
+    height: auto;
+    object-fit: unset;
+    border-radius: 0;
+    display: block;
+  }
+
+  /* Heading overlaid at the bottom of the image */
   .gvb-bedrucken-anlass .gvb-overlay-card__title {
-    font-size: 24px;
+    position: absolute;
+    bottom: 100px;
+    left: 20px;
+    right: 20px;
+    font-size: 24px !important;
+    line-height: 1.1;
+    z-index: 1;
+    margin: 0;
+  }
+
+  /* Desc-only block below the image */
+  .gvb-bedrucken-anlass .gvb-overlay-card__content {
+    position: relative;
+    max-width: none;
+    background: none;
+    padding: 16px 20px 24px;
+    margin-top: -100px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Card 2 (green bg): linen desc text */
+  .gvb-bedrucken-anlass .gvb-overlay-card__desc {
+    font-size: 15px;
+    line-height: 1.4;
+    color: rgba(237, 232, 219, 0.85);
+  }
+
+  /* Cards 1 + 3 (linen bg): graphite desc text */
+  .gvb-bedrucken-anlass .gvb-overlay-card--dark-text .gvb-overlay-card__desc {
+    color: var(--wp--preset--color--gvb-graphite);
   }
 
   .gvb-bedrucken-warum {
@@ -3825,6 +4002,11 @@ Text Domain: gvb
     font-size: 20px;
   }
 
+  .gvb-uberuns-vm {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .gvb-uberuns-vm__row {
     flex-direction: column;
     height: auto;
@@ -4005,9 +4187,81 @@ Text Domain: gvb
     grid-template-columns: 1fr;
   }
 
+  /* ── Anlass: single column on small phones — reset carousel + hide scroll hint ── */
+  .gvb-bedrucken-anlass::after {
+    display: none;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-card__title {
+    font-size: clamp(16px, 5vw, 22px) !important;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-card__desc {
+    font-size: clamp(11px, 3.4vw, 15px);
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-cards {
+    flex-direction: column;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    gap: 20px;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-card {
+    flex: 1 1 100%;
+    scroll-snap-align: none;
+  }
+
+}
+
+/* Mobile line breaks: hidden on desktop, visible at specific breakpoints */
+.gvb-br-mobile,
+.gvb-br-mobile-m,
+.gvb-br-mobile-s {
+  display: none;
+}
+
+@media (max-width: 375px) {
+  .gvb-br-mobile {
+    display: inline;
+  }
+}
+
+@media (max-width: 375px) and (min-width: 321px) {
+  .gvb-br-mobile-m {
+    display: inline;
+  }
+}
+
+/* Mobile S (≤320px): line breaks + tighten anlass overlay */
+@media (max-width: 320px) {
+  .gvb-br-mobile-s {
+    display: inline;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-card__title {
+    bottom: 90px;
+    font-size: 15px !important;
+  }
+
+  .gvb-bedrucken-anlass .gvb-overlay-card__desc {
+    font-size: 10px;
+  }
 }
 
 @media (max-width: 480px) {
+
+  /* ── Global typography + button scale for mobile ── */
+  h1, .has-h-1-font-size { font-size: 34px !important; }
+  h2, .has-h-2-font-size { font-size: 26px !important; }
+  .has-display-font-size  { font-size: 38px !important; }
+
+  .gvb-btn--primary,
+  .gvb-btn--secondary {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
 
   /* ── Steps: compact number + tighter padding ── */
   .gvb-steps__content {
@@ -4376,17 +4630,13 @@ Text Domain: gvb
 
 
 /* ══════════════════════════════════════════════════════════════
-   19. LARGE-SCREEN ENHANCEMENTS
+   19. LARGE-SCREEN CEILING — max-width: 1400px on all sections
+   Everything freezes at 1400px. Only side margins grow beyond that.
    ══════════════════════════════════════════════════════════════ */
 
 /* ──────────────────────────────────────────────────────────────
-   19a. MAX-WIDTH CONSTRAINTS — ceiling at 1440px (theme wideSize)
-   The 1200px design is the baseline. Sections scale naturally
-   with the viewport up to 1440px, then side space grows.
-   Rules are general (no media query) — only visible beyond 1440px.
+   19a. Content sections — no WP inline margin, general rule works.
    ────────────────────────────────────────────────────────────── */
-
-/* ── Content sections — constrain and centre ── */
 .gvb-logos,
 .gvb-testimonials,
 .gvb-contact,
@@ -4395,6 +4645,7 @@ Text Domain: gvb
 .gvb-steps,
 .gvb-uberuns-team,
 .gvb-uberuns-vm,
+.gvb-uberuns-personen,
 .gvb-ueberzeugung,
 .gvb-flaschen-cards,
 .gvb-druckverfahren,
@@ -4406,87 +4657,45 @@ Text Domain: gvb
 .gvb-personalisieren,
 .gvb-edelstahl-features,
 .gvb-borosilikat-features,
-.gvb-borosilikat-verschluesse {
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Update personen (had 1240px) to match ceiling */
-.gvb-uberuns-personen {
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Branding inner flex container — centred within the full-width outer section */
-.gvb-branding__inner {
-  max-width: 1440px;
+.gvb-borosilikat-verschluesse,
+.gvb-brand-promise,
+.gvb-branding,
+.gvb-branding__inner,
+.gvb-flaschen-intro,
+.gvb-uberuns-intro,
+.gvb-losungen-intro,
+.gvb-intro-text {
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
 }
 
 /* ──────────────────────────────────────────────────────────────
-   19b. 1280px+ — typography scaling
-   Headings scale gently from design baseline → ceiling at 1440px.
-   ────────────────────────────────────────────────────────────── */
-
-@media (min-width: 1280px) {
-
-  /* Section headings: 40px → max 48px (caps at 1440px) */
-  .gvb-personalisieren__heading,
-  .gvb-branding__heading {
-    font-size: clamp(40px, 3.33vw, 48px);
-  }
-
-  /* Large intro paragraph: 32px → max 36px (caps at 1440px) */
-  .gvb-flaschen-intro p {
-    font-size: clamp(32px, 2.5vw, 36px);
-  }
-
-  /* Benefit card titles: 40px → max 44px (caps at 1440px) */
-  .gvb-personalisieren-card__title {
-    font-size: clamp(40px, 3.05vw, 44px);
-  }
-
-}
-
-/* ──────────────────────────────────────────────────────────────
-   19c. 1440px+ — card section centring
-   Card sections have WP inline margin: 0 20px which works
-   naturally up to 1440px. Beyond the ceiling, override to
-   auto so the card sits centred on the page.
+   19b. Card sections — WP writes inline margin: 0 20px on these,
+   so we need a media query + !important to override beyond 1400px.
    ────────────────────────────────────────────────────────────── */
 
 @media (min-width: 1440px) {
 
-  /* Card sections: cap at 1400px and centre (20px each side at 1440px). */
+  /* Hero, Cases, FAQ: cap at 1400px and centre. */
   .gvb-hero,
   .gvb-cases,
-  .gvb-faq {
+  .gvb-faq,
+  .gvb-edelstahl-product {
     max-width: 1400px !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  /* Anlass: max-width via calc margin — margin grows with viewport so the
-     section stays at 1400px. Same mechanic as the base 20px margin that
-     naturally gives 1400px at exactly 1440px. At 1440px: (1440-1400)/2=20px. */
+  /* Anlass: uses calc margin instead of max-width (WP flex-stretch pitfall).
+     At 1440px: (1440-1400)/2 = 20px each side — same as the natural inline margin. */
   .gvb-bedrucken-anlass {
     margin-left: calc((100% - 1400px) / 2) !important;
     margin-right: calc((100% - 1400px) / 2) !important;
   }
 
-  /* Edelstahl product card */
-  .gvb-edelstahl-product {
-    max-width: 1440px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  /* Header: keep green background full-width, but push logo + nav
-     inward so they stay centred within the 1440px content column.
-     Formula: 54px (design padding) + half of the viewport excess beyond 1440px */
+  /* Header: green bar stays full-width, logo + nav stay aligned to the 1440px content column.
+     Formula: 54px (design padding) + half the viewport excess beyond 1440px. */
   .gvb-header {
     padding-left: calc((100% - 1440px) / 2 + 54px) !important;
     padding-right: calc((100% - 1440px) / 2 + 54px) !important;

@@ -1,7 +1,7 @@
 <?php
 /**
- * Title: Borosilikatglas Brand Promise
- * Slug: gvb/borosilikat-brand-promise
+ * Title: Flaschen Brand Promise
+ * Slug: gvb/flaschen-brand-promise
  * Categories: gvb
  */
 $svg = get_stylesheet_directory_uri() . '/assets/svg';
@@ -14,7 +14,7 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 	<div class="wp-block-group gvb-brand-promise__content">
 
 		<!-- wp:heading {"textAlign":"center","level":2,"style":{"typography":{"fontSize":"60px","fontWeight":"700","lineHeight":"1.03"}},"textColor":"gvb-linen"} -->
-		<h2 class="wp-block-heading has-text-align-center has-gvb-linen-color has-text-color" style="font-size:60px;font-weight:700;line-height:1.03">Noch mehr Flaschen.</h2>
+		<h2 class="wp-block-heading has-text-align-center has-gvb-linen-color has-text-color" style="font-size:60px;font-weight:700;line-height:1.03">Unsere Flaschen haben's drauf!</h2>
 		<!-- /wp:heading -->
 
 		<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"24px","lineHeight":"1.2","letterSpacing":"0.12px"}},"textColor":"gvb-linen"} -->
@@ -24,7 +24,7 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 		<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 		<div class="wp-block-buttons">
 			<!-- wp:button {"className":"gvb-btn--primary","style":{"border":{"radius":"50px"}}} -->
-			<div class="wp-block-button gvb-btn--primary"><a class="wp-block-button__link" >Mehr erfahren</a></div>
+			<div class="wp-block-button gvb-btn--primary"><a class="wp-block-button__link" href="<?php echo esc_url( home_url( '/unsere-flaschen/' ) ); ?>">Mehr erfahren</a></div>
 			<!-- /wp:button -->
 		</div>
 		<!-- /wp:buttons -->

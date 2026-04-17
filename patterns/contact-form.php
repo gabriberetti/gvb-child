@@ -27,8 +27,8 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<!-- wp:columns {"className":"gvb-contact__body","style":{"spacing":{"blockGap":{"left":"69px"}}}} -->
 	<div class="wp-block-columns gvb-contact__body">
 
-		<!-- wp:column {"width":"480px","className":"gvb-contact__image-col"} -->
-		<div class="wp-block-column gvb-contact__image-col" style="flex-basis:480px">
+		<!-- wp:column {"width":"500px","className":"gvb-contact__image-col"} -->
+		<div class="wp-block-column gvb-contact__image-col" style="flex-basis:500px">
 
 			<!-- wp:image {"className":"gvb-contact__portrait","style":{"border":{"radius":"36px"}}} -->
 			<figure class="wp-block-image gvb-contact__portrait" style="border-radius:36px">

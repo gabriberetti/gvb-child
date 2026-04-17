@@ -24,7 +24,7 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 		<!-- wp:buttons {"className":"gvb-fade-up","layout":{"type":"flex","justifyContent":"center"}} -->
 		<div class="wp-block-buttons gvb-fade-up">
 			<!-- wp:button {"className":"gvb-btn--primary","style":{"border":{"radius":"50px"}}} -->
-			<div class="wp-block-button gvb-btn--primary"><a class="wp-block-button__link" >Mehr erfahren</a></div>
+			<div class="wp-block-button gvb-btn--primary"><a class="wp-block-button__link" href="<?php echo esc_url( home_url( '/unsere-flaschen/' ) ); ?>">Mehr erfahren</a></div>
 			<!-- /wp:button -->
 		</div>
 		<!-- /wp:buttons -->

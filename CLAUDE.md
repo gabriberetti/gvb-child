@@ -174,7 +174,23 @@ Templates in `templates/` are HTML files using WordPress block markup. Page-spec
 | `.gvb-rounded-img` | Rounded photo corners (16px) |
 | `.gvb-fade-up` | Scroll-triggered fade-up animation (JS observer adds `.gvb-in-view`) |
 
-Responsive breakpoints: 1200px / 768px / 480px.
+Responsive breakpoints (aligned to Chrome DevTools device presets):
+
+| Preset | Width | Usage |
+|---|---|---|
+| Mobile S | `≤320px` | `gvb-br-mobile-s` line breaks, Anlass title/desc tightening |
+| Mobile M | `321–375px` | `gvb-br-mobile-m` line breaks |
+| Mobile L | `≤425px` | Single-column stacks, Anlass carousel reset |
+| Tablet | `≤768px` | Main mobile layout block (collapse columns, mobile nav overlay, etc.) |
+| Laptop | `≤1024px` | Industry grid stack; `(769–1024)` iPad-only Anlass title clamp + carousel |
+| Laptop L | `≥1440px` | Large-screen ceiling (`.gvb-hero`, `.gvb-cases`, `.gvb-faq` → `max-width: 1400px`) |
+| 4K | `2560px` | No explicit rule — inherits ceiling |
+
+Auxiliary breakpoints still in use (not DevTools presets but serve real purpose):
+- `≤1199px` — Steps section fluid scaling (avoids overlap with 1200 desktop rules)
+- `≤1200px` — desktop → fluid columns
+- `≤784px` (5 occurrences) — WP's internal breakpoint; 16px off from 768, candidate for future cleanup
+- `≤480px` — consolidated into a single block (global h1/h2/buttons + section-specific overrides)
 
 **Mobile responsive strategy** (sections 16–17 of `style.css`, updated April 2026):
 - All fixed-width flex/grid columns (product cards, steps, VM rows, branding) collapse to single-column stacks at 768px
@@ -184,7 +200,7 @@ Responsive breakpoints: 1200px / 768px / 480px.
 - Feature card images (`gvb-edelstahl-feature-card__image`, `gvb-borosilikat-feature-card__image`): 140×140px + `align-self: center` on mobile; text blocks `text-align: center` + `align-items: center`
 - Contact form fields: `gap: 32px` between stacked fields within pairs, `margin-bottom: 32px` between groups
 - Bottom wave: `wave-bottom-mobile.svg` (full-width concave arc) replaces desktop S-curve on mobile via `background-image` override in `@media (max-width: 768px)`
-- **Mobile nav overlay (section 17):** ALL styles targeting `.wp-block-navigation__responsive-container` children must use `.is-menu-open` in the selector — this container is visible on desktop too. Hamburger/close button styles must be inside `@media (max-width: 768px)`. `.wp-block-navigation__responsive-container-content` must also be scoped to `.is-menu-open`.
+- **Mobile nav overlay (section 17):** ALL styles targeting `.wp-block-navigation__responsive-container` children must use `.is-menu-open` in the selector — this container is visible on desktop too. Hamburger/close button styles must be inside `@media (max-width: 768px)`. `.wp-block-navigation__responsive-container-content` must also be scoped to `.is-menu-open`. WP 6.5+ adds intermediate layers `responsive-close > responsive-dialog` — WP core gives `.wp-block-navigation__responsive-close { margin: auto }` inside `.has-modal-open`, which in a flex-column context shrinks it to content-width. Fix: force `width: 100% !important; height: 100% !important; margin: 0 !important; max-width: none !important` on `responsive-close` and `width: 100%; height: 100%; display: flex; flex-direction: column` on `responsive-dialog` when `.is-menu-open`.
 - Blog page mobile: featured articles stack image-first (`order: -1`) with `height: auto !important` on `<figure>` and `<a>` to override WP inline `height: 432px`; all-articles cards go single-column — use `display: flex; flex-direction: column` on the `ul` (not `grid-template-columns`) to handle both WP flex and grid post-template layouts
 - Blog desktop: `.gvb-blog-grid .wp-block-post-template` has `min-height: 520px; align-content: start` so all pages keep consistent section height regardless of article count (6 articles = 3 rows of 2)
 - **Bedrucken anlass mobile:** content below image (not overlaid) — `__img` set to `position: relative; height: 280px; border-radius: 20px`; `__content` has `background: none` (section already orange)
@@ -192,6 +208,10 @@ Responsive breakpoints: 1200px / 768px / 480px.
 - **Industry intro patterns:** all 5 `industrie-intro-{slug}.php` files have `className="gvb-flaschen-intro"` for shared mobile padding/font-size CSS
 - **Steps section:** `.gvb-steps` gets `padding: 0 20px`; `.gvb-steps__rows` gets `padding: 0` (no double inset)
 - **Double-padding pitfall:** if outer section has inline `padding: 0 20px`, do NOT repeat on inner wrapper — set inner to `0`
+- **Personalisieren grid breakpoints:** 2-column at ≥426px (including 768px tablet), single-column at `≤425px`. The card `aspect-ratio: 4/3` applies at `≤1023px`; `1/1` at ≥1024px. Card titles: `clamp(24px, 3vw, 30px)` at `≤1024px`.
+- **Large-screen ceiling (`@media min-width: 1440px`, Section 19):** `.gvb-hero`, `.gvb-cases`, `.gvb-faq` get `max-width: 1400px !important; margin: auto !important`. `.gvb-bedrucken-anlass` uses `margin-left/right: calc((100% - 1400px) / 2) !important` (cannot use `max-width` directly — WP flex-stretch on `.wp-site-blocks` direct children overrides it even with `!important`). Key headings (`.gvb-personalisieren__heading`, `.gvb-edelstahl-features__heading`) have `max-width: 1400px; margin: 0 auto`.
+- **Blog cards clickable:** `.gvb-blog-card .wp-block-post-title a::after { content: ''; position: absolute; inset: 0; border-radius: 16px; z-index: 0 }`. `.gvb-blog-card` must have `position: relative`; `.gvb-blog-card__thumb` gets `position: relative; z-index: 1` to stay above the overlay.
+- **Cases carousel active tab:** linen pill border — `border: 1.5px solid rgba(237,232,219,0.55); border-radius: 50px; background: rgba(237,232,219,0.08)` on `.is-active`. Non-active tabs have `border: 1.5px solid transparent`. No orange colour on tabs.
 
 ## ACF Field Groups
 
