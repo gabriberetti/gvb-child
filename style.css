@@ -144,17 +144,61 @@ Text Domain: gvb
   padding: 12px 0;
   min-width: 200px;
   box-shadow: var(--gvb-shadow-md);
+  margin-top: 10px;
+}
+
+/* Invisible bridge fills the gap so hover isn't lost while moving to the submenu */
+.gvb-header .wp-block-navigation__submenu-container::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
 }
 
 .gvb-header .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
   color: var(--wp--preset--color--gvb-linen) !important;
   font-size: 15px;
-  padding: 8px 24px;
+  padding: 8px 24px 8px 24px;
   display: block;
+  opacity: 0.75;
+  transition: opacity 0.15s, padding-left 0.15s;
 }
 
 .gvb-header .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover {
-  opacity: 0.75;
+  opacity: 1;
+  padding-left: 30px;
+}
+
+/* Active/current page — full opacity */
+.gvb-header .wp-block-navigation__submenu-container > .current-menu-item
+  > .wp-block-navigation-item__content {
+  opacity: 1;
+}
+
+/* Divider after first submenu item (Übersicht / Alle Lösungen) — desktop only */
+.gvb-header .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(2) {
+  border-top: 1px solid rgba(237, 232, 219, 0.2);
+  margin-top: 6px;
+  padding-top: 6px;
+}
+
+/* Divider before a specific submenu item — add class gvb-nav-divider-before in WP nav editor */
+.gvb-header .wp-block-navigation__submenu-container > .gvb-nav-divider-before {
+  border-top: 1px solid rgba(237, 232, 219, 0.2);
+  margin-top: 6px;
+  padding-top: 6px;
+}
+
+/* Remove dividers inside mobile overlay */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(2),
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-navigation__submenu-container > .gvb-nav-divider-before {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 
@@ -4473,6 +4517,14 @@ Text Domain: gvb
   margin-bottom: 4px;
 }
 
+/* Remove border from last submenu item — parent already provides the section separator */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open
+  .wp-block-navigation__submenu-container > .wp-block-navigation-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 /* ── Parent nav links: large + bold (overlay only) ── */
 .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item > .wp-block-navigation-item__content {
   color: var(--wp--preset--color--gvb-linen) !important;
@@ -4481,6 +4533,7 @@ Text Domain: gvb
   letter-spacing: -0.78px !important;
   line-height: 1.05 !important;
   padding: 14px 0 8px !important;
+  white-space: nowrap !important;
   display: block;
   text-decoration: none !important;
 }
