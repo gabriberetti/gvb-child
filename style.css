@@ -232,11 +232,54 @@ Text Domain: gvb
   height: 24px;
 }
 
+.gvb-footer__nav-list li.gvb-footer__nav-divider {
+  border-top: 1px solid rgba(69, 146, 113, 0.25);
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.gvb-footer__nav-heading a,
+.gvb-footer__nav-list a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.15s ease;
+}
+
+.gvb-footer__nav-heading a:hover,
+.gvb-footer__nav-list a:hover {
+  color: var(--wp--preset--color--gvb-orange);
+}
+
 .gvb-footer__nav-heading {
   font-weight: 400 !important;
   line-height: 1 !important;
   width: fit-content;
 }
+
+@media (min-width: 769px) {
+  .gvb-footer__nav.wp-block-columns {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: 24px !important;
+  }
+
+  .gvb-footer__nav.wp-block-columns > .wp-block-column {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 0;
+  }
+
+  .gvb-footer__nav-heading {
+    font-size: clamp(12px, 1.1vw, 15px) !important;
+  }
+
+  .gvb-footer__nav-list {
+    font-size: clamp(13px, 1.2vw, 16px) !important;
+  }
+}
+
 
 .gvb-footer__nav-list {
   list-style: none;
@@ -730,12 +773,17 @@ Text Domain: gvb
 /* Columns body — image anchored to the left with 60px offset. */
 .gvb-contact__body {
   align-items: center !important;
-  justify-content: flex-start !important;
-  padding-left: 60px;
+  justify-content: center !important;
+  padding-left: 0;
+  gap: 89px !important;
 }
 
 /* Portrait image
    Figma: 420px × 755px, border-radius 36px, object-cover */
+.gvb-contact__image-col {
+  flex-basis: 620px !important;
+}
+
 .gvb-contact__portrait img {
   width: 100%;
   height: 755px;
@@ -4200,13 +4248,8 @@ Text Domain: gvb
     flex-wrap: wrap !important;
   }
 
-  .gvb-contact__form-col .ff-t-container {
-    gap: 32px;
-    margin-bottom: 32px;
-  }
-
   .gvb-contact__form-col .ff-el-group {
-    margin-bottom: 32px;
+    margin-bottom: 16px;
   }
 
   .gvb-contact__form-col .ff-t-cell .ff-el-group {
@@ -4225,6 +4268,36 @@ Text Domain: gvb
 }
 
 @media (max-width: 425px) {
+
+  /* ── Contact form: container is block on mobile (Fluent Forms default),
+     so spacing comes from each cell's group margin, not flex row-gap ── */
+  .gvb-contact__form-col .ff-t-cell {
+    margin-bottom: 16px;
+  }
+
+  .gvb-contact__form-col .ff-t-cell:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Remove the desktop 6px offset on Verschluss placeholder — at mobile
+     the Menge label sits 6px higher, causing label misalignment */
+  .gvb-field--verschluss.ff-t-container
+    .ff-t-column-1:not(:has(.ff-el-group:not(.ff_excluded))) {
+    padding-top: 0;
+  }
+
+  .gvb-field--material.ff-t-container
+    .ff-t-column-2:not(:has(.ff-el-group:not(.ff_excluded))) {
+    padding-top: 0;
+  }
+
+  /* Fluent Forms default: .ff-el-input--content has margin-left: auto
+     + width: 100% isn't enforced at mobile — real inputs (Modell, Menge)
+     end up narrower/offset vs the ::after placeholder boxes. Force both. */
+  .gvb-contact__form-col .ff-el-input--content {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
 
   /* ── Personalisieren: single column on small phones ── */
   .gvb-personalisieren__grid {
