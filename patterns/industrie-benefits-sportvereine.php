@@ -16,7 +16,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--dark gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/sportvereine-card-1.jpg' ); ?>" alt="Mehr trinken. Mehr Leistung." />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/sportvereine-card-1.png' ); ?>" alt="Mehr trinken. Mehr Leistung." />
 				<h3 class="gvb-personalisieren-card__title">Mehr trinken.<br>Mehr Leistung.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -26,7 +26,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--orange gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/sportvereine-card-2.jpg' ); ?>" alt="Gemacht für jeden Einsatz" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/sportvereine-card-2.png' ); ?>" alt="Gemacht für jeden Einsatz" />
 				<h3 class="gvb-personalisieren-card__title">Gemacht für<br>jeden Einsatz.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -36,7 +36,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--orange gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/sportvereine-card-3.jpg' ); ?>" alt="Praktisch und flexibel" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/sportvereine-card-3.png' ); ?>" alt="Praktisch und flexibel" />
 				<h3 class="gvb-personalisieren-card__title">Praktisch und<br>flexibel.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -46,7 +46,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--dark gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/sportvereine-card-4.jpg' ); ?>" alt="Nachhaltig statt Einweg" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/sportvereine-card-4.png' ); ?>" alt="Nachhaltig statt Einweg" />
 				<h3 class="gvb-personalisieren-card__title">Nachhaltig<br>statt Einweg.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">

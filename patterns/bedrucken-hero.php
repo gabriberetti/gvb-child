@@ -16,8 +16,8 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<!-- wp:group {"className":"gvb-hero__content","style":{"spacing":{"margin":{"left":"auto"}}},"layout":{"type":"constrained","contentSize":"608px"}} -->
 	<div class="wp-block-group gvb-hero__content" style="margin-left:auto">
 
-		<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px)","fontWeight":"700","lineHeight":"1","letterSpacing":"-1.95px"}},"textColor":"gvb-linen"} -->
-		<h1 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px);font-weight:700;line-height:1;letter-spacing:-1.95px">Deine Marke.<br>Dein Design.<br>Deine Vibes.</h1>
+		<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px)","fontWeight":"700","lineHeight":"1","letterSpacing":"-1.95px"}},"textColor":"gvb-white"} -->
+		<h1 class="wp-block-heading has-gvb-white-color has-text-color" style="font-size:clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px);font-weight:700;line-height:1;letter-spacing:-1.95px"><span class="has-gvb-linen-color has-inline-color">Deine Marke.</span><br>Dein Design.<br>Deine Vibes.</h1>
 		<!-- /wp:heading -->
 
 	</div>

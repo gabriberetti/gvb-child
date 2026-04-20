@@ -16,7 +16,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--dark gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/bildung-card-1.jpg' ); ?>" alt="Erlebbare Nachhaltigkeit" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/bildung-card-1.png' ); ?>" alt="Erlebbare Nachhaltigkeit" />
 				<h3 class="gvb-personalisieren-card__title">Erlebbare<br>Nachhaltigkeit.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -26,7 +26,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--orange gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/bildung-card-2.jpg' ); ?>" alt="Gut hydriert. Besser lernen." />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/bildung-card-2.png' ); ?>" alt="Gut hydriert. Besser lernen." />
 				<h3 class="gvb-personalisieren-card__title">Gut hydriert.<br>Besser lernen.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -36,7 +36,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--orange gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/bildung-card-3.jpg' ); ?>" alt="Sichtbarkeit für deine Einrichtung" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/bildung-card-3.png' ); ?>" alt="Sichtbarkeit für deine Einrichtung" />
 				<h3 class="gvb-personalisieren-card__title">Sichtbarkeit für<br>deine Einrichtung.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -46,7 +46,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--dark gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/bildung-card-4.jpg' ); ?>" alt="Gemacht für den Alltag" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/bildung-card-4.png' ); ?>" alt="Gemacht für den Alltag" />
 				<h3 class="gvb-personalisieren-card__title">Gemacht für<br>den Alltag.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">

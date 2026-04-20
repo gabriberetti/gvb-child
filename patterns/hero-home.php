@@ -10,7 +10,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <!-- wp:group {"className":"gvb-hero","style":{"spacing":{"padding":{"top":"110px","bottom":"120px","left":"64px","right":"64px"},"margin":{"left":"20px","right":"20px"}},"border":{"radius":"20px"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group gvb-hero" style="border-radius:20px;margin-left:20px;margin-right:20px;padding-top:110px;padding-right:64px;padding-bottom:120px;padding-left:64px">
 
-	<img class="gvb-hero__bg" src="<?php echo esc_url( $img . '/hero-home.png' ); ?>" alt="" aria-hidden="true" />
+	<img class="gvb-hero__bg" src="<?php echo esc_url( $img . '/hero-home.jpg' ); ?>" alt="" aria-hidden="true" />
 	<div class="gvb-hero__overlay"></div>
 
 	<!-- wp:group {"className":"gvb-hero__content","style":{"spacing":{"margin":{"left":"auto"}}},"layout":{"type":"constrained","contentSize":"608px"}} -->

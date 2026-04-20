@@ -16,7 +16,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--dark gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/hotel-card-1.jpg' ); ?>" alt="Stilvoll servieren" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/hotel-card-1.png' ); ?>" alt="Stilvoll servieren" />
 				<h3 class="gvb-personalisieren-card__title">Stilvoll<br>servieren.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -26,7 +26,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--orange gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/hotel-card-2.jpg' ); ?>" alt="Deine Marke im Gästeerlebnis" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/hotel-card-2.png' ); ?>" alt="Deine Marke im Gästeerlebnis" />
 				<h3 class="gvb-personalisieren-card__title">Deine Marke<br>im Gästeerlebnis.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -36,7 +36,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--orange gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/hotel-card-3.jpg' ); ?>" alt="Nachhaltigkeit als Philosophie" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/hotel-card-3.png' ); ?>" alt="Nachhaltigkeit als Philosophie" />
 				<h3 class="gvb-personalisieren-card__title">Nachhaltigkeit<br>als Philosophie.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -46,7 +46,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--dark gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/hotel-card-4.jpg' ); ?>" alt="Praktisch im täglichen Einsatz" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/hotel-card-4.png' ); ?>" alt="Praktisch im täglichen Einsatz" />
 				<h3 class="gvb-personalisieren-card__title">Praktisch im<br>täglichen Einsatz.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">

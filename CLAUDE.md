@@ -60,8 +60,8 @@ Each sub-page lives in `templates/page-{slug}.html` and uses per-page patterns f
 | Hotel Wellness und Spa | `page-hotel-wellness-und-spa.html` | `hero-hotel-wellness-und-spa.jpg` |
 | Bildungseinrichtungen | `page-bildungseinrichtungen.html` | `hero-bildungseinrichtungen.jpg` |
 | Impressum | `page-impressum.html` | `hero-uberuns.jpg` (reused) |
-| Download | `page-download.html` | `hero-uberuns.jpg` (reused) |
-| FAQ | `page-faq.html` | `bedrucken-warum.jpg` (reused) |
+| Download | `page-download.html` | `hero-download.jpg` |
+| FAQ | `page-faq.html` | `hero-faq.jpg` |
 
 **Hero H1 standard** (all industry + bedrucken heroes):
 ```css

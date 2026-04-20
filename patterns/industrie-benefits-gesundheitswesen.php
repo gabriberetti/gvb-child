@@ -16,7 +16,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--dark gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/gesundheitswesen-card-1.jpg' ); ?>" alt="Sicher und schadstofffrei" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/gesundheitswesen-card-1.png' ); ?>" alt="Sicher und schadstofffrei" />
 				<h3 class="gvb-personalisieren-card__title">Sicher und<br>schadstofffrei.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -26,7 +26,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--orange gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/gesundheitswesen-card-2.jpg' ); ?>" alt="Jeden Tag verlässlich" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/gesundheitswesen-card-2.png' ); ?>" alt="Jeden Tag verlässlich" />
 				<h3 class="gvb-personalisieren-card__title">Jeden Tag<br>verlässlich.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -36,7 +36,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--orange gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/gesundheitswesen-card-3.jpg' ); ?>" alt="Hygienisch und praktisch" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/gesundheitswesen-card-3.png' ); ?>" alt="Hygienisch und praktisch" />
 				<h3 class="gvb-personalisieren-card__title">Hygienisch<br>&amp; praktisch.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
@@ -46,7 +46,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--dark gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/gesundheitswesen-card-4.jpg' ); ?>" alt="Nachhaltig und praktikabel" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/gesundheitswesen-card-4.png' ); ?>" alt="Nachhaltig und praktikabel" />
 				<h3 class="gvb-personalisieren-card__title">Nachhaltig<br>&amp; praktikabel.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
