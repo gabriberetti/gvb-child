@@ -41,6 +41,7 @@ gvb-child/
 └── assets/
     ├── js/
     │   ├── cases-carousel.js      # Vanilla JS tab switcher
+    │   ├── carousel.js            # Generic [data-carousel] horizontal carousel controller
     │   └── scroll-animations.js   # IntersectionObserver fade-up system
     ├── img/                   # Static images / fallback featured image
     └── svg/                   # SVG icons
@@ -143,6 +144,22 @@ Elements with class `gvb-fade-up` start at `opacity: 0; transform: translateY(30
 
 **NOT animated:** hero sections, header/footer, cases carousel, contact form fields, FAQ accordion items.
 
+### Generic Carousel System (`assets/js/carousel.js` — added April 2026)
+
+Any element with `data-carousel` is a carousel root; inside it, `[data-carousel-track]` is the scrollable strip and `.gvb-carousel-nav--prev` / `--next` are clickable chevron buttons. The JS toggles `.is-at-start` / `.is-at-end` on the root based on scroll position; CSS uses those classes to hide the prev chevron at the start and the next chevron at the end. Chevron clicks scroll by one card (`firstCardWidth + columnGap`).
+
+**Current users:**
+- `.gvb-bedrucken-anlass` — carousel at 426–768px (2 cards visible, 3rd peeks)
+- `.gvb-product-cards` — carousel at 426–784px (same pattern)
+
+**Adding a new carousel:**
+1. Add `data-carousel` + `is-at-start` class to the root; `data-carousel-track` to the scroll strip.
+2. Inject two `<button class="gvb-carousel-nav gvb-carousel-nav--prev/--next">` with German `aria-label` and an inline SVG chevron.
+3. In the section's tablet media block: set root `position: relative`, flip nav `display: grid`, add track scroll styles (`overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; scrollbar-width: none`) and card sizing (`flex: 0 0 calc(50% - 8px); scroll-snap-align: start`).
+4. At phone range, reset the track (`overflow-x: visible; scroll-snap-type: none`) and hide the nav (`display: none`).
+
+Base `.gvb-carousel-nav` styling (size, colour, focus ring, hover scale) lives once at the top of `style.css` — hidden by default, each carousel flips it on within its own media block. State visibility rules are driven off `[data-carousel].is-at-start/.is-at-end`.
+
 ### Block Patterns
 
 Patterns are PHP files in `patterns/`, all registered in `functions.php`. Each pattern corresponds to a section of a specific page (e.g., `edelstahl-hero.php`, `edelstahl-product.php`). When adding a new page, create patterns per section and register them in `functions.php`.
@@ -218,6 +235,7 @@ Auxiliary breakpoints still in use (not DevTools presets but serve real purpose)
 - **Large-screen ceiling (`@media min-width: 1440px`, Section 19):** `.gvb-hero`, `.gvb-cases`, `.gvb-faq` get `max-width: 1400px !important; margin: auto !important`. `.gvb-bedrucken-anlass` uses `margin-left/right: calc((100% - 1400px) / 2) !important` (cannot use `max-width` directly — WP flex-stretch on `.wp-site-blocks` direct children overrides it even with `!important`). Key headings (`.gvb-personalisieren__heading`, `.gvb-edelstahl-features__heading`) have `max-width: 1400px; margin: 0 auto`.
 - **Blog cards clickable:** `.gvb-blog-card .wp-block-post-title a::after { content: ''; position: absolute; inset: 0; border-radius: 16px; z-index: 0 }`. `.gvb-blog-card` must have `position: relative`; `.gvb-blog-card__thumb` gets `position: relative; z-index: 1` to stay above the overlay.
 - **Cases carousel active tab:** linen pill border — `border: 1.5px solid rgba(237,232,219,0.55); border-radius: 50px; background: rgba(237,232,219,0.08)` on `.is-active`. Non-active tabs have `border: 1.5px solid transparent`. No orange colour on tabs.
+- **Product cards responsive:** all 3 PNGs (`card-besser-trinken.png` / `card-genau-dein-vibe.png` / `card-nachhaltigkeit.png`) share a 400×574 aspect ratio with the wave shape baked into the image. Title uses `position: absolute; bottom: 23.8%; left: 7%; right: 13%` (percentages of media height) and content uses `margin-top: -28.7%; padding: 0 13% 32px 7%` (percentages of card width). This is a single-rule-set scaling system — no per-breakpoint recalibration. Section has `max-width: 1440px` (overrides the shared 1400 ceiling). Tablet carousel at 426–784 via the generic `[data-carousel]` system, single column at ≤425.
 
 ## ACF Field Groups
 

@@ -55,6 +55,14 @@ function gvb_enqueue_scripts() {
         true
     );
 
+    wp_enqueue_script(
+        'gvb-carousel',
+        $theme_uri . '/assets/js/carousel.js',
+        array(),
+        filemtime( $theme_dir . '/assets/js/carousel.js' ),
+        true
+    );
+
     if ( is_home() ) {
         wp_enqueue_script(
             'gvb-blog-pagination',

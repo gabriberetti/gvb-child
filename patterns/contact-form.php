@@ -103,10 +103,47 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		} );
 	}
 
-	if ( document.readyState === 'loading' ) {
-		document.addEventListener( 'DOMContentLoaded', initFormExpander );
-	} else {
+	/**
+	 * Replace the browser's English HTML5 validation tooltips
+	 * (e.g. "Value must be greater than or equal to 50") with German text.
+	 */
+	function initGermanValidation() {
+		var form = document.querySelector( '.gvb-contact__form-col .fluentform form, .gvb-contact__form-col form' );
+		if ( ! form ) return;
+
+		function messageFor( input ) {
+			var v = input.validity;
+			if ( v.valueMissing )    return 'Bitte fülle dieses Feld aus.';
+			if ( v.typeMismatch )    return 'Bitte gib einen gültigen Wert ein.';
+			if ( v.patternMismatch ) return 'Bitte halte dich an das geforderte Format.';
+			if ( v.tooShort )        return 'Bitte gib mindestens ' + input.minLength + ' Zeichen ein.';
+			if ( v.tooLong )         return 'Bitte gib höchstens ' + input.maxLength + ' Zeichen ein.';
+			if ( v.rangeUnderflow )  return 'Der Wert muss mindestens ' + input.min + ' betragen.';
+			if ( v.rangeOverflow )   return 'Der Wert darf höchstens ' + input.max + ' betragen.';
+			if ( v.stepMismatch )    return 'Bitte gib einen gültigen Wert ein.';
+			if ( v.badInput )        return 'Bitte gib einen gültigen Wert ein.';
+			return '';
+		}
+
+		form.querySelectorAll( 'input, select, textarea' ).forEach( function ( el ) {
+			el.addEventListener( 'invalid', function () {
+				el.setCustomValidity( messageFor( el ) );
+			} );
+			el.addEventListener( 'input', function () {
+				el.setCustomValidity( '' );
+			} );
+		} );
+	}
+
+	function init() {
 		initFormExpander();
+		initGermanValidation();
+	}
+
+	if ( document.readyState === 'loading' ) {
+		document.addEventListener( 'DOMContentLoaded', init );
+	} else {
+		init();
 	}
 } )();
 </script>

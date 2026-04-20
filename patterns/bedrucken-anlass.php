@@ -8,10 +8,17 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 ?>
 
 <!-- wp:html -->
-<section class="gvb-bedrucken-anlass">
+<section class="gvb-bedrucken-anlass is-at-start" data-carousel>
 	<h2 class="gvb-bedrucken-anlass__heading">Good Vibes für jeden Anlass.</h2>
 
-	<div class="gvb-overlay-cards">
+	<button type="button" class="gvb-carousel-nav gvb-carousel-nav--prev" aria-label="Vorherige Karte" aria-controls="gvb-anlass-track">
+		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+	</button>
+	<button type="button" class="gvb-carousel-nav gvb-carousel-nav--next" aria-label="Nächste Karte" aria-controls="gvb-anlass-track">
+		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+	</button>
+
+	<div class="gvb-overlay-cards" id="gvb-anlass-track" data-carousel-track>
 		<div class="gvb-overlay-card gvb-overlay-card--dark-text">
 			<div class="gvb-overlay-card__media">
 				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/bedrucken-anlass-1.png' ); ?>" alt="" />

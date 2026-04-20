@@ -518,6 +518,7 @@ Text Domain: gvb
   border: 1.5px solid transparent;
   border-radius: 50px;
   color: rgba(237, 232, 219, 0.55);
+  font-family: inherit;
   font-size: 16px;
   font-weight: 400;
   padding: 8px 16px;
@@ -575,31 +576,40 @@ Text Domain: gvb
 
 .gvb-product-cards__track {
   display: flex;
-  gap: 20px;
+  align-items: stretch;
+  gap: clamp(12px, 1.4vw, 20px);
 }
 
 .gvb-product-card {
   position: relative;
   flex: 1 1 0;
   min-width: 0;
-  height: 574px;
   border-radius: 20px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+}
+
+.gvb-product-card--dark {
+  background: var(--wp--preset--color--gvb-graphite);
+}
+
+.gvb-product-card--orange {
+  background: var(--wp--preset--color--gvb-orange);
 }
 
 .gvb-product-card__media {
-  display: contents;
+  display: block;
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
 }
 
 .gvb-product-card__bg {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  position: relative;
   z-index: 0;
 }
 
@@ -613,7 +623,9 @@ Text Domain: gvb
 .gvb-product-card__content {
   position: relative;
   z-index: 2;
-  padding: 0 60px 32px 32px;
+  flex: 0 0 auto;
+  margin-top: -28.7%;
+  padding: 0 13% 32px 7%;
 }
 
 .gvb-product-card__content--center {
@@ -627,15 +639,18 @@ Text Domain: gvb
 }
 
 .gvb-product-card__title {
-  position: relative;
+  position: absolute;
+  bottom: 23.8%;
+  left: 7%;
+  right: 13%;
   z-index: 2;
-  font-size: 40px;
+  font-size: clamp(32px, 1.923vw + 12.31px, 40px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
   color: var(--wp--preset--color--gvb-linen);
-  margin: 0 0 12px;
-  padding: 0 60px 0 32px;
+  margin: 0;
+  padding: 0;
 }
 
 .gvb-product-card__title--light {
@@ -681,7 +696,9 @@ Text Domain: gvb
 }
 
 .gvb-testimonial-card {
-  flex: 0 0 360px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 360px;
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 16px;
@@ -764,15 +781,19 @@ Text Domain: gvb
    ══════════════════════════════════════════════════════════════ */
 
 /* Section wrapper — override uneven inline padding to keep content centred */
-.gvb-contact,
-.gvb-blog-all {
+.gvb-contact {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
+.gvb-blog-all {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
 /* Columns body — image anchored to the left with 60px offset. */
 .gvb-contact__body {
-  align-items: center !important;
+  align-items: flex-start !important;
   justify-content: center !important;
   padding-left: 0;
   gap: 89px !important;
@@ -874,6 +895,8 @@ Text Domain: gvb
 .gvb-contact__form-col select.ff-el-form-control {
   padding-right: 40px;
   cursor: pointer;
+  line-height: 1;
+  min-height: 45px;
 }
 
 .gvb-contact__form-col .ff-el-select-wrapper::after {
@@ -964,7 +987,6 @@ Text Domain: gvb
    Figma (expanded): border-top only — bottom removed when open
    ────────────────────────────────────────────────────────────── */
 .gvb-trigger-group {
-  border-top: 2px solid rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 0 !important;
 }
@@ -1091,9 +1113,11 @@ Text Domain: gvb
   display: flex !important;
   flex-wrap: nowrap !important;
   gap: 16px;
-  margin-bottom: 24px !important;
-  padding-top: 8px;
-  padding-bottom: 16px;
+  margin-bottom: 8px !important;
+}
+
+.gvb-contact__form-col .ff-t-container.ff_columns_total_2:has(.gvb-form-expanded-container) {
+  margin-bottom: 8px !important;
 }
 
 .gvb-form-expanded-container.is-open.ff-t-container > .ff-t-cell {
@@ -1132,7 +1156,7 @@ Text Domain: gvb
 /* Push the cell down to match the Material field's label vertical start */
 .gvb-field--material.ff-t-container
   .ff-t-column-2:not(:has(.ff-el-group:not(.ff_excluded))) {
-  padding-top: 6px;
+  padding-top: 5px;
 }
 
 .gvb-field--material.ff-t-container
@@ -1169,7 +1193,7 @@ Text Domain: gvb
 /* Push the cell down to match the Menge field's label vertical start */
 .gvb-field--verschluss.ff-t-container
   .ff-t-column-1:not(:has(.ff-el-group:not(.ff_excluded))) {
-  padding-top: 6px;
+  padding-top: 5px;
 }
 
 .gvb-field--verschluss.ff-t-container
@@ -1471,16 +1495,6 @@ Text Domain: gvb
     font-size: 18px !important;
     text-align: left !important;
     line-height: 1.5 !important;
-  }
-
-  .gvb-product-cards__track {
-    flex-wrap: wrap;
-  }
-
-  .gvb-product-card {
-    flex: 0 0 auto;
-    width: 100%;
-    height: auto;
   }
 
   .gvb-testimonials {
@@ -1862,7 +1876,7 @@ Text Domain: gvb
 
 /* ── Steps section ── */
 .gvb-steps {
-  padding: 0 0 60px;
+  padding: 80px 0 60px;
 }
 
 .gvb-steps__intro {
@@ -3303,6 +3317,38 @@ Text Domain: gvb
   padding: 0;
 }
 
+/* Carousel nav buttons — hidden by default, shown by each carousel's tablet media block */
+.gvb-carousel-nav {
+  display: none;
+  position: absolute;
+  top: 55%;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--wp--preset--color--gvb-linen);
+  color: var(--wp--preset--color--gvb-graphite);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  place-items: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.gvb-carousel-nav--prev { left: 16px; }
+.gvb-carousel-nav--next { right: 16px; }
+
+.gvb-carousel-nav:hover { transform: scale(1.08); }
+.gvb-carousel-nav:focus-visible { outline: 2px solid var(--wp--preset--color--gvb-orange); outline-offset: 2px; }
+
+/* State-driven visibility: one source of truth on the carousel root */
+[data-carousel].is-at-start .gvb-carousel-nav--prev,
+[data-carousel].is-at-end .gvb-carousel-nav--next {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Desktop: card is a column — __media (image + overlaid title) on top, __content below */
 .gvb-bedrucken-anlass .gvb-overlay-card {
   flex-direction: column;
@@ -3730,22 +3776,13 @@ Text Domain: gvb
     margin: 0;
   }
 
-  /* Scroll-hint chevron — pulses rightward to signal swipeability */
+  /* Anlass carousel: activate nav buttons (base styling lives at top of file) */
   .gvb-bedrucken-anlass {
     position: relative;
   }
 
-  .gvb-bedrucken-anlass::after {
-    content: '';
-    position: absolute;
-    right: 16px;
-    top: 55%;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--wp--preset--color--gvb-linen) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232B2B2B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E") center / 14px no-repeat;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    pointer-events: none;
+  .gvb-bedrucken-anlass .gvb-carousel-nav {
+    display: grid;
   }
 
   .gvb-bedrucken-anlass .gvb-overlay-card {
@@ -3981,59 +4018,30 @@ Text Domain: gvb
     align-items: center;
   }
 
-  /* ── Product cards: stack vertically (Apple HIG) ── */
+  /* ── Product cards: horizontal carousel at 426–784px (single column ≤425) ── */
+  .gvb-product-cards {
+    position: relative;
+  }
+
+  .gvb-product-cards .gvb-carousel-nav {
+    display: grid;
+  }
+
   .gvb-product-cards__track {
-    overflow-x: visible;
-    scroll-snap-type: none;
-    flex-wrap: wrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .gvb-product-cards__track::-webkit-scrollbar {
+    display: none;
   }
 
   .gvb-product-card {
-    flex: 0 0 auto !important;
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    flex-direction: column;
-    justify-content: flex-start;
-    scroll-snap-align: none;
-  }
-
-  .gvb-product-card--dark {
-    background: var(--wp--preset--color--gvb-graphite);
-  }
-
-  .gvb-product-card--orange {
-    background: var(--wp--preset--color--gvb-orange);
-  }
-
-  .gvb-product-card__media {
-    display: block;
-    position: relative;
-    height: 280px;
-    flex-shrink: 0;
-  }
-
-  .gvb-product-card__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .gvb-product-card__title {
-    position: absolute;
-    bottom: 16px;
-    left: 20px;
-    right: 20px;
-    padding: 0;
-    margin: 0;
-    font-size: clamp(22px, 5.5vw, 28px);
-    line-height: 1.1;
-  }
-
-  .gvb-product-card__content {
-    padding: 8px 20px 28px;
+    flex: 0 0 calc(50% - 8px) !important;
+    scroll-snap-align: start;
   }
 
   .gvb-product-card__text {
@@ -4304,8 +4312,25 @@ Text Domain: gvb
     grid-template-columns: 1fr;
   }
 
-  /* ── Anlass: single column on small phones — reset carousel + hide scroll hint ── */
-  .gvb-bedrucken-anlass::after {
+  /* ── Anlass: single column on small phones — reset carousel + hide nav ── */
+  .gvb-bedrucken-anlass .gvb-carousel-nav {
+    display: none;
+  }
+
+  /* ── Product cards: single column on small phones — reset carousel + hide nav ── */
+  .gvb-product-cards__track {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .gvb-product-card {
+    flex: 0 0 auto !important;
+    width: 100%;
+    scroll-snap-align: none;
+  }
+
+  .gvb-product-cards .gvb-carousel-nav {
     display: none;
   }
 
@@ -4794,6 +4819,10 @@ Text Domain: gvb
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.gvb-product-cards {
+  max-width: 1440px;
 }
 
 /* ──────────────────────────────────────────────────────────────
