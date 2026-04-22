@@ -880,7 +880,8 @@ html {
 }
 
 .gvb-logos__track {
-  display: flex;
+  /* TEMP: hidden — current logos are placeholders pending real client logos. */
+  display: none;
   align-items: center;
   justify-content: center;
   gap: 52px;
