@@ -52,19 +52,22 @@ Text Domain: gvb
   padding-top: 96px;
 }
 
-/* Top wave — green organic shape anchored at top; caps at 1440px width (matches Figma),
-   centered; aspect-ratio locks SVG proportions. */
+/* Top wave — green organic shape anchored at top; spans full viewport width at
+   any screen size. Width fills viewport (via width: 100% on full-width parent);
+   height is capped by max-height so the wave never stretches vertically beyond
+   its original design height. SVG has its own viewBox so paths stay correct;
+   background-size: 100% 100% fills the box (wave stretches horizontally on
+   very wide screens — acceptable for smooth curves). */
 .wp-site-blocks::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  margin-inline: auto;
-  max-width: 2000px;
   width: 100%;
+  height: auto;
   aspect-ratio: 1280 / 1000;
-  max-height: 1200px;
+  max-height: 1000px;
   background-image: url('assets/svg/wave-top.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -72,19 +75,18 @@ Text Domain: gvb
   pointer-events: none;
 }
 
-/* Bottom wave — green organic shape anchored at bottom; caps at 1440px width
-   (matches the Figma design tier), centered; aspect-ratio locks SVG proportions. */
+/* Bottom wave — green organic shape anchored at bottom; spans full viewport width
+   at any screen size. Same width/height lock strategy as the top wave. */
 .wp-site-blocks::after {
   content: '';
   position: absolute;
   bottom: -100px;
   left: 0;
   right: 0;
-  margin-inline: auto;
-  max-width: 2000px;
   width: 100%;
+  height: auto;
   aspect-ratio: 1280 / 3322;
-  max-height: 3250px;
+  max-height: 3322px;
   background-image: url('assets/svg/wave-bottom.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
