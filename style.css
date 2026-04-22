@@ -788,6 +788,11 @@ html {
    11. TESTIMONIALS
    ══════════════════════════════════════════════════════════════ */
 
+.gvb-testimonials {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .gvb-testimonials__cards {
   display: flex;
   gap: 20px;
@@ -880,10 +885,10 @@ html {
    Source: Figma 780:7295 (closed) + 780:7296 (expanded)
    ══════════════════════════════════════════════════════════════ */
 
-/* Section wrapper — override uneven inline padding to keep content centred */
+/* Section wrapper — override uneven inline padding; 20px inset applies at all widths */
 .gvb-contact {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 .gvb-blog-all {
@@ -1757,6 +1762,11 @@ html {
 .gvb-btn-primary:hover { opacity: 0.85; }
 
 /* ── Industry cards (Branchen section) ── */
+.gvb-branchen {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 .gvb-branchen__heading {
   margin-bottom: 32px !important;
 }
@@ -2033,7 +2043,7 @@ html {
 
 /* ── Steps section ── */
 .gvb-steps {
-  padding: 0 0 60px;
+  padding: 0 20px 60px;
 }
 
 .gvb-steps__intro {
