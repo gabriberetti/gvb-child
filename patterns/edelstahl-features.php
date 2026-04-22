@@ -49,7 +49,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<img src="<?php echo esc_url( $img . '/edelstahl-feature-4.jpg' ); ?>" alt="Deine Flasche. Dein Vibe." />
 			</div>
 			<div class="gvb-edelstahl-feature-card__text">
-				<h5 class="gvb-edelstahl-feature-card__title">Deine Flasche. Dein Vibe.</h5>
+				<h5 class="gvb-edelstahl-feature-card__title">Deine Flasche.<br>Dein Vibe.</h5>
 				<p class="gvb-edelstahl-feature-card__desc">Unsere Edelstahlflaschen personalisieren wir gerne für dich. Logo, Wunschdesign oder -motiv kommen im hochwertigen Druck oder als Lasergravur richtig zur Geltung.</p>
 			</div>
 		</li>

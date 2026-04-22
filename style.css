@@ -46,16 +46,25 @@ Text Domain: gvb
 .wp-site-blocks {
   position: relative;
   overflow: hidden;
+  /* Reserve space for the fixed header so hero images aren't clipped under it.
+     Waves are absolute-positioned from top: 0 (element outer edge) so they
+     start above this padding, unaffected. */
+  padding-top: 96px;
 }
 
-/* Top wave — green upper area with gentle concave curve */
+/* Top wave — green organic shape anchored at top; caps at 1440px width (matches Figma),
+   centered; aspect-ratio locks SVG proportions. */
 .wp-site-blocks::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  margin-inline: auto;
+  max-width: 2000px;
   width: 100%;
-  height: 820px;
+  aspect-ratio: 1280 / 1000;
+  max-height: 1200px;
   background-image: url('assets/svg/wave-top.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -63,14 +72,19 @@ Text Domain: gvb
   pointer-events: none;
 }
 
-/* Bottom wave — large organic S-curve + circular cutout from mid-page to footer */
+/* Bottom wave — green organic shape anchored at bottom; caps at 1440px width
+   (matches the Figma design tier), centered; aspect-ratio locks SVG proportions. */
 .wp-site-blocks::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -100px;
   left: 0;
+  right: 0;
+  margin-inline: auto;
+  max-width: 2000px;
   width: 100%;
-  height: 3200px;
+  aspect-ratio: 1280 / 3322;
+  max-height: 3250px;
   background-image: url('assets/svg/wave-bottom.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -95,10 +109,94 @@ Text Domain: gvb
    ══════════════════════════════════════════════════════════════ */
 
 .gvb-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 200;
   overflow: visible !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+  box-sizing: border-box;
+}
+
+/* Logged-in WP admin bar (desktop ≥783px only): admin bar is fixed, so we
+   extend the green bar behind it via extra top padding.
+   On mobile (<783px) the admin bar is position: absolute — it scrolls away
+   with the page — so we do NOT add padding there (would leave a permanent
+   phantom gap when the nav re-pins on scroll-up). */
+@media (min-width: 783px) {
+  .admin-bar .gvb-header {
+    padding-top: calc(24px + 32px) !important;
+  }
+}
+
+/* No mobile admin-bar padding override needed: at ≤784px the navbar is
+   position: relative (see the tablet/mobile block below), and WP already adds
+   html { padding-top: 46px } to reserve space for the absolute admin bar. */
+
+/* Hidden on scroll-down */
+.gvb-header.gvb-header--unpinned {
+  transform: translateY(-100%);
+}
+
+/* Visible on scroll-up (not at top) — adds subtle shadow */
+.gvb-header.gvb-header--pinned {
+  transform: translateY(0);
+  box-shadow: 0 4px 16px rgba(43, 43, 43, 0.08);
+}
+
+/* At the very top of the page — no shadow */
+.gvb-header.gvb-header--top {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Accessibility: honour reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .gvb-header {
+    transition: none;
+  }
+}
+
+/* Anchor-jump offset for fixed header — #kontakt lands below the nav.
+   scroll-behavior: smooth gives native smooth scrolling for hash links. */
+html {
+  scroll-padding-top: 96px;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+#kontakt {
+  scroll-margin-top: 96px;
+}
+
+/* ── Tablet + mobile (≤784px): navbar flows with the page, no smart hide/show ──
+   Navbar is static (scrolls away with content), so we undo everything the
+   fixed-nav setup assumed: position, transform states, page padding reserve,
+   and anchor scroll offsets. */
+@media (max-width: 784px) {
+  .gvb-header,
+  .gvb-header.gvb-header--top,
+  .gvb-header.gvb-header--pinned,
+  .gvb-header.gvb-header--unpinned {
+    position: relative;
+    transform: none !important;
+    transition: none;
+    will-change: auto;
+    box-shadow: none;
+  }
+
+  /* No fixed nav → no need to reserve space above the content */
+  .wp-site-blocks { padding-top: 0; }
+
+  /* No fixed nav → anchor jumps don't need an offset */
+  html { scroll-padding-top: 0; }
+  #kontakt { scroll-margin-top: 0; }
 }
 
 /* Allow dropdown to escape the flex container */
@@ -951,7 +1049,7 @@ Text Domain: gvb
   height: 42px !important;
   min-width: 114px !important;
   padding: 0 24px !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
   font-weight: 700 !important;
   font-family: inherit !important;
   cursor: pointer !important;
@@ -979,6 +1077,39 @@ Text Domain: gvb
   display: flex;
   justify-content: flex-end;
   padding-top: 16px;
+}
+
+/* ── Success message after form submit ──────────────────────── */
+.gvb-contact__form-col .ff-message-success {
+  background-color: var(--wp--preset--color--gvb-orange);
+  color: var(--wp--preset--color--gvb-linen);
+  border: none;
+  border-radius: 20px;
+  padding: 48px 40px;
+  margin-top: 120px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.08px;
+}
+
+.gvb-contact__form-col .ff-message-success::before {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background-color: var(--wp--preset--color--gvb-linen);
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 12.5L10 17.5L19 7.5' stroke='%23F28C3B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* ── Expandable trigger row ───────────────────────────────────
@@ -1314,8 +1445,8 @@ Text Domain: gvb
   position: absolute;
   left: 0;
   color: var(--wp--preset--color--gvb-orange);
-  top: 0;
-  font-size: 20px;
+  top: -4px;
+  font-size: 25px;
   font-weight: 700;
   color: var(--wp--preset--color--gvb-orange);
   transition: transform var(--gvb-transition);
@@ -1339,6 +1470,36 @@ Text Domain: gvb
   opacity: 0.7;
 }
 
+/* "→ Alle weiteren FAQs findest du hier." bottom-right link */
+.gvb-faq:has(.gvb-faq__more-link) {
+  padding-bottom: 16px !important;
+}
+
+.gvb-faq__more-link {
+  margin-top: 16px;
+  margin-bottom: 0;
+  text-align: right;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.32px;
+}
+
+.gvb-faq__more-link a {
+  color: var(--wp--preset--color--gvb-linen);
+  text-decoration: none;
+  font-weight: 400;
+  transition: opacity 0.2s ease;
+}
+
+.gvb-faq__more-link a:hover {
+  opacity: 0.8;
+}
+
+.gvb-faq__more-link-arrow {
+  font-weight: 300;
+  margin-right: 4px;
+}
+
 /* ══════════════════════════════════════════════════════════════
    14. BRAND PROMISE CTA
    ══════════════════════════════════════════════════════════════ */
@@ -1347,33 +1508,18 @@ Text Domain: gvb
   position: relative;
 }
 
-.gvb-chat-bubble {
-  position: absolute;
-  right: 80px;
-  bottom: 80px;
-  width: 110px;
-  height: 110px;
-  transform: rotate(-10deg);
+/* WP's default alignfull only negates root padding (16px), not enough to reach the viewport edges.
+   The double-class selector (0,2,0) beats WP's :where-wrapped constraining rule without !important. */
+.alignfull.gvb-brand-promise {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  max-width: 100vw;
 }
 
-.gvb-chat-bubble__bg {
-  width: 100%;
-  height: 100%;
-}
-
-.gvb-chat-bubble__text {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--wp--preset--color--gvb-linen);
-  text-decoration: underline;
-  letter-spacing: -0.99px;
-  text-align: center;
-  transform: rotate(19deg);
+/* Close the WP block-gap between brand-promise and the footer template-part
+   so the bottom wave pseudo-element doesn't peek through the transparent gap. */
+.wp-site-blocks > .wp-block-template-part:last-child {
+  margin-top: 0;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1388,9 +1534,25 @@ Text Domain: gvb
 
 @media (max-width: 784px) {
   .gvb-header {
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
+
+  /* Shrink logo on mobile/tablet so header band stays compact */
+  .gvb-header__logo {
+    width: 120px !important;
+  }
+  .gvb-header__logo img,
+  .gvb-header__logo a {
+    width: 120px !important;
+    max-width: 120px !important;
+    height: auto !important;
+  }
+
+  /* Navbar is static at ≤784px (see section 3 HEADER), so no padding-top
+     reserve is needed here — content flows naturally below the header. */
 
   .gvb-footer {
     padding-left: 24px !important;
@@ -1546,13 +1708,6 @@ Text Domain: gvb
 
   .gvb-faq__grid {
     flex-direction: column;
-  }
-
-  .gvb-chat-bubble {
-    right: 20px;
-    bottom: 20px;
-    width: 80px;
-    height: 80px;
   }
 
   .gvb-split {
@@ -1876,7 +2031,7 @@ Text Domain: gvb
 
 /* ── Steps section ── */
 .gvb-steps {
-  padding: 80px 0 60px;
+  padding: 0 0 60px;
 }
 
 .gvb-steps__intro {
@@ -1902,7 +2057,7 @@ Text Domain: gvb
 .gvb-steps__row {
   display: flex;
   gap: 20px;
-  height: 432px;
+  height: clamp(340px, 30vw, 432px);
 }
 
 
@@ -1914,20 +2069,36 @@ Text Domain: gvb
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 50px 50px 50px 240px;
+  padding: 50px 50px 50px clamp(180px, 17.7vw, 255px);
 }
 
 .gvb-steps__number {
   position: absolute;
-  left: 60px;
-  top: 50%;
+  left: clamp(60px, 6.94vw, 100px);
+  top: 43%;
   transform: translateY(-50%);
-  font-size: 180px;
+  font-size: clamp(140px, 13.4vw, 193px);
   font-weight: 700;
   line-height: 1;
   color: var(--wp--preset--color--gvb-green);
-  letter-spacing: -8px;
+  letter-spacing: clamp(-8.68px, -0.6vw, -6px);
   user-select: none;
+}
+
+.gvb-steps__row:first-child .gvb-steps__number {
+  left: clamp(90px, 10.4vw, 150px);
+}
+
+.gvb-steps__row:nth-child(1) .gvb-steps__text {
+  transform: translateY(clamp(-20px, -1.4vw, -19px));
+}
+
+.gvb-steps__row:nth-child(2) .gvb-steps__text {
+  transform: translateY(clamp(-9px, -0.02vw, 0px));
+}
+
+.gvb-steps__row:nth-child(3) .gvb-steps__text {
+  transform: translateY(clamp(-50px, -3.49vw, -34px));
 }
 
 .gvb-steps__text {
@@ -1937,7 +2108,7 @@ Text Domain: gvb
 }
 
 .gvb-steps__text h3 {
-  font-size: 32px;
+  font-size: clamp(24px, 2.22vw, 32px);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.16px;
@@ -1946,7 +2117,7 @@ Text Domain: gvb
 }
 
 .gvb-steps__text p {
-  font-size: 16px;
+  font-size: clamp(14px, 1.11vw, 16px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: var(--wp--preset--color--gvb-linen);
@@ -1955,8 +2126,8 @@ Text Domain: gvb
 }
 
 .gvb-steps__image {
-  flex: 0 0 506px;
-  height: 432px;
+  flex: 0 0 clamp(380px, 35.14vw, 506px);
+  height: clamp(340px, 30vw, 432px);
   border-radius: 20px;
   overflow: hidden;
 }
@@ -1972,7 +2143,8 @@ Text Domain: gvb
   padding: 80px 64px;
   text-align: center;
   box-sizing: border-box;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .gvb-flaschen-intro p {
@@ -2003,6 +2175,7 @@ Text Domain: gvb
 
 .gvb-flaschen-cards__item {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -2020,16 +2193,49 @@ Text Domain: gvb
   object-fit: cover;
 }
 
+/* Source images are landscape (4096×2732) but the card is portrait (362×483),
+   so object-fit: cover crops to the middle 50% of the source by default — which
+   misses the bottle in each photo (bottles sit left-of-centre in the source).
+   Per-card object-position shifts the visible strip so each bottle ends up
+   centred in the card. Values derived from the Figma crop percentages. */
+.gvb-flaschen-cards__item:nth-child(1) .gvb-flaschen-cards__image img {
+  object-position: 5% center;   /* Edelstahl — horizontal focal point */
+  /* Source is landscape, container is portrait → object-fit: cover leaves no
+     vertical overflow for object-position Y to move. Scale from the bottom
+     edge instead: the bottom anchors, top extends off-frame, bottle rides up. */
+  transform: scale(1.45);
+  transform-origin: center 75%;
+}
+.gvb-flaschen-cards__item:nth-child(2) .gvb-flaschen-cards__image img {
+  object-position: 0% center;   /* Tritan */
+  transform: scale(1.35);
+  transform-origin: center 90%;
+}
+.gvb-flaschen-cards__item:nth-child(3) .gvb-flaschen-cards__image img {
+  object-position: 23% center;  /* Borosilikat */
+  transform: scale(1.07);
+  transform-origin: center 75%;
+}
+
+.gvb-flaschen-cards__image img.gvb-img-right {
+  object-position: 5% center;
+}
+
 .gvb-flaschen-cards__text {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  align-items: flex-start;
   flex: 1;
 }
 
 .gvb-flaschen-cards__text .gvb-btn-primary {
   margin-top: auto;
+  align-self: flex-start;
+  transition: background-color var(--gvb-transition), transform 0.3s ease, opacity var(--gvb-transition);
+}
+
+.gvb-flaschen-cards__text .gvb-btn-primary:hover {
+  background-color: var(--wp--preset--color--gvb-orange-hover);
 }
 
 .gvb-flaschen-cards__title {
@@ -2060,7 +2266,7 @@ Text Domain: gvb
 
 /* ── Hero: borosilikat bottle ── */
 .gvb-hero__bg--borosilikat {
-  object-position: center 5%;
+  object-position: center 100%;
   transform: scaleX(-1);
 }
 
@@ -2254,22 +2460,39 @@ Text Domain: gvb
    ══════════════════════════════════════════════════════════════ */
 
 /* ── Product showcase ── */
-.gvb-edelstahl-product {
+/* ── Unified bottle product card (Edelstahl, Borosilikat, Tritan) ── */
+.gvb-bottle-showcase {
+  padding: 40px 17px;
+}
+
+.gvb-bottle-showcase__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  margin: 0 17px 40px;
-  background: rgba(255, 255, 255, 0.2);
+  flex-direction: column;
+  gap: 40px;
+}
+
+.gvb-bottle-card {
+  display: flex;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(43, 43, 43, 0.08);
   border-radius: 30px;
   overflow: hidden;
   min-height: 593px;
 }
 
-.gvb-edelstahl-product__image-col {
+.gvb-bottle-card__image {
   flex: 0 0 496px;
   position: relative;
   overflow: hidden;
 }
 
-.gvb-edelstahl-product__image-col img {
+.gvb-bottle-card__image img {
   width: 82%;
   height: auto;
   position: absolute;
@@ -2280,7 +2503,30 @@ Text Domain: gvb
   object-fit: contain;
 }
 
-.gvb-edelstahl-product__content {
+/* Per-SKU image sizing/positioning (Figma-derived) */
+.gvb-bottle-card--slim .gvb-bottle-card__image img {
+  width: 76%; left: 12%; top: -6%; transform: none;
+}
+.gvb-bottle-card--wideneck .gvb-bottle-card__image img {
+  width: 78%; left: 11%; top: -6%; transform: none;
+}
+.gvb-bottle-card--tea .gvb-bottle-card__image img {
+  width: 72%; left: 14%; top: -2%; transform: none;
+}
+.gvb-bottle-card--karaffe .gvb-bottle-card__image img {
+  width: 62%; left: 19%; top: 13%; transform: none;
+}
+.gvb-bottle-card--kavo-premium .gvb-bottle-card__image img {
+  width: 73%; left: 13%; top: -2%; transform: none;
+}
+.gvb-bottle-card--kavo-classic .gvb-bottle-card__image img {
+  width: 64%; left: 18%; top: 7%; transform: none;
+}
+.gvb-bottle-card--kavo-eco .gvb-bottle-card__image img {
+  width: 70%; left: 14.5%; top: 0%; transform: none;
+}
+
+.gvb-bottle-card__content {
   flex: 1;
   padding: 48px 60px;
   display: flex;
@@ -2289,7 +2535,7 @@ Text Domain: gvb
   gap: 20px;
 }
 
-.gvb-edelstahl-product__title {
+.gvb-bottle-card__title {
   font-size: 60px;
   font-weight: 700;
   line-height: 1.03;
@@ -2297,47 +2543,33 @@ Text Domain: gvb
   margin: 0;
 }
 
-.gvb-edelstahl-product__desc p {
+.gvb-bottle-card__body {
   font-size: 15px;
   line-height: 1.2;
   letter-spacing: 0.075px;
   color: #2b2b2b;
+}
+
+.gvb-bottle-card__body p {
   margin: 0 0 12px;
 }
 
-.gvb-edelstahl-product__desc ul {
-  font-size: 15px;
-  line-height: 1.2;
-  color: #2b2b2b;
-  padding-left: 20px;
+.gvb-bottle-card__body ul {
   margin: 0;
+  padding-left: 20px;
 }
 
-.gvb-edelstahl-product__desc li {
+.gvb-bottle-card__body li {
   margin-bottom: 4px;
 }
 
-.gvb-edelstahl-product__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.gvb-edelstahl-product__meta p {
-  font-size: 16px;
-  line-height: 1.2;
-  letter-spacing: 0.08px;
-  color: #2b2b2b;
-  margin: 0;
-}
-
-.gvb-edelstahl-product__colors {
+.gvb-bottle-card__colors {
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
-.gvb-edelstahl-product__color-btn {
+.gvb-bottle-card__color-btn {
   background: none;
   border: 2px solid transparent;
   border-radius: 50%;
@@ -2351,7 +2583,7 @@ Text Domain: gvb
   justify-content: center;
 }
 
-.gvb-edelstahl-product__color-btn img {
+.gvb-bottle-card__color-btn img {
   width: 27px;
   height: 27px;
   border-radius: 50%;
@@ -2359,12 +2591,35 @@ Text Domain: gvb
   display: block;
 }
 
-.gvb-edelstahl-product__color-btn.is-active {
+.gvb-bottle-card__color-btn.is-active {
   border-color: #2b2b2b;
 }
 
-.gvb-edelstahl-product__color-btn:hover {
+.gvb-bottle-card__color-btn:hover {
   border-color: rgba(43, 43, 43, 0.4);
+}
+
+.gvb-bottle-card__dot {
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(43, 43, 43, 0.15);
+}
+
+.gvb-bottle-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gvb-bottle-card__meta p {
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: 0.08px;
+  color: #2b2b2b;
+  margin: 0;
 }
 
 .gvb-verschluss-color {
@@ -2413,7 +2668,7 @@ Text Domain: gvb
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
 }
 
@@ -2433,10 +2688,10 @@ Text Domain: gvb
 .gvb-edelstahl-feature-card__text {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   width: 100%;
-  text-align: center;
+  text-align: left;
 }
 
 .gvb-edelstahl-feature-card__title {
@@ -2446,7 +2701,7 @@ Text Domain: gvb
   letter-spacing: 0.11px;
   color: #2b2b2b;
   margin: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .gvb-edelstahl-feature-card__desc {
@@ -2456,103 +2711,12 @@ Text Domain: gvb
   color: #2b2b2b;
   margin: 0;
   max-width: 245px;
-  text-align: center;
+  text-align: left;
 }
 
 /* ══════════════════════════════════════════════════════════════
    BOROSILIKATGLAS PAGE
    ══════════════════════════════════════════════════════════════ */
-
-/* ── Product cards ── */
-.gvb-borosilikat-product {
-  padding: 40px 12px;
-}
-
-.gvb-borosilikat-cards {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.gvb-borosilikat-card {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 30px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 496px 1fr;
-  min-height: 593px;
-}
-
-.gvb-borosilikat-card__image {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.gvb-borosilikat-card__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
-.gvb-borosilikat-card__content {
-  padding: 48px 50px 48px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-}
-
-.gvb-borosilikat-card__title {
-  font-size: 60px;
-  font-weight: 700;
-  line-height: 1.03;
-  letter-spacing: 0;
-  color: #2b2b2b;
-  margin: 0;
-}
-
-.gvb-borosilikat-card__body {
-  font-size: 15px;
-  line-height: 1.2;
-  letter-spacing: 0.075px;
-  color: #2b2b2b;
-}
-
-.gvb-borosilikat-card__body p {
-  margin: 0 0 12px;
-}
-
-.gvb-borosilikat-card__body ul {
-  margin: 0;
-  padding-left: 22px;
-}
-
-.gvb-borosilikat-card__body li {
-  margin-bottom: 4px;
-}
-
-.gvb-borosilikat-card__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-top: 8px;
-}
-
-.gvb-borosilikat-card__meta p {
-  font-size: 16px;
-  line-height: 1.2;
-  letter-spacing: 0.08px;
-  color: #2b2b2b;
-  margin: 0;
-}
 
 /* ── Verschlüsse ── */
 .gvb-borosilikat-verschluesse {
@@ -2580,6 +2744,7 @@ Text Domain: gvb
   padding: 40px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 16px;
 }
 
@@ -2638,9 +2803,37 @@ Text Domain: gvb
   margin: 0;
 }
 
+/* Borosilikat verschluss column: text lives outside the card, left-aligned */
+.gvb-borosilikat-verschluesse .gvb-verschluss-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gvb-borosilikat-verschluesse .gvb-verschluss-col .gvb-verschluss-card {
+  padding: 0;
+  background: rgba(255, 255, 255, 0.2);
+  align-items: stretch;
+}
+
+.gvb-borosilikat-verschluesse .gvb-verschluss-col .gvb-verschluss-card__image {
+  width: 100%;
+  height: 347px;
+}
+
+.gvb-borosilikat-verschluesse .gvb-verschluss-col .gvb-verschluss-card__title,
+.gvb-borosilikat-verschluesse .gvb-verschluss-col .gvb-verschluss-card__desc {
+  text-align: left;
+  padding-left: 16px;
+}
+
+.gvb-borosilikat-verschluesse .gvb-verschluss-col .gvb-verschluss-card__title {
+  margin-top: 16px;
+}
+
 /* ── Feature cards ── */
 .gvb-borosilikat-features {
-  padding: 40px 0 80px;
+  padding: 40px 0 120px;
 }
 
 .gvb-borosilikat-features__heading {
@@ -2649,7 +2842,7 @@ Text Domain: gvb
   line-height: 1.08;
   letter-spacing: 0.2px;
   color: #2b2b2b;
-  margin: 0 0 40px;
+  margin: 0 0 80px;
   padding: 0 20px;
 }
 
@@ -2767,6 +2960,23 @@ Text Domain: gvb
   margin: 0 !important;
 }
 
+.gvb-blog-featured__content .wp-block-read-more {
+  align-self: flex-start;
+  margin-left: 0 !important;
+  margin-right: auto;
+}
+
+.gvb-blog-featured__row {
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.gvb-blog-featured__row:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(43, 43, 43, 0.1);
+}
+
 /* Featured image */
 .gvb-blog-featured__image img {
   width: 638px;
@@ -2815,8 +3025,6 @@ Text Domain: gvb
 /* ── All Articles Grid (Zone 2) ─────────────────────────────── */
 .gvb-blog-grid .wp-block-post-template {
   gap: 16px !important;
-  /* Reserve space for 3 rows of cards so all pages have consistent height */
-  min-height: 520px;
   align-content: start;
 }
 
@@ -3168,7 +3376,7 @@ Text Domain: gvb
    ═══════════════════════════════════════ */
 
 .gvb-impressum-card {
-  padding: 0 20px 80px;
+  padding: 80px 20px;
 }
 
 .gvb-impressum-card__inner {
@@ -3177,6 +3385,9 @@ Text Domain: gvb
   border-radius: 20px;
   padding: 48px 52px;
   box-shadow: 0 25px 33px -15px rgba(149, 149, 149, 0.25);
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .gvb-impressum-card__company {
@@ -3556,7 +3767,7 @@ Text Domain: gvb
    ══════════════════════════════════════════════════════════════ */
 
 /* ── Touch targets: colour swatches (Apple HIG: 44pt minimum) ── */
-.gvb-edelstahl-product__color-btn {
+.gvb-bottle-card__color-btn {
   width: 44px;
   height: 44px;
 }
@@ -3913,29 +4124,32 @@ Text Domain: gvb
     flex: 1 1 calc(50% - 10px);
   }
 
-  /* ── Edelstahl product: stack image + content ── */
-  .gvb-edelstahl-product {
-    flex-direction: column;
-    min-height: auto;
-    margin: 0 20px 40px;
+  /* ── Bottle product card: stack image + content ── */
+  .gvb-bottle-showcase {
+    padding: 0 20px 40px;
   }
 
-  .gvb-edelstahl-product__image-col {
+  .gvb-bottle-card {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .gvb-bottle-card__image {
     flex: none;
     width: 100%;
     height: 280px;
   }
 
-  .gvb-edelstahl-product__image-col img {
+  .gvb-bottle-card__image img {
     width: 60%;
     left: 20%;
   }
 
-  .gvb-edelstahl-product__content {
+  .gvb-bottle-card__content {
     padding: 32px 24px;
   }
 
-  .gvb-edelstahl-product__title {
+  .gvb-bottle-card__title {
     font-size: 38px;
   }
 
@@ -3959,29 +4173,6 @@ Text Domain: gvb
   .gvb-edelstahl-feature-card__text {
     text-align: center;
     align-items: center;
-  }
-
-  /* ── Borosilikat product: stack image + content ── */
-  .gvb-borosilikat-product {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
-
-  .gvb-borosilikat-card {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  .gvb-borosilikat-card__image {
-    height: 280px;
-  }
-
-  .gvb-borosilikat-card__content {
-    padding: 32px 24px;
-  }
-
-  .gvb-borosilikat-card__title {
-    font-size: 38px;
   }
 
   /* Verschluss cards: single column, responsive image */
@@ -4082,6 +4273,16 @@ Text Domain: gvb
   .gvb-steps__number {
     font-size: 120px;
     left: 24px;
+  }
+
+  .gvb-steps__row:first-child .gvb-steps__number {
+    left: 24px;
+  }
+
+  .gvb-steps__row:nth-child(1) .gvb-steps__text,
+  .gvb-steps__row:nth-child(2) .gvb-steps__text,
+  .gvb-steps__row:nth-child(3) .gvb-steps__text {
+    transform: none;
   }
 
   .gvb-steps__image {
@@ -4270,10 +4471,15 @@ Text Domain: gvb
     padding: 20px 24px;
   }
 
-  /* ── Bottom wave: full-width arc SVG on mobile (replaces S-curve from corner) ── */
+  /* ── Bottom wave: simpler full-width concave arc on mobile.
+         Override the desktop aspect-ratio with a fixed tall box so the wave
+         reaches up to the contact form's transparent zone on long pages. ── */
   .wp-site-blocks::after {
+    aspect-ratio: auto;
+    height: 3200px;
     background-image: url('assets/svg/wave-bottom-mobile.svg');
   }
+
 }
 
 @media (max-width: 425px) {
@@ -4534,6 +4740,11 @@ Text Domain: gvb
   height: 100%;
   display: flex;
   flex-direction: column;
+  /* WP core adds margin-top: 46px/32px on .responsive-dialog when .admin-bar
+     is present (logged-in users) to clear the admin bar. Our overlay already
+     covers the full viewport and the admin bar sits on top via its own z-index,
+     so this extra margin only creates a phantom gap above the nav links. */
+  margin-top: 0 !important;
 }
 
 /* ── Overlay content wrapper (mobile only) ── */
@@ -4544,10 +4755,20 @@ Text Domain: gvb
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /* WP resolves --navigation-layout-justification-setting to flex-end because the
+     nav block has justifyContent:"right" for desktop. In flex-direction:column that
+     becomes the MAIN axis → nav items get pushed toward the bottom of the 100%-height
+     overlay, leaving a big empty band at the top. Force flex-start to pin to top. */
+  justify-content: flex-start;
   width: 100%;
-  padding: 24px 32px 48px;
+  /* Top padding clears the fixed close button (24 top + 44 button = 68, +4 breathing).
+     Bottom padding gives the last nav item breathing room on short viewports. */
+  padding: 72px 32px 80px;
   height: 100%;
   overflow-y: auto;
+  /* Prevent mobile rubber-band overscroll revealing the empty area above
+     the content when the user drags past the top of the menu. */
+  overscroll-behavior: contain;
 }
 
 /* ── Close (×) button: hidden by default, only shown when overlay is open ── */
@@ -4555,7 +4776,7 @@ Text Domain: gvb
   display: none !important;
 }
 
-/* ── Close (×) button: top-right, linen, 44px touch target (mobile only) ── */
+/* ── Close (×) button: pinned top-right, linen, 44px touch target (mobile only) ── */
 @media (max-width: 784px) {
   .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close,
   .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close-button button {
@@ -4567,10 +4788,16 @@ Text Domain: gvb
     display: flex !important;
     align-items: center;
     justify-content: flex-end;
-    align-self: flex-end;
-    padding: 24px 32px 0 0;
+    padding: 0;
     opacity: 0.9;
+    /* Stay pinned at the top-right of the overlay while inner content scrolls.
+       The overlay covers the admin bar, so a plain top inset works. */
+    position: fixed !important;
+    top: 24px;
+    right: 24px;
+    z-index: 10;
   }
+
 
   .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close svg {
     fill: var(--wp--preset--color--gvb-linen) !important;
@@ -4589,7 +4816,7 @@ Text Domain: gvb
   flex-wrap: nowrap !important;
   align-items: flex-start !important;
   gap: 0 !important;
-  padding-top: 24px;
+  padding-top: 0;
   width: 100%;
 }
 
@@ -4624,14 +4851,20 @@ Text Domain: gvb
   margin-bottom: 0;
 }
 
+/* ── Hide the Kontakt anchor link from the mobile overlay (desktop only) ── */
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:has(> a[href*="#kontakt"]),
+.gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item:has(> .wp-block-navigation-item__content[href*="#kontakt"]) {
+  display: none !important;
+}
+
 /* ── Parent nav links: large + bold (overlay only) ── */
 .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item > .wp-block-navigation-item__content {
   color: var(--wp--preset--color--gvb-linen) !important;
-  font-size: 26px !important;
+  font-size: 20px !important;
   font-weight: 700 !important;
-  letter-spacing: -0.78px !important;
-  line-height: 1.05 !important;
-  padding: 14px 0 8px !important;
+  letter-spacing: -0.6px !important;
+  line-height: 1.1 !important;
+  padding: 10px 0 6px !important;
   white-space: nowrap !important;
   display: block;
   text-decoration: none !important;
@@ -4659,11 +4892,11 @@ Text Domain: gvb
 /* ── Submenu links: smaller, 75% linen opacity (overlay only) ── */
 .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
   color: rgba(237, 232, 219, 0.75) !important;
-  font-size: 17px !important;
+  font-size: 15px !important;
   font-weight: 400 !important;
-  letter-spacing: -0.17px !important;
+  letter-spacing: -0.15px !important;
   line-height: 1.2 !important;
-  padding: 7px 0 !important;
+  padding: 5px 0 !important;
   display: block;
   text-decoration: none !important;
 }
@@ -4685,6 +4918,47 @@ Text Domain: gvb
 
 .gvb-industry-card:hover {
   transform: translateY(-8px);
+}
+
+/* Whole-card click target: stretched overlay link */
+.gvb-industry-card__link {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: 16px;
+  overflow: hidden;
+  text-indent: -9999px;
+  white-space: nowrap;
+}
+
+/* Keep the CTA button visually on top and clickable */
+.gvb-industry-card__content {
+  z-index: 4;
+}
+.gvb-industry-card .gvb-btn-sm {
+  position: relative;
+  z-index: 5;
+  height: 42px;
+  min-width: 114px;
+  padding: 0 24px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.gvb-industry-card .gvb-btn-sm:hover {
+  transform: scale(1.08);
+  background-color: #E65620;
+  color: #fff;
+}
+
+/* Image zoom on card hover */
+.gvb-industry-card img {
+  transition: transform 0.5s ease;
+}
+.gvb-industry-card:hover img {
+  transform: scale(1.06);
 }
 
 /* ── Hover scale: plain primary buttons (flaschen-cards, branding, etc.) ── */
@@ -4803,7 +5077,7 @@ Text Domain: gvb
 .gvb-druckverfahren,
 .gvb-bedrucken-warum,
 .gvb-download-cards,
-.gvb-borosilikat-product,
+.gvb-bottle-showcase,
 .gvb-blog-featured,
 .gvb-blog-all,
 .gvb-personalisieren,
@@ -4837,7 +5111,7 @@ Text Domain: gvb
   .gvb-hero,
   .gvb-cases,
   .gvb-faq,
-  .gvb-edelstahl-product {
+  .gvb-bottle-showcase {
     max-width: 1400px !important;
     margin-left: auto !important;
     margin-right: auto !important;
@@ -4845,7 +5119,8 @@ Text Domain: gvb
 
   /* Anlass: uses calc margin instead of max-width (WP flex-stretch pitfall).
      At 1440px: (1440-1400)/2 = 20px each side — same as the natural inline margin. */
-  .gvb-bedrucken-anlass {
+  .gvb-bedrucken-anlass,
+  .gvb-impressum-card {
     margin-left: calc((100% - 1400px) / 2) !important;
     margin-right: calc((100% - 1400px) / 2) !important;
   }

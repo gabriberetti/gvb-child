@@ -9,7 +9,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 <!-- wp:html -->
 <section class="gvb-bedrucken-anlass is-at-start" data-carousel>
-	<h2 class="gvb-bedrucken-anlass__heading">Good Vibes für jeden Anlass.</h2>
+	<h2 class="gvb-bedrucken-anlass__heading gvb-fade-up">Good Vibes für jeden Anlass.</h2>
 
 	<button type="button" class="gvb-carousel-nav gvb-carousel-nav--prev" aria-label="Vorherige Karte" aria-controls="gvb-anlass-track">
 		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
@@ -19,7 +19,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	</button>
 
 	<div class="gvb-overlay-cards" id="gvb-anlass-track" data-carousel-track>
-		<div class="gvb-overlay-card gvb-overlay-card--dark-text">
+		<div class="gvb-overlay-card gvb-overlay-card--dark-text gvb-fade-up">
 			<div class="gvb-overlay-card__media">
 				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/bedrucken-anlass-1.png' ); ?>" alt="" />
 				<h3 class="gvb-overlay-card__title">Employer<br>Branding &amp;<br>Onboarding</h3>
@@ -29,7 +29,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</div>
 
-		<div class="gvb-overlay-card">
+		<div class="gvb-overlay-card gvb-fade-up">
 			<div class="gvb-overlay-card__media">
 				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/bedrucken-anlass-2.png' ); ?>" alt="" />
 				<h3 class="gvb-overlay-card__title">Events &amp;<br>Marken-<br>auftritte</h3>
@@ -39,7 +39,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</div>
 
-		<div class="gvb-overlay-card gvb-overlay-card--dark-text">
+		<div class="gvb-overlay-card gvb-overlay-card--dark-text gvb-fade-up">
 			<div class="gvb-overlay-card__media">
 				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/bedrucken-anlass-3.png' ); ?>" alt="" />
 				<h3 class="gvb-overlay-card__title">Merchandise</h3>

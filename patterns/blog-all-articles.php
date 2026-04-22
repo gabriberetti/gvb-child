@@ -9,13 +9,9 @@
 <!-- wp:group {"className":"gvb-blog-all","style":{"spacing":{"padding":{"top":"80px","bottom":"80px","left":"64px","right":"64px"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-group gvb-blog-all" style="padding-top:80px;padding-right:64px;padding-bottom:80px;padding-left:64px">
 
-	<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"60px","fontWeight":"700","lineHeight":"1.03","letterSpacing":"0px"}},"textColor":"gvb-graphite"} -->
-	<h2 class="wp-block-heading has-gvb-graphite-color has-text-color" style="font-size:60px;font-weight:700;line-height:1.03;letter-spacing:0px">Alle Artikel:</h2>
+	<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"-1.8px"}},"textColor":"gvb-graphite"} -->
+	<h2 class="wp-block-heading has-gvb-graphite-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Alle Artikel:</h2>
 	<!-- /wp:heading -->
-
-	<!-- wp:spacer {"height":"48px"} -->
-	<div style="height:48px" aria-hidden="true" class="wp-block-spacer"></div>
-	<!-- /wp:spacer -->
 
 	<!-- wp:query {"query":{"perPage":6,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","sticky":"","inherit":false},"className":"gvb-blog-grid"} -->
 	<div class="wp-block-query gvb-blog-grid">

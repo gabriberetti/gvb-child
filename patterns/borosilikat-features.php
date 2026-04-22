@@ -10,7 +10,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <!-- wp:html -->
 <section class="gvb-borosilikat-features">
 
-	<h3 class="gvb-borosilikat-features__heading gvb-fade-up">Wieso Borosilikat überzeugt</h3>
+	<h3 class="gvb-borosilikat-features__heading gvb-fade-up">Wieso Borosilikat überzeugt.</h3>
 
 	<ul class="gvb-borosilikat-features__cards">
 
@@ -29,7 +29,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<img src="<?php echo esc_url( $img . '/borosilikat-feature-2.jpg' ); ?>" alt="Bereit für den Alltag." />
 			</div>
 			<div class="gvb-borosilikat-feature-card__text">
-				<h5 class="gvb-borosilikat-feature-card__title">Bereit für den Alltag.</h5>
+				<h5 class="gvb-borosilikat-feature-card__title">Bereit für<br>den Alltag.</h5>
 				<p class="gvb-borosilikat-feature-card__desc">Unsere Slim und Wideneck Edition bestehen aus hochwertigem Borosilikatglas. Das Material ist stabil, langlebig und gleichzeitig angenehm leicht. So wird deine Flasche zu einem zuverlässigen Begleiter im Alltag, im Büro oder unterwegs.</p>
 			</div>
 		</li>
@@ -49,7 +49,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<img src="<?php echo esc_url( $img . '/borosilikat-feature-4.jpg' ); ?>" alt="Deine Flasche. Dein Vibe." />
 			</div>
 			<div class="gvb-borosilikat-feature-card__text">
-				<h5 class="gvb-borosilikat-feature-card__title">Deine Flasche. Dein Vibe.</h5>
+				<h5 class="gvb-borosilikat-feature-card__title">Deine Flasche.<br>Dein Vibe.</h5>
 				<p class="gvb-borosilikat-feature-card__desc">Unsere Borosilikatglasflaschen personalisieren wir gerne für dich. Logo, Wunschdesign oder -motiv kommen im hochwertigen Druck oder als Lasergravur richtig zur Geltung.</p>
 			</div>
 		</li>

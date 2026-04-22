@@ -7,8 +7,8 @@
 $img = get_stylesheet_directory_uri() . '/assets/img';
 ?>
 
-<!-- wp:group {"className":"gvb-cases","style":{"spacing":{"margin":{"left":"20px","right":"20px"},"padding":{"top":"20px","bottom":"39px","left":"52px","right":"52px"}},"border":{"radius":"20px"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group gvb-cases" style="border-radius:20px;margin-left:20px;margin-right:20px;padding-top:20px;padding-right:52px;padding-bottom:39px;padding-left:52px">
+<!-- wp:group {"className":"gvb-cases gvb-fade-up","style":{"spacing":{"margin":{"left":"20px","right":"20px"},"padding":{"top":"20px","bottom":"39px","left":"52px","right":"52px"}},"border":{"radius":"20px"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group gvb-cases gvb-fade-up" style="border-radius:20px;margin-left:20px;margin-right:20px;padding-top:20px;padding-right:52px;padding-bottom:39px;padding-left:52px">
 
 	<img class="gvb-cases__bg" src="<?php echo esc_url( $img . '/cases-bg-1.png' ); ?>" alt="" aria-hidden="true" />
 

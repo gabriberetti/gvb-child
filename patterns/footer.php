@@ -30,10 +30,10 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 
 			<!-- wp:group {"className":"gvb-footer__social","style":{"spacing":{"blockGap":"24px","margin":{"top":"56px"}}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
 			<div class="wp-block-group gvb-footer__social" style="margin-top:56px">
-				<a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="gvb-footer__social-link">
+				<a href="https://www.instagram.com/goodvibebottles" target="_blank" rel="noopener noreferrer" class="gvb-footer__social-link">
 					<img src="<?php echo esc_url( $svg . '/icon-instagram.svg' ); ?>" alt="Instagram" width="24" height="24" />
 				</a>
-				<a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="gvb-footer__social-link">
+				<a href="https://www.linkedin.com/company/good-vibe-bottles/" target="_blank" rel="noopener noreferrer" class="gvb-footer__social-link">
 					<img src="<?php echo esc_url( $svg . '/icon-linkedin.svg' ); ?>" alt="LinkedIn" width="24" height="24" />
 				</a>
 			</div>
@@ -75,7 +75,7 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 						<li><a href="/gesundheitswesen/">Gesundheit</a></li>
 						<li><a href="/hotel-wellness-und-spa/">Hotels</a></li>
 						<li><a href="/bildungseinrichtungen/">Bildung</a></li>
-						<li class="gvb-footer__nav-divider"><a href="/bedrucken/">Personalisieren</a></li>
+						<li class="gvb-footer__nav-divider"><a href="/bedrucken/">Bedrucken</a></li>
 					</ul>
 					<!-- /wp:list -->
 				</div>

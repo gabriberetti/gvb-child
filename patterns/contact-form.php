@@ -7,8 +7,8 @@
 $img = get_stylesheet_directory_uri() . '/assets/img';
 ?>
 
-<!-- wp:group {"className":"gvb-contact","style":{"spacing":{"padding":{"top":"60px","bottom":"80px","left":"20px","right":"52px"}}},"layout":{"type":"default"}} -->
-<div class="wp-block-group gvb-contact" style="padding-top:60px;padding-right:52px;padding-bottom:80px;padding-left:20px">
+<!-- wp:group {"tagName":"section","anchor":"kontakt","className":"gvb-contact","style":{"spacing":{"padding":{"top":"60px","bottom":"80px","left":"20px","right":"52px"}}},"layout":{"type":"default"}} -->
+<section id="kontakt" class="wp-block-group gvb-contact" style="padding-top:60px;padding-right:52px;padding-bottom:80px;padding-left:20px">
 
 	<!-- wp:group {"className":"gvb-contact__header","style":{"spacing":{"margin":{"bottom":"48px"}}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group gvb-contact__header" style="margin-bottom:48px">
@@ -55,7 +55,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	</div>
 	<!-- /wp:columns -->
 
-</div>
+</section>
 <!-- /wp:group -->
 
 <!-- wp:html -->

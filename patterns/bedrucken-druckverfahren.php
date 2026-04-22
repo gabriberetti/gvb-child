@@ -10,12 +10,12 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <!-- wp:html -->
 <section class="gvb-druckverfahren">
 	<div class="gvb-druckverfahren__header">
-		<h2 class="gvb-druckverfahren__heading">Unsere Druckverfahren.</h2>
-		<p class="gvb-druckverfahren__intro">Damit dein Logo oder Design auf der Flasche richtig gut aussieht, setzen wir auf hochwertige Druckverfahren und erfahrene Partner. So entsteht ein Ergebnis, das präzise umgesetzt wird, langlebig ist und deine Marke so zeigt, wie du es dir vorstellst. Je nach Motiv, Einsatzbereich und gewünschter Wirkung wählen wir das passende Druckverfahren für dich aus.</p>
+		<h2 class="gvb-druckverfahren__heading gvb-fade-up">Unsere Druckverfahren.</h2>
+		<p class="gvb-druckverfahren__intro gvb-fade-up">Damit dein Logo oder Design auf der Flasche richtig gut aussieht, setzen wir auf hochwertige Druckverfahren und erfahrene Partner. So entsteht ein Ergebnis, das präzise umgesetzt wird, langlebig ist und deine Marke so zeigt, wie du es dir vorstellst. Je nach Motiv, Einsatzbereich und gewünschter Wirkung wählen wir das passende Druckverfahren für dich aus.</p>
 	</div>
 
 	<ul class="gvb-flaschen-cards__list gvb-flaschen-cards__list--4">
-		<li class="gvb-flaschen-cards__item">
+		<li class="gvb-flaschen-cards__item gvb-fade-up">
 			<div class="gvb-flaschen-cards__image">
 				<img src="<?php echo esc_url( $img . '/bedrucken-druck-1.jpg' ); ?>" alt="Digitaldruck" />
 			</div>
@@ -25,7 +25,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-flaschen-cards__item">
+		<li class="gvb-flaschen-cards__item gvb-fade-up">
 			<div class="gvb-flaschen-cards__image">
 				<img src="<?php echo esc_url( $img . '/bedrucken-druck-2.jpg' ); ?>" alt="Siebdruck" />
 			</div>
@@ -35,9 +35,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-flaschen-cards__item">
+		<li class="gvb-flaschen-cards__item gvb-fade-up">
 			<div class="gvb-flaschen-cards__image">
-				<img src="<?php echo esc_url( $img . '/bedrucken-druck-3.jpg' ); ?>" alt="Lasergravur" />
+				<img class="gvb-img-right" src="<?php echo esc_url( $img . '/bedrucken-druck-3.jpg' ); ?>" alt="Lasergravur" />
 			</div>
 			<div class="gvb-flaschen-cards__text">
 				<h5 class="gvb-flaschen-cards__title">Lasergravur</h5>
@@ -45,7 +45,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 		</li>
 
-		<li class="gvb-flaschen-cards__item">
+		<li class="gvb-flaschen-cards__item gvb-fade-up">
 			<div class="gvb-flaschen-cards__image">
 				<img src="<?php echo esc_url( $img . '/bedrucken-druck-4.jpg' ); ?>" alt="Noch mehr Branding" />
 			</div>

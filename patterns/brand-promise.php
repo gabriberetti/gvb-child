@@ -7,8 +7,8 @@
 $svg = get_stylesheet_directory_uri() . '/assets/svg';
 ?>
 
-<!-- wp:group {"className":"gvb-brand-promise","backgroundColor":"gvb-green","style":{"spacing":{"padding":{"top":"120px","bottom":"120px","left":"64px","right":"64px"}}},"layout":{"type":"constrained","contentSize":"808px"}} -->
-<div class="wp-block-group gvb-brand-promise has-gvb-green-background-color has-background" style="padding-top:120px;padding-right:64px;padding-bottom:120px;padding-left:64px">
+<!-- wp:group {"align":"full","className":"gvb-brand-promise","backgroundColor":"gvb-green","style":{"spacing":{"padding":{"top":"120px","bottom":"120px","left":"64px","right":"64px"}}},"layout":{"type":"constrained","contentSize":"808px"}} -->
+<div class="wp-block-group alignfull gvb-brand-promise has-gvb-green-background-color has-background" style="padding-top:120px;padding-right:64px;padding-bottom:120px;padding-left:64px">
 
 	<!-- wp:group {"className":"gvb-brand-promise__content","style":{"spacing":{"blockGap":"48px"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 	<div class="wp-block-group gvb-brand-promise__content">
@@ -31,13 +31,6 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 
 	</div>
 	<!-- /wp:group -->
-
-	<!-- wp:html -->
-	<div class="gvb-chat-bubble">
-		<img src="<?php echo esc_url( $svg . '/chat-bubble.svg' ); ?>" alt="" class="gvb-chat-bubble__bg" />
-		<span class="gvb-chat-bubble__text">Chat with us!</span>
-	</div>
-	<!-- /wp:html -->
 
 </div>
 <!-- /wp:group -->

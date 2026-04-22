@@ -8,7 +8,7 @@
 
 <!-- wp:html -->
 <section class="gvb-impressum-card">
-	<div class="gvb-impressum-card__inner">
+	<div class="gvb-impressum-card__inner gvb-fade-up">
 		<h2 class="gvb-impressum-card__company">Good Vibe Bottles GmbH</h2>
 		<div class="gvb-impressum-card__details">
 			<p>Harrachstraße 52 / Top 18, 4020 Linz, Österreich</p>

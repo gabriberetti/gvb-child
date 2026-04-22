@@ -18,7 +18,8 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<div class="gvb-industry-grid gvb-industry-grid--left-stacked">
 
 		<div class="gvb-industry-card gvb-fade-up">
-			<img src="<?php echo esc_url( $img . '/losungen-branchen-1.jpg' ); ?>" alt="Umweltbewusste Unternehmen" />
+				<a class="gvb-industry-card__link" href="<?php echo esc_url( home_url( '/unternehmen/' ) ); ?>" aria-label="Umweltbewusste und nachhaltige Unternehmen">Mehr erfahren</a>
+				<img src="<?php echo esc_url( $img . '/losungen-branchen-1.jpg' ); ?>" alt="Umweltbewusste Unternehmen" />
 			<div class="gvb-industry-card__overlay"></div>
 			<div class="gvb-industry-card__content">
 				<h5>Umweltbewusste und nachhaltige Unternehmen</h5>
@@ -27,7 +28,8 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		</div>
 
 		<div class="gvb-industry-card gvb-fade-up">
-			<img src="<?php echo esc_url( $img . '/losungen-branchen-2.jpg' ); ?>" alt="Veranstaltungen und Sport" />
+				<a class="gvb-industry-card__link" href="<?php echo esc_url( home_url( '/sportvereine/' ) ); ?>" aria-label="Veranstaltungen, Sport(vereine) und Freizeitaktivitäten">Mehr erfahren</a>
+				<img src="<?php echo esc_url( $img . '/losungen-branchen-2.jpg' ); ?>" alt="Veranstaltungen und Sport" />
 			<div class="gvb-industry-card__overlay"></div>
 			<div class="gvb-industry-card__content">
 				<h5>Veranstaltungen, Sport(vereine) und Freizeitaktivitäten</h5>
@@ -36,7 +38,8 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		</div>
 
 		<div class="gvb-industry-card gvb-industry-card--tall gvb-fade-up">
-			<img src="<?php echo esc_url( $img . '/losungen-branchen-3.jpg' ); ?>" alt="Hotellerie, Wellness und Spa" />
+				<a class="gvb-industry-card__link" href="<?php echo esc_url( home_url( '/hotel-wellness-und-spa/' ) ); ?>" aria-label="Hotellerie, Wellness und Spa">Mehr erfahren</a>
+				<img src="<?php echo esc_url( $img . '/losungen-branchen-3.jpg' ); ?>" alt="Hotellerie, Wellness und Spa" />
 			<div class="gvb-industry-card__overlay"></div>
 			<div class="gvb-industry-card__content">
 				<h5>Hotellerie, Wellness und Spa</h5>
@@ -49,7 +52,8 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<div class="gvb-industry-grid gvb-industry-grid--two-tall">
 
 		<div class="gvb-industry-card gvb-fade-up">
-			<img src="<?php echo esc_url( $img . '/losungen-branchen-4.jpg' ); ?>" alt="Gesundheitswesen" />
+				<a class="gvb-industry-card__link" href="<?php echo esc_url( home_url( '/gesundheitswesen/' ) ); ?>" aria-label="Gesundheitswesen">Mehr erfahren</a>
+				<img src="<?php echo esc_url( $img . '/losungen-branchen-4.jpg' ); ?>" alt="Gesundheitswesen" />
 			<div class="gvb-industry-card__overlay"></div>
 			<div class="gvb-industry-card__content">
 				<h5>Gesundheitswesen</h5>
@@ -58,7 +62,8 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		</div>
 
 		<div class="gvb-industry-card gvb-fade-up">
-			<img src="<?php echo esc_url( $img . '/losungen-branchen-5.jpg' ); ?>" alt="Bildungseinrichtungen" />
+				<a class="gvb-industry-card__link" href="<?php echo esc_url( home_url( '/bildungseinrichtungen/' ) ); ?>" aria-label="Öffentliche Bildungseinrichtungen und Kommunen">Mehr erfahren</a>
+				<img src="<?php echo esc_url( $img . '/losungen-branchen-5.jpg' ); ?>" alt="Bildungseinrichtungen" />
 			<div class="gvb-industry-card__overlay"></div>
 			<div class="gvb-industry-card__content">
 				<h5>Öffentliche Bildungseinrichtungen und Kommunen</h5>

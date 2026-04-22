@@ -32,12 +32,5 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:html -->
-	<div class="gvb-chat-bubble">
-		<img src="<?php echo esc_url( $svg . '/chat-bubble.svg' ); ?>" alt="" class="gvb-chat-bubble__bg" />
-		<span class="gvb-chat-bubble__text">Chat with us!</span>
-	</div>
-	<!-- /wp:html -->
-
 </div>
 <!-- /wp:group -->

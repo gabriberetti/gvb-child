@@ -51,5 +51,9 @@
 	</div>
 	<!-- /wp:columns -->
 
+	<!-- wp:html -->
+	<p class="gvb-faq__more-link"><a href="/faq/"><span class="gvb-faq__more-link-arrow">→</span> Alle weiteren FAQs findest du hier.</a></p>
+	<!-- /wp:html -->
+
 </div>
 <!-- /wp:group -->

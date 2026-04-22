@@ -14,7 +14,7 @@
 <div class="wp-block-group gvb-faq has-gvb-orange-background-color has-background" style="border-radius:20px;margin-left:20px;margin-right:20px;margin-bottom:20px;padding-top:48px;padding-right:34px;padding-bottom:48px;padding-left:34px">
 
 	<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"-1.8px"}},"textColor":"gvb-linen"} -->
-	<h2 class="wp-block-heading has-gvb-graphite-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Trinkflaschen</h2>
+	<h2 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Trinkflaschen</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:columns {"className":"gvb-faq__grid","style":{"spacing":{"blockGap":{"left":"28px"},"margin":{"top":"48px"}}}} -->
@@ -93,7 +93,7 @@
 <div class="wp-block-group gvb-faq has-gvb-orange-background-color has-background" style="border-radius:20px;margin-left:20px;margin-right:20px;margin-bottom:20px;padding-top:48px;padding-right:34px;padding-bottom:48px;padding-left:34px">
 
 	<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"-1.8px"}},"textColor":"gvb-linen"} -->
-	<h2 class="wp-block-heading has-gvb-graphite-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Bedruckung</h2>
+	<h2 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Bedruckung</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:columns {"className":"gvb-faq__grid","style":{"spacing":{"blockGap":{"left":"28px"},"margin":{"top":"48px"}}}} -->
@@ -147,7 +147,7 @@
 <div class="wp-block-group gvb-faq has-gvb-orange-background-color has-background" style="border-radius:20px;margin-left:20px;margin-right:20px;margin-bottom:20px;padding-top:48px;padding-right:34px;padding-bottom:48px;padding-left:34px">
 
 	<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"-1.8px"}},"textColor":"gvb-linen"} -->
-	<h2 class="wp-block-heading has-gvb-graphite-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Zubehör</h2>
+	<h2 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Zubehör</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:columns {"className":"gvb-faq__grid","style":{"spacing":{"blockGap":{"left":"28px"},"margin":{"top":"48px"}}}} -->
@@ -186,7 +186,7 @@
 <div class="wp-block-group gvb-faq has-gvb-orange-background-color has-background" style="border-radius:20px;margin-left:20px;margin-right:20px;margin-bottom:20px;padding-top:48px;padding-right:34px;padding-bottom:48px;padding-left:34px">
 
 	<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"-1.8px"}},"textColor":"gvb-linen"} -->
-	<h2 class="wp-block-heading has-gvb-graphite-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Reinigung</h2>
+	<h2 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Reinigung</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:columns {"className":"gvb-faq__grid","style":{"spacing":{"blockGap":{"left":"28px"},"margin":{"top":"48px"}}}} -->
@@ -225,7 +225,7 @@
 <div class="wp-block-group gvb-faq has-gvb-orange-background-color has-background" style="border-radius:20px;margin-left:20px;margin-right:20px;margin-bottom:20px;padding-top:48px;padding-right:34px;padding-bottom:48px;padding-left:34px">
 
 	<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"-1.8px"}},"textColor":"gvb-linen"} -->
-	<h2 class="wp-block-heading has-gvb-graphite-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Bestellung</h2>
+	<h2 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Bestellung</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:columns {"className":"gvb-faq__grid","style":{"spacing":{"blockGap":{"left":"28px"},"margin":{"top":"48px"}}}} -->
@@ -269,7 +269,7 @@
 <div class="wp-block-group gvb-faq has-gvb-orange-background-color has-background" style="border-radius:20px;margin-left:20px;margin-right:20px;margin-bottom:20px;padding-top:48px;padding-right:34px;padding-bottom:48px;padding-left:34px">
 
 	<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"-1.8px"}},"textColor":"gvb-linen"} -->
-	<h2 class="wp-block-heading has-gvb-graphite-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Lieferung</h2>
+	<h2 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Lieferung</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:columns {"className":"gvb-faq__grid","style":{"spacing":{"blockGap":{"left":"28px"},"margin":{"top":"48px"}}}} -->

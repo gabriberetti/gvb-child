@@ -11,13 +11,13 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <div class="wp-block-group gvb-hero gvb-hero--losungen" style="border-radius:20px;margin-left:20px;margin-right:20px;padding-top:110px;padding-right:64px;padding-bottom:120px;padding-left:64px">
 
 	<img class="gvb-hero__bg gvb-hero__bg--borosilikat" src="<?php echo esc_url( $img . '/hero-borosilikat.jpg' ); ?>" alt="" aria-hidden="true" />
-	<div class="gvb-hero__overlay" style="background:linear-gradient(110deg, rgba(0,0,0,0) 44%, rgba(255,255,255,0.15) 55%)"></div>
+	<div class="gvb-hero__overlay" style="background:linear-gradient(110deg, rgba(0,0,0,0) 44%, rgba(0,0,0,0.34) 55%)"></div>
 
 	<!-- wp:group {"className":"gvb-hero__content","style":{"spacing":{"margin":{"left":"auto"}}},"layout":{"type":"constrained","contentSize":"608px"}} -->
 	<div class="wp-block-group gvb-hero__content" style="margin-left:auto">
 
-		<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px)","fontWeight":"700","lineHeight":"1","letterSpacing":"-1.95px"},"color":{"text":"#2b2b2b"}}} -->
-		<h1 class="wp-block-heading has-text-color" style="font-size:clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px);font-weight:700;line-height:1;letter-spacing:-1.95px;color:#2b2b2b">Borosilikatglas</h1>
+		<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px)","fontWeight":"700","lineHeight":"1","letterSpacing":"-1.95px"}},"textColor":"gvb-white"} -->
+		<h1 class="wp-block-heading has-gvb-white-color has-text-color" style="font-size:clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px);font-weight:700;line-height:1;letter-spacing:-1.95px">Borosilikatglas</h1>
 		<!-- /wp:heading -->
 
 	</div>

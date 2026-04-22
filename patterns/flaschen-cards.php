@@ -13,7 +13,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<li class="gvb-flaschen-cards__item">
 			<div class="gvb-flaschen-cards__image">
-				<img src="<?php echo esc_url( $img . '/flaschen-edelstahl.jpg' ); ?>" alt="Edelstahl Trinkflasche" />
+				<img src="<?php echo esc_url( $img . '/flaschen-edelstahl.png' ); ?>" alt="Edelstahl Trinkflasche" />
 			</div>
 			<div class="gvb-flaschen-cards__text">
 				<h5 class="gvb-flaschen-cards__title">Edelstahl</h5>
@@ -24,7 +24,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<li class="gvb-flaschen-cards__item">
 			<div class="gvb-flaschen-cards__image">
-				<img src="<?php echo esc_url( $img . '/flaschen-tritan.jpg' ); ?>" alt="Tritan Trinkflasche" />
+				<img src="<?php echo esc_url( $img . '/flaschen-tritan.png' ); ?>" alt="Tritan Trinkflasche" />
 			</div>
 			<div class="gvb-flaschen-cards__text">
 				<h5 class="gvb-flaschen-cards__title">Tritan</h5>
@@ -35,7 +35,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<li class="gvb-flaschen-cards__item">
 			<div class="gvb-flaschen-cards__image">
-				<img src="<?php echo esc_url( $img . '/flaschen-borosilikat.jpg' ); ?>" alt="Borosilikatglas Trinkflasche" />
+				<img src="<?php echo esc_url( $img . '/flaschen-borosilikat.png' ); ?>" alt="Borosilikatglas Trinkflasche" />
 			</div>
 			<div class="gvb-flaschen-cards__text">
 				<h5 class="gvb-flaschen-cards__title">Borosilikatglas</h5>

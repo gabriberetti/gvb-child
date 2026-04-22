@@ -26,7 +26,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<div class="gvb-product-card gvb-product-card--dark gvb-fade-up">
 			<div class="gvb-product-card__media">
 				<img class="gvb-product-card__bg" src="<?php echo esc_url( $img . '/card-besser-trinken.png' ); ?>" alt="" />
-				<h2 class="gvb-product-card__title">Besser trinken.</h2>
+				<h2 class="gvb-product-card__title">Besser<br>trinken.</h2>
 			</div>
 			<div class="gvb-product-card__content">
 				<p class="gvb-product-card__text">Mach das Richtige: Mit unseren Trinkflaschen aus nachhaltigen Materialien und echten Good Vibes trinkst du einfach besser.</p>

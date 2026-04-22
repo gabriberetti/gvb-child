@@ -11,7 +11,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <div class="wp-block-group gvb-hero gvb-hero--bedrucken" style="border-radius:20px;margin-left:20px;margin-right:20px;padding-top:120px;padding-right:64px;padding-bottom:120px;padding-left:64px">
 
 	<img class="gvb-hero__bg gvb-hero__bg--bedrucken" src="<?php echo esc_url( $img . '/hero-bedrucken.jpg' ); ?>" alt="" aria-hidden="true" />
-	<div class="gvb-hero__overlay" style="background:linear-gradient(109deg, rgba(0,0,0,0) 49%, rgba(0,0,0,0.2) 96%)"></div>
+	<div class="gvb-hero__overlay" style="background:linear-gradient(110deg, rgba(0,0,0,0) 44%, rgba(0,0,0,0.34) 55%)"></div>
 
 	<!-- wp:group {"className":"gvb-hero__content","style":{"spacing":{"margin":{"left":"auto"}}},"layout":{"type":"constrained","contentSize":"608px"}} -->
 	<div class="wp-block-group gvb-hero__content" style="margin-left:auto">
