@@ -400,6 +400,19 @@ html {
 }
 
 
+/* Footer inner content scales with the viewport up to 2000px (matches
+   the blog-featured row cap). Overrides WP's runtime constrained-layout
+   rule `.wp-container-core-group-is-layout-{hash} > * { max-width: 1200 }`
+   that comes from the pattern's `contentSize: 1200px`. Specificity 0,2,0
+   beats WP's (0,1,0) rule cleanly — no !important needed.
+   Pattern's 1200 contentSize still applies at viewports ≤1534 (clamp min),
+   so narrower screens are unchanged. */
+.gvb-footer > .gvb-footer__inner {
+  max-width: clamp(1200px, 78.125vw, 2000px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .gvb-footer__nav-list {
   list-style: none;
   padding-left: 0;
@@ -1184,14 +1197,17 @@ html {
   padding: 2px 0;
 }
 
-/* Figma: 15px Regular, black, letter-spacing 0.75px, max-width 480px */
+/* Figma: 15px Regular, black, letter-spacing 0.75px.
+   Max-width is fluid: 480px ≤1440 → scales to 854px at 2560 (1.778× ratio
+   matching the outer-shell cap) so the trigger text spreads across the
+   wider form column instead of stacking into a narrow block. */
 .gvb-expand-trigger__text {
   font-size: clamp(15px, 1.042vw, 27px);
   font-weight: 400;
   line-height: 1.38;
   letter-spacing: 0.75px;
   color: #000000;
-  max-width: 480px;
+  max-width: clamp(480px, 33.33vw, 854px);
   margin: 0;
 }
 
@@ -1509,6 +1525,34 @@ html {
   letter-spacing: 0.08px;
   color: var(--wp--preset--color--gvb-graphite);
   opacity: 0.7;
+}
+
+/* ── FAQ smooth expand/collapse (fixes the wave "jump" on question click)
+   Native <details> snaps open/closed in one frame, which cascades into
+   a sudden page-height change and the bottom wave pseudo-element appears
+   to shift. Animating ::details-content with block-size: 0 → auto (via
+   interpolate-size) stretches that change across 300ms, so the eye reads
+   it as smooth motion instead of a jump.
+   Wrapped in @supports so Firefox (no ::details-content support yet)
+   falls back to native instant open — nothing breaks. */
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+
+  .gvb-faq__item::details-content {
+    block-size: 0;
+    opacity: 0;
+    overflow-y: clip;
+    transition: block-size 0.3s ease,
+                opacity 0.25s ease,
+                content-visibility 0.3s allow-discrete;
+  }
+
+  .gvb-faq__item[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
 }
 
 /* "→ Alle weiteren FAQs findest du hier." bottom-right link */
@@ -2283,6 +2327,22 @@ html {
   object-position: 5% center;
 }
 
+/* Bedrucken-specific tweaks (scoped so the Flaschen page is unaffected):
+   - Card 1 (Digitaldruck): was zoomed in too much, bottle was cropped off.
+   - Card 2 (Siebdruck): slight zoom-out for better framing.
+   - Card 3 (Lasergravur): shift the crop window right so the bottle sits
+     further right in the card. */
+.gvb-druckverfahren .gvb-flaschen-cards__item:nth-child(1) .gvb-flaschen-cards__image img {
+  transform: none;
+  object-position: 60% center;
+}
+.gvb-druckverfahren .gvb-flaschen-cards__item:nth-child(2) .gvb-flaschen-cards__image img {
+  transform: scale(1.15);
+}
+.gvb-druckverfahren .gvb-flaschen-cards__item:nth-child(3) .gvb-flaschen-cards__image img {
+  object-position: 5% center;
+}
+
 .gvb-flaschen-cards__text {
   display: flex;
   flex-direction: column;
@@ -2379,7 +2439,7 @@ html {
 
 .gvb-uberuns-vm__content {
   flex: 1;
-  background: #459271;
+  background: #F28C3B;
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -2977,6 +3037,23 @@ html {
 }
 
 /* ── Featured Articles (Zone 1) ────────────────────────────── */
+
+/* Override WP's constrained-layout cap on the section's nested wrappers
+   so the row can actually grow with the viewport. The query block (direct
+   child) AND the post-template (grandchild, gets capped by WP's default
+   contentSize 1200) are both targeted, otherwise the post-template cap
+   squeezes the row regardless of what we do on the query.
+   Grows from 1400 at 1440 viewport → 2300 at 2560 viewport — wide enough
+   to fit image (max 1134) + content (max 900) + gap (64) + padding (128)
+   with ~74px leftover that `justify-content: space-between` distributes
+   as a visible gap between content and image. */
+.gvb-blog-featured > *,
+.gvb-blog-featured .wp-block-post-template {
+  max-width: clamp(1400px, 89.84vw, 2300px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .gvb-blog-featured__list {
   display: flex;
   flex-direction: column;
@@ -3003,6 +3080,19 @@ html {
   gap: 24px;
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+/* ≥1440: content stops flex-growing and its max-width scales fluidly
+   (600 at 1440 → 900 at 2560). `justify-content: space-between` (set on
+   the row in the pattern) then has leftover space to distribute, creating
+   a visible gap between content and image. Content anchors to the start
+   of the row (left in normal flex, right in row-reverse even rows),
+   image anchors to the end. */
+@media (min-width: 1440px) {
+  .gvb-blog-featured__content {
+    flex: 0 1 auto;
+    max-width: clamp(600px, 35.15vw, 900px);
+  }
 }
 
 .gvb-blog-featured__content .wp-block-post-title {
@@ -3041,9 +3131,12 @@ html {
   box-shadow: 0 12px 32px rgba(43, 43, 43, 0.1);
 }
 
-/* Featured image */
+/* Featured image — width stretches fluidly with the viewport (height stays
+   fixed at 432px). 638 at 1440 viewport → 1134 at 2560 viewport (tied to
+   the 2560 outer-shell cap). object-fit: cover re-crops the source as the
+   frame widens so the image doesn't distort. */
 .gvb-blog-featured__image img {
-  width: 638px;
+  width: clamp(638px, 44.3vw, 1134px);
   height: 432px;
   object-fit: cover;
   border-radius: 16px;
@@ -3051,13 +3144,20 @@ html {
   display: block;
 }
 
+/* The <figure> is the actual flex item in the row — its width needs to
+   match the <img> inside, otherwise WP's inline style="width: 638px" on
+   the figure (from the post-featured-image block's width attribute)
+   stays at 638 while the img scales to 1134, and the image overflows
+   the figure + the row on wide screens. !important beats the inline. */
 .gvb-blog-featured .wp-block-post-featured-image {
   flex-shrink: 0;
+  width: clamp(638px, 44.3vw, 1134px) !important;
+  max-width: clamp(638px, 44.3vw, 1134px) !important;
 }
 
 .gvb-blog-featured .wp-block-post-featured-image img {
-  width: 638px !important;
-  max-width: 638px !important;
+  width: clamp(638px, 44.3vw, 1134px) !important;
+  max-width: clamp(638px, 44.3vw, 1134px) !important;
   height: 432px !important;
   object-fit: cover;
   border-radius: 16px;
@@ -5186,9 +5286,9 @@ html {
 @media (min-width: 1440px) {
 
   /* Hero + FAQ + Contact + Cases + Bottle-showcase + Personalisieren +
-     Steps + Druckverfahren: grow with the viewport, cap at 2560, always
-     keep a 20px breathing gap from the viewport edge until the cap hits.
-     The min() baked into max-width reproduces the 20px inline-margin
+     Steps + Druckverfahren + Intros: grow with the viewport, cap at 2560,
+     always keep a 20px breathing gap from the viewport edge until the cap
+     hits. The min() baked into max-width reproduces the 20px inline-margin
      look at small/medium screens, and auto margins centre the section in
      the excess space above 2600. */
   .gvb-hero,
@@ -5198,10 +5298,26 @@ html {
   .gvb-bottle-showcase,
   .gvb-personalisieren,
   .gvb-steps,
-  .gvb-druckverfahren {
+  .gvb-druckverfahren,
+  .gvb-flaschen-intro,
+  .gvb-uberuns-intro,
+  .gvb-losungen-intro,
+  .gvb-intro-text {
     max-width: min(calc(100% - 40px), 2560px) !important;
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  /* Intro paragraphs (and any direct children) use a fluid reading-width
+     cap — 1200 baseline (theme contentSize) up to 1600 on 2560 screens.
+     Targeted at (0,2,1) specificity to beat the WP constrained-layout rule
+     `.wp-container-core-group-is-layout-XXX > *` (0,1,1) that otherwise
+     locks inner content at 1200. */
+  .gvb-flaschen-intro.is-layout-constrained > *:not(.alignleft):not(.alignright):not(.alignfull),
+  .gvb-uberuns-intro.is-layout-constrained > *:not(.alignleft):not(.alignright):not(.alignfull),
+  .gvb-losungen-intro.is-layout-constrained > *:not(.alignleft):not(.alignright):not(.alignfull),
+  .gvb-intro-text.is-layout-constrained > *:not(.alignleft):not(.alignright):not(.alignfull) {
+    max-width: clamp(1200px, 65vw, 1600px);
   }
 
   /* Impressum: uses calc margin instead of max-width (WP flex-stretch pitfall).
