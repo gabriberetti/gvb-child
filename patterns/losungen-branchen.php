@@ -10,8 +10,8 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <!-- wp:group {"className":"gvb-branchen","style":{"spacing":{"padding":{"top":"0","bottom":"40px","left":"0","right":"0"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-group gvb-branchen" style="padding-top:0;padding-bottom:40px">
 
-	<!-- wp:heading {"level":2,"className":"gvb-branchen__heading","style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}}} -->
-	<h2 class="wp-block-heading gvb-branchen__heading gvb-fade-up" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Deine Branche. Deine Good Vibes.</h2>
+	<!-- wp:heading {"level":2,"className":"gvb-branchen__heading","style":{"typography":{"fontSize":"clamp(40px, 2.778vw, 71px)","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}}} -->
+	<h2 class="wp-block-heading gvb-branchen__heading gvb-fade-up" style="font-size:clamp(40px, 2.778vw, 71px);font-weight:700;line-height:1.08;letter-spacing:0.2px">Deine Branche. Deine Good Vibes.</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:html -->

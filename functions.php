@@ -16,7 +16,7 @@ function gvb_enqueue_styles() {
         'gvb-child-style',
         get_stylesheet_uri(),
         array( 'twentytwentyfive-style' ),
-        wp_get_theme()->get( 'Version' )
+        filemtime( get_stylesheet_directory() . '/style.css' )
     );
 }
 add_action( 'wp_enqueue_scripts', 'gvb_enqueue_styles' );

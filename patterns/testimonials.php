@@ -13,12 +13,12 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 	<!-- wp:group {"className":"gvb-testimonials__header gvb-fade-up","style":{"spacing":{"margin":{"bottom":"48px"}}},"layout":{"type":"default"}} -->
 	<div class="wp-block-group gvb-testimonials__header gvb-fade-up" style="margin-bottom:48px">
 
-		<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-graphite"} -->
-		<h2 class="wp-block-heading has-gvb-graphite-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles kommt an.</h2>
+		<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"clamp(40px, 2.778vw, 71px)","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-graphite"} -->
+		<h2 class="wp-block-heading has-gvb-graphite-color has-text-color" style="font-size:clamp(40px, 2.778vw, 71px);font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles kommt an.</h2>
 		<!-- /wp:heading -->
 
-		<!-- wp:paragraph {"style":{"typography":{"fontSize":"32px","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-graphite"} -->
-		<p class="has-gvb-graphite-color has-text-color" style="font-size:32px;line-height:1.15;letter-spacing:0.16px">Das sagen unsere Kunden</p>
+		<!-- wp:paragraph {"style":{"typography":{"fontSize":"clamp(32px, 2.222vw, 57px)","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-graphite"} -->
+		<p class="has-gvb-graphite-color has-text-color" style="font-size:clamp(32px, 2.222vw, 57px);line-height:1.15;letter-spacing:0.16px">Das sagen unsere Kunden</p>
 		<!-- /wp:paragraph -->
 
 	</div>

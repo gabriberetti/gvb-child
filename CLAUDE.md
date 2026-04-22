@@ -80,7 +80,25 @@ color: gvb-linen (#EDE8DB)
 
 **Colors:** `gvb-green` (#459271), `gvb-orange` (#F28C3B), `gvb-orange-hover` (#E65620), `gvb-linen` (#EDE8DB), `gvb-graphite` (#2B2B2B), `gvb-white`, `gvb-black`, `gvb-divider` (#E9E9E9)
 
-**Typography:** `scale-variable` (Adobe Fonts, TypeKit ID: `ycw7tlm`). Sizes: display (65px), h1–h6, body (16px).
+**Typography:** `scale-variable` (Adobe Fonts, TypeKit ID: `ycw7tlm`). 1440-design sizes: display (65px), h1 (60px), h2 (40px), h3 (32px), h4 (24px), h5 (18px), h6 (30px), body (16px). **All font-sizes are fluid 1440→2560** — see *Fluid Typography* section below.
+
+### Fluid Typography (Section 20 of style.css — added April 2026)
+
+Every `font-size` in the codebase follows the formula:
+```
+font-size: clamp(Xpx, (X/14.4)vw, round(X × 1.778)px);
+```
+Where `X` is the 1440-design value. Below 1440 viewport the clamp resolves to `X` (MIN) → mobile/tablet/laptop untouched. At 2560 the value hits `X × 1.778` — matching the outer-shell cap ratio. Beyond 2560 it caps.
+
+**Where the clamps live**
+- **style.css**: 127 hardcoded `font-size: Xpx` declarations converted in-place. Also 9 pre-existing clamps had their MAX bumped to `MIN × 1.778` (e.g. `clamp(40px, ..., 40px)` → `clamp(40px, ..., 71px)`).
+- **Pattern PHP files** (38 files, 131 replacements): both `"fontSize":"40px"` in Gutenberg block JSON and matching `style="font-size:40px"` HTML attribute converted. Always edit both in sync.
+- **parts/header.html**: nav `fontSize` converted.
+- **Hero H1 exception**: every hero pattern ships with `style="font-size:clamp(35.641px, …, 65px)"` (custom slope for small-screen legibility). A single `!important` rule in Section 20 bumps the ceiling to `clamp(65px, 4.514vw, 116px)` at ≥1440.
+
+**Canonical tokens at `:root`** (Section 1 of style.css): `--fs-display`, `--fs-h1`, `--fs-h2`, `--fs-h3`, `--fs-h4`, `--fs-h5`, `--fs-h6`, `--fs-body`, `--fs-label`, `--fs-label-sm`. **Use tokens for new rules.** Existing rules keep their own inline clamp for grep-ability (`grep "40px"` still finds the h2-tier rules).
+
+**Cache-bust**: `functions.php` uses `filemtime( get_stylesheet_directory() . '/style.css' )` for the enqueue version, so every save auto-invalidates the browser cache. Never switch this back to a static `Version` string.
 
 **Spacing:** XS 8px / SM 16px / MD 32px / LG 64px / XL 80px. Content width: 1200px, wide: 1440px.
 
@@ -240,13 +258,14 @@ Auxiliary breakpoints still in use (not DevTools presets but serve real purpose)
 - **Double-padding pitfall:** if outer section has inline `padding: 0 20px`, do NOT repeat on inner wrapper — set inner to `0`
 - **Personalisieren grid breakpoints:** 2-column at ≥426px (including 768px tablet), single-column at `≤425px`. The card `aspect-ratio: 4/3` applies at `≤1023px`; `1/1` at ≥1024px. Card titles: `clamp(24px, 3vw, 30px)` at `≤1024px`.
 - **Three-tier width system (Section 19, rewritten April 2026):** Outer shell caps every direct child of `.wp-site-blocks` at **2560px** via `.wp-site-blocks > *:not(.gvb-header) { max-width: 2560; margin-inline: auto }` (specificity 0,2,0 — intentionally beats Section 19a's 1400). Inside that shell, sections fall into tiers:
-  - **2560 tier (grow to shell):** `.gvb-hero`, `.gvb-faq`, `.gvb-contact`, `.gvb-cases`, `.gvb-bottle-showcase`, `.gvb-personalisieren` — `max-width: min(calc(100% - 40px), 2560px) !important; margin-inline: auto !important` at `≥1440`. The `min(calc(100% - 40px), ...)` pattern preserves the 20px viewport gutter at small/medium screens and caps at 2560 above ~2600 viewport. Auto margins then centre.
-  - **1800 tier (intermediate cap):** `.gvb-druckverfahren` (`max-width: 1800px !important`), `.gvb-bedrucken-anlass` (`margin: max(20px, calc((100% - 1800px) / 2)) !important` — uses calc-margin because WP flex-stretch overrides max-width on `.wp-site-blocks` direct children), `.gvb-personalisieren__heading` + `.gvb-personalisieren__grid` (`max-width: 1800px; margin: auto`).
+  - **2560 tier (grow to shell):** `.gvb-hero`, `.gvb-faq`, `.gvb-contact`, `.gvb-cases`, `.gvb-bottle-showcase`, `.gvb-personalisieren`, `.gvb-steps`, `.gvb-druckverfahren` — `max-width: min(calc(100% - 40px), 2560px) !important; margin-inline: auto !important` at `≥1440`. The `min(calc(100% - 40px), ...)` pattern preserves the 20px viewport gutter at small/medium screens and caps at 2560 above ~2600 viewport. Auto margins then centre. (Steps/Druckverfahren graduated to 2560 after the fluid-type refactor — bigger text needs more room.)
+  - **2560 tier via calc-margin (WP flex-stretch pitfall):** `.gvb-bedrucken-anlass` uses `margin: max(20px, calc((100% - 2560px) / 2)) !important` — WP ignores `max-width` on direct children of `.wp-site-blocks`, so it needs calc-margin instead.
+  - **Personalisieren inner:** `.gvb-personalisieren__heading` + `.gvb-personalisieren__grid` now uncapped (removed the 1800 inner cap), so headings + card grid fill the full 2560 section.
   - **1900 tier + fluid inner (branding only):** `.gvb-branding` capped at 1900 with `clamp()` on image flex-basis (`501px → 750px`), image height (`489px → 600px`), content max-width (`603px → 900px`) — scales continuously from ~1250 viewport up.
-  - **1400 tier (tight cap):** `.gvb-steps`, `.gvb-impressum-card` (calc-margin variant), everything in Section 19a's list that doesn't have a more specific override (`.gvb-logos`, `.gvb-testimonials`, `.gvb-branchen`, `.gvb-flaschen-intro`, `.gvb-flaschen-cards`, `.gvb-uberuns-*`, `.gvb-edelstahl-features`, `.gvb-borosilikat-features`, `.gvb-blog-*`, `.gvb-ueberzeugung`, `.gvb-bedrucken-warum`, `.gvb-download-cards`, etc.).
-  - **Full-bleed (escapes cap):** footer (`<footer class="wp-block-template-part">`) — its template-part wrapper gets `max-width: none` at `.wp-site-blocks > .wp-block-template-part:last-child` (specificity 0,3,0 beats 0,2,0) so the linen footer background bleeds viewport-wide. Waves on `.wp-site-blocks::before/::after` are pseudos and unaffected by the shell cap — also full-viewport as intended.
+  - **1400 tier (tight cap):** `.gvb-impressum-card` (calc-margin variant), everything in Section 19a's list that doesn't have a more specific override (`.gvb-logos`, `.gvb-testimonials`, `.gvb-branchen`, `.gvb-flaschen-intro`, `.gvb-flaschen-cards`, `.gvb-uberuns-*`, `.gvb-edelstahl-features`, `.gvb-borosilikat-features`, `.gvb-blog-*`, `.gvb-ueberzeugung`, `.gvb-bedrucken-warum`, `.gvb-download-cards`, etc.).
+  - **Full-bleed (escapes cap):** footer (`<footer class="wp-block-template-part">`) — its template-part wrapper gets `max-width: none` at `.wp-site-blocks > .wp-block-template-part:last-child` (specificity 0,3,0 beats 0,2,0) so the linen footer background bleeds viewport-wide. Waves on `.wp-site-blocks::before/::after` are pseudos and unaffected by the shell cap — also full-viewport as intended. Wave `max-height` caps raised for the 2560 shell: top `2000px`, bottom `6644px` (both 2× the old 1440-era caps). FAQ page-specific override: `.page-template-page-faq .wp-site-blocks::after { height: 1300px }` matches Impressum's shorter wave and stops the taller default climbing into short-page content.
   - **Header alignment:** `.gvb-header` (position: fixed, full viewport) uses `padding-left/right: min(calc((100% - 1440px) / 2 + 54px), 614px) !important` — stops the logo/nav from growing inward past the 2560 shell alignment.
-  - **Brand-promise breakout:** `.alignfull.gvb-brand-promise` uses `max-width: min(100vw, 2560px); margin: auto; width: 100%` to reach viewport edges up to 2560, then cap centred. Replaces the older `calc(50% - 50vw)` viewport-math trick.
+  - **Brand-promise full-bleed (no cap):** `.alignfull.gvb-brand-promise` uses `max-width: none !important; margin-left/right: 0 !important` so the green background bleeds to viewport edge at every size (matches the footer treatment — does NOT cap at 2560). `!important` required to beat the `.wp-site-blocks > *:not(.gvb-header)` 2560 shell rule (0,2,0). Inner content stays constrained by the block's own `contentSize: 808px` layout — only the green background fills the viewport. Replaces both the older `calc(50% - 50vw)` trick and the interim `min(100vw, 2560px)` shell-capped version.
   - **Bottle card inner cluster:** `.gvb-bottle-card` (inside `.gvb-bottle-showcase` stretched to 2560) uses `justify-content: center` + `.gvb-bottle-card__content { max-width: 1000px }` so image + text stay grouped inside the wide glass card instead of spreading edge-to-edge.
   - **Contact form columns:** at `≥1440` the image + form columns have `flex: 1 1 0 !important` forced on `.gvb-contact__body > .wp-block-column` so they grow evenly to fill the 2560-capped section (overrides WP's inline `flex-basis: 500/600`). Header + body both span the full section width.
 - **Specificity gotchas (2560 cap system):**

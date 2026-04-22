@@ -4,7 +4,7 @@ Theme URI:   https://goodvibebottles.com
 Description: Child theme for Good Vibe Bottles — built on Twenty Twenty-Five
 Author:      AGG
 Template:    twentytwentyfive
-Version:     1.0.0
+Version:     1.1.0
 Text Domain: gvb
 */
 
@@ -27,6 +27,25 @@ Text Domain: gvb
 
   /* Transition */
   --gvb-transition: 0.25s ease;
+
+  /* ── Fluid type scale (1440 → 2560) ──
+     Formula: clamp(PX, (PX/14.4)vw, round(PX × 1.778)px)
+       • MIN   = value at 1440px viewport (floor — mobile/tablet untouched)
+       • PREF  = viewport-linear growth, equals MIN exactly at 1440
+       • MAX   = value at 2560px viewport (1.778× ratio matches outer-shell cap)
+     Every `font-size` declaration in this stylesheet and in pattern PHP files
+     follows this formula. Tokens below are the canonical list — use them for
+     new rules. Existing rules carry their own clamp inline for grep-ability. */
+  --fs-display:  clamp(65px,  4.514vw, 116px);
+  --fs-h1:       clamp(60px,  4.167vw, 107px);
+  --fs-h2:       clamp(40px,  2.778vw,  71px);
+  --fs-h3:       clamp(32px,  2.222vw,  57px);
+  --fs-h4:       clamp(24px,  1.667vw,  43px);
+  --fs-h5:       clamp(18px,  1.25vw,   32px);
+  --fs-h6:       clamp(30px,  2.083vw,  53px);
+  --fs-body:     clamp(16px,  1.111vw,  28px);
+  --fs-label:    clamp(15px,  1.042vw,  27px);
+  --fs-label-sm: clamp(12px,  0.833vw,  21px);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -67,7 +86,7 @@ Text Domain: gvb
   width: 100%;
   height: auto;
   aspect-ratio: 1280 / 1000;
-  max-height: 1000px;
+  max-height: 2000px;
   background-image: url('assets/svg/wave-top.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -86,7 +105,7 @@ Text Domain: gvb
   width: 100%;
   height: auto;
   aspect-ratio: 1280 / 3322;
-  max-height: 3322px;
+  max-height: 6644px;
   background-image: url('assets/svg/wave-bottom.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -225,7 +244,7 @@ html {
 
 .gvb-header__nav .wp-block-navigation-item__content {
   color: var(--wp--preset--color--gvb-linen);
-  font-size: 15px;
+  font-size: clamp(15px, 1.042vw, 27px);
   font-weight: 400;
   letter-spacing: -0.3px;
   text-decoration: none;
@@ -259,7 +278,7 @@ html {
 
 .gvb-header .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
   color: var(--wp--preset--color--gvb-linen) !important;
-  font-size: 15px;
+  font-size: clamp(15px, 1.042vw, 27px);
   padding: 8px 24px 8px 24px;
   display: block;
   opacity: 0.75;
@@ -372,11 +391,11 @@ html {
   }
 
   .gvb-footer__nav-heading {
-    font-size: clamp(12px, 1.1vw, 15px) !important;
+    font-size: clamp(12px, 1.1vw, 21px) !important;
   }
 
   .gvb-footer__nav-list {
-    font-size: clamp(13px, 1.2vw, 16px) !important;
+    font-size: clamp(13px, 1.2vw, 23px) !important;
   }
 }
 
@@ -434,7 +453,7 @@ html {
   background-color: var(--wp--preset--color--gvb-orange);
   color: var(--wp--preset--color--gvb-white);
   font-weight: 700;
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   padding: 12px 32px;
   border: none;
   border-radius: var(--gvb-radius-pill);
@@ -460,7 +479,7 @@ html {
   background-color: transparent;
   color: var(--wp--preset--color--gvb-orange);
   font-weight: 700;
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   padding: 12px 32px;
   border: 2px solid var(--wp--preset--color--gvb-orange);
   border-radius: var(--gvb-radius-pill);
@@ -561,6 +580,10 @@ html {
   height: 1300px;
 }
 
+.page-template-page-faq .wp-site-blocks::after {
+  height: 1300px;
+}
+
 .gvb-hero__overlay {
   position: absolute;
   inset: 0;
@@ -619,7 +642,7 @@ html {
   border-radius: 50px;
   color: rgba(237, 232, 219, 0.55);
   font-family: inherit;
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 400;
   padding: 8px 16px;
   cursor: pointer;
@@ -744,7 +767,7 @@ html {
   left: 7%;
   right: 13%;
   z-index: 2;
-  font-size: clamp(32px, 1.923vw + 12.31px, 40px);
+  font-size: clamp(32px, 1.923vw + 12.31px, 57px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -760,7 +783,7 @@ html {
 }
 
 .gvb-product-card__text {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #fff;
@@ -771,7 +794,7 @@ html {
   display: inline-block;
   background: #fff;
   color: var(--wp--preset--color--gvb-graphite);
-  font-size: 12px;
+  font-size: clamp(12px, 0.833vw, 21px);
   font-weight: 700;
   padding: 12px 24px;
   border-radius: var(--gvb-radius-pill);
@@ -825,7 +848,7 @@ html {
 }
 
 .gvb-testimonial-card__quote {
-  font-size: 24px;
+  font-size: clamp(24px, 1.667vw, 43px);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.12px;
@@ -834,14 +857,14 @@ html {
 }
 
 .gvb-testimonial-card__name {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 400;
   color: var(--wp--preset--color--gvb-graphite);
   margin: 0 0 2px;
 }
 
 .gvb-testimonial-card__role {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   color: var(--wp--preset--color--gvb-graphite);
   opacity: 0.5;
   margin: 0;
@@ -875,7 +898,7 @@ html {
   border: 2px solid currentColor;
   border-radius: 50px;
   padding: 6px 20px;
-  font-size: 14px;
+  font-size: clamp(14px, 0.972vw, 25px);
   font-weight: 700;
   letter-spacing: 0.5px;
 }
@@ -957,7 +980,7 @@ html {
   border-radius: 12px;
   height: 45px;
   padding: 12px 16px;
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 400;
   font-family: inherit;
   line-height: 1.2;
@@ -977,7 +1000,7 @@ html {
   border-radius: 12px;
   height: 172px;
   padding: 12px 16px;
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 400;
   font-family: inherit;
   line-height: 1.2;
@@ -1030,7 +1053,7 @@ html {
 
 /* Field labels */
 .gvb-contact__form-col .ff-el-input--label label {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.08px;
@@ -1066,7 +1089,7 @@ html {
   height: 42px !important;
   min-width: 114px !important;
   padding: 0 24px !important;
-  font-size: 14px !important;
+  font-size: clamp(14px, 0.972vw, 25px) !important;
   font-weight: 700 !important;
   font-family: inherit !important;
   cursor: pointer !important;
@@ -1110,7 +1133,7 @@ html {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 20px;
+  font-size: clamp(20px, 1.389vw, 36px);
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: 0.08px;
@@ -1162,7 +1185,7 @@ html {
 
 /* Figma: 15px Regular, black, letter-spacing 0.75px, max-width 480px */
 .gvb-expand-trigger__text {
-  font-size: 15px;
+  font-size: clamp(15px, 1.042vw, 27px);
   font-weight: 400;
   line-height: 1.38;
   letter-spacing: 0.75px;
@@ -1311,7 +1334,7 @@ html {
   .ff-t-column-2:not(:has(.ff-el-group:not(.ff_excluded)))::before {
   content: 'Modell';
   display: block;
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.08px;
@@ -1348,7 +1371,7 @@ html {
   .ff-t-column-1:not(:has(.ff-el-group:not(.ff_excluded)))::before {
   content: 'Verschluss';
   display: block;
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.08px;
@@ -1397,7 +1420,7 @@ html {
   display: flex !important;
   align-items: center !important;
   gap: 16px !important;
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.08px;
@@ -1442,7 +1465,7 @@ html {
 }
 
 .gvb-faq__question {
-  font-size: 18px;
+  font-size: clamp(18px, 1.25vw, 32px);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.09px;
@@ -1463,7 +1486,7 @@ html {
   left: 0;
   color: var(--wp--preset--color--gvb-orange);
   top: -4px;
-  font-size: 25px;
+  font-size: clamp(25px, 1.736vw, 44px);
   font-weight: 700;
   color: var(--wp--preset--color--gvb-orange);
   transition: transform var(--gvb-transition);
@@ -1480,7 +1503,7 @@ html {
 }
 
 .gvb-faq__answer p {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: var(--wp--preset--color--gvb-graphite);
@@ -1496,7 +1519,7 @@ html {
   margin-top: 16px;
   margin-bottom: 0;
   text-align: right;
-  font-size: 20px;
+  font-size: clamp(20px, 1.389vw, 36px);
   line-height: 1.2;
   letter-spacing: -0.32px;
 }
@@ -1525,13 +1548,16 @@ html {
   position: relative;
 }
 
-/* WP's default alignfull only negates root padding (16px), not enough to reach the viewport edges.
-   The double-class selector (0,2,0) beats WP's :where-wrapped constraining rule without !important.
-   min(100vw, 2560px) keeps the element spanning edge-to-edge below 2560 and caps it at 2560 above. */
+/* Brand-promise green background bleeds full viewport width at every size
+   (like the footer) — never caps at the 2560 outer-shell ceiling. !important
+   is required to beat .wp-site-blocks > *:not(.gvb-header) (0,2,0 specificity)
+   which would otherwise cap the element at 2560. The inner content stays
+   constrained by its own `contentSize: 808px` layout, so text/buttons don't
+   stretch — only the green background fills the viewport. */
 .alignfull.gvb-brand-promise {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: min(100vw, 2560px);
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  max-width: none !important;
   width: 100%;
 }
 
@@ -1633,7 +1659,7 @@ html {
     background: rgba(255, 255, 255, 0.20);
     border: none;
     color: var(--wp--preset--color--gvb-linen);
-    font-size: 28px;
+    font-size: clamp(28px, 1.944vw, 50px);
     line-height: 1;
     width: 44px;
     height: 44px;
@@ -1655,7 +1681,7 @@ html {
   }
 
   .gvb-cases__panel h3.wp-block-heading {
-    font-size: 18px !important;
+    font-size: clamp(18px, 1.25vw, 32px) !important;
   }
 
   .gvb-cases__h3-break,
@@ -1664,7 +1690,7 @@ html {
   }
 
   .gvb-cases__panel h4.wp-block-heading {
-    font-size: 24px !important;
+    font-size: clamp(24px, 1.667vw, 43px) !important;
     margin-top: 0;
   }
 
@@ -1677,7 +1703,7 @@ html {
   }
 
   .gvb-losungen-intro p {
-    font-size: 18px !important;
+    font-size: clamp(18px, 1.25vw, 32px) !important;
     text-align: left !important;
     line-height: 1.5 !important;
   }
@@ -1707,7 +1733,7 @@ html {
 
   .gvb-testimonial-card__name,
   .gvb-testimonial-card__role {
-    font-size: 14px;
+    font-size: clamp(14px, 0.972vw, 25px);
   }
 
   .gvb-contact__portrait img {
@@ -1721,7 +1747,7 @@ html {
   }
 
   .gvb-expand-trigger__text {
-    font-size: 13px;
+    font-size: clamp(13px, 0.903vw, 23px);
   }
 
   .gvb-intro-text {
@@ -1738,11 +1764,11 @@ html {
   }
 
   /* Scale down headings for tablet */
-  h1, .has-h-1-font-size { font-size: 42px !important; }
-  h2, .has-h-2-font-size { font-size: 30px !important; }
-  h3, .has-h-3-font-size { font-size: 26px !important; }
-  h6, .has-h-6-font-size { font-size: 24px !important; }
-  .has-display-font-size  { font-size: 48px !important; }
+  h1, .has-h-1-font-size { font-size: clamp(42px, 2.917vw, 75px) !important; }
+  h2, .has-h-2-font-size { font-size: clamp(30px, 2.083vw, 53px) !important; }
+  h3, .has-h-3-font-size { font-size: clamp(26px, 1.806vw, 46px) !important; }
+  h6, .has-h-6-font-size { font-size: clamp(24px, 1.667vw, 43px) !important; }
+  .has-display-font-size  { font-size: clamp(48px, 3.333vw, 85px) !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1754,7 +1780,7 @@ html {
   display: inline-block;
   background: var(--wp--preset--color--gvb-orange);
   color: #fff;
-  font-size: 12px;
+  font-size: clamp(12px, 0.833vw, 21px);
   font-weight: 700;
   padding: 10px 20px;
   border-radius: 51px;
@@ -1768,7 +1794,7 @@ html {
   display: inline-block;
   background: var(--wp--preset--color--gvb-orange);
   color: #fff;
-  font-size: 12px;
+  font-size: clamp(12px, 0.833vw, 21px);
   font-weight: 700;
   padding: 12px 28px;
   border-radius: 51px;
@@ -1847,7 +1873,7 @@ html {
 }
 
 .gvb-industry-card__content h5 {
-  font-size: 32px;
+  font-size: clamp(32px, 2.222vw, 57px);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.16px;
@@ -1861,22 +1887,18 @@ html {
 }
 
 .gvb-personalisieren__heading {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
   color: var(--wp--preset--color--gvb-graphite);
-  max-width: 1800px;
-  margin: 0 auto 32px;
+  margin: 0 0 32px;
 }
 
 .gvb-personalisieren__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .gvb-personalisieren-card {
@@ -1908,7 +1930,7 @@ html {
 .gvb-personalisieren-card__title {
   position: relative;
   z-index: 2;
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1;
   color: var(--wp--preset--color--gvb-linen);
@@ -1922,7 +1944,7 @@ html {
 }
 
 .gvb-personalisieren-card__desc {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #fff;
@@ -2003,7 +2025,7 @@ html {
   }
 
   .gvb-personalisieren-card__desc {
-    font-size: 15px;
+    font-size: clamp(15px, 1.042vw, 27px);
     line-height: 1.4;
     letter-spacing: 0.1px;
   }
@@ -2052,7 +2074,7 @@ html {
 }
 
 .gvb-branding__heading {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -2061,7 +2083,7 @@ html {
 }
 
 .gvb-branding__text {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #2b2b2b;
@@ -2078,7 +2100,7 @@ html {
 }
 
 .gvb-steps__heading {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -1.8px;
@@ -2108,15 +2130,15 @@ html {
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 50px 50px 50px clamp(180px, 17.7vw, 255px);
+  padding: 50px 50px 50px clamp(180px, 17.7vw, 450px);
 }
 
 .gvb-steps__number {
   position: absolute;
-  left: clamp(60px, 6.94vw, 100px);
+  left: clamp(60px, 6.94vw, 150px);
   top: 43%;
   transform: translateY(-50%);
-  font-size: clamp(140px, 13.4vw, 193px);
+  font-size: clamp(140px, 13.4vw, 249px);
   font-weight: 700;
   line-height: 1;
   color: var(--wp--preset--color--gvb-green);
@@ -2125,7 +2147,7 @@ html {
 }
 
 .gvb-steps__row:first-child .gvb-steps__number {
-  left: clamp(90px, 10.4vw, 150px);
+  left: clamp(90px, 10.4vw, 200px);
 }
 
 .gvb-steps__row:nth-child(1) .gvb-steps__text {
@@ -2147,7 +2169,7 @@ html {
 }
 
 .gvb-steps__text h3 {
-  font-size: clamp(24px, 2.22vw, 32px);
+  font-size: clamp(24px, 2.22vw, 43px);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.16px;
@@ -2156,16 +2178,16 @@ html {
 }
 
 .gvb-steps__text p {
-  font-size: clamp(14px, 1.11vw, 16px);
+  font-size: clamp(14px, 1.11vw, 25px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: var(--wp--preset--color--gvb-linen);
   margin: 0;
-  max-width: 380px;
+  max-width: clamp(380px, 30vw, 900px);
 }
 
 .gvb-steps__image {
-  flex: 0 0 clamp(380px, 35.14vw, 506px);
+  flex: 0 0 clamp(380px, 35.14vw, 700px);
   height: clamp(340px, 30vw, 432px);
   border-radius: 20px;
   overflow: hidden;
@@ -2187,7 +2209,7 @@ html {
 }
 
 .gvb-flaschen-intro p {
-  font-size: 32px;
+  font-size: clamp(32px, 2.222vw, 57px);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.16px;
@@ -2278,7 +2300,7 @@ html {
 }
 
 .gvb-flaschen-cards__title {
-  font-size: 30px;
+  font-size: clamp(30px, 2.083vw, 53px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: 0.15px;
@@ -2287,7 +2309,7 @@ html {
 }
 
 .gvb-flaschen-cards__desc {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #2b2b2b;
@@ -2328,7 +2350,7 @@ html {
 }
 
 .gvb-uberuns-intro p {
-  font-size: 32px;
+  font-size: clamp(32px, 2.222vw, 57px);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.16px;
@@ -2371,7 +2393,7 @@ html {
 }
 
 .gvb-uberuns-vm__text h2 {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -2380,7 +2402,7 @@ html {
 }
 
 .gvb-uberuns-vm__text p {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #ede8db;
@@ -2425,7 +2447,7 @@ html {
 }
 
 .gvb-uberuns-personen h2 {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -1.8px;
@@ -2434,7 +2456,7 @@ html {
 }
 
 .gvb-uberuns-personen__text p {
-  font-size: 24px;
+  font-size: clamp(24px, 1.667vw, 43px);
   line-height: 1.2;
   letter-spacing: 0.12px;
   color: #000;
@@ -2451,7 +2473,7 @@ html {
 }
 
 .gvb-ueberzeugung__heading {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -1.8px;
@@ -2478,7 +2500,7 @@ html {
 }
 
 .gvb-ueberzeugung__num {
-  font-size: 15px;
+  font-size: clamp(15px, 1.042vw, 27px);
   font-weight: 400;
   color: #ede8db;
   letter-spacing: -0.3px;
@@ -2486,7 +2508,7 @@ html {
 }
 
 .gvb-ueberzeugung__text {
-  font-size: 30px;
+  font-size: clamp(30px, 2.083vw, 53px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: 0.15px;
@@ -2577,7 +2599,7 @@ html {
 }
 
 .gvb-bottle-card__title {
-  font-size: 60px;
+  font-size: clamp(60px, 4.167vw, 107px);
   font-weight: 700;
   line-height: 1.03;
   color: #2b2b2b;
@@ -2585,7 +2607,7 @@ html {
 }
 
 .gvb-bottle-card__body {
-  font-size: 15px;
+  font-size: clamp(15px, 1.042vw, 27px);
   line-height: 1.2;
   letter-spacing: 0.075px;
   color: #2b2b2b;
@@ -2656,7 +2678,7 @@ html {
 }
 
 .gvb-bottle-card__meta p {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #2b2b2b;
@@ -2686,7 +2708,7 @@ html {
 }
 
 .gvb-edelstahl-features__heading {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -2736,7 +2758,7 @@ html {
 }
 
 .gvb-edelstahl-feature-card__title {
-  font-size: 22px;
+  font-size: clamp(22px, 1.528vw, 39px);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: 0.11px;
@@ -2746,7 +2768,7 @@ html {
 }
 
 .gvb-edelstahl-feature-card__desc {
-  font-size: 13px;
+  font-size: clamp(13px, 0.903vw, 23px);
   line-height: 1.2;
   letter-spacing: 0.07px;
   color: #2b2b2b;
@@ -2765,7 +2787,7 @@ html {
 }
 
 .gvb-borosilikat-verschluesse__heading {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -2828,7 +2850,7 @@ html {
 }
 
 .gvb-verschluss-card__title {
-  font-size: 26px;
+  font-size: clamp(26px, 1.806vw, 46px);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: 0.13px;
@@ -2837,7 +2859,7 @@ html {
 }
 
 .gvb-verschluss-card__desc {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #2b2b2b;
@@ -2878,7 +2900,7 @@ html {
 }
 
 .gvb-borosilikat-features__heading {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -2923,7 +2945,7 @@ html {
 }
 
 .gvb-borosilikat-feature-card__title {
-  font-size: 22px;
+  font-size: clamp(22px, 1.528vw, 39px);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: 0.11px;
@@ -2932,7 +2954,7 @@ html {
 }
 
 .gvb-borosilikat-feature-card__desc {
-  font-size: 13px;
+  font-size: clamp(13px, 0.903vw, 23px);
   line-height: 1.2;
   letter-spacing: 0.07px;
   color: #2b2b2b;
@@ -2983,7 +3005,7 @@ html {
 }
 
 .gvb-blog-featured__content .wp-block-post-title {
-  font-size: 40px !important;
+  font-size: clamp(40px, 2.778vw, 71px) !important;
   font-weight: 700 !important;
   line-height: 1.08 !important;
   letter-spacing: 0.2px !important;
@@ -2991,7 +3013,7 @@ html {
 }
 
 .gvb-blog-featured__content .wp-block-post-excerpt {
-  font-size: 16px !important;
+  font-size: clamp(16px, 1.111vw, 28px) !important;
   line-height: 1.2 !important;
   letter-spacing: 0.08px !important;
   margin: 0 !important;
@@ -3048,7 +3070,7 @@ html {
   justify-content: center;
   background-color: var(--wp--preset--color--gvb-orange);
   color: #ffffff !important;
-  font-size: 12px !important;
+  font-size: clamp(12px, 0.833vw, 21px) !important;
   font-weight: 700 !important;
   line-height: 1 !important;
   text-decoration: none !important;
@@ -3102,7 +3124,7 @@ html {
 }
 
 .gvb-blog-card__body .wp-block-post-title {
-  font-size: 22px !important;
+  font-size: clamp(22px, 1.528vw, 39px) !important;
   font-weight: 700 !important;
   line-height: 1.08 !important;
   letter-spacing: 0.175px !important;
@@ -3123,7 +3145,7 @@ html {
 }
 
 .gvb-blog-card__body .wp-block-post-date {
-  font-size: 16px !important;
+  font-size: clamp(16px, 1.111vw, 28px) !important;
   line-height: 1.5 !important;
   letter-spacing: 0.08px !important;
   color: var(--wp--preset--color--gvb-orange) !important;
@@ -3136,7 +3158,7 @@ html {
 }
 
 .gvb-blog-card__excerpt .wp-block-post-excerpt__excerpt {
-  font-size: 16px !important;
+  font-size: clamp(16px, 1.111vw, 28px) !important;
   line-height: 1.2 !important;
   letter-spacing: 0.08px !important;
   color: rgba(43, 43, 43, 0.55) !important;
@@ -3170,7 +3192,7 @@ html {
   background: transparent;
   border: 2px solid var(--wp--preset--color--gvb-green);
   color: var(--wp--preset--color--gvb-green);
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 700;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
@@ -3192,7 +3214,7 @@ html {
   background: var(--wp--preset--color--gvb-green);
   border: 2px solid var(--wp--preset--color--gvb-green);
   color: var(--wp--preset--color--gvb-linen);
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 700;
 }
 
@@ -3211,7 +3233,7 @@ html {
 }
 
 .gvb-single-hero .wp-block-post-title {
-  font-size: clamp(36px, 3.5vw, 60px) !important;
+  font-size: clamp(36px, 3.5vw, 64px) !important;
   font-weight: 700 !important;
   line-height: 1.05 !important;
   letter-spacing: -1.8px !important;
@@ -3220,7 +3242,7 @@ html {
 }
 
 .gvb-single-hero .wp-block-post-date {
-  font-size: 16px !important;
+  font-size: clamp(16px, 1.111vw, 28px) !important;
   line-height: 1.5 !important;
   color: var(--wp--preset--color--gvb-orange) !important;
 }
@@ -3232,7 +3254,7 @@ html {
 }
 
 .gvb-single-hero .wp-block-post-terms {
-  font-size: 16px !important;
+  font-size: clamp(16px, 1.111vw, 28px) !important;
   line-height: 1.5 !important;
   color: var(--wp--preset--color--gvb-linen) !important;
 }
@@ -3245,7 +3267,7 @@ html {
 }
 
 .gvb-single-body .wp-block-post-content h2 {
-  font-size: 28px;
+  font-size: clamp(28px, 1.944vw, 50px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.5px;
@@ -3254,7 +3276,7 @@ html {
 }
 
 .gvb-single-body .wp-block-post-content h3 {
-  font-size: 22px;
+  font-size: clamp(22px, 1.528vw, 39px);
   font-weight: 700;
   line-height: 1.15;
   margin-bottom: 12px;
@@ -3262,7 +3284,7 @@ html {
 }
 
 .gvb-single-body .wp-block-post-content p {
-  font-size: 17px;
+  font-size: clamp(17px, 1.181vw, 30px);
   line-height: 1.65;
   letter-spacing: 0.08px;
   color: #2b2b2b;
@@ -3318,13 +3340,13 @@ html {
   }
 
   .gvb-blog-featured__content .wp-block-post-title {
-    font-size: 26px !important;
+    font-size: clamp(26px, 1.806vw, 46px) !important;
   }
 
   /* "Mehr erfahren" button: meet 44pt touch target (Apple HIG), below image */
   .wp-block-read-more.gvb-btn--orange {
     min-height: 44px !important;
-    font-size: 14px !important;
+    font-size: clamp(14px, 0.972vw, 25px) !important;
     padding: 12px 24px !important;
     align-self: flex-start;
   }
@@ -3336,7 +3358,7 @@ html {
   }
 
   .gvb-blog-all > .wp-block-heading {
-    font-size: 36px !important;
+    font-size: clamp(36px, 2.5vw, 64px) !important;
     margin-bottom: 0 !important;
   }
 
@@ -3408,7 +3430,7 @@ html {
   }
 
   .gvb-blog-card__body .wp-block-post-title {
-    font-size: 20px !important;
+    font-size: clamp(20px, 1.389vw, 36px) !important;
   }
 }
 
@@ -3432,7 +3454,7 @@ html {
 }
 
 .gvb-impressum-card__company {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1.26;
   letter-spacing: 0.2px;
@@ -3441,7 +3463,7 @@ html {
 }
 
 .gvb-impressum-card__details p {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.26;
   letter-spacing: 0.08px;
   margin: 0;
@@ -3495,7 +3517,7 @@ html {
 }
 
 .gvb-overlay-card__title {
-  font-size: 31px;
+  font-size: clamp(31px, 2.153vw, 55px);
   font-weight: 700;
   line-height: 1;
   color: var(--wp--preset--color--gvb-linen);
@@ -3503,7 +3525,7 @@ html {
 }
 
 .gvb-overlay-card__desc {
-  font-size: 16px;
+  font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #fff;
@@ -3526,9 +3548,6 @@ html {
 
 .gvb-druckverfahren {
   padding: 80px 52px 80px;
-  max-width: 1800px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
 }
 
 .gvb-druckverfahren__header {
@@ -3536,7 +3555,7 @@ html {
 }
 
 .gvb-druckverfahren__heading {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1.2px;
@@ -3545,7 +3564,7 @@ html {
 }
 
 .gvb-druckverfahren__intro {
-  font-size: 32px;
+  font-size: clamp(32px, 2.222vw, 57px);
   line-height: 1.2;
   letter-spacing: 0.16px;
   color: #2b2b2b;
@@ -3644,7 +3663,7 @@ html {
   left: 24px;
   right: 24px;
   z-index: 1;
-  font-size: 31px;
+  font-size: clamp(31px, 2.153vw, 55px);
   line-height: 1.1;
   color: var(--wp--preset--color--gvb-linen) !important;
 }
@@ -3675,7 +3694,7 @@ html {
 
 
 .gvb-bedrucken-anlass__heading {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1.2px;
@@ -3690,7 +3709,7 @@ html {
 }
 
 .gvb-bedrucken-warum__heading {
-  font-size: 40px;
+  font-size: clamp(40px, 2.778vw, 71px);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1.2px;
@@ -3713,7 +3732,7 @@ html {
 }
 
 .gvb-bedrucken-warum__text p {
-  font-size: 32px;
+  font-size: clamp(32px, 2.222vw, 57px);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.16px;
@@ -3735,7 +3754,7 @@ html {
 }
 
 .gvb-download-section__heading {
-  font-size: clamp(32px, 2.5vw + 1.25rem, 55px);
+  font-size: clamp(32px, 2.5vw + 1.25rem, 57px);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1.65px;
@@ -3797,7 +3816,7 @@ html {
 }
 
 .gvb-faq-section__heading {
-  font-size: clamp(24px, 2vw + 0.75rem, 40px);
+  font-size: clamp(24px, 2vw + 0.75rem, 43px);
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -1.2px;
@@ -3944,7 +3963,7 @@ html {
 
   .gvb-branding__heading {
     order: 1;
-    font-size: 28px;
+    font-size: clamp(28px, 1.944vw, 50px);
     text-align: left;
   }
 
@@ -3996,7 +4015,7 @@ html {
   }
 
   .gvb-overlay-card__title {
-    font-size: 22px;
+    font-size: clamp(22px, 1.528vw, 39px);
   }
 
   /* ── Bedrucken sections ── */
@@ -4006,7 +4025,7 @@ html {
   }
 
   .gvb-bedrucken-anlass__heading {
-    font-size: 28px;
+    font-size: clamp(28px, 1.944vw, 50px);
   }
 
   /* ── Anlass overlay cards: horizontal carousel at 426–768px, 1-column at ≤425px ── */
@@ -4083,7 +4102,7 @@ html {
     bottom: 100px;
     left: 20px;
     right: 20px;
-    font-size: 24px !important;
+    font-size: clamp(24px, 1.667vw, 43px) !important;
     line-height: 1.1;
     z-index: 1;
     margin: 0;
@@ -4103,7 +4122,7 @@ html {
 
   /* Card 2 (green bg): linen desc text */
   .gvb-bedrucken-anlass .gvb-overlay-card__desc {
-    font-size: 15px;
+    font-size: clamp(15px, 1.042vw, 27px);
     line-height: 1.4;
     color: rgba(237, 232, 219, 0.85);
   }
@@ -4118,11 +4137,11 @@ html {
   }
 
   .gvb-bedrucken-warum__heading {
-    font-size: 28px;
+    font-size: clamp(28px, 1.944vw, 50px);
   }
 
   .gvb-bedrucken-warum__text p {
-    font-size: 22px;
+    font-size: clamp(22px, 1.528vw, 39px);
   }
 
   /* ── Druckverfahren ── */
@@ -4131,11 +4150,11 @@ html {
   }
 
   .gvb-druckverfahren__heading {
-    font-size: 28px;
+    font-size: clamp(28px, 1.944vw, 50px);
   }
 
   .gvb-druckverfahren__intro {
-    font-size: 20px;
+    font-size: clamp(20px, 1.389vw, 36px);
   }
 
   /* ── Flaschen intro (Unsere Flaschen + Bedrucken) ── */
@@ -4144,7 +4163,7 @@ html {
   }
 
   .gvb-flaschen-intro p {
-    font-size: 20px;
+    font-size: clamp(20px, 1.389vw, 36px);
   }
 
   /* ── Flaschen cards: stack vertically ── */
@@ -4194,7 +4213,7 @@ html {
   }
 
   .gvb-bottle-card__title {
-    font-size: 38px;
+    font-size: clamp(38px, 2.639vw, 68px);
   }
 
   /* Feature cards: 2-col wrap on tablet */
@@ -4281,7 +4300,7 @@ html {
   }
 
   .gvb-product-card__text {
-    font-size: 14px;
+    font-size: clamp(14px, 0.972vw, 25px);
     line-height: 1.4;
   }
 
@@ -4315,7 +4334,7 @@ html {
   }
 
   .gvb-steps__number {
-    font-size: 120px;
+    font-size: clamp(120px, 8.333vw, 213px);
     left: 24px;
   }
 
@@ -4336,7 +4355,7 @@ html {
   }
 
   .gvb-steps__text h3 {
-    font-size: 24px;
+    font-size: clamp(24px, 1.667vw, 43px);
   }
 
   /* ── Über uns ── */
@@ -4345,7 +4364,7 @@ html {
   }
 
   .gvb-uberuns-intro p {
-    font-size: 20px;
+    font-size: clamp(20px, 1.389vw, 36px);
   }
 
   .gvb-uberuns-vm {
@@ -4369,7 +4388,7 @@ html {
   }
 
   .gvb-uberuns-vm__text h2 {
-    font-size: 28px;
+    font-size: clamp(28px, 1.944vw, 50px);
   }
 
   .gvb-uberuns-team {
@@ -4381,12 +4400,12 @@ html {
   }
 
   .gvb-uberuns-personen h2 {
-    font-size: 28px;
+    font-size: clamp(28px, 1.944vw, 50px);
     letter-spacing: -0.5px;
   }
 
   .gvb-uberuns-personen__text p {
-    font-size: 18px;
+    font-size: clamp(18px, 1.25vw, 32px);
   }
 
   .gvb-ueberzeugung {
@@ -4394,7 +4413,7 @@ html {
   }
 
   .gvb-ueberzeugung__heading {
-    font-size: 28px;
+    font-size: clamp(28px, 1.944vw, 50px);
     letter-spacing: -0.5px;
   }
 
@@ -4408,7 +4427,7 @@ html {
   }
 
   .gvb-ueberzeugung__text {
-    font-size: 22px;
+    font-size: clamp(22px, 1.528vw, 39px);
   }
 
   /* ── Impressum ── */
@@ -4421,12 +4440,12 @@ html {
   }
 
   .gvb-impressum-card__company {
-    font-size: 28px;
+    font-size: clamp(28px, 1.944vw, 50px);
   }
 
   /* ── Personalisieren cards ── */
   .gvb-personalisieren__heading {
-    font-size: 28px;
+    font-size: clamp(28px, 1.944vw, 50px);
   }
 
   /* Cards: stacked layout — photo+title on top, desc colour block below */
@@ -4492,7 +4511,7 @@ html {
   }
 
   .gvb-personalisieren-card__desc {
-    font-size: 14px;
+    font-size: clamp(14px, 0.972vw, 25px);
     line-height: 1.4;
     letter-spacing: 0.2px;
   }
@@ -4634,7 +4653,7 @@ html {
 
   .gvb-bedrucken-anlass .gvb-overlay-card__title {
     bottom: 90px;
-    font-size: 15px !important;
+    font-size: clamp(15px, 1.042vw, 27px) !important;
   }
 
   .gvb-bedrucken-anlass .gvb-overlay-card__desc {
@@ -4645,9 +4664,9 @@ html {
 @media (max-width: 480px) {
 
   /* ── Global typography + button scale for mobile ── */
-  h1, .has-h-1-font-size { font-size: 34px !important; }
-  h2, .has-h-2-font-size { font-size: 26px !important; }
-  .has-display-font-size  { font-size: 38px !important; }
+  h1, .has-h-1-font-size { font-size: clamp(34px, 2.361vw, 60px) !important; }
+  h2, .has-h-2-font-size { font-size: clamp(26px, 1.806vw, 46px) !important; }
+  .has-display-font-size  { font-size: clamp(38px, 2.639vw, 68px) !important; }
 
   .gvb-btn--primary,
   .gvb-btn--secondary {
@@ -4663,7 +4682,7 @@ html {
   }
 
   .gvb-steps__number {
-    font-size: 80px;
+    font-size: clamp(80px, 5.556vw, 142px);
     left: 12px;
     letter-spacing: -4px;
   }
@@ -4683,7 +4702,7 @@ html {
   /* ── Contact: full-bleed section ── */
   /* ── Überzeugung cards: tightest padding ── */
   .gvb-ueberzeugung__text {
-    font-size: 18px;
+    font-size: clamp(18px, 1.25vw, 32px);
   }
 
   .gvb-ueberzeugung__card {
@@ -4904,7 +4923,7 @@ html {
 /* ── Parent nav links: large + bold (overlay only) ── */
 .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item > .wp-block-navigation-item__content {
   color: var(--wp--preset--color--gvb-linen) !important;
-  font-size: 20px !important;
+  font-size: clamp(20px, 1.389vw, 36px) !important;
   font-weight: 700 !important;
   letter-spacing: -0.6px !important;
   line-height: 1.1 !important;
@@ -4936,7 +4955,7 @@ html {
 /* ── Submenu links: smaller, 75% linen opacity (overlay only) ── */
 .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
   color: rgba(237, 232, 219, 0.75) !important;
-  font-size: 15px !important;
+  font-size: clamp(15px, 1.042vw, 27px) !important;
   font-weight: 400 !important;
   letter-spacing: -0.15px !important;
   line-height: 1.2 !important;
@@ -4985,7 +5004,7 @@ html {
   height: 42px;
   min-width: 114px;
   padding: 0 24px;
-  font-size: 14px;
+  font-size: clamp(14px, 0.972vw, 25px);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -5165,27 +5184,20 @@ html {
 
 @media (min-width: 1440px) {
 
-  /* Steps: cap at 1400px and centre.
-     !important is required to beat the 2560 outer-shell rule (0,2,0)
-     that otherwise lets this section stretch to the shell ceiling. */
-  .gvb-steps {
-    max-width: 1400px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  /* Hero + FAQ + Contact + Cases + Bottle-showcase + Personalisieren:
-     grow with the viewport, cap at 2560, always keep a 20px breathing gap
-     from the viewport edge until the cap hits. The min() baked into
-     max-width reproduces the 20px inline-margin look at small/medium
-     screens, and auto margins centre the section in the excess space
-     above 2600. */
+  /* Hero + FAQ + Contact + Cases + Bottle-showcase + Personalisieren +
+     Steps + Druckverfahren: grow with the viewport, cap at 2560, always
+     keep a 20px breathing gap from the viewport edge until the cap hits.
+     The min() baked into max-width reproduces the 20px inline-margin
+     look at small/medium screens, and auto margins centre the section in
+     the excess space above 2600. */
   .gvb-hero,
   .gvb-faq,
   .gvb-contact,
   .gvb-cases,
   .gvb-bottle-showcase,
-  .gvb-personalisieren {
+  .gvb-personalisieren,
+  .gvb-steps,
+  .gvb-druckverfahren {
     max-width: min(calc(100% - 40px), 2560px) !important;
     margin-left: auto !important;
     margin-right: auto !important;
@@ -5198,13 +5210,14 @@ html {
     margin-right: calc((100% - 1400px) / 2) !important;
   }
 
-  /* Anlass: caps at 1800 (coherent with Druckverfahren + Personalisieren
-     cap), with a 20px breathing gap preserved until the cap hits. max()
-     picks the larger of 20px or the excess-gutter calc so the margin
-     never goes negative below ~1840px viewport. */
+  /* Anlass: caps at 2560 (outer-shell ceiling), with a 20px breathing gap
+     preserved until the cap hits. max() picks the larger of 20px or the
+     excess-gutter calc so the margin never goes negative below ~2600px
+     viewport. Uses calc-margin instead of max-width because WP flex-stretch
+     ignores max-width on .wp-site-blocks direct children. */
   .gvb-bedrucken-anlass {
-    margin-left: max(20px, calc((100% - 1800px) / 2)) !important;
-    margin-right: max(20px, calc((100% - 1800px) / 2)) !important;
+    margin-left: max(20px, calc((100% - 2560px) / 2)) !important;
+    margin-right: max(20px, calc((100% - 2560px) / 2)) !important;
   }
 
   /* Header: green bar stays full-width, logo + nav stay aligned to the 1440px content column.
@@ -5216,4 +5229,42 @@ html {
     padding-right: min(calc((100% - 1440px) / 2 + 54px), 614px) !important;
   }
 
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION 20 — FLUID TYPOGRAPHY (1440 → 2560)
+   ══════════════════════════════════════════════════════════════
+   System overview
+   ───────────────
+   Text scales linearly from its 1440 design value to (value × 1.778)
+   at 2560 viewport, then caps. Below 1440 viewport it holds at the
+   MIN (original design value) — mobile/tablet behaviour untouched.
+
+   Canonical tokens: see `:root` in Section 1 (`--fs-h1`, `--fs-body`, …).
+   Use them for new rules.
+
+   How existing rules scale
+   ────────────────────────
+   1. CSS (Sections 1–19): every `font-size: Xpx` was converted in-place
+      to `clamp(Xpx, (X/14.4)vw, round(X × 1.778)px)`.
+   2. Pattern PHP files: every inline `"fontSize":"Xpx"` + matching
+      `style="font-size:Xpx"` was converted with the same formula.
+   3. Pre-existing clamps whose MAX was below target were bumped to
+      `MIN × 1.778`.
+
+   Why this section exists
+   ───────────────────────
+   The hero H1 patterns ship a specific inline clamp (max 65px) that
+   was authored for the 320→1440 range and uses a custom slope we
+   don't want to distort for small-screen legibility. Rather than
+   double-clamp or rewrite every hero pattern, this one !important
+   rule takes over above 1440 and bumps the ceiling to 116px
+   (65 × 1.778). Inline styles beat class-level CSS without !important.
+   ══════════════════════════════════════════════════════════════ */
+
+@media (min-width: 1440px) {
+  .gvb-hero h1,
+  .gvb-hero .wp-block-heading {
+    font-size: clamp(65px, 4.514vw, 116px) !important;
+  }
 }
