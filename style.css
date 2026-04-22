@@ -910,6 +910,16 @@ html {
   flex-basis: 620px !important;
 }
 
+/* ≥1440: let the image + form columns grow to fill the 2560-capped section
+   instead of staying at their fixed flex-basis widths. Overrides the inline
+   flex-basis so columns expand from 0 and share the body width equally. */
+@media (min-width: 1440px) {
+  .gvb-contact__body > .wp-block-column {
+    flex-basis: 0 !important;
+    flex-grow: 1 !important;
+  }
+}
+
 .gvb-contact__portrait img {
   width: 100%;
   height: 755px;
@@ -1516,17 +1526,23 @@ html {
 }
 
 /* WP's default alignfull only negates root padding (16px), not enough to reach the viewport edges.
-   The double-class selector (0,2,0) beats WP's :where-wrapped constraining rule without !important. */
+   The double-class selector (0,2,0) beats WP's :where-wrapped constraining rule without !important.
+   min(100vw, 2560px) keeps the element spanning edge-to-edge below 2560 and caps it at 2560 above. */
 .alignfull.gvb-brand-promise {
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  max-width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: min(100vw, 2560px);
+  width: 100%;
 }
 
 /* Close the WP block-gap between brand-promise and the footer template-part
-   so the bottom wave pseudo-element doesn't peek through the transparent gap. */
+   so the bottom wave pseudo-element doesn't peek through the transparent gap.
+   Also overrides the 2560 outer-shell cap so the footer's linen background
+   bleeds to the viewport edges on ultra-wide screens. Specificity (0,3,0)
+   beats the .wp-site-blocks > *:not(.gvb-header) rule (0,2,0). */
 .wp-site-blocks > .wp-block-template-part:last-child {
   margin-top: 0;
+  max-width: none;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1850,7 +1866,7 @@ html {
   line-height: 1.08;
   letter-spacing: 0.2px;
   color: var(--wp--preset--color--gvb-graphite);
-  max-width: 1400px;
+  max-width: 1800px;
   margin: 0 auto 32px;
 }
 
@@ -1858,7 +1874,7 @@ html {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  max-width: 1400px;
+  max-width: 1800px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -2002,9 +2018,20 @@ html {
   justify-content: center;
 }
 
+/* Branding section scales fluidly with the viewport via clamp():
+   - Section caps at 1900 (overrides Section 19a's 1400)
+   - Image width grows from 501 → 750 between viewports ~1250 → ~1875
+   - Image height grows from 489 → 600 proportionally
+   - Content max-width grows from 603 → 900
+   No sudden jump at a media-query boundary — everything interpolates. */
+.gvb-branding {
+  max-width: 1900px !important;
+  margin-inline: auto !important;
+}
+
 .gvb-branding__image {
-  flex: 0 0 501px;
-  height: 489px;
+  flex: 0 0 clamp(501px, 40vw, 750px);
+  height: clamp(489px, 32vw, 600px);
   border-radius: 16px;
   overflow: hidden;
 }
@@ -2021,7 +2048,7 @@ html {
   flex-direction: column;
   gap: 24px;
   align-items: flex-start;
-  max-width: 603px;
+  max-width: clamp(603px, 47vw, 900px);
 }
 
 .gvb-branding__heading {
@@ -2488,6 +2515,7 @@ html {
 
 .gvb-bottle-card {
   display: flex;
+  justify-content: center;
   background: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -2540,6 +2568,7 @@ html {
 
 .gvb-bottle-card__content {
   flex: 1;
+  max-width: 1000px;
   padding: 48px 60px;
   display: flex;
   flex-direction: column;
@@ -3497,6 +3526,9 @@ html {
 
 .gvb-druckverfahren {
   padding: 80px 52px 80px;
+  max-width: 1800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .gvb-druckverfahren__header {
@@ -3648,8 +3680,7 @@ html {
   line-height: 1;
   letter-spacing: -1.2px;
   color: var(--wp--preset--color--gvb-linen);
-  max-width: 1392px;
-  margin: 0 auto 32px;
+  margin: 0 0 32px;
 }
 
 /* ── Warum section ── */
@@ -3688,6 +3719,7 @@ html {
   letter-spacing: 0.16px;
   color: #000;
   margin: 0;
+  padding: 0 24px;
 }
 
 /* ═══════════════════════════════════════
@@ -5072,6 +5104,20 @@ html {
    Everything freezes at 1400px. Only side margins grow beyond that.
    ══════════════════════════════════════════════════════════════ */
 
+/* Outer shell cap: every direct child of .wp-site-blocks (sections,
+   footer, alignfull blocks) stops growing at 2560px and centres.
+   Specificity (0,2,0) via :not() intentionally overrides Section 19a's
+   1400px cap so content sections stretch up to 2560 on wide screens
+   (heroes keep their 1400 cap via Section 19b's !important rules).
+   Header's fixed inner .gvb-header is unaffected; its alignment is
+   handled by the min() padding rule in Section 19b below.
+   Waves (.wp-site-blocks::before/::after) are pseudos on the parent
+   and keep their full-viewport width. */
+.wp-site-blocks > *:not(.gvb-header) {
+  max-width: 2560px;
+  margin-inline: auto;
+}
+
 /* ──────────────────────────────────────────────────────────────
    19a. Content sections — no WP inline margin, general rule works.
    ────────────────────────────────────────────────────────────── */
@@ -5119,29 +5165,55 @@ html {
 
 @media (min-width: 1440px) {
 
-  /* Hero, Cases, FAQ: cap at 1400px and centre. */
-  .gvb-hero,
-  .gvb-cases,
-  .gvb-faq,
-  .gvb-bottle-showcase {
+  /* Steps: cap at 1400px and centre.
+     !important is required to beat the 2560 outer-shell rule (0,2,0)
+     that otherwise lets this section stretch to the shell ceiling. */
+  .gvb-steps {
     max-width: 1400px !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  /* Anlass: uses calc margin instead of max-width (WP flex-stretch pitfall).
+  /* Hero + FAQ + Contact + Cases + Bottle-showcase + Personalisieren:
+     grow with the viewport, cap at 2560, always keep a 20px breathing gap
+     from the viewport edge until the cap hits. The min() baked into
+     max-width reproduces the 20px inline-margin look at small/medium
+     screens, and auto margins centre the section in the excess space
+     above 2600. */
+  .gvb-hero,
+  .gvb-faq,
+  .gvb-contact,
+  .gvb-cases,
+  .gvb-bottle-showcase,
+  .gvb-personalisieren {
+    max-width: min(calc(100% - 40px), 2560px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Impressum: uses calc margin instead of max-width (WP flex-stretch pitfall).
      At 1440px: (1440-1400)/2 = 20px each side — same as the natural inline margin. */
-  .gvb-bedrucken-anlass,
   .gvb-impressum-card {
     margin-left: calc((100% - 1400px) / 2) !important;
     margin-right: calc((100% - 1400px) / 2) !important;
   }
 
+  /* Anlass: caps at 1800 (coherent with Druckverfahren + Personalisieren
+     cap), with a 20px breathing gap preserved until the cap hits. max()
+     picks the larger of 20px or the excess-gutter calc so the margin
+     never goes negative below ~1840px viewport. */
+  .gvb-bedrucken-anlass {
+    margin-left: max(20px, calc((100% - 1800px) / 2)) !important;
+    margin-right: max(20px, calc((100% - 1800px) / 2)) !important;
+  }
+
   /* Header: green bar stays full-width, logo + nav stay aligned to the 1440px content column.
-     Formula: 54px (design padding) + half the viewport excess beyond 1440px. */
+     Formula: 54px (design padding) + half the viewport excess beyond 1440px,
+     capped at 614px so logo/nav stop growing past the 2560px outer-shell ceiling.
+     At 1440 → 54px; at 2560 → 614px; at 3440+ → stays at 614px. */
   .gvb-header {
-    padding-left: calc((100% - 1440px) / 2 + 54px) !important;
-    padding-right: calc((100% - 1440px) / 2 + 54px) !important;
+    padding-left: min(calc((100% - 1440px) / 2 + 54px), 614px) !important;
+    padding-right: min(calc((100% - 1440px) / 2 + 54px), 614px) !important;
   }
 
 }
