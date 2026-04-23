@@ -14,38 +14,51 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 	<div class="gvb-borosilikat-verschluesse__cards">
 
+		<!-- Classic (single color, no slider) -->
 		<div class="gvb-verschluss-card">
 			<div class="gvb-verschluss-card__image">
-				<img id="tritan-cap-classic-img" src="<?php echo esc_url( $img . '/tritan-verschluss-classic.jpg' ); ?>" alt="Classic Verschluss" />
+				<img src="<?php echo esc_url( $img . '/tritan-verschluss-classic.jpg' ); ?>" alt="Classic Verschluss" />
 			</div>
 			<div class="gvb-verschluss-card__header">
 				<h5 class="gvb-verschluss-card__title">Classic</h5>
 				<div class="gvb-verschluss-colors">
-					<button class="gvb-bottle-card__color-btn is-active" data-img="<?php echo esc_url( $img . '/tritan-verschluss-classic.jpg' ); ?>" data-target="tritan-cap-classic-img" aria-label="Farbe 1">
-						<img src="<?php echo esc_url( $img . '/tritan-color-5.svg' ); ?>" alt="" />
-					</button>
+					<span class="gvb-bottle-card__dot is-active" style="background:#D9D9D9" aria-hidden="true"></span>
 				</div>
 			</div>
 			<p class="gvb-verschluss-card__desc">Unser verlässlicher Standardverschluss. (bei jeder Flasche mit dabei)</p>
 		</div>
 
-		<div class="gvb-verschluss-card">
+		<!-- Premium (4 colors) -->
+		<div class="gvb-verschluss-card" data-bottle-card>
 			<div class="gvb-verschluss-card__image">
-				<img id="tritan-cap-premium-img" src="<?php echo esc_url( $img . '/tritan-verschluss-premium.jpg' ); ?>" alt="Premium Verschluss" />
+				<div class="gvb-verschluss-card__track" data-bottle-track>
+					<div class="gvb-verschluss-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-verschluss-premium-grau.png' ); ?>" alt="Premium Verschluss – grau" />
+					</div>
+					<div class="gvb-verschluss-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-verschluss-premium-blau.png' ); ?>" alt="Premium Verschluss – blau" />
+					</div>
+					<div class="gvb-verschluss-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-verschluss-premium-braun.png' ); ?>" alt="Premium Verschluss – braun" />
+					</div>
+					<div class="gvb-verschluss-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-verschluss-premium-creme.png' ); ?>" alt="Premium Verschluss – creme" />
+					</div>
+				</div>
 			</div>
 			<div class="gvb-verschluss-card__header">
 				<h5 class="gvb-verschluss-card__title">Premium</h5>
-				<div class="gvb-verschluss-colors">
-					<button class="gvb-bottle-card__color-btn is-active" data-img="<?php echo esc_url( $img . '/tritan-verschluss-premium.jpg' ); ?>" data-target="tritan-cap-premium-img" aria-label="Farbe 1">
+				<div class="gvb-verschluss-colors" role="tablist" aria-label="Farbe wählen">
+					<button class="gvb-bottle-card__color-btn is-active" data-bottle-index="0" role="tab" aria-selected="true" aria-label="Farbe Grau">
 						<img src="<?php echo esc_url( $img . '/tritan-color-4.svg' ); ?>" alt="" />
 					</button>
-					<button class="gvb-bottle-card__color-btn" data-img="<?php echo esc_url( $img . '/tritan-verschluss-premium.jpg' ); ?>" data-target="tritan-cap-premium-img" aria-label="Farbe 2">
+					<button class="gvb-bottle-card__color-btn" data-bottle-index="1" role="tab" aria-selected="false" aria-label="Farbe Blau">
 						<img src="<?php echo esc_url( $img . '/tritan-color-2.svg' ); ?>" alt="" />
 					</button>
-					<button class="gvb-bottle-card__color-btn" data-img="<?php echo esc_url( $img . '/tritan-verschluss-premium.jpg' ); ?>" data-target="tritan-cap-premium-img" aria-label="Farbe 3">
+					<button class="gvb-bottle-card__color-btn" data-bottle-index="2" role="tab" aria-selected="false" aria-label="Farbe Braun">
 						<img src="<?php echo esc_url( $img . '/tritan-color-6.svg' ); ?>" alt="" />
 					</button>
-					<button class="gvb-bottle-card__color-btn" data-img="<?php echo esc_url( $img . '/tritan-verschluss-premium.jpg' ); ?>" data-target="tritan-cap-premium-img" aria-label="Farbe 4">
+					<button class="gvb-bottle-card__color-btn" data-bottle-index="3" role="tab" aria-selected="false" aria-label="Farbe Creme">
 						<img src="<?php echo esc_url( $img . '/tritan-color-7.svg' ); ?>" alt="" />
 					</button>
 				</div>
@@ -53,17 +66,25 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<p class="gvb-verschluss-card__desc">Mit fest integriertem Dichtungsring garantiert maximale Sicherheit.</p>
 		</div>
 
-		<div class="gvb-verschluss-card">
+		<!-- Flip-Top (2 colors) -->
+		<div class="gvb-verschluss-card" data-bottle-card>
 			<div class="gvb-verschluss-card__image">
-				<img id="tritan-cap-fliptop-img" src="<?php echo esc_url( $img . '/tritan-verschluss-fliptop.jpg' ); ?>" alt="Flip-Top Verschluss" />
+				<div class="gvb-verschluss-card__track" data-bottle-track>
+					<div class="gvb-verschluss-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-verschluss-fliptop-schwarz.png' ); ?>" alt="Flip-Top Verschluss – schwarz" />
+					</div>
+					<div class="gvb-verschluss-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-verschluss-fliptop.jpg' ); ?>" alt="Flip-Top Verschluss – weiß" />
+					</div>
+				</div>
 			</div>
 			<div class="gvb-verschluss-card__header">
 				<h5 class="gvb-verschluss-card__title">Flip-Top</h5>
-				<div class="gvb-verschluss-colors">
-					<button class="gvb-bottle-card__color-btn is-active" data-img="<?php echo esc_url( $img . '/tritan-verschluss-fliptop.jpg' ); ?>" data-target="tritan-cap-fliptop-img" aria-label="Farbe 1">
+				<div class="gvb-verschluss-colors" role="tablist" aria-label="Farbe wählen">
+					<button class="gvb-bottle-card__color-btn is-active" data-bottle-index="0" role="tab" aria-selected="true" aria-label="Farbe Schwarz">
 						<img src="<?php echo esc_url( $img . '/tritan-color-3.svg' ); ?>" alt="" />
 					</button>
-					<button class="gvb-bottle-card__color-btn" data-img="<?php echo esc_url( $img . '/tritan-verschluss-fliptop.jpg' ); ?>" data-target="tritan-cap-fliptop-img" aria-label="Farbe 2">
+					<button class="gvb-bottle-card__color-btn" data-bottle-index="1" role="tab" aria-selected="false" aria-label="Farbe Weiß">
 						<img src="<?php echo esc_url( $img . '/tritan-color-8.svg' ); ?>" alt="" />
 					</button>
 				</div>
@@ -71,17 +92,25 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<p class="gvb-verschluss-card__desc">Optimal beim Sport, für Kinder und Patienten.</p>
 		</div>
 
-		<div class="gvb-verschluss-card">
+		<!-- Sport (2 colors) -->
+		<div class="gvb-verschluss-card" data-bottle-card>
 			<div class="gvb-verschluss-card__image">
-				<img id="tritan-cap-sport-img" src="<?php echo esc_url( $img . '/tritan-verschluss-sport.jpg' ); ?>" alt="Sport Verschluss" />
+				<div class="gvb-verschluss-card__track" data-bottle-track>
+					<div class="gvb-verschluss-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-verschluss-sport-schwarz.png' ); ?>" alt="Sport Verschluss – schwarz" />
+					</div>
+					<div class="gvb-verschluss-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-verschluss-sport-grau.png' ); ?>" alt="Sport Verschluss – grau" />
+					</div>
+				</div>
 			</div>
 			<div class="gvb-verschluss-card__header">
 				<h5 class="gvb-verschluss-card__title">Sport</h5>
-				<div class="gvb-verschluss-colors">
-					<button class="gvb-bottle-card__color-btn is-active" data-img="<?php echo esc_url( $img . '/tritan-verschluss-sport.jpg' ); ?>" data-target="tritan-cap-sport-img" aria-label="Farbe 1">
+				<div class="gvb-verschluss-colors" role="tablist" aria-label="Farbe wählen">
+					<button class="gvb-bottle-card__color-btn is-active" data-bottle-index="0" role="tab" aria-selected="true" aria-label="Farbe Schwarz">
 						<img src="<?php echo esc_url( $img . '/tritan-color-3.svg' ); ?>" alt="" />
 					</button>
-					<button class="gvb-bottle-card__color-btn" data-img="<?php echo esc_url( $img . '/tritan-verschluss-sport.jpg' ); ?>" data-target="tritan-cap-sport-img" aria-label="Farbe 2">
+					<button class="gvb-bottle-card__color-btn" data-bottle-index="1" role="tab" aria-selected="false" aria-label="Farbe Grau">
 						<img src="<?php echo esc_url( $img . '/tritan-color-4.svg' ); ?>" alt="" />
 					</button>
 				</div>
@@ -92,22 +121,4 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	</div>
 
 </section>
-
-<script>
-(function() {
-	var btns = document.querySelectorAll('.gvb-tritan-verschluesse .gvb-bottle-card__color-btn');
-	btns.forEach(function(btn) {
-		btn.addEventListener('click', function() {
-			var targetId = btn.dataset.target;
-			var group = btn.closest('.gvb-verschluss-colors');
-			group.querySelectorAll('.gvb-bottle-card__color-btn').forEach(function(b) {
-				b.classList.remove('is-active');
-			});
-			btn.classList.add('is-active');
-			var mainImg = document.getElementById(targetId);
-			if (mainImg) mainImg.src = btn.dataset.img;
-		});
-	});
-})();
-</script>
 <!-- /wp:html -->

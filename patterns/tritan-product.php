@@ -13,9 +13,22 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<ul class="gvb-bottle-showcase__list">
 
 		<!-- Kavodrink Premium -->
-		<li class="gvb-bottle-card gvb-fade-up gvb-bottle-card--kavo-premium">
+		<li class="gvb-bottle-card gvb-fade-up gvb-bottle-card--kavo-premium" data-bottle-card>
 			<div class="gvb-bottle-card__image">
-				<img id="tritan-premium-img" src="<?php echo esc_url( $img . '/tritan-premium.jpg' ); ?>" alt="Kavodrink Premium" />
+				<div class="gvb-bottle-card__track" data-bottle-track>
+					<div class="gvb-bottle-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-premium-transparent.png' ); ?>" alt="Kavodrink Premium – transparent" />
+					</div>
+					<div class="gvb-bottle-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-premium-blau.png' ); ?>" alt="Kavodrink Premium – blau" />
+					</div>
+					<div class="gvb-bottle-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-premium-schwarz.png' ); ?>" alt="Kavodrink Premium – schwarz" />
+					</div>
+					<div class="gvb-bottle-card__slide">
+						<img src="<?php echo esc_url( $img . '/tritan-premium-coolgrau.png' ); ?>" alt="Kavodrink Premium – cool grau" />
+					</div>
+				</div>
 			</div>
 			<div class="gvb-bottle-card__content">
 				<h2 class="gvb-bottle-card__title">Kavodrink Premium</h2>
@@ -31,17 +44,17 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 						<li>In mehreren stylishen Farben erhältlich – ganz nach deinem Vibe</li>
 					</ul>
 				</div>
-				<div class="gvb-bottle-card__colors">
-					<button class="gvb-bottle-card__color-btn is-active" data-img="<?php echo esc_url( $img . '/tritan-premium.jpg' ); ?>" data-target="tritan-premium-img" aria-label="Farbe 1">
+				<div class="gvb-bottle-card__colors" role="tablist" aria-label="Farbe wählen">
+					<button class="gvb-bottle-card__color-btn is-active" data-bottle-index="0" role="tab" aria-selected="true" aria-label="Farbe Transparent">
 						<img src="<?php echo esc_url( $img . '/tritan-color-1.svg' ); ?>" alt="" />
 					</button>
-					<button class="gvb-bottle-card__color-btn" data-img="<?php echo esc_url( $img . '/tritan-premium.jpg' ); ?>" data-target="tritan-premium-img" aria-label="Farbe 2">
+					<button class="gvb-bottle-card__color-btn" data-bottle-index="1" role="tab" aria-selected="false" aria-label="Farbe Blau">
 						<img src="<?php echo esc_url( $img . '/tritan-color-2.svg' ); ?>" alt="" />
 					</button>
-					<button class="gvb-bottle-card__color-btn" data-img="<?php echo esc_url( $img . '/tritan-premium.jpg' ); ?>" data-target="tritan-premium-img" aria-label="Farbe 3">
+					<button class="gvb-bottle-card__color-btn" data-bottle-index="2" role="tab" aria-selected="false" aria-label="Farbe Schwarz">
 						<img src="<?php echo esc_url( $img . '/tritan-color-3.svg' ); ?>" alt="" />
 					</button>
-					<button class="gvb-bottle-card__color-btn" data-img="<?php echo esc_url( $img . '/tritan-premium.jpg' ); ?>" data-target="tritan-premium-img" aria-label="Farbe 4">
+					<button class="gvb-bottle-card__color-btn" data-bottle-index="3" role="tab" aria-selected="false" aria-label="Farbe Cool Grau">
 						<img src="<?php echo esc_url( $img . '/tritan-color-4.svg' ); ?>" alt="" />
 					</button>
 				</div>
@@ -55,7 +68,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<!-- Kavodrink Classic -->
 		<li class="gvb-bottle-card gvb-fade-up gvb-bottle-card--kavo-classic">
 			<div class="gvb-bottle-card__image">
-				<img id="tritan-classic-img" src="<?php echo esc_url( $img . '/tritan-classic.jpg' ); ?>" alt="Kavodrink Classic" />
+				<img src="<?php echo esc_url( $img . '/tritan-classic.jpg' ); ?>" alt="Kavodrink Classic" />
 			</div>
 			<div class="gvb-bottle-card__content">
 				<h2 class="gvb-bottle-card__title">Kavodrink Classic</h2>
@@ -72,9 +85,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 					</ul>
 				</div>
 				<div class="gvb-bottle-card__colors">
-					<button class="gvb-bottle-card__color-btn is-active" data-img="<?php echo esc_url( $img . '/tritan-classic.jpg' ); ?>" data-target="tritan-classic-img" aria-label="Farbe 1">
-						<img src="<?php echo esc_url( $img . '/tritan-color-2.svg' ); ?>" alt="" />
-					</button>
+					<span class="gvb-bottle-card__dot" style="background:#D9D9D9" aria-hidden="true"></span>
 				</div>
 				<div class="gvb-bottle-card__meta">
 					<p>Größen: 500 ml, 750 ml, 1.000 ml</p>
@@ -86,7 +97,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<!-- Kavodrink Eco -->
 		<li class="gvb-bottle-card gvb-fade-up gvb-bottle-card--kavo-eco">
 			<div class="gvb-bottle-card__image">
-				<img id="tritan-eco-img" src="<?php echo esc_url( $img . '/tritan-eco.jpg' ); ?>" alt="Kavodrink Eco" />
+				<img src="<?php echo esc_url( $img . '/tritan-eco.jpg' ); ?>" alt="Kavodrink Eco" />
 			</div>
 			<div class="gvb-bottle-card__content">
 				<h2 class="gvb-bottle-card__title">Kavodrink Eco</h2>
@@ -102,9 +113,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 					</ul>
 				</div>
 				<div class="gvb-bottle-card__colors">
-					<button class="gvb-bottle-card__color-btn is-active" data-img="<?php echo esc_url( $img . '/tritan-eco.jpg' ); ?>" data-target="tritan-eco-img" aria-label="Farbe 1">
-						<img src="<?php echo esc_url( $img . '/tritan-color-2.svg' ); ?>" alt="" />
-					</button>
+					<span class="gvb-bottle-card__dot" style="background:#D9D9D9" aria-hidden="true"></span>
 				</div>
 				<div class="gvb-bottle-card__meta">
 					<p>Größen: 500 ml, 750 ml, 1.000 ml</p>
@@ -116,22 +125,4 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	</ul>
 
 </section>
-
-<script>
-(function() {
-	var btns = document.querySelectorAll('.gvb-tritan-showcase .gvb-bottle-card__color-btn');
-	btns.forEach(function(btn) {
-		btn.addEventListener('click', function() {
-			var targetId = btn.dataset.target;
-			var group = btn.closest('.gvb-bottle-card__colors');
-			group.querySelectorAll('.gvb-bottle-card__color-btn').forEach(function(b) {
-				b.classList.remove('is-active');
-			});
-			btn.classList.add('is-active');
-			var mainImg = document.getElementById(targetId);
-			if (mainImg) mainImg.src = btn.dataset.img;
-		});
-	});
-})();
-</script>
 <!-- /wp:html -->

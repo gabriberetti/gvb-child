@@ -64,6 +64,14 @@ function gvb_enqueue_scripts() {
     );
 
     wp_enqueue_script(
+        'gvb-bottle-slider',
+        $theme_uri . '/assets/js/bottle-slider.js',
+        array(),
+        filemtime( $theme_dir . '/assets/js/bottle-slider.js' ),
+        true
+    );
+
+    wp_enqueue_script(
         'gvb-navbar-scroll',
         $theme_uri . '/assets/js/navbar-scroll.js',
         array(),

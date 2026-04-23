@@ -10,14 +10,20 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <!-- wp:html -->
 <section class="gvb-bottle-showcase">
 
-	<div class="gvb-bottle-card gvb-fade-up">
+	<div class="gvb-bottle-card gvb-fade-up" data-bottle-card>
 
 		<div class="gvb-bottle-card__image">
-			<img
-				id="gvb-edelstahl-main-img"
-				src="<?php echo esc_url( $img . '/edelstahl-product.jpg' ); ?>"
-				alt="Edelstahl Trinkflasche"
-			/>
+			<div class="gvb-bottle-card__track" data-bottle-track>
+				<div class="gvb-bottle-card__slide">
+					<img src="<?php echo esc_url( $img . '/edelstahl-product.jpg' ); ?>" alt="Edelstahl Trinkflasche – blau" />
+				</div>
+				<div class="gvb-bottle-card__slide">
+					<img src="<?php echo esc_url( $img . '/edelstahl-silver.png' ); ?>" alt="Edelstahl Trinkflasche – silber" />
+				</div>
+				<div class="gvb-bottle-card__slide">
+					<img src="<?php echo esc_url( $img . '/edelstahl-white.png' ); ?>" alt="Edelstahl Trinkflasche – weiß" />
+				</div>
+			</div>
 		</div>
 
 		<div class="gvb-bottle-card__content">
@@ -37,29 +43,14 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				</ul>
 			</div>
 
-			<div class="gvb-bottle-card__colors">
-				<button
-					class="gvb-bottle-card__color-btn is-active"
-					data-img="<?php echo esc_url( $img . '/edelstahl-product.jpg' ); ?>"
-					data-target="gvb-edelstahl-main-img"
-					aria-label="Farbe 1"
-				>
+			<div class="gvb-bottle-card__colors" role="tablist" aria-label="Farbe wählen">
+				<button class="gvb-bottle-card__color-btn is-active" data-bottle-index="0" role="tab" aria-selected="true" aria-label="Farbe Blau">
 					<img src="<?php echo esc_url( $img . '/edelstahl-color-1.svg' ); ?>" alt="" />
 				</button>
-				<button
-					class="gvb-bottle-card__color-btn"
-					data-img="<?php echo esc_url( $img . '/edelstahl-product.jpg' ); ?>"
-					data-target="gvb-edelstahl-main-img"
-					aria-label="Farbe 2"
-				>
+				<button class="gvb-bottle-card__color-btn" data-bottle-index="1" role="tab" aria-selected="false" aria-label="Farbe Silber">
 					<img src="<?php echo esc_url( $img . '/edelstahl-color-2.svg' ); ?>" alt="" />
 				</button>
-				<button
-					class="gvb-bottle-card__color-btn"
-					data-img="<?php echo esc_url( $img . '/edelstahl-product.jpg' ); ?>"
-					data-target="gvb-edelstahl-main-img"
-					aria-label="Farbe 3"
-				>
+				<button class="gvb-bottle-card__color-btn" data-bottle-index="2" role="tab" aria-selected="false" aria-label="Farbe Weiß">
 					<img src="<?php echo esc_url( $img . '/edelstahl-color-3.svg' ); ?>" alt="" />
 				</button>
 			</div>
@@ -74,22 +65,4 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	</div>
 
 </section>
-
-<script>
-(function() {
-	var btns = document.querySelectorAll('.gvb-bottle-card__color-btn');
-	btns.forEach(function(btn) {
-		btn.addEventListener('click', function() {
-			var targetId = btn.dataset.target;
-			var group = btn.closest('.gvb-bottle-card__colors');
-			group.querySelectorAll('.gvb-bottle-card__color-btn').forEach(function(b) {
-				b.classList.remove('is-active');
-			});
-			btn.classList.add('is-active');
-			var mainImg = document.getElementById(targetId);
-			if (mainImg) mainImg.src = btn.dataset.img;
-		});
-	});
-})();
-</script>
 <!-- /wp:html -->
