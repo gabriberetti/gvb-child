@@ -6,9 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Good Vibe Bottles** is a WordPress website for a German drinkware/bottle company. It uses the **Full Site Editing (FSE)** architecture with a custom child theme (`gvb-child`) built on top of Twenty Twenty-Five.
 
-- **CMS:** WordPress (local dev via Local by Flywheel — nginx + PHP + MySQL)
+- **Production:** Live at **https://goodvibebottles.com** (Hostinger Business, since 2026-04-24). `.de` + `.at` parked at Checkdomain.
+- **Local dev:** Local by Flywheel at `http://good-vibe-bottles.local` — staging environment. Never push Local DB to prod.
+- **Deployment:** Git auto-deploy — `git push origin main` on this theme repo → Hostinger pulls in ~15–20 sec. See parent `/CLAUDE.md` in project root for full deployment details + SSH access (`ssh hostinger-gvb`).
 - **Theme:** `gvb-child` child theme (FSE, no page builders)
-- **Languages:** German (default). English versions will be created manually as duplicate pages after final design sign-off — language switcher via header menu link and geo-localisation. No multilingual plugin.
+- **Languages:** German (`de_DE`) default. English versions planned as duplicate pages with new slugs — language switcher via header menu link. No multilingual plugin.
 - **Key constraint:** Clients author blog posts using only the Gutenberg block editor — no code
 
 ## Development
@@ -281,6 +283,9 @@ Auxiliary breakpoints still in use (not DevTools presets but serve real purpose)
 - **Product cards responsive:** all 3 PNGs (`card-besser-trinken.png` / `card-genau-dein-vibe.png` / `card-nachhaltigkeit.png`) share a 400×574 aspect ratio with the wave shape baked into the image. Title uses `position: absolute; bottom: 23.8%; left: 7%; right: 13%` (percentages of media height) and content uses `margin-top: -28.7%; padding: 0 13% 32px 7%` (percentages of card width). This is a single-rule-set scaling system — no per-breakpoint recalibration. Section has `max-width: 1440px` (overrides the shared 1400 ceiling). Tablet carousel at 426–784 via the generic `[data-carousel]` system, single column at ≤425.
 
 ## ACF Field Groups
+
+> ⚠️ **Status as of 2026-04-24**: The field groups below are **documented but not yet implemented**. ACF plugin is installed on both Local and production; **zero field groups exist in the DB**. All product-page content (bottle models, colors, specs) currently lives hardcoded in pattern PHP files. The `acf-json/` folder exists in the theme (empty, with `.gitkeep`), ready for future ACF work — when field groups are created on Local, ACF will auto-write JSON there and sync to production on next deploy.
+
 
 **`bottle_details`** (assigned to product pages: Edelstahl, Borosilikat-Glas, Tritan):
 - `bottle_material` (Select), `bottle_intro_text` (Textarea), `minimum_order` (Number), `bottle_branding` (Checkbox)
