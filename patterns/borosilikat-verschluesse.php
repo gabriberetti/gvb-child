@@ -17,21 +17,41 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<div class="gvb-verschluss-col">
 			<div class="gvb-verschluss-card">
 				<div class="gvb-verschluss-card__image">
-					<img src="<?php echo esc_url( $img . '/borosilikat-verschluss-bambus.jpg' ); ?>" alt="Bambusverschluss" />
+					<img src="<?php echo esc_url( $img . '/borosilikat-verschluss-bambus.webp' ); ?>" alt="Bambusverschluss Slim" />
 				</div>
 			</div>
 			<h5 class="gvb-verschluss-card__title">Bambus</h5>
-			<p class="gvb-verschluss-card__desc">Bambusverschluss in edler Optik.<br>Verfügbar für Slim und Wideneck Edition.</p>
+			<p class="gvb-verschluss-card__desc">Bambusverschluss in edler Optik.<br>Verfügbar für die Slim Edition.</p>
 		</div>
 
 		<div class="gvb-verschluss-col">
 			<div class="gvb-verschluss-card">
 				<div class="gvb-verschluss-card__image">
-					<img src="<?php echo esc_url( $img . '/borosilikat-verschluss-edelstahl.jpg' ); ?>" alt="Edelstahlverschluss" />
+					<img src="<?php echo esc_url( $img . '/borosilikat-verschluss-bambus-wideneck.webp' ); ?>" alt="Bambusverschluss Wideneck" />
+				</div>
+			</div>
+			<h5 class="gvb-verschluss-card__title">Bambus Wideneck</h5>
+			<p class="gvb-verschluss-card__desc">Bambusverschluss in edler Optik.<br>Verfügbar für die Wideneck Edition.</p>
+		</div>
+
+		<div class="gvb-verschluss-col">
+			<div class="gvb-verschluss-card">
+				<div class="gvb-verschluss-card__image">
+					<img src="<?php echo esc_url( $img . '/borosilikat-verschluss-edelstahl.webp' ); ?>" alt="Edelstahlverschluss Slim" />
 				</div>
 			</div>
 			<h5 class="gvb-verschluss-card__title">Edelstahl</h5>
-			<p class="gvb-verschluss-card__desc">Hochwertiger Edelstahlverschluss.<br>Verfügbar für Slim und Wideneck Edition.</p>
+			<p class="gvb-verschluss-card__desc">Hochwertiger Edelstahlverschluss.<br>Verfügbar für die Slim Edition.</p>
+		</div>
+
+		<div class="gvb-verschluss-col">
+			<div class="gvb-verschluss-card">
+				<div class="gvb-verschluss-card__image">
+					<img src="<?php echo esc_url( $img . '/borosilikat-verschluss-edelstahl-wideneck.webp' ); ?>" alt="Edelstahlverschluss Wideneck" />
+				</div>
+			</div>
+			<h5 class="gvb-verschluss-card__title">Edelstahl Wideneck</h5>
+			<p class="gvb-verschluss-card__desc">Hochwertiger Edelstahlverschluss.<br>Verfügbar für die Wideneck Edition.</p>
 		</div>
 
 	</div>
