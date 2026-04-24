@@ -1543,7 +1543,10 @@ html {
   padding-left: 32px;
 }
 
-.gvb-faq__answer p {
+.gvb-faq__answer p,
+.gvb-faq__answer ul,
+.gvb-faq__answer ol,
+.gvb-faq__answer li {
   font-size: clamp(16px, 1.111vw, 28px);
   line-height: 1.2;
   letter-spacing: 0.08px;
