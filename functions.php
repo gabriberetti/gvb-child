@@ -116,7 +116,6 @@ function gvb_register_pattern_category() {
         'gvb/losungen-branchen' => array( 'file' => 'losungen-branchen.php', 'title' => 'Lösungen Branchen' ),
         'gvb/losungen-personalisieren' => array( 'file' => 'losungen-personalisieren.php', 'title' => 'Lösungen Personalisieren' ),
         'gvb/losungen-branding' => array( 'file' => 'losungen-branding.php', 'title' => 'Lösungen Branding' ),
-        'gvb/industrie-branding' => array( 'file' => 'industrie-branding.php', 'title' => 'Industrie Branding' ),
         'gvb/losungen-steps'    => array( 'file' => 'losungen-steps.php',    'title' => 'Lösungen Steps' ),
         'gvb/flaschen-hero'          => array( 'file' => 'flaschen-hero.php',          'title' => 'Flaschen Hero' ),
         'gvb/flaschen-intro'         => array( 'file' => 'flaschen-intro.php',         'title' => 'Flaschen Intro' ),
