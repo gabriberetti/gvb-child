@@ -60,6 +60,8 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 						<li><a href="/edelstahl/">Edelstahl</a></li>
 						<li><a href="/borosilikatglas/">Borosilikatglas</a></li>
 						<li><a href="/tritan/">Tritan</a></li>
+						<li class="gvb-footer__nav-divider"><a href="/download/">Preisliste</a></li>
+						<li><a href="">Druckleitfaden</a></li>
 					</ul>
 					<!-- /wp:list -->
 				</div>
