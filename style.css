@@ -1065,15 +1065,39 @@ html {
   pointer-events: none;
 }
 
-/* Field labels */
+/* Field labels — wrapper is flex so label + optional Fluent Forms tooltip
+   icon (`.ff-el-tooltip`, rendered as a sibling of the <label>) sit on the
+   same row. Before this, `display: block` on the <label> forced the
+   inline-block tooltip to wrap below, which added ~20px of vertical
+   space and misaligned fields that have a Helper Text (e.g. Menge). */
+.gvb-contact__form-col .ff-el-input--label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
 .gvb-contact__form-col .ff-el-input--label label {
   font-size: clamp(16px, 1.111vw, 28px);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: var(--wp--preset--color--gvb-graphite);
-  display: block;
-  margin-bottom: 6px;
+  display: inline;
+  margin-bottom: 0;
+}
+
+/* Recolour Fluent Forms tooltip icon (default: blue via --fluentform-primary)
+   to our brand orange, with hover state matching the buttons. */
+.gvb-contact__form-col .ff-el-tooltip svg {
+  fill: var(--wp--preset--color--gvb-orange);
+  width: 16px;
+  height: 16px;
+  transition: fill 0.2s ease;
+}
+
+.gvb-contact__form-col .ff-el-tooltip:hover svg {
+  fill: var(--wp--preset--color--gvb-orange-hover);
 }
 
 /* Vertical gap between standalone field rows: 24px */
@@ -1344,7 +1368,7 @@ html {
 /* Push the cell down to match the Material field's label vertical start */
 .gvb-field--material.ff-t-container
   .ff-t-column-2:not(:has(.ff-el-group:not(.ff_excluded))) {
-  padding-top: 5px;
+  padding-top: 0;
 }
 
 .gvb-field--material.ff-t-container
@@ -1381,7 +1405,7 @@ html {
 /* Push the cell down to match the Menge field's label vertical start */
 .gvb-field--verschluss.ff-t-container
   .ff-t-column-1:not(:has(.ff-el-group:not(.ff_excluded))) {
-  padding-top: 5px;
+  padding-top: 0;
 }
 
 .gvb-field--verschluss.ff-t-container
@@ -2135,6 +2159,17 @@ html {
   margin: 0;
 }
 
+/* Branding "Mehr erfahren" CTA — base `.gvb-btn-primary` only transitions
+   opacity + transform; add background-color transition + the hover colour
+   swap so the button matches the other orange CTAs (flaschen-cards, etc.). */
+.gvb-branding .gvb-btn-primary {
+  transition: background-color var(--gvb-transition), transform 0.3s ease, opacity var(--gvb-transition);
+}
+
+.gvb-branding .gvb-btn-primary:hover {
+  background-color: var(--wp--preset--color--gvb-orange-hover);
+}
+
 /* ── Steps section ── */
 .gvb-steps {
   padding: 0 20px 60px;
@@ -2397,6 +2432,12 @@ html {
   object-position: center center;
 }
 
+/* ── Hero: unternehmen — shift crop up so the bottle's top + sport cap
+      stay visible (default center crops them off). */
+.gvb-hero__bg--unternehmen {
+  object-position: center 25%;
+}
+
 .gvb-hero--uberuns .gvb-hero__content {
   margin-left: 55% !important;
   margin-right: 0 !important;
@@ -2561,7 +2602,7 @@ html {
 }
 
 .gvb-ueberzeugung__num {
-  font-size: clamp(15px, 1.042vw, 27px);
+  font-size: clamp(30px, 2.083vw, 54px);
   font-weight: 400;
   color: #ede8db;
   letter-spacing: -0.3px;
@@ -3877,11 +3918,15 @@ html {
    ═══════════════════════════════════════ */
 
 .gvb-download-cards {
-  padding: 40px 0 20px;
+  padding: 80px 0 40px;
 }
 
 .gvb-download-section {
-  margin-bottom: 48px;
+  margin-bottom: 64px;
+}
+
+.gvb-download-section:last-child {
+  margin-bottom: 0;
 }
 
 .gvb-download-section__heading {
@@ -3890,7 +3935,14 @@ html {
   line-height: 1;
   letter-spacing: -1.65px;
   color: var(--wp--preset--color--gvb-graphite);
-  margin: 0 20px 20px;
+  margin: 0 20px 28px;
+}
+
+/* Stack multiple download bars under a single heading with consistent gap. */
+.gvb-download-section__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .gvb-download-bar {

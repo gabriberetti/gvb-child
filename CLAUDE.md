@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - **CMS:** WordPress (local dev via Local by Flywheel — nginx + PHP + MySQL)
 - **Theme:** `gvb-child` child theme (FSE, no page builders)
-- **Languages:** German (default) + English via Polylang
+- **Languages:** German (default). English versions will be created manually as duplicate pages after final design sign-off — language switcher via header menu link and geo-localisation. No multilingual plugin.
 - **Key constraint:** Clients author blog posts using only the Gutenberg block editor — no code
 
 ## Development
@@ -32,7 +32,7 @@ All custom code lives in `app/public/wp-content/themes/gvb-child/`.
 
 ```
 gvb-child/
-├── style.css          # All custom styles (~4,100+ lines, 18 sections)
+├── style.css          # All custom styles (~5,400 lines, 20 sections)
 ├── theme.json         # Design tokens (colors, fonts, spacing)
 ├── functions.php      # Theme setup: enqueues, pattern registration, Adobe Fonts
 ├── templates/         # FSE page templates (21 total, one per page type)
@@ -192,7 +192,6 @@ Templates in `templates/` are HTML files using WordPress block markup. Page-spec
 |--------|---------|
 | Advanced Custom Fields (ACF) | Structured product specs for bottle pages |
 | Fluent Forms | Contact/quote forms (supports .eps/.ai/.pdf uploads) |
-| Polylang | DE + EN multilingual routing |
 | RankMath SEO | On-page SEO and sitemaps |
 
 ### CSS Utility Classes

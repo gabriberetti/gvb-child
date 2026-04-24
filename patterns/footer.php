@@ -20,7 +20,9 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 
 			<!-- wp:image {"width":"175px","height":"53px","className":"gvb-footer__logo"} -->
 			<figure class="wp-block-image is-resized gvb-footer__logo">
-				<img src="<?php echo esc_url( $img . '/gvb-logo-orange.png' ); ?>" alt="Good Vibe Bottles" style="width:175px;height:53px" />
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Zur Startseite', 'gvb' ); ?>">
+					<img src="<?php echo esc_url( $img . '/gvb-logo-orange.png' ); ?>" alt="Good Vibe Bottles" style="width:175px;height:53px" />
+				</a>
 			</figure>
 			<!-- /wp:image -->
 

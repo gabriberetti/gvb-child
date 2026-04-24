@@ -19,7 +19,7 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 
-			<details class="gvb-faq__item is-open" open>
+			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Sind unsere Trinkflaschen auslaufsicher?</summary>
 				<div class="gvb-faq__answer"><p>Ja. Unsere Trinkflaschen sind zuverlässig, auslaufsicher und für den täglichen Einsatz gemacht. Die Verschlüsse verfügen über integrierte Dichtungen, die auch bei kohlensäurehaltigen Getränken für eine sichere Abdichtung sorgen – egal ob <a href="/unsere-flaschen/edelstahl/">Edelstahl-</a>, <a href="/unsere-flaschen/borosilikatglas/">Glas-</a> oder <a href="/unsere-flaschen/tritan/">Kavodrink Premium Flaschen</a>.</p></div>
 			</details>

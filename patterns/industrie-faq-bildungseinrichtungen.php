@@ -19,7 +19,7 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 
-			<details class="gvb-faq__item is-open" open>
+			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Sind unsere Trinkflaschen BPA-frei und schadstofffrei?</summary>
 				<div class="gvb-faq__answer"><p>Ja, alle unsere <a href="/unsere-flaschen/">Trinkflaschen</a> sind BPA-frei sowie frei von BPS, Weichmachern und anderen Schadstoffen. Sie sind lebensmittelecht, entsprechen den geltenden Vorschriften und sind für den täglichen Gebrauch geeignet. Auf Wunsch stellen wir dir eine Konformitätserklärung zur Verfügung.</p></div>
 			</details>

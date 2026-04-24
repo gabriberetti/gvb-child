@@ -19,7 +19,7 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 
-			<details class="gvb-faq__item is-open" open>
+			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie robust und langlebig sind unsere Trinkflaschen?</summary>
 				<div class="gvb-faq__answer"><p>Unsere Trinkflaschen bestehen aus <a href="/unsere-flaschen/edelstahl/">Edelstahl</a>, <a href="/unsere-flaschen/borosilikatglas/">Borosilikatglas</a> und <a href="/unsere-flaschen/tritan/">Tritan</a> und sind für den täglichen Einsatz gemacht. Sie sind robust, bruchsicher und deutlich widerstandsfähiger als viele herkömmliche Alternativen. Mit der richtigen Pflege bleiben sie über Jahre hinweg im Einsatz.</p></div>
 			</details>

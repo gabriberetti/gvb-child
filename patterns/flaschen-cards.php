@@ -40,7 +40,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<div class="gvb-flaschen-cards__text">
 				<h5 class="gvb-flaschen-cards__title">Borosilikatglas</h5>
 				<p class="gvb-flaschen-cards__desc">Unsere edlen Glasflaschen gibt es in vielen verschiedenen Modellen und mit unterschiedlichen Verschlüssen.</p>
-				<a href="<?php echo esc_url( home_url( '/borosilikat-glas/' ) ); ?>" class="gvb-btn-primary">Mehr erfahren</a>
+				<a href="<?php echo esc_url( home_url( '/borosilikatglas/' ) ); ?>" class="gvb-btn-primary">Mehr erfahren</a>
 			</div>
 		</li>
 

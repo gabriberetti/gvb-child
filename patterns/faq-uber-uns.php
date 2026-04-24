@@ -19,9 +19,9 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 
-			<details class="gvb-faq__item is-open" open>
+			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie läuft die Bestellung bedruckter Flaschen ab?</summary>
-				<div class="gvb-faq__answer"><p>Ganz einfach: Du wählst deine gewünschte <a href="/unsere-flaschen/">Trinkflasche</a> und sendest uns dein Logo oder Design. Wir prüfen alles, beraten dich bei Bedarf und kümmern uns um die Umsetzung. Alle Details zum Ablauf findest du auch in unserem Druckleitfaden.</p></div>
+				<div class="gvb-faq__answer"><p>Ganz einfach: Du wählst deine gewünschte <a href="/unsere-flaschen/">Trinkflasche</a> und sendest uns dein Logo oder Design. Wir prüfen alles, beraten dich bei Bedarf und kümmern uns um die Umsetzung. Alle Details zum Ablauf findest du auch in unserem <a href="/download/">Druckleitfaden</a>.</p></div>
 			</details>
 
 			<details class="gvb-faq__item">
@@ -37,7 +37,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Was mache ich bei einer Reklamation?</summary>
-				<div class="gvb-faq__answer"><p>Melde dich einfach bei uns per E-Mail oder über unser Kontaktformular. Wir kümmern uns schnell und unkompliziert darum.</p></div>
+				<div class="gvb-faq__answer"><p>Melde dich einfach bei uns per E-Mail (<a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a>) oder über unser Kontaktformular. Wir kümmern uns schnell und unkompliziert darum.</p></div>
 			</details>
 
 			<details class="gvb-faq__item">
