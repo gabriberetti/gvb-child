@@ -2204,7 +2204,7 @@ html {
 
 .gvb-steps__content {
   flex: 1;
-  background: #2b2b2b;
+  background: var(--wp--preset--color--gvb-green);
   border-radius: 16px;
   position: relative;
   overflow: hidden;
@@ -2221,7 +2221,7 @@ html {
   font-size: clamp(140px, 13.4vw, 249px);
   font-weight: 700;
   line-height: 1;
-  color: var(--wp--preset--color--gvb-green);
+  color: var(--wp--preset--color--gvb-orange);
   letter-spacing: clamp(-8.68px, -0.6vw, -6px);
   user-select: none;
 }
@@ -2819,9 +2819,13 @@ html {
   object-fit: cover;
 }
 
-/* ── Feature cards ── */
+/* ── Feature cards ──
+   Section has a 20px lateral inset (matches the Steps section) so the
+   heading is full-width — same cap as `.gvb-steps__heading`. The cards
+   list adds extra inner padding so the 4-image row stays visually
+   narrower than the heading (doesn't go full-width). */
 .gvb-edelstahl-features {
-  padding: 40px 0 80px;
+  padding: 40px 20px 80px;
 }
 
 .gvb-edelstahl-features__heading {
@@ -2830,18 +2834,16 @@ html {
   line-height: 1.08;
   letter-spacing: 0.2px;
   color: #2b2b2b;
-  max-width: 1392px;
-  margin: 0 auto 40px;
-  padding: 0 20px;
+  margin: 0 0 40px;
 }
 
 .gvb-edelstahl-features__cards {
   display: flex;
   gap: 20px;
   justify-content: center;
-  padding: 0 20px;
   list-style: none;
   margin: 0;
+  padding: 0 60px;
 }
 
 .gvb-edelstahl-feature-card {
@@ -2857,6 +2859,7 @@ html {
   height: 200px;
   border-radius: 13px;
   overflow: hidden;
+  align-self: center;
 }
 
 .gvb-edelstahl-feature-card__image img {
@@ -2868,10 +2871,10 @@ html {
 .gvb-edelstahl-feature-card__text {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 
 .gvb-edelstahl-feature-card__title {
@@ -2881,7 +2884,6 @@ html {
   letter-spacing: 0.11px;
   color: #2b2b2b;
   margin: 0;
-  text-align: left;
 }
 
 .gvb-edelstahl-feature-card__desc {
@@ -2890,8 +2892,7 @@ html {
   letter-spacing: 0.07px;
   color: #2b2b2b;
   margin: 0;
-  max-width: 245px;
-  text-align: left;
+  max-width: clamp(245px, 17vw, 435px);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -3026,9 +3027,12 @@ html {
   margin-top: 16px;
 }
 
-/* ── Feature cards ── */
+/* ── Feature cards ──
+   Shared by the Borosilikat + Tritan pages (tritan-features.php uses
+   the same `gvb-borosilikat-*` class names). Styling mirrors the
+   Edelstahl feature cards for visual consistency. */
 .gvb-borosilikat-features {
-  padding: 40px 0 120px;
+  padding: 40px 20px 80px;
 }
 
 .gvb-borosilikat-features__heading {
@@ -3037,23 +3041,23 @@ html {
   line-height: 1.08;
   letter-spacing: 0.2px;
   color: #2b2b2b;
-  margin: 0 0 80px;
-  padding: 0 20px;
+  margin: 0 0 40px;
 }
 
 .gvb-borosilikat-features__cards {
   display: flex;
   gap: 20px;
   justify-content: center;
-  padding: 0 20px;
   list-style: none;
   margin: 0;
+  padding: 0 60px;
 }
 
 .gvb-borosilikat-feature-card {
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 16px;
 }
 
@@ -3062,6 +3066,7 @@ html {
   height: 200px;
   border-radius: 13px;
   overflow: hidden;
+  align-self: center;
 }
 
 .gvb-borosilikat-feature-card__image img {
@@ -3073,7 +3078,10 @@ html {
 .gvb-borosilikat-feature-card__text {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 8px;
+  width: 100%;
+  text-align: center;
 }
 
 .gvb-borosilikat-feature-card__title {
@@ -3091,7 +3099,7 @@ html {
   letter-spacing: 0.07px;
   color: #2b2b2b;
   margin: 0;
-  max-width: 245px;
+  max-width: clamp(245px, 17vw, 435px);
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -4413,12 +4421,6 @@ html {
   .gvb-edelstahl-feature-card__image {
     width: 140px;
     height: 140px;
-    align-self: center;
-  }
-
-  .gvb-edelstahl-feature-card__text {
-    text-align: center;
-    align-items: center;
   }
 
   /* Verschluss cards: single column, responsive image */
@@ -4448,12 +4450,6 @@ html {
   .gvb-borosilikat-feature-card__image {
     width: 140px;
     height: 140px;
-    align-self: center;
-  }
-
-  .gvb-borosilikat-feature-card__text {
-    text-align: center;
-    align-items: center;
   }
 
   /* ── Product cards: horizontal carousel at 426–784px (single column ≤425) ── */

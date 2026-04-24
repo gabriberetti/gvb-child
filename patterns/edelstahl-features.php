@@ -10,7 +10,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <!-- wp:html -->
 <section class="gvb-edelstahl-features">
 
-	<h3 class="gvb-edelstahl-features__heading gvb-fade-up">Bei Edelstahl stimmt der Vibe</h3>
+	<h3 class="gvb-edelstahl-features__heading gvb-fade-up">Bei Edelstahl stimmt der Vibe.</h3>
 
 	<ul class="gvb-edelstahl-features__cards">
 
