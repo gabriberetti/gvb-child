@@ -1,4 +1,33 @@
+# macOS
 .DS_Store
-*.log
-node_modules/
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
 .env
+.env.local
+.env.*.local
+
+# Build
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# WordPress local artifacts
+wp-config-local.php
+local-xdebuginfo.php
