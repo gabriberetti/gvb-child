@@ -93,20 +93,29 @@ Text Domain: gvb
        --top-wave-fade  → length (px) the L2 green strip fades from solid
                           to transparent below --top-wave-start. Larger =
                           softer blend into the wave layer. 0 = hard edge.
-       --bg-h           → bottom-green start point (where linen valley ends) */
+       --bg-h           → height (px) of the bottom-wave layer (the SVG)
+       --bottom-wave-offset → distance (px) from page-bottom up to the
+                              wave's bottom edge. Equals approximately
+                              footer-height + brand-promise-height so the
+                              wave's bottom lands at brand-promise's top. */
   --top-wave-start: 70px;
   --top-wave-h: 1000px;
   --top-wave-zoom: 1;
   --top-wave-fade: 0px;
   --bg-h: 4000px;
-  background-color: #459271;
-  /* 3-layer background:
+  --bottom-wave-offset: 850px;
+  background-color: #EDE8DB;
+  /* 2-layer top background:
        L1 (drawn on top): top-wave SVG, shifted down by --top-wave-start
        L2 (middle): green strip — solid from y=0 to y=--top-wave-start
                     (fills the navbar gap), then fades to transparent over
                     the next --top-wave-fade px so it blends seamlessly
                     into the wave layer below with no hard cutoff line
-       L3 (bottom): bottom-wave SVG (linen rect + bottom green wave) */
+     The bottom wave is no longer here — it now lives on
+     .gvb-brand-promise::before (see below) so its bottom edge is pinned
+     to the top of the brand-promise section on every page, regardless
+     of page length. Page bg-color is linen so areas above L1 + below
+     the bottom-wave pseudo read as linen consistently. */
   background-image:
     url('assets/svg/desktop-wave-top.svg'),
     linear-gradient(
@@ -114,23 +123,56 @@ Text Domain: gvb
       #459271 0px,
       #459271 var(--top-wave-start),
       transparent calc(var(--top-wave-start) + var(--top-wave-fade))
-    ),
-    url('assets/svg/background-large-bottom.svg');
+    );
   background-size:
     calc(100% * var(--top-wave-zoom)) calc((var(--top-wave-h) - var(--top-wave-start)) * var(--top-wave-zoom)),
-    100% calc(var(--top-wave-start) + var(--top-wave-fade)),
-    100% var(--bg-h);
-  background-repeat: no-repeat, no-repeat, no-repeat;
+    100% calc(var(--top-wave-start) + var(--top-wave-fade));
+  background-repeat: no-repeat, no-repeat;
   background-position:
     center calc(var(--top-wave-h) - (var(--top-wave-h) - var(--top-wave-start)) * var(--top-wave-zoom)),
-    center top,
     center top;
+}
+
+/* Bottom wave — lives on .wp-site-blocks::before so it sits in the
+   parent's stacking context (NOT brand-promise's, which has z-index: 1
+   from .wp-site-blocks > * and would otherwise paint the pseudo over
+   the previous section's content). With z-index: auto the pseudo is
+   painted in step 6 of body's stacking context, behind every direct
+   child of .wp-site-blocks (which are all at z-index: 1, step 7).
+
+   Position: anchored to .wp-site-blocks's bottom (= footer's bottom =
+   page-bottom). `bottom: var(--bottom-wave-offset)` lifts the wave up
+   so its bottom edge lands at brand-promise's top — adjust the offset
+   per viewport (it's footer-height + brand-promise-height, roughly).
+   `height: var(--bg-h)` sets how far up the wave's top edge reaches.
+
+   Mobile uses the smaller mobile-bottom SVG via the @media block
+   below. */
+.wp-site-blocks::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--bottom-wave-offset);
+  height: var(--bg-h);
+  background-image: url('assets/svg/background-large-bottom.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
 }
 
 /* Laptop tier (≥1024) — bottom-green start point starts creeping up. */
 @media (min-width: 1024px) {
   .wp-site-blocks {
     --bg-h: 3900px;
+  }
+}
+
+/* Laptop L tier (≥1440) — bottom wave nudges closer to the footer. */
+@media (min-width: 1440px) {
+  .wp-site-blocks {
+    --bottom-wave-offset: 800px;
   }
 }
 
@@ -149,8 +191,7 @@ Text Domain: gvb
         #459271 0px,
         #459271 var(--top-wave-start),
         transparent calc(var(--top-wave-start) + var(--top-wave-fade))
-      ),
-      url('assets/svg/background-large-bottom.svg');
+      );
   }
 }
 
@@ -159,6 +200,7 @@ Text Domain: gvb
 @media (min-width: 2200px) {
   .wp-site-blocks {
     --bg-h: 4100px;
+    --bottom-wave-offset: 750px;
   }
 }
 
@@ -4792,6 +4834,7 @@ html {
     --top-wave-h: 1200px;
     --top-wave-fade: 0px;
     --bg-h: 4200px;
+    --bottom-wave-offset: 1200px;
     background-image:
       url('assets/svg/mobile-top-wave.svg'),
       linear-gradient(
@@ -4799,17 +4842,19 @@ html {
         #459271 0px,
         #459271 var(--top-wave-start),
         transparent calc(var(--top-wave-start) + var(--top-wave-fade))
-      ),
-      url('assets/svg/background-mobile-bottom.svg');
+      );
     background-size:
       calc(100% * var(--top-wave-zoom)) calc((var(--top-wave-h) - var(--top-wave-start)) * var(--top-wave-zoom)),
-      100% calc(var(--top-wave-start) + var(--top-wave-fade)),
-      100% var(--bg-h);
+      100% calc(var(--top-wave-start) + var(--top-wave-fade));
     background-position:
       center calc(var(--top-wave-h) - (var(--top-wave-h) - var(--top-wave-start)) * var(--top-wave-zoom)),
-      center top,
       center top;
-    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-repeat: no-repeat, no-repeat;
+  }
+
+  /* Mobile bottom-wave: swap the SVG on the .wp-site-blocks::before pseudo. */
+  .wp-site-blocks::before {
+    background-image: url('assets/svg/background-mobile-bottom.svg');
   }
 
 }
