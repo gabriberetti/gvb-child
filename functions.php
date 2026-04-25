@@ -535,3 +535,69 @@ function gvb_og_locale() {
     printf( '<meta property="og:locale:alternate" content="%s" />' . "\n", esc_attr( $alt ) );
 }
 add_action( 'wp_head', 'gvb_og_locale', 6 );
+
+/* ── 10. Language switcher shortcode ─────────────────────────── */
+
+/**
+ * Render the DE / EN language switcher.
+ *
+ * Outputs a small <nav> with two language links. The active link
+ * carries `aria-current="page"` and self-references; the inactive link
+ * points to the equivalent translated page (via ACF Translation Pairing
+ * fields) or, as fallback, to the language home root (`/` for DE,
+ * `/en/` for EN).
+ *
+ * Both links carry `lang` + `hreflang` attributes so screen readers
+ * announce the language correctly and search engines understand the
+ * link semantics.
+ *
+ * Usage in template part / pattern:
+ *   <!-- wp:shortcode -->[gvb_lang_switcher]<!-- /wp:shortcode -->
+ *
+ * Usage in PHP:
+ *   echo do_shortcode( '[gvb_lang_switcher]' );
+ *
+ * @return string
+ */
+function gvb_lang_switcher_shortcode() {
+    $current_id = get_queried_object_id();
+    $is_en      = gvb_is_english_page( $current_id );
+
+    // Counterpart URL via ACF pairing
+    $pair_id = 0;
+    if ( $current_id && function_exists( 'get_field' ) ) {
+        $pair_id = $is_en
+            ? gvb_acf_to_post_id( get_field( '_de_page_id', $current_id ) )
+            : gvb_acf_to_post_id( get_field( '_en_page_id', $current_id ) );
+    }
+
+    $pair_url = ( $pair_id && 'publish' === get_post_status( $pair_id ) )
+        ? get_permalink( $pair_id )
+        : ( $is_en ? home_url( '/' ) : home_url( '/en/' ) );
+
+    // Self URL for the active link (matches canonical — no surprise reload target)
+    $self_url = $current_id ? get_permalink( $current_id ) : ( $is_en ? home_url( '/en/' ) : home_url( '/' ) );
+
+    $de_href   = $is_en ? $pair_url : $self_url;
+    $en_href   = $is_en ? $self_url : $pair_url;
+    $de_class  = $is_en ? 'gvb-lang-switcher__link' : 'gvb-lang-switcher__link is-active';
+    $en_class  = $is_en ? 'gvb-lang-switcher__link is-active' : 'gvb-lang-switcher__link';
+    $de_aria   = $is_en ? '' : ' aria-current="page"';
+    $en_aria   = $is_en ? ' aria-current="page"' : '';
+
+    return sprintf(
+        '<nav class="gvb-lang-switcher" aria-label="%s">' .
+        '<a class="%s" href="%s" lang="de" hreflang="de-DE"%s>DE</a>' .
+        '<span class="gvb-lang-switcher__divider" aria-hidden="true">/</span>' .
+        '<a class="%s" href="%s" lang="en" hreflang="en"%s>EN</a>' .
+        '</nav>',
+        esc_attr__( 'Language', 'gvb' ),
+        esc_attr( $de_class ),
+        esc_url( $de_href ),
+        $de_aria,
+        esc_attr( $en_class ),
+        esc_url( $en_href ),
+        $en_aria
+    );
+}
+add_shortcode( 'gvb_lang_switcher', 'gvb_lang_switcher_shortcode' );
