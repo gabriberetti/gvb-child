@@ -238,11 +238,11 @@ Text Domain: gvb
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   will-change: transform;
   box-sizing: border-box;
-  /* Trim navbar height symmetrically — overrides inline style padding from
+  /* Header padding — explicit override of the inline style from
      parts/header.html (or its DB-cached FSE template-part copy).
      Mobile rule at @media (max-width: 784px) below still wins for ≤784. */
-  padding-top: 12px !important;
-  padding-bottom: 12px !important;
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
 }
 
 /* Logged-in WP admin bar (desktop ≥783px only): admin bar is fixed, so we
@@ -252,7 +252,7 @@ Text Domain: gvb
    phantom gap when the nav re-pins on scroll-up). */
 @media (min-width: 783px) {
   .admin-bar .gvb-header {
-    padding-top: calc(12px + 32px) !important;
+    padding-top: calc(24px + 32px) !important;
   }
 }
 
