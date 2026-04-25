@@ -412,3 +412,126 @@ function gvb_register_en_post_type() {
     ) );
 }
 add_action( 'init', 'gvb_register_en_post_type' );
+
+/* ── 9. SEO: hreflang + language_attributes + og:locale ──────── */
+
+/**
+ * Normalize an ACF Post Object field value to an integer post ID.
+ *
+ * ACF Post Object fields can return either an integer (when "Return Format"
+ * is set to "Post ID") or a WP_Post object (when set to "Post Object").
+ * This helper accepts both shapes plus arrays for multi-select variants.
+ *
+ * @param mixed $value Raw return value from get_field().
+ * @return int Post ID, or 0 if invalid/empty.
+ */
+function gvb_acf_to_post_id( $value ) {
+    if ( empty( $value ) ) {
+        return 0;
+    }
+    if ( is_object( $value ) && isset( $value->ID ) ) {
+        return (int) $value->ID;
+    }
+    if ( is_array( $value ) ) {
+        $first = reset( $value );
+        return is_object( $first ) ? (int) $first->ID : (int) $first;
+    }
+    return (int) $value;
+}
+
+/**
+ * Output reciprocal hreflang link tags in the document <head>.
+ *
+ * Tags emitted (when applicable):
+ *   <link rel="alternate" hreflang="de-DE"    href="..." />
+ *   <link rel="alternate" hreflang="x-default" href="..." /> (mirrors DE — primary market)
+ *   <link rel="alternate" hreflang="en"       href="..." />
+ *
+ * Page pairing comes from ACF fields (Translation Pairing field group):
+ *   - On DE pages/posts:  `_en_page_id` → EN counterpart (page or en_post)
+ *   - On EN pages/posts:  `_de_page_id` → DE counterpart (page or post)
+ *
+ * Both fields must use Return Format = Post ID (or Post Object — handled by
+ * gvb_acf_to_post_id()). Self-referencing + reciprocal annotation are
+ * mandatory per Google's hreflang spec.
+ *
+ * If ACF is not active or the pair is unset, only the self-referencing tag
+ * is emitted (graceful degradation — no broken hreflang cluster).
+ *
+ * Skips on archive/search/404; only fires for is_singular() and the static
+ * front page.
+ */
+function gvb_hreflang_tags() {
+    if ( ! is_singular() && ! is_front_page() ) {
+        return;
+    }
+
+    $current_id = get_queried_object_id();
+    if ( ! $current_id ) {
+        return; // "latest posts" homepage with no static page assigned — skip.
+    }
+
+    $is_en = gvb_is_english_page( $current_id );
+
+    if ( function_exists( 'get_field' ) ) {
+        $de_id = $is_en
+            ? gvb_acf_to_post_id( get_field( '_de_page_id', $current_id ) )
+            : (int) $current_id;
+        $en_id = $is_en
+            ? (int) $current_id
+            : gvb_acf_to_post_id( get_field( '_en_page_id', $current_id ) );
+    } else {
+        // ACF not active — only self-reference (still valid SEO, just no pair).
+        $de_id = $is_en ? 0 : (int) $current_id;
+        $en_id = $is_en ? (int) $current_id : 0;
+    }
+
+    $de_url = ( $de_id && 'publish' === get_post_status( $de_id ) ) ? get_permalink( $de_id ) : '';
+    $en_url = ( $en_id && 'publish' === get_post_status( $en_id ) ) ? get_permalink( $en_id ) : '';
+
+    if ( $de_url ) {
+        printf( '<link rel="alternate" hreflang="de-DE" href="%s" />' . "\n", esc_url( $de_url ) );
+        printf( '<link rel="alternate" hreflang="x-default" href="%s" />' . "\n", esc_url( $de_url ) );
+    }
+    if ( $en_url ) {
+        printf( '<link rel="alternate" hreflang="en" href="%s" />' . "\n", esc_url( $en_url ) );
+    }
+}
+add_action( 'wp_head', 'gvb_hreflang_tags', 5 );
+
+/**
+ * Set HTML lang attribute to "en-US" on English pages.
+ *
+ * Falls through to the WordPress default ("de-DE" per Settings → General)
+ * for everything else, so DE pages remain unchanged.
+ *
+ * @param string $output Default `lang="..." dir="..."` attribute string.
+ * @return string
+ */
+function gvb_language_attributes( $output ) {
+    if ( gvb_is_english_page( get_queried_object_id() ) ) {
+        return 'lang="en-US" dir="ltr"';
+    }
+    return $output;
+}
+add_filter( 'language_attributes', 'gvb_language_attributes' );
+
+/**
+ * Emit OpenGraph og:locale + og:locale:alternate per language.
+ *
+ * Ensures social shares (Facebook, LinkedIn, etc.) advertise the correct
+ * primary locale and the available translation.
+ *
+ * NOTE: RankMath also emits og:locale (default priority 10). We hook at
+ * priority 6 so our tag appears first; OG parsers typically honour the first
+ * occurrence. If duplicate tags become an issue in QA, filter
+ * `rank_math/frontend/locale` to return our locale and remove this emit.
+ */
+function gvb_og_locale() {
+    $is_en   = gvb_is_english_page( get_queried_object_id() );
+    $primary = $is_en ? 'en_US' : 'de_DE';
+    $alt     = $is_en ? 'de_DE' : 'en_US';
+    printf( '<meta property="og:locale" content="%s" />' . "\n", esc_attr( $primary ) );
+    printf( '<meta property="og:locale:alternate" content="%s" />' . "\n", esc_attr( $alt ) );
+}
+add_action( 'wp_head', 'gvb_og_locale', 6 );
