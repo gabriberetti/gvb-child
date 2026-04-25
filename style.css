@@ -169,9 +169,13 @@ Text Domain: gvb
   }
 }
 
-/* Laptop L tier (≥1440) — bottom wave nudges closer to the footer. */
+/* Laptop L tier (≥1440) — bottom wave nudges closer to the footer.
+   --top-wave-h bumps to 1100 for the 1441–1949 band (using the smaller
+   desktop-wave-top.svg, which renders best at this height). At ≥1950 the
+   SVG swaps to background-large-top.svg and --top-wave-h jumps to 5000+. */
 @media (min-width: 1440px) {
   .wp-site-blocks {
+    --top-wave-h: 1100px;
     --bottom-wave-offset: 800px;
   }
 }
@@ -183,7 +187,7 @@ Text Domain: gvb
    Cascades up to 4K. */
 @media (min-width: 1950px) {
   .wp-site-blocks {
-    --top-wave-h: 4400px;
+    --top-wave-h: 5000px;
     background-image:
       url('assets/svg/background-large-top.svg'),
       linear-gradient(
@@ -199,6 +203,7 @@ Text Domain: gvb
    creeps up further as the SVG stretches horizontally. */
 @media (min-width: 2200px) {
   .wp-site-blocks {
+    --top-wave-h: 5300px;
     --bg-h: 4100px;
     --bottom-wave-offset: 750px;
   }
@@ -659,7 +664,13 @@ html {
 .gvb-hero {
   position: relative;
   overflow: hidden;
-  min-height: 604px;
+  /* Fluid floor: 604px at 1280 viewport (Figma's 1280 frame = our 1440 design)
+     → 774px at 2200 viewport (Figma's 2200 frame = our 2560 design).
+     Clamped at both ends. Below 1024 the @media override sets 400px. */
+  min-height: clamp(604px, calc(367.5px + 18.48vw), 774px);
+  /* Tighten WP's default block-gap (`:where(.wp-site-blocks) > * { margin-block-start: 1.5rem }`)
+     from 24px → 8px so the hero sits closer to the navbar — matches Figma's design. */
+  margin-top: 8px;
   display: flex;
   align-items: center;
 }
@@ -5643,3 +5654,4 @@ html {
     font-size: 65px !important;
   }
 }
+
