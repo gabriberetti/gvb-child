@@ -289,7 +289,8 @@ function gvb_theme_setup() {
     load_child_theme_textdomain( 'gvb', get_stylesheet_directory() . '/languages' );
 
     register_nav_menus( array(
-        'gvb-header-nav' => __( 'Header Navigation', 'gvb' ),
+        'gvb-header-nav'    => __( 'Header Navigation (DE)', 'gvb' ),
+        'gvb-header-nav-en' => __( 'Header Navigation (EN)', 'gvb' ),
     ) );
 }
 add_action( 'after_setup_theme', 'gvb_theme_setup' );
@@ -312,3 +313,102 @@ add_filter( 'fluentform/allowed_mimes', function( $mimes ) {
     $mimes['tiff'] = 'image/tiff';
     return $mimes;
 } );
+
+/* ── 9. English page detection helper ────────────────────────── */
+
+/**
+ * Determine whether a given post is part of the English-language section.
+ *
+ * Returns true when:
+ *   - The post is an `en_post` (English blog post CPT), OR
+ *   - The post is a page that is itself slug=`en` or has an ancestor with slug=`en`
+ *     (i.e. lives under /en/).
+ *
+ * Used by hreflang injection, the `language_attributes` filter, og:locale
+ * meta tags, and the language switcher pattern.
+ *
+ * @param int|null $post_id Optional. Defaults to the queried object.
+ * @return bool
+ */
+function gvb_is_english_page( $post_id = null ) {
+    if ( null === $post_id ) {
+        $post_id = get_queried_object_id();
+    }
+    if ( ! $post_id ) {
+        return false;
+    }
+
+    $post_type = get_post_type( $post_id );
+
+    // English blog posts (custom post type)
+    if ( 'en_post' === $post_type ) {
+        return true;
+    }
+
+    // English pages — self or ancestor has slug `en`
+    if ( 'page' === $post_type ) {
+        $candidates   = get_post_ancestors( $post_id );
+        $candidates[] = (int) $post_id; // include self in case this IS the /en/ parent
+        foreach ( $candidates as $candidate_id ) {
+            if ( 'en' === get_post_field( 'post_name', $candidate_id ) ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+/* ── 10. English Posts CPT + en_category taxonomy ────────────── */
+
+/**
+ * Register the `en_post` custom post type for English blog posts and the
+ * `en_category` taxonomy that mirrors the German `category` taxonomy.
+ *
+ * URL structure:
+ *   - Archive:  /en/blog/
+ *   - Single:   /en/blog/{slug}/
+ *   - Category: /en/blog/category/{slug}/
+ *
+ * NOTE: After deploying, visit Settings → Permalinks once (or call
+ * flush_rewrite_rules()) to register the rewrite rules. Visiting the
+ * Permalinks screen is sufficient — no field needs to change.
+ */
+function gvb_register_en_post_type() {
+    register_post_type( 'en_post', array(
+        'labels' => array(
+            'name'               => __( 'English Posts', 'gvb' ),
+            'singular_name'      => __( 'English Post', 'gvb' ),
+            'menu_name'          => __( 'English Posts', 'gvb' ),
+            'add_new'            => __( 'Add New', 'gvb' ),
+            'add_new_item'       => __( 'Add New English Post', 'gvb' ),
+            'edit_item'          => __( 'Edit English Post', 'gvb' ),
+            'new_item'           => __( 'New English Post', 'gvb' ),
+            'view_item'          => __( 'View English Post', 'gvb' ),
+            'search_items'       => __( 'Search English Posts', 'gvb' ),
+            'not_found'          => __( 'No English posts found', 'gvb' ),
+            'not_found_in_trash' => __( 'No English posts found in Trash', 'gvb' ),
+            'all_items'          => __( 'All English Posts', 'gvb' ),
+        ),
+        'public'        => true,
+        'show_in_rest'  => true,
+        'has_archive'   => 'en/blog',
+        'rewrite'       => array( 'slug' => 'en/blog', 'with_front' => false ),
+        'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'author', 'revisions' ),
+        'menu_icon'     => 'dashicons-admin-site-alt3',
+        'menu_position' => 6, // Between Posts (5) and Pages (20)
+    ) );
+
+    register_taxonomy( 'en_category', 'en_post', array(
+        'labels' => array(
+            'name'          => __( 'English Categories', 'gvb' ),
+            'singular_name' => __( 'English Category', 'gvb' ),
+            'menu_name'     => __( 'Categories', 'gvb' ),
+        ),
+        'hierarchical'      => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'rewrite'           => array( 'slug' => 'en/blog/category', 'with_front' => false ),
+    ) );
+}
+add_action( 'init', 'gvb_register_en_post_type' );
