@@ -206,6 +206,37 @@ function gvb_register_pattern_category() {
             ) );
         }
     }
+
+    // Auto-register English mirror patterns from patterns/en/
+    // Slug derived from filename: patterns/en/edelstahl-hero.php → gvb/en-edelstahl-hero
+    // Title pulled from each file's "Title:" docblock when present.
+    $en_dir = get_stylesheet_directory() . '/patterns/en/';
+    if ( is_dir( $en_dir ) ) {
+        foreach ( glob( $en_dir . '*.php' ) as $en_file ) {
+            $slug_base = basename( $en_file, '.php' );
+            $en_slug   = 'gvb/en-' . $slug_base;
+            if ( $registry->is_registered( $en_slug ) ) {
+                continue;
+            }
+
+            // Extract Title from file's leading docblock
+            $header = file_get_contents( $en_file, false, null, 0, 512 );
+            if ( $header && preg_match( '/Title:\s*(.+)$/m', $header, $m ) ) {
+                $title = trim( $m[1] );
+            } else {
+                $title = 'EN ' . ucwords( str_replace( array( '-', '_' ), ' ', $slug_base ) );
+            }
+
+            ob_start();
+            include $en_file;
+            $content = ob_get_clean();
+            register_block_pattern( $en_slug, array(
+                'title'      => $title,
+                'categories' => array( 'gvb' ),
+                'content'    => $content,
+            ) );
+        }
+    }
 }
 add_action( 'init', 'gvb_register_pattern_category' );
 
