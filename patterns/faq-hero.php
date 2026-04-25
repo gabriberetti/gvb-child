@@ -20,8 +20,8 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<h1 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px);font-weight:700;line-height:1;letter-spacing:-1.95px">FAQ</h1>
 		<!-- /wp:heading -->
 
-		<!-- wp:paragraph {"style":{"typography":{"fontSize":"clamp(32px, 2.222vw, 57px)","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
-		<p class="has-gvb-linen-color has-text-color" style="font-size:clamp(32px, 2.222vw, 57px);font-weight:400;line-height:1.15;letter-spacing:0.16px">Du hast Fragen? Wir haben Antworten.</p>
+		<!-- wp:paragraph {"style":{"typography":{"fontSize":"32px","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
+		<p class="has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Du hast Fragen? Wir haben Antworten.</p>
 		<!-- /wp:paragraph -->
 
 	</div>

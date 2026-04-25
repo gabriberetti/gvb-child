@@ -26,8 +26,8 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 			</figure>
 			<!-- /wp:image -->
 
-			<!-- wp:paragraph {"className":"gvb-footer__tagline","textColor":"gvb-green","style":{"typography":{"fontSize":"clamp(16px, 1.111vw, 28px)","lineHeight":"1.2","letterSpacing":"0.08px"},"spacing":{"margin":{"top":"56px"}}}} -->
-			<p class="gvb-footer__tagline has-gvb-green-color has-text-color" style="margin-top:56px;font-size:clamp(16px, 1.111vw, 28px);line-height:1.2;letter-spacing:0.08px">Good Vibes Only. Great Hydration Always.</p>
+			<!-- wp:paragraph {"className":"gvb-footer__tagline","textColor":"gvb-green","style":{"typography":{"fontSize":"16px","lineHeight":"1.2","letterSpacing":"0.08px"},"spacing":{"margin":{"top":"56px"}}}} -->
+			<p class="gvb-footer__tagline has-gvb-green-color has-text-color" style="margin-top:56px;font-size:16px;line-height:1.2;letter-spacing:0.08px">Good Vibes Only. Great Hydration Always.</p>
 			<!-- /wp:paragraph -->
 
 			<!-- wp:group {"className":"gvb-footer__social","style":{"spacing":{"blockGap":"24px","margin":{"top":"56px"}}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
@@ -52,11 +52,11 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 
 				<!-- wp:column -->
 				<div class="wp-block-column">
-					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"clamp(15px, 1.042vw, 27px)","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"16px"}}}} -->
-					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:clamp(15px, 1.042vw, 27px);font-weight:400;letter-spacing:-0.3px;line-height:1"><a href="/unsere-flaschen/">Unsere Flaschen</a></h6>
+					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"16px"}}}} -->
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:15px;font-weight:400;letter-spacing:-0.3px;line-height:1"><a href="/unsere-flaschen/">Unsere Flaschen</a></h6>
 					<!-- /wp:heading -->
-					<!-- wp:list {"className":"gvb-footer__nav-list","textColor":"gvb-green","style":{"typography":{"fontSize":"clamp(16px, 1.111vw, 28px)","lineHeight":"1.2","letterSpacing":"0.08px"},"spacing":{"blockGap":"8px"}}} -->
-					<ul class="wp-block-list gvb-footer__nav-list has-gvb-green-color has-text-color" style="font-size:clamp(16px, 1.111vw, 28px);line-height:1.2;letter-spacing:0.08px">
+					<!-- wp:list {"className":"gvb-footer__nav-list","textColor":"gvb-green","style":{"typography":{"fontSize":"16px","lineHeight":"1.2","letterSpacing":"0.08px"},"spacing":{"blockGap":"8px"}}} -->
+					<ul class="wp-block-list gvb-footer__nav-list has-gvb-green-color has-text-color" style="font-size:16px;line-height:1.2;letter-spacing:0.08px">
 						<li><a href="/edelstahl/">Edelstahl</a></li>
 						<li><a href="/borosilikatglas/">Borosilikatglas</a></li>
 						<li><a href="/tritan/">Tritan</a></li>
@@ -69,11 +69,11 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 
 				<!-- wp:column -->
 				<div class="wp-block-column">
-					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"clamp(15px, 1.042vw, 27px)","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"16px"}}}} -->
-					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:clamp(15px, 1.042vw, 27px);font-weight:400;letter-spacing:-0.3px;line-height:1"><a href="/unsere-losungen/">Unsere Lösungen</a></h6>
+					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"16px"}}}} -->
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:15px;font-weight:400;letter-spacing:-0.3px;line-height:1"><a href="/unsere-losungen/">Unsere Lösungen</a></h6>
 					<!-- /wp:heading -->
-					<!-- wp:list {"className":"gvb-footer__nav-list","textColor":"gvb-green","style":{"typography":{"fontSize":"clamp(16px, 1.111vw, 28px)","lineHeight":"1.2","letterSpacing":"0.08px"},"spacing":{"blockGap":"8px"}}} -->
-					<ul class="wp-block-list gvb-footer__nav-list has-gvb-green-color has-text-color" style="font-size:clamp(16px, 1.111vw, 28px);line-height:1.2;letter-spacing:0.08px">
+					<!-- wp:list {"className":"gvb-footer__nav-list","textColor":"gvb-green","style":{"typography":{"fontSize":"16px","lineHeight":"1.2","letterSpacing":"0.08px"},"spacing":{"blockGap":"8px"}}} -->
+					<ul class="wp-block-list gvb-footer__nav-list has-gvb-green-color has-text-color" style="font-size:16px;line-height:1.2;letter-spacing:0.08px">
 						<li><a href="/unternehmen/">Unternehmen</a></li>
 						<li><a href="/sportvereine/">Sport</a></li>
 						<li><a href="/gesundheitswesen/">Gesundheit</a></li>
@@ -87,32 +87,32 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 
 				<!-- wp:column -->
 				<div class="wp-block-column">
-					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"clamp(15px, 1.042vw, 27px)","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"16px"}}}} -->
-					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:clamp(15px, 1.042vw, 27px);font-weight:400;letter-spacing:-0.3px;line-height:1"><a href="/uber-uns/">Über uns</a></h6>
+					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"16px"}}}} -->
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:16px;font-size:15px;font-weight:400;letter-spacing:-0.3px;line-height:1"><a href="/uber-uns/">Über uns</a></h6>
 					<!-- /wp:heading -->
 				</div>
 				<!-- /wp:column -->
 
 				<!-- wp:column -->
 				<div class="wp-block-column">
-					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"clamp(15px, 1.042vw, 27px)","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
-					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:clamp(15px, 1.042vw, 27px);font-weight:400;line-height:1"><a href="/blog/">Blog</a></h6>
+					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:15px;font-weight:400;line-height:1"><a href="/blog/">Blog</a></h6>
 					<!-- /wp:heading -->
 				</div>
 				<!-- /wp:column -->
 
 				<!-- wp:column -->
 				<div class="wp-block-column">
-					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"clamp(15px, 1.042vw, 27px)","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
-					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:clamp(15px, 1.042vw, 27px);font-weight:400;line-height:1"><a href="/impressum/">Impressum</a></h6>
+					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:15px;font-weight:400;line-height:1"><a href="/impressum/">Impressum</a></h6>
 					<!-- /wp:heading -->
 				</div>
 				<!-- /wp:column -->
 
 				<!-- wp:column -->
 				<div class="wp-block-column">
-					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"clamp(15px, 1.042vw, 27px)","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
-					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:clamp(15px, 1.042vw, 27px);font-weight:400;line-height:1"><a href="/faq/">FAQ</a></h6>
+					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:15px;font-weight:400;line-height:1"><a href="/faq/">FAQ</a></h6>
 					<!-- /wp:heading -->
 				</div>
 				<!-- /wp:column -->

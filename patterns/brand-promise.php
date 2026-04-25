@@ -13,12 +13,12 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 	<!-- wp:group {"className":"gvb-brand-promise__content","style":{"spacing":{"blockGap":"48px"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"center"}} -->
 	<div class="wp-block-group gvb-brand-promise__content">
 
-		<!-- wp:heading {"textAlign":"center","level":2,"className":"gvb-fade-up","style":{"typography":{"fontSize":"clamp(60px, 4.167vw, 107px)","fontWeight":"700","lineHeight":"1.03"}},"textColor":"gvb-linen"} -->
-		<h2 class="wp-block-heading has-text-align-center has-gvb-linen-color has-text-color gvb-fade-up" style="font-size:clamp(60px, 4.167vw, 107px);font-weight:700;line-height:1.03">Heute schon genug getrunken?</h2>
+		<!-- wp:heading {"textAlign":"center","level":2,"className":"gvb-fade-up","style":{"typography":{"fontSize":"60px","fontWeight":"700","lineHeight":"1.03"}},"textColor":"gvb-linen"} -->
+		<h2 class="wp-block-heading has-text-align-center has-gvb-linen-color has-text-color gvb-fade-up" style="font-size:60px;font-weight:700;line-height:1.03">Heute schon genug getrunken?</h2>
 		<!-- /wp:heading -->
 
-		<!-- wp:paragraph {"align":"center","className":"gvb-fade-up","style":{"typography":{"fontSize":"clamp(24px, 1.667vw, 43px)","lineHeight":"1.2","letterSpacing":"0.12px"}},"textColor":"gvb-linen"} -->
-		<p class="has-text-align-center has-gvb-linen-color has-text-color gvb-fade-up" style="font-size:clamp(24px, 1.667vw, 43px);line-height:1.2;letter-spacing:0.12px">Entdecke unsere Trinkflaschen.</p>
+		<!-- wp:paragraph {"align":"center","className":"gvb-fade-up","style":{"typography":{"fontSize":"24px","lineHeight":"1.2","letterSpacing":"0.12px"}},"textColor":"gvb-linen"} -->
+		<p class="has-text-align-center has-gvb-linen-color has-text-color gvb-fade-up" style="font-size:24px;line-height:1.2;letter-spacing:0.12px">Entdecke unsere Trinkflaschen.</p>
 		<!-- /wp:paragraph -->
 
 		<!-- wp:buttons {"className":"gvb-fade-up","layout":{"type":"flex","justifyContent":"center"}} -->

@@ -28,24 +28,22 @@ Text Domain: gvb
   /* Transition */
   --gvb-transition: 0.25s ease;
 
-  /* ── Fluid type scale (1440 → 2560) ──
-     Formula: clamp(PX, (PX/14.4)vw, round(PX × 1.778)px)
-       • MIN   = value at 1440px viewport (floor — mobile/tablet untouched)
-       • PREF  = viewport-linear growth, equals MIN exactly at 1440
-       • MAX   = value at 2560px viewport (1.778× ratio matches outer-shell cap)
-     Every `font-size` declaration in this stylesheet and in pattern PHP files
-     follows this formula. Tokens below are the canonical list — use them for
-     new rules. Existing rules carry their own clamp inline for grep-ability. */
-  --fs-display:  clamp(65px,  4.514vw, 116px);
-  --fs-h1:       clamp(60px,  4.167vw, 107px);
-  --fs-h2:       clamp(40px,  2.778vw,  71px);
-  --fs-h3:       clamp(32px,  2.222vw,  57px);
-  --fs-h4:       clamp(24px,  1.667vw,  43px);
-  --fs-h5:       clamp(18px,  1.25vw,   32px);
-  --fs-h6:       clamp(30px,  2.083vw,  53px);
-  --fs-body:     clamp(16px,  1.111vw,  28px);
-  --fs-label:    clamp(15px,  1.042vw,  27px);
-  --fs-label-sm: clamp(12px,  0.833vw,  21px);
+  /* ── Type scale (locked at 1440 design values) ──
+     April 2026 refactor: typography no longer scales above 1440. Figma's
+     2200 design uses these exact pixel values, so every viewport ≥1440
+     renders text at the static MIN. Mobile/tablet still scale via Section
+     16's overrides (h1=42, h2=30, etc.). Tokens below are the canonical
+     list — use them for new rules. */
+  --fs-display:  65px;
+  --fs-h1:       60px;
+  --fs-h2:       40px;
+  --fs-h3:       32px;
+  --fs-h4:       24px;
+  --fs-h5:       18px;
+  --fs-h6:       30px;
+  --fs-body:     16px;
+  --fs-label:    15px;
+  --fs-label-sm: 12px;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -65,52 +63,110 @@ Text Domain: gvb
 .wp-site-blocks {
   position: relative;
   overflow: hidden;
-  /* Reserve space for the fixed header so hero images aren't clipped under it.
-     Waves are absolute-positioned from top: 0 (element outer edge) so they
-     start above this padding, unaffected. */
+  /* Reserve space for the fixed header so hero images aren't clipped under it. */
   padding-top: 96px;
+
+  /* ── PAGE BACKGROUND (April 2026 refactor — split-layer) ───────────
+     Two-layer background: top wave + bottom wave separated into their
+     own SVGs so neither wave can leak into the wrong area when stretched.
+
+     Layer 1 (top, drawn on top): background-large-top.svg — top wave
+       path only, NO linen rect (transparent everywhere except the wave),
+       so layer 2 shows through underneath.
+     Layer 2 (bottom, drawn below): background-large-bottom.svg — bottom
+       wave path only, WITH linen rect — provides the page's linen
+       background plus the bottom green wave.
+
+     Top layer at fixed --top-wave-h (independent knob), bottom layer
+     stretched to --bg-h. Below --bg-h the page falls through to
+     background-color (gvb-green) so the bottom green continues down
+     through brand-promise into the footer.
+
+     TUNABLE:
+       --top-wave-start → where the TOP edge of the top-wave layer starts
+                          (push top down, bottom stays pinned at --top-wave-h)
+       --top-wave-h     → where the BOTTOM edge of the top-wave layer ends
+       --top-wave-zoom  → proportional zoom on the top wave (1 = no zoom,
+                          1.2 = 20% bigger). Bottom stays pinned at
+                          --top-wave-h; image grows upward (extra height is
+                          clipped under navbar) and outward (sides clipped)
+       --top-wave-fade  → length (px) the L2 green strip fades from solid
+                          to transparent below --top-wave-start. Larger =
+                          softer blend into the wave layer. 0 = hard edge.
+       --bg-h           → bottom-green start point (where linen valley ends) */
+  --top-wave-start: 70px;
+  --top-wave-h: 1000px;
+  --top-wave-zoom: 1;
+  --top-wave-fade: 0px;
+  --bg-h: 4000px;
+  background-color: #459271;
+  /* 3-layer background:
+       L1 (drawn on top): top-wave SVG, shifted down by --top-wave-start
+       L2 (middle): green strip — solid from y=0 to y=--top-wave-start
+                    (fills the navbar gap), then fades to transparent over
+                    the next --top-wave-fade px so it blends seamlessly
+                    into the wave layer below with no hard cutoff line
+       L3 (bottom): bottom-wave SVG (linen rect + bottom green wave) */
+  background-image:
+    url('assets/svg/desktop-wave-top.svg'),
+    linear-gradient(
+      to bottom,
+      #459271 0px,
+      #459271 var(--top-wave-start),
+      transparent calc(var(--top-wave-start) + var(--top-wave-fade))
+    ),
+    url('assets/svg/background-large-bottom.svg');
+  background-size:
+    calc(100% * var(--top-wave-zoom)) calc((var(--top-wave-h) - var(--top-wave-start)) * var(--top-wave-zoom)),
+    100% calc(var(--top-wave-start) + var(--top-wave-fade)),
+    100% var(--bg-h);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position:
+    center calc(var(--top-wave-h) - (var(--top-wave-h) - var(--top-wave-start)) * var(--top-wave-zoom)),
+    center top,
+    center top;
 }
 
-/* Top wave — green organic shape anchored at top; spans full viewport width at
-   any screen size. Width fills viewport (via width: 100% on full-width parent);
-   height is capped by max-height so the wave never stretches vertically beyond
-   its original design height. SVG has its own viewBox so paths stay correct;
-   background-size: 100% 100% fills the box (wave stretches horizontally on
-   very wide screens — acceptable for smooth curves). */
-.wp-site-blocks::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1280 / 1000;
-  max-height: 2000px;
-  background-image: url('assets/svg/wave-top.svg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  z-index: 0;
-  pointer-events: none;
+/* Laptop tier (≥1024) — bottom-green start point starts creeping up. */
+@media (min-width: 1024px) {
+  .wp-site-blocks {
+    --bg-h: 3900px;
+  }
 }
 
-/* Bottom wave — green organic shape anchored at bottom; spans full viewport width
-   at any screen size. Same width/height lock strategy as the top wave. */
-.wp-site-blocks::after {
-  content: '';
-  position: absolute;
-  bottom: -100px;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1280 / 3322;
-  max-height: 6644px;
-  background-image: url('assets/svg/wave-bottom.svg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  z-index: 0;
-  pointer-events: none;
+/* Ultra-wide (≥1950) — switch the top-wave SVG from the simpler
+   desktop-wave-top.svg (used at smaller laptop widths) to the detailed
+   background-large-top.svg, whose shape was designed for wide viewports.
+   --top-wave-h bumps to match the SVG's much bigger natural viewBox.
+   Cascades up to 4K. */
+@media (min-width: 1950px) {
+  .wp-site-blocks {
+    --top-wave-h: 4400px;
+    background-image:
+      url('assets/svg/background-large-top.svg'),
+      linear-gradient(
+        to bottom,
+        #459271 0px,
+        #459271 var(--top-wave-start),
+        transparent calc(var(--top-wave-start) + var(--top-wave-fade))
+      ),
+      url('assets/svg/background-large-bottom.svg');
+  }
+}
+
+/* Ultra-wide intermediate tier (≥2200, <2560) — bottom-green start point
+   creeps up further as the SVG stretches horizontally. */
+@media (min-width: 2200px) {
+  .wp-site-blocks {
+    --bg-h: 4100px;
+  }
+}
+
+/* Ultrawide / 4K (≥2560 viewport) — final --bg-h tune. */
+@media (min-width: 2560px) {
+  .wp-site-blocks {
+    --bg-h: 4050px;
+  }
 }
 
 /* Ensure all content stacks above both waves */
@@ -140,6 +196,11 @@ Text Domain: gvb
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   will-change: transform;
   box-sizing: border-box;
+  /* Trim navbar height symmetrically — overrides inline style padding from
+     parts/header.html (or its DB-cached FSE template-part copy).
+     Mobile rule at @media (max-width: 784px) below still wins for ≤784. */
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
 }
 
 /* Logged-in WP admin bar (desktop ≥783px only): admin bar is fixed, so we
@@ -149,7 +210,7 @@ Text Domain: gvb
    phantom gap when the nav re-pins on scroll-up). */
 @media (min-width: 783px) {
   .admin-bar .gvb-header {
-    padding-top: calc(24px + 32px) !important;
+    padding-top: calc(12px + 32px) !important;
   }
 }
 
@@ -182,10 +243,15 @@ Text Domain: gvb
 }
 
 /* Anchor-jump offset for fixed header — #kontakt lands below the nav.
-   scroll-behavior: smooth gives native smooth scrolling for hash links. */
+   scroll-behavior: smooth gives native smooth scrolling for hash links.
+   overscroll-behavior: none disables the rubber-band bounce so we never
+   reveal canvas color outside the page boundaries — same approach used by
+   Linear, Vercel, Notion. background-color is the canvas fallback. */
 html {
   scroll-padding-top: 96px;
   scroll-behavior: smooth;
+  background-color: #459271;
+  overscroll-behavior: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -244,7 +310,7 @@ html {
 
 .gvb-header__nav .wp-block-navigation-item__content {
   color: var(--wp--preset--color--gvb-linen);
-  font-size: clamp(15px, 1.042vw, 27px);
+  font-size: 15px;
   font-weight: 400;
   letter-spacing: -0.3px;
   text-decoration: none;
@@ -278,7 +344,7 @@ html {
 
 .gvb-header .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
   color: var(--wp--preset--color--gvb-linen) !important;
-  font-size: clamp(15px, 1.042vw, 27px);
+  font-size: 15px;
   padding: 8px 24px 8px 24px;
   display: block;
   opacity: 0.75;
@@ -391,11 +457,11 @@ html {
   }
 
   .gvb-footer__nav-heading {
-    font-size: clamp(12px, 1.1vw, 21px) !important;
+    font-size: 12px !important;
   }
 
   .gvb-footer__nav-list {
-    font-size: clamp(13px, 1.2vw, 23px) !important;
+    font-size: 13px !important;
   }
 }
 
@@ -408,7 +474,7 @@ html {
    Pattern's 1200 contentSize still applies at viewports ≤1534 (clamp min),
    so narrower screens are unchanged. */
 .gvb-footer > .gvb-footer__inner {
-  max-width: clamp(1200px, 78.125vw, 2000px);
+  max-width: clamp(1200px, 78.125vw, 1895px);
   margin-left: auto;
   margin-right: auto;
 }
@@ -466,7 +532,7 @@ html {
   background-color: var(--wp--preset--color--gvb-orange);
   color: var(--wp--preset--color--gvb-white);
   font-weight: 700;
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   padding: 12px 32px;
   border: none;
   border-radius: var(--gvb-radius-pill);
@@ -492,7 +558,7 @@ html {
   background-color: transparent;
   color: var(--wp--preset--color--gvb-orange);
   font-weight: 700;
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   padding: 12px 32px;
   border: 2px solid var(--wp--preset--color--gvb-orange);
   border-radius: var(--gvb-radius-pill);
@@ -584,18 +650,9 @@ html {
   margin-right: auto !important;
 }
 
-/* Shorter pages: reduce wave height so the green starts at the contact form, not the top */
-.page-template-page-download .wp-site-blocks::after {
-  height: 1100px;
-}
-
-.page-template-page-impressum .wp-site-blocks::after {
-  height: 1300px;
-}
-
-.page-template-page-faq .wp-site-blocks::after {
-  height: 1300px;
-}
+/* Per-page bottom-wave height overrides removed (April 2026): page bg now
+   lives on .wp-site-blocks with a single locked --bg-h height, so the green
+   region can't intrude into earlier sections regardless of page length. */
 
 .gvb-hero__overlay {
   position: absolute;
@@ -655,7 +712,7 @@ html {
   border-radius: 50px;
   color: rgba(237, 232, 219, 0.55);
   font-family: inherit;
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   font-weight: 400;
   padding: 8px 16px;
   cursor: pointer;
@@ -780,7 +837,7 @@ html {
   left: 7%;
   right: 13%;
   z-index: 2;
-  font-size: clamp(32px, 1.923vw + 12.31px, 57px);
+  font-size: 32px;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -796,7 +853,7 @@ html {
 }
 
 .gvb-product-card__text {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #fff;
@@ -807,7 +864,7 @@ html {
   display: inline-block;
   background: #fff;
   color: var(--wp--preset--color--gvb-graphite);
-  font-size: clamp(12px, 0.833vw, 21px);
+  font-size: 12px;
   font-weight: 700;
   padding: 12px 24px;
   border-radius: var(--gvb-radius-pill);
@@ -861,7 +918,7 @@ html {
 }
 
 .gvb-testimonial-card__quote {
-  font-size: clamp(24px, 1.667vw, 43px);
+  font-size: 24px;
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.12px;
@@ -870,14 +927,14 @@ html {
 }
 
 .gvb-testimonial-card__name {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   font-weight: 400;
   color: var(--wp--preset--color--gvb-graphite);
   margin: 0 0 2px;
 }
 
 .gvb-testimonial-card__role {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   color: var(--wp--preset--color--gvb-graphite);
   opacity: 0.5;
   margin: 0;
@@ -912,7 +969,7 @@ html {
   border: 2px solid currentColor;
   border-radius: 50px;
   padding: 6px 20px;
-  font-size: clamp(14px, 0.972vw, 25px);
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
@@ -994,7 +1051,7 @@ html {
   border-radius: 12px;
   height: 45px;
   padding: 12px 16px;
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   font-weight: 400;
   font-family: inherit;
   line-height: 1.2;
@@ -1014,7 +1071,7 @@ html {
   border-radius: 12px;
   height: 172px;
   padding: 12px 16px;
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   font-weight: 400;
   font-family: inherit;
   line-height: 1.2;
@@ -1078,7 +1135,7 @@ html {
 }
 
 .gvb-contact__form-col .ff-el-input--label label {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.08px;
@@ -1127,7 +1184,7 @@ html {
   height: 42px !important;
   min-width: 114px !important;
   padding: 0 24px !important;
-  font-size: clamp(14px, 0.972vw, 25px) !important;
+  font-size: 14px !important;
   font-weight: 700 !important;
   font-family: inherit !important;
   cursor: pointer !important;
@@ -1171,7 +1228,7 @@ html {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: clamp(20px, 1.389vw, 36px);
+  font-size: 20px;
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: 0.08px;
@@ -1226,7 +1283,7 @@ html {
    matching the outer-shell cap) so the trigger text spreads across the
    wider form column instead of stacking into a narrow block. */
 .gvb-expand-trigger__text {
-  font-size: clamp(15px, 1.042vw, 27px);
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.38;
   letter-spacing: 0.75px;
@@ -1375,7 +1432,7 @@ html {
   .ff-t-column-2:not(:has(.ff-el-group:not(.ff_excluded)))::before {
   content: 'Modell';
   display: block;
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.08px;
@@ -1412,7 +1469,7 @@ html {
   .ff-t-column-1:not(:has(.ff-el-group:not(.ff_excluded)))::before {
   content: 'Verschluss';
   display: block;
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.08px;
@@ -1461,7 +1518,7 @@ html {
   display: flex !important;
   align-items: center !important;
   gap: 16px !important;
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.08px;
@@ -1506,7 +1563,7 @@ html {
 }
 
 .gvb-faq__question {
-  font-size: clamp(18px, 1.25vw, 32px);
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.09px;
@@ -1527,7 +1584,7 @@ html {
   left: 0;
   color: var(--wp--preset--color--gvb-orange);
   top: -4px;
-  font-size: clamp(25px, 1.736vw, 44px);
+  font-size: 25px;
   font-weight: 700;
   color: var(--wp--preset--color--gvb-orange);
   transition: transform var(--gvb-transition);
@@ -1547,7 +1604,7 @@ html {
 .gvb-faq__answer ul,
 .gvb-faq__answer ol,
 .gvb-faq__answer li {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: var(--wp--preset--color--gvb-graphite);
@@ -1591,7 +1648,7 @@ html {
   margin-top: 16px;
   margin-bottom: 0;
   text-align: right;
-  font-size: clamp(20px, 1.389vw, 36px);
+  font-size: 20px;
   line-height: 1.2;
   letter-spacing: -0.32px;
 }
@@ -1731,7 +1788,7 @@ html {
     background: rgba(255, 255, 255, 0.20);
     border: none;
     color: var(--wp--preset--color--gvb-linen);
-    font-size: clamp(28px, 1.944vw, 50px);
+    font-size: 28px;
     line-height: 1;
     width: 44px;
     height: 44px;
@@ -1753,7 +1810,7 @@ html {
   }
 
   .gvb-cases__panel h3.wp-block-heading {
-    font-size: clamp(18px, 1.25vw, 32px) !important;
+    font-size: 18px !important;
   }
 
   .gvb-cases__h3-break,
@@ -1762,7 +1819,7 @@ html {
   }
 
   .gvb-cases__panel h4.wp-block-heading {
-    font-size: clamp(24px, 1.667vw, 43px) !important;
+    font-size: 24px !important;
     margin-top: 0;
   }
 
@@ -1775,7 +1832,7 @@ html {
   }
 
   .gvb-losungen-intro p {
-    font-size: clamp(18px, 1.25vw, 32px) !important;
+    font-size: 18px !important;
     text-align: left !important;
     line-height: 1.5 !important;
   }
@@ -1800,12 +1857,12 @@ html {
   }
 
   .gvb-testimonial-card__quote {
-    font-size: clamp(16px, 4.5vw, 20px);
+    font-size: 16px;
   }
 
   .gvb-testimonial-card__name,
   .gvb-testimonial-card__role {
-    font-size: clamp(14px, 0.972vw, 25px);
+    font-size: 14px;
   }
 
   .gvb-contact__portrait img {
@@ -1819,7 +1876,7 @@ html {
   }
 
   .gvb-expand-trigger__text {
-    font-size: clamp(13px, 0.903vw, 23px);
+    font-size: 13px;
   }
 
   .gvb-intro-text {
@@ -1836,11 +1893,11 @@ html {
   }
 
   /* Scale down headings for tablet */
-  h1, .has-h-1-font-size { font-size: clamp(42px, 2.917vw, 75px) !important; }
-  h2, .has-h-2-font-size { font-size: clamp(30px, 2.083vw, 53px) !important; }
-  h3, .has-h-3-font-size { font-size: clamp(26px, 1.806vw, 46px) !important; }
-  h6, .has-h-6-font-size { font-size: clamp(24px, 1.667vw, 43px) !important; }
-  .has-display-font-size  { font-size: clamp(48px, 3.333vw, 85px) !important; }
+  h1, .has-h-1-font-size { font-size: 42px !important; }
+  h2, .has-h-2-font-size { font-size: 30px !important; }
+  h3, .has-h-3-font-size { font-size: 26px !important; }
+  h6, .has-h-6-font-size { font-size: 24px !important; }
+  .has-display-font-size  { font-size: 48px !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1852,7 +1909,7 @@ html {
   display: inline-block;
   background: var(--wp--preset--color--gvb-orange);
   color: #fff;
-  font-size: clamp(12px, 0.833vw, 21px);
+  font-size: 12px;
   font-weight: 700;
   padding: 10px 20px;
   border-radius: 51px;
@@ -1866,7 +1923,7 @@ html {
   display: inline-block;
   background: var(--wp--preset--color--gvb-orange);
   color: #fff;
-  font-size: clamp(12px, 0.833vw, 21px);
+  font-size: 12px;
   font-weight: 700;
   padding: 12px 28px;
   border-radius: 51px;
@@ -1945,7 +2002,7 @@ html {
 }
 
 .gvb-industry-card__content h5 {
-  font-size: clamp(32px, 2.222vw, 57px);
+  font-size: 32px;
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.16px;
@@ -1959,7 +2016,7 @@ html {
 }
 
 .gvb-personalisieren__heading {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -2002,7 +2059,7 @@ html {
 .gvb-personalisieren-card__title {
   position: relative;
   z-index: 2;
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1;
   color: var(--wp--preset--color--gvb-linen);
@@ -2016,7 +2073,7 @@ html {
 }
 
 .gvb-personalisieren-card__desc {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #fff;
@@ -2081,7 +2138,7 @@ html {
     left: 24px;
     right: 24px;
     padding: 0;
-    font-size: clamp(24px, 3vw, 30px);
+    font-size: 24px;
     line-height: 1.1;
   }
 
@@ -2097,7 +2154,7 @@ html {
   }
 
   .gvb-personalisieren-card__desc {
-    font-size: clamp(15px, 1.042vw, 27px);
+    font-size: 15px;
     line-height: 1.4;
     letter-spacing: 0.1px;
   }
@@ -2119,7 +2176,7 @@ html {
    - Content max-width grows from 603 → 900
    No sudden jump at a media-query boundary — everything interpolates. */
 .gvb-branding {
-  max-width: 1900px !important;
+  max-width: 1895px !important;
   margin-inline: auto !important;
 }
 
@@ -2146,7 +2203,7 @@ html {
 }
 
 .gvb-branding__heading {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -2155,7 +2212,7 @@ html {
 }
 
 .gvb-branding__text {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #2b2b2b;
@@ -2183,7 +2240,7 @@ html {
 }
 
 .gvb-steps__heading {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -1.8px;
@@ -2221,7 +2278,7 @@ html {
   left: clamp(60px, 6.94vw, 150px);
   top: 43%;
   transform: translateY(-50%);
-  font-size: clamp(140px, 13.4vw, 249px);
+  font-size: 140px;
   font-weight: 700;
   line-height: 1;
   color: var(--wp--preset--color--gvb-orange);
@@ -2252,7 +2309,7 @@ html {
 }
 
 .gvb-steps__text h3 {
-  font-size: clamp(24px, 2.22vw, 43px);
+  font-size: 24px;
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.16px;
@@ -2261,7 +2318,7 @@ html {
 }
 
 .gvb-steps__text p {
-  font-size: clamp(14px, 1.11vw, 25px);
+  font-size: 14px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: var(--wp--preset--color--gvb-linen);
@@ -2292,7 +2349,7 @@ html {
 }
 
 .gvb-flaschen-intro p {
-  font-size: clamp(32px, 2.222vw, 57px);
+  font-size: 32px;
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.16px;
@@ -2399,7 +2456,7 @@ html {
 }
 
 .gvb-flaschen-cards__title {
-  font-size: clamp(30px, 2.083vw, 53px);
+  font-size: 30px;
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: 0.15px;
@@ -2408,7 +2465,7 @@ html {
 }
 
 .gvb-flaschen-cards__desc {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #2b2b2b;
@@ -2455,7 +2512,7 @@ html {
 }
 
 .gvb-uberuns-intro p {
-  font-size: clamp(32px, 2.222vw, 57px);
+  font-size: 32px;
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.16px;
@@ -2498,7 +2555,7 @@ html {
 }
 
 .gvb-uberuns-vm__text h2 {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -2507,7 +2564,7 @@ html {
 }
 
 .gvb-uberuns-vm__text p {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #ede8db;
@@ -2552,7 +2609,7 @@ html {
 }
 
 .gvb-uberuns-personen h2 {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -1.8px;
@@ -2561,7 +2618,7 @@ html {
 }
 
 .gvb-uberuns-personen__text p {
-  font-size: clamp(24px, 1.667vw, 43px);
+  font-size: 24px;
   line-height: 1.2;
   letter-spacing: 0.12px;
   color: #000;
@@ -2578,7 +2635,7 @@ html {
 }
 
 .gvb-ueberzeugung__heading {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -1.8px;
@@ -2605,7 +2662,7 @@ html {
 }
 
 .gvb-ueberzeugung__num {
-  font-size: clamp(30px, 2.083vw, 54px);
+  font-size: 30px;
   font-weight: 400;
   color: #ede8db;
   letter-spacing: -0.3px;
@@ -2613,7 +2670,7 @@ html {
 }
 
 .gvb-ueberzeugung__text {
-  font-size: clamp(30px, 2.083vw, 53px);
+  font-size: 30px;
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: 0.15px;
@@ -2719,7 +2776,7 @@ html {
 }
 
 .gvb-bottle-card__title {
-  font-size: clamp(60px, 4.167vw, 107px);
+  font-size: 60px;
   font-weight: 700;
   line-height: 1.03;
   color: #2b2b2b;
@@ -2727,7 +2784,7 @@ html {
 }
 
 .gvb-bottle-card__body {
-  font-size: clamp(15px, 1.042vw, 27px);
+  font-size: 15px;
   line-height: 1.2;
   letter-spacing: 0.075px;
   color: #2b2b2b;
@@ -2798,7 +2855,7 @@ html {
 }
 
 .gvb-bottle-card__meta p {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #2b2b2b;
@@ -2832,7 +2889,7 @@ html {
 }
 
 .gvb-edelstahl-features__heading {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -2881,7 +2938,7 @@ html {
 }
 
 .gvb-edelstahl-feature-card__title {
-  font-size: clamp(22px, 1.528vw, 39px);
+  font-size: 22px;
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: 0.11px;
@@ -2890,7 +2947,7 @@ html {
 }
 
 .gvb-edelstahl-feature-card__desc {
-  font-size: clamp(13px, 0.903vw, 23px);
+  font-size: 13px;
   line-height: 1.2;
   letter-spacing: 0.07px;
   color: #2b2b2b;
@@ -2908,7 +2965,7 @@ html {
 }
 
 .gvb-borosilikat-verschluesse__heading {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -2986,7 +3043,7 @@ html {
 }
 
 .gvb-verschluss-card__title {
-  font-size: clamp(26px, 1.806vw, 46px);
+  font-size: 26px;
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: 0.13px;
@@ -2995,7 +3052,7 @@ html {
 }
 
 .gvb-verschluss-card__desc {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #2b2b2b;
@@ -3039,7 +3096,7 @@ html {
 }
 
 .gvb-borosilikat-features__heading {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -3088,7 +3145,7 @@ html {
 }
 
 .gvb-borosilikat-feature-card__title {
-  font-size: clamp(22px, 1.528vw, 39px);
+  font-size: 22px;
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: 0.11px;
@@ -3097,7 +3154,7 @@ html {
 }
 
 .gvb-borosilikat-feature-card__desc {
-  font-size: clamp(13px, 0.903vw, 23px);
+  font-size: 13px;
   line-height: 1.2;
   letter-spacing: 0.07px;
   color: #2b2b2b;
@@ -3131,7 +3188,7 @@ html {
    as a visible gap between content and image. */
 .gvb-blog-featured > *,
 .gvb-blog-featured .wp-block-post-template {
-  max-width: clamp(1400px, 89.84vw, 2300px);
+  max-width: clamp(1400px, 89.84vw, 1895px);
   margin-left: auto;
   margin-right: auto;
 }
@@ -3178,7 +3235,7 @@ html {
 }
 
 .gvb-blog-featured__content .wp-block-post-title {
-  font-size: clamp(40px, 2.778vw, 71px) !important;
+  font-size: 40px !important;
   font-weight: 700 !important;
   line-height: 1.08 !important;
   letter-spacing: 0.2px !important;
@@ -3186,7 +3243,7 @@ html {
 }
 
 .gvb-blog-featured__content .wp-block-post-excerpt {
-  font-size: clamp(16px, 1.111vw, 28px) !important;
+  font-size: 16px !important;
   line-height: 1.2 !important;
   letter-spacing: 0.08px !important;
   margin: 0 !important;
@@ -3253,7 +3310,7 @@ html {
   justify-content: center;
   background-color: var(--wp--preset--color--gvb-orange);
   color: #ffffff !important;
-  font-size: clamp(12px, 0.833vw, 21px) !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
   line-height: 1 !important;
   text-decoration: none !important;
@@ -3307,7 +3364,7 @@ html {
 }
 
 .gvb-blog-card__body .wp-block-post-title {
-  font-size: clamp(22px, 1.528vw, 39px) !important;
+  font-size: 22px !important;
   font-weight: 700 !important;
   line-height: 1.08 !important;
   letter-spacing: 0.175px !important;
@@ -3328,7 +3385,7 @@ html {
 }
 
 .gvb-blog-card__body .wp-block-post-date {
-  font-size: clamp(16px, 1.111vw, 28px) !important;
+  font-size: 16px !important;
   line-height: 1.5 !important;
   letter-spacing: 0.08px !important;
   color: var(--wp--preset--color--gvb-orange) !important;
@@ -3341,7 +3398,7 @@ html {
 }
 
 .gvb-blog-card__excerpt .wp-block-post-excerpt__excerpt {
-  font-size: clamp(16px, 1.111vw, 28px) !important;
+  font-size: 16px !important;
   line-height: 1.2 !important;
   letter-spacing: 0.08px !important;
   color: rgba(43, 43, 43, 0.55) !important;
@@ -3375,7 +3432,7 @@ html {
   background: transparent;
   border: 2px solid var(--wp--preset--color--gvb-green);
   color: var(--wp--preset--color--gvb-green);
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   font-weight: 700;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
@@ -3397,7 +3454,7 @@ html {
   background: var(--wp--preset--color--gvb-green);
   border: 2px solid var(--wp--preset--color--gvb-green);
   color: var(--wp--preset--color--gvb-linen);
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -3416,7 +3473,7 @@ html {
 }
 
 .gvb-single-hero .wp-block-post-title {
-  font-size: clamp(36px, 3.5vw, 64px) !important;
+  font-size: 36px !important;
   font-weight: 700 !important;
   line-height: 1.05 !important;
   letter-spacing: -1.8px !important;
@@ -3425,7 +3482,7 @@ html {
 }
 
 .gvb-single-hero .wp-block-post-date {
-  font-size: clamp(16px, 1.111vw, 28px) !important;
+  font-size: 16px !important;
   line-height: 1.5 !important;
   color: var(--wp--preset--color--gvb-orange) !important;
 }
@@ -3437,7 +3494,7 @@ html {
 }
 
 .gvb-single-hero .wp-block-post-terms {
-  font-size: clamp(16px, 1.111vw, 28px) !important;
+  font-size: 16px !important;
   line-height: 1.5 !important;
   color: var(--wp--preset--color--gvb-linen) !important;
 }
@@ -3450,7 +3507,7 @@ html {
 }
 
 .gvb-single-body .wp-block-post-content h2 {
-  font-size: clamp(28px, 1.944vw, 50px);
+  font-size: 28px;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.5px;
@@ -3459,7 +3516,7 @@ html {
 }
 
 .gvb-single-body .wp-block-post-content h3 {
-  font-size: clamp(22px, 1.528vw, 39px);
+  font-size: 22px;
   font-weight: 700;
   line-height: 1.15;
   margin-bottom: 12px;
@@ -3467,7 +3524,7 @@ html {
 }
 
 .gvb-single-body .wp-block-post-content p {
-  font-size: clamp(17px, 1.181vw, 30px);
+  font-size: 17px;
   line-height: 1.65;
   letter-spacing: 0.08px;
   color: #2b2b2b;
@@ -3523,13 +3580,13 @@ html {
   }
 
   .gvb-blog-featured__content .wp-block-post-title {
-    font-size: clamp(26px, 1.806vw, 46px) !important;
+    font-size: 26px !important;
   }
 
   /* "Mehr erfahren" button: meet 44pt touch target (Apple HIG), below image */
   .wp-block-read-more.gvb-btn--orange {
     min-height: 44px !important;
-    font-size: clamp(14px, 0.972vw, 25px) !important;
+    font-size: 14px !important;
     padding: 12px 24px !important;
     align-self: flex-start;
   }
@@ -3541,7 +3598,7 @@ html {
   }
 
   .gvb-blog-all > .wp-block-heading {
-    font-size: clamp(36px, 2.5vw, 64px) !important;
+    font-size: 36px !important;
     margin-bottom: 0 !important;
   }
 
@@ -3613,7 +3670,7 @@ html {
   }
 
   .gvb-blog-card__body .wp-block-post-title {
-    font-size: clamp(20px, 1.389vw, 36px) !important;
+    font-size: 20px !important;
   }
 }
 
@@ -3631,13 +3688,13 @@ html {
   border-radius: 20px;
   padding: 48px 52px;
   box-shadow: 0 25px 33px -15px rgba(149, 149, 149, 0.25);
-  max-width: 1400px;
+  max-width: 1895px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .gvb-impressum-card__company {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1.26;
   letter-spacing: 0.2px;
@@ -3646,7 +3703,7 @@ html {
 }
 
 .gvb-impressum-card__details p {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   line-height: 1.26;
   letter-spacing: 0.08px;
   margin: 0;
@@ -3700,7 +3757,7 @@ html {
 }
 
 .gvb-overlay-card__title {
-  font-size: clamp(31px, 2.153vw, 55px);
+  font-size: 31px;
   font-weight: 700;
   line-height: 1;
   color: var(--wp--preset--color--gvb-linen);
@@ -3708,7 +3765,7 @@ html {
 }
 
 .gvb-overlay-card__desc {
-  font-size: clamp(16px, 1.111vw, 28px);
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: #fff;
@@ -3738,7 +3795,7 @@ html {
 }
 
 .gvb-druckverfahren__heading {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1.2px;
@@ -3747,7 +3804,7 @@ html {
 }
 
 .gvb-druckverfahren__intro {
-  font-size: clamp(32px, 2.222vw, 57px);
+  font-size: 32px;
   line-height: 1.2;
   letter-spacing: 0.16px;
   color: #2b2b2b;
@@ -3846,7 +3903,7 @@ html {
   left: 24px;
   right: 24px;
   z-index: 1;
-  font-size: clamp(31px, 2.153vw, 55px);
+  font-size: 31px;
   line-height: 1.1;
   color: var(--wp--preset--color--gvb-linen) !important;
 }
@@ -3877,7 +3934,7 @@ html {
 
 
 .gvb-bedrucken-anlass__heading {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1.2px;
@@ -3892,7 +3949,7 @@ html {
 }
 
 .gvb-bedrucken-warum__heading {
-  font-size: clamp(40px, 2.778vw, 71px);
+  font-size: 40px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1.2px;
@@ -3915,7 +3972,7 @@ html {
 }
 
 .gvb-bedrucken-warum__text p {
-  font-size: clamp(32px, 2.222vw, 57px);
+  font-size: 32px;
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.16px;
@@ -3941,7 +3998,7 @@ html {
 }
 
 .gvb-download-section__heading {
-  font-size: clamp(32px, 2.5vw + 1.25rem, 57px);
+  font-size: 32px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1.65px;
@@ -3974,7 +4031,7 @@ html {
 }
 
 .gvb-download-bar__label {
-  font-size: clamp(18px, 1.5vw + 0.5rem, 32px);
+  font-size: 18px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.88);
   line-height: 1;
@@ -3984,7 +4041,7 @@ html {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: clamp(18px, 1.5vw + 0.5rem, 32px);
+  font-size: 18px;
   font-weight: 400;
   color: rgba(237, 232, 219, 0.88);
   line-height: 1;
@@ -4010,7 +4067,7 @@ html {
 }
 
 .gvb-faq-section__heading {
-  font-size: clamp(24px, 2vw + 0.75rem, 43px);
+  font-size: 24px;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -1.2px;
@@ -4066,7 +4123,7 @@ html {
   }
 
   .gvb-steps__number {
-    font-size: clamp(60px, 15vw, 180px);
+    font-size: 60px;
     left: clamp(16px, 5vw, 60px);
   }
 
@@ -4076,13 +4133,13 @@ html {
 
   /* Scale heading down so long German words never overflow the narrower card */
   .gvb-steps__text h3 {
-    font-size: clamp(20px, 2.6vw, 32px);
+    font-size: 20px;
   }
 }
 
 @media (max-width: 1024px) and (min-width: 769px) {
   .gvb-bedrucken-anlass .gvb-overlay-card__title {
-    font-size: clamp(20px, 2.3vw, 24px);
+    font-size: 20px;
     line-height: 1.1;
     bottom: 40px;
   }
@@ -4157,7 +4214,7 @@ html {
 
   .gvb-branding__heading {
     order: 1;
-    font-size: clamp(28px, 1.944vw, 50px);
+    font-size: 28px;
     text-align: left;
   }
 
@@ -4209,7 +4266,7 @@ html {
   }
 
   .gvb-overlay-card__title {
-    font-size: clamp(22px, 1.528vw, 39px);
+    font-size: 22px;
   }
 
   /* ── Bedrucken sections ── */
@@ -4219,7 +4276,7 @@ html {
   }
 
   .gvb-bedrucken-anlass__heading {
-    font-size: clamp(28px, 1.944vw, 50px);
+    font-size: 28px;
   }
 
   /* ── Anlass overlay cards: horizontal carousel at 426–768px, 1-column at ≤425px ── */
@@ -4296,7 +4353,7 @@ html {
     bottom: 100px;
     left: 20px;
     right: 20px;
-    font-size: clamp(24px, 1.667vw, 43px) !important;
+    font-size: 24px !important;
     line-height: 1.1;
     z-index: 1;
     margin: 0;
@@ -4316,7 +4373,7 @@ html {
 
   /* Card 2 (green bg): linen desc text */
   .gvb-bedrucken-anlass .gvb-overlay-card__desc {
-    font-size: clamp(15px, 1.042vw, 27px);
+    font-size: 15px;
     line-height: 1.4;
     color: rgba(237, 232, 219, 0.85);
   }
@@ -4331,11 +4388,11 @@ html {
   }
 
   .gvb-bedrucken-warum__heading {
-    font-size: clamp(28px, 1.944vw, 50px);
+    font-size: 28px;
   }
 
   .gvb-bedrucken-warum__text p {
-    font-size: clamp(22px, 1.528vw, 39px);
+    font-size: 22px;
   }
 
   /* ── Druckverfahren ── */
@@ -4344,11 +4401,11 @@ html {
   }
 
   .gvb-druckverfahren__heading {
-    font-size: clamp(28px, 1.944vw, 50px);
+    font-size: 28px;
   }
 
   .gvb-druckverfahren__intro {
-    font-size: clamp(20px, 1.389vw, 36px);
+    font-size: 20px;
   }
 
   /* ── Flaschen intro (Unsere Flaschen + Bedrucken) ── */
@@ -4357,7 +4414,7 @@ html {
   }
 
   .gvb-flaschen-intro p {
-    font-size: clamp(20px, 1.389vw, 36px);
+    font-size: 20px;
   }
 
   /* ── Flaschen cards: stack vertically ── */
@@ -4407,7 +4464,7 @@ html {
   }
 
   .gvb-bottle-card__title {
-    font-size: clamp(38px, 2.639vw, 68px);
+    font-size: 38px;
   }
 
   /* Feature cards: 2-col wrap on tablet */
@@ -4482,7 +4539,7 @@ html {
   }
 
   .gvb-product-card__text {
-    font-size: clamp(14px, 0.972vw, 25px);
+    font-size: 14px;
     line-height: 1.4;
   }
 
@@ -4516,7 +4573,7 @@ html {
   }
 
   .gvb-steps__number {
-    font-size: clamp(120px, 8.333vw, 213px);
+    font-size: 120px;
     left: 24px;
   }
 
@@ -4537,7 +4594,7 @@ html {
   }
 
   .gvb-steps__text h3 {
-    font-size: clamp(24px, 1.667vw, 43px);
+    font-size: 24px;
   }
 
   /* ── Über uns ── */
@@ -4546,7 +4603,7 @@ html {
   }
 
   .gvb-uberuns-intro p {
-    font-size: clamp(20px, 1.389vw, 36px);
+    font-size: 20px;
   }
 
   .gvb-uberuns-vm {
@@ -4570,7 +4627,7 @@ html {
   }
 
   .gvb-uberuns-vm__text h2 {
-    font-size: clamp(28px, 1.944vw, 50px);
+    font-size: 28px;
   }
 
   .gvb-uberuns-team {
@@ -4582,12 +4639,12 @@ html {
   }
 
   .gvb-uberuns-personen h2 {
-    font-size: clamp(28px, 1.944vw, 50px);
+    font-size: 28px;
     letter-spacing: -0.5px;
   }
 
   .gvb-uberuns-personen__text p {
-    font-size: clamp(18px, 1.25vw, 32px);
+    font-size: 18px;
   }
 
   .gvb-ueberzeugung {
@@ -4595,7 +4652,7 @@ html {
   }
 
   .gvb-ueberzeugung__heading {
-    font-size: clamp(28px, 1.944vw, 50px);
+    font-size: 28px;
     letter-spacing: -0.5px;
   }
 
@@ -4609,7 +4666,7 @@ html {
   }
 
   .gvb-ueberzeugung__text {
-    font-size: clamp(22px, 1.528vw, 39px);
+    font-size: 22px;
   }
 
   /* ── Impressum ── */
@@ -4622,12 +4679,12 @@ html {
   }
 
   .gvb-impressum-card__company {
-    font-size: clamp(28px, 1.944vw, 50px);
+    font-size: 28px;
   }
 
   /* ── Personalisieren cards ── */
   .gvb-personalisieren__heading {
-    font-size: clamp(28px, 1.944vw, 50px);
+    font-size: 28px;
   }
 
   /* Cards: stacked layout — photo+title on top, desc colour block below */
@@ -4680,7 +4737,7 @@ html {
     left: 20px;
     right: 20px;
     padding: 0;
-    font-size: clamp(22px, 5.5vw, 28px);
+    font-size: 22px;
     line-height: 1.1;
   }
 
@@ -4693,7 +4750,7 @@ html {
   }
 
   .gvb-personalisieren-card__desc {
-    font-size: clamp(14px, 0.972vw, 25px);
+    font-size: 14px;
     line-height: 1.4;
     letter-spacing: 0.2px;
   }
@@ -4716,15 +4773,74 @@ html {
     padding: 20px 24px;
   }
 
-  /* ── Bottom wave: simpler full-width concave arc on mobile.
-         Override the desktop aspect-ratio with a fixed tall box so the wave
-         reaches up to the contact form's transparent zone on long pages. ── */
-  .wp-site-blocks::after {
-    aspect-ratio: auto;
-    height: 3200px;
-    background-image: url('assets/svg/wave-bottom-mobile.svg');
+  /* Mobile + small-tablet (≤768) — TWO-LAYER background. Mobile reuses
+     the same split-layer pattern as desktop, but layer 1 is FIXED-HEIGHT
+     instead of stretched (mobile's --bg-h is 1.7–1.9× the natural SVG
+     height, so a stretched top wave would deform into a "claw").
+
+     Layer 1 (top): mobile-top-wave.svg — top wave only at fixed
+       --top-wave-h, opaque linen padding included.
+     Layer 2 (bottom): background-mobile-bottom.svg — bottom wave path
+       only (NO top wave), so nothing leaks into the page middle when
+       stretched to --bg-h.
+
+     TUNABLE: --top-wave-h sets where the top wave's bottom edge lands.
+     Tablet (426–768) --bg-h: 4200px tuned. Sub-breakpoints below override
+     for narrower mobile viewports. */
+  .wp-site-blocks {
+    --top-wave-start: 0px;
+    --top-wave-h: 1200px;
+    --top-wave-fade: 0px;
+    --bg-h: 4200px;
+    background-image:
+      url('assets/svg/mobile-top-wave.svg'),
+      linear-gradient(
+        to bottom,
+        #459271 0px,
+        #459271 var(--top-wave-start),
+        transparent calc(var(--top-wave-start) + var(--top-wave-fade))
+      ),
+      url('assets/svg/background-mobile-bottom.svg');
+    background-size:
+      calc(100% * var(--top-wave-zoom)) calc((var(--top-wave-h) - var(--top-wave-start)) * var(--top-wave-zoom)),
+      100% calc(var(--top-wave-start) + var(--top-wave-fade)),
+      100% var(--bg-h);
+    background-position:
+      center calc(var(--top-wave-h) - (var(--top-wave-h) - var(--top-wave-start)) * var(--top-wave-zoom)),
+      center top,
+      center top;
+    background-repeat: no-repeat, no-repeat, no-repeat;
   }
 
+}
+
+/* ── Mobile sub-breakpoint --bg-h overrides ──────────────────────────
+   Each tier needs its own --bg-h because the page gets PHYSICALLY TALLER
+   as widths shrink (more line-wraps, taller stacked sections). Cascade
+   order: narrowest max-width LAST so it wins. */
+
+/* Mobile L (376–425) */
+@media (max-width: 425px) {
+  .wp-site-blocks {
+    --top-wave-h: 1200px;
+    --bg-h: 6000px;
+  }
+}
+
+/* Mobile M (321–375) */
+@media (max-width: 375px) {
+  .wp-site-blocks {
+    --top-wave-h: 1200px;
+    --bg-h: 5900px;
+  }
+}
+
+/* Mobile S (≤320) */
+@media (max-width: 320px) {
+  .wp-site-blocks {
+    --top-wave-h: 1200px;
+    --bg-h: 6500px;
+  }
 }
 
 @media (max-width: 425px) {
@@ -4787,11 +4903,11 @@ html {
   }
 
   .gvb-bedrucken-anlass .gvb-overlay-card__title {
-    font-size: clamp(16px, 5vw, 22px) !important;
+    font-size: 16px !important;
   }
 
   .gvb-bedrucken-anlass .gvb-overlay-card__desc {
-    font-size: clamp(11px, 3.4vw, 15px);
+    font-size: 11px;
   }
 
   .gvb-bedrucken-anlass .gvb-overlay-cards {
@@ -4835,7 +4951,7 @@ html {
 
   .gvb-bedrucken-anlass .gvb-overlay-card__title {
     bottom: 90px;
-    font-size: clamp(15px, 1.042vw, 27px) !important;
+    font-size: 15px !important;
   }
 
   .gvb-bedrucken-anlass .gvb-overlay-card__desc {
@@ -4846,9 +4962,9 @@ html {
 @media (max-width: 480px) {
 
   /* ── Global typography + button scale for mobile ── */
-  h1, .has-h-1-font-size { font-size: clamp(34px, 2.361vw, 60px) !important; }
-  h2, .has-h-2-font-size { font-size: clamp(26px, 1.806vw, 46px) !important; }
-  .has-display-font-size  { font-size: clamp(38px, 2.639vw, 68px) !important; }
+  h1, .has-h-1-font-size { font-size: 34px !important; }
+  h2, .has-h-2-font-size { font-size: 26px !important; }
+  .has-display-font-size  { font-size: 38px !important; }
 
   .gvb-btn--primary,
   .gvb-btn--secondary {
@@ -4864,7 +4980,7 @@ html {
   }
 
   .gvb-steps__number {
-    font-size: clamp(80px, 5.556vw, 142px);
+    font-size: 80px;
     left: 12px;
     letter-spacing: -4px;
   }
@@ -4884,7 +5000,7 @@ html {
   /* ── Contact: full-bleed section ── */
   /* ── Überzeugung cards: tightest padding ── */
   .gvb-ueberzeugung__text {
-    font-size: clamp(18px, 1.25vw, 32px);
+    font-size: 18px;
   }
 
   .gvb-ueberzeugung__card {
@@ -5105,7 +5221,7 @@ html {
 /* ── Parent nav links: large + bold (overlay only) ── */
 .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item > .wp-block-navigation-item__content {
   color: var(--wp--preset--color--gvb-linen) !important;
-  font-size: clamp(20px, 1.389vw, 36px) !important;
+  font-size: 20px !important;
   font-weight: 700 !important;
   letter-spacing: -0.6px !important;
   line-height: 1.1 !important;
@@ -5137,7 +5253,7 @@ html {
 /* ── Submenu links: smaller, 75% linen opacity (overlay only) ── */
 .gvb-header__nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
   color: rgba(237, 232, 219, 0.75) !important;
-  font-size: clamp(15px, 1.042vw, 27px) !important;
+  font-size: 15px !important;
   font-weight: 400 !important;
   letter-spacing: -0.15px !important;
   line-height: 1.2 !important;
@@ -5186,7 +5302,7 @@ html {
   height: 42px;
   min-width: 114px;
   padding: 0 24px;
-  font-size: clamp(14px, 0.972vw, 25px);
+  font-size: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -5312,8 +5428,10 @@ html {
    (heroes keep their 1400 cap via Section 19b's !important rules).
    Header's fixed inner .gvb-header is unaffected; its alignment is
    handled by the min() padding rule in Section 19b below.
-   Waves (.wp-site-blocks::before/::after) are pseudos on the parent
-   and keep their full-viewport width. */
+   Page background (linen + green waves) now lives on .wp-site-blocks
+   itself as a single background-image (April 2026 refactor) — width
+   stretches full viewport, height locked via --bg-h, doesn't grow on
+   ultrawide. Independent of the 2560 outer-shell cap. */
 .wp-site-blocks > *:not(.gvb-header) {
   max-width: 2560px;
   margin-inline: auto;
@@ -5355,9 +5473,8 @@ html {
   margin-right: auto;
 }
 
-.gvb-product-cards {
-  max-width: 1440px;
-}
+/* (Removed: .gvb-product-cards { max-width: 1440px } — Section 19b's
+   universal 1895 cap now governs product-cards too.) */
 
 /* ──────────────────────────────────────────────────────────────
    19b. Card sections — WP writes inline margin: 0 20px on these,
@@ -5366,12 +5483,20 @@ html {
 
 @media (min-width: 1440px) {
 
-  /* Hero + FAQ + Contact + Cases + Bottle-showcase + Personalisieren +
-     Steps + Druckverfahren + Intros: grow with the viewport, cap at 2560,
-     always keep a 20px breathing gap from the viewport edge until the cap
-     hits. The min() baked into max-width reproduces the 20px inline-margin
-     look at small/medium screens, and auto margins centre the section in
-     the excess space above 2600. */
+  /* UNIVERSAL CONTENT CAP — every content section caps at 1895 (Figma's
+     hero width, the design's content baseline). At 1440 viewport the rule
+     resolves to `min(1400, 1895) = 1400` so behaviour matches Section 19a's
+     1400 baseline. Above 1440, sections grow toward 1895 then cap. At 2560
+     viewport: 1895 wide, (2560-1895)/2 = 332.5px gutter each side — visually
+     matches Figma 2200's proportions. ≤1440 untouched.
+     Specials NOT in this list (handled separately):
+       - .gvb-brand-promise → full-bleed (green strip)
+       - footer (.wp-block-template-part:last-child) → full-bleed
+       - .gvb-branding → own 1895 cap with fluid inner image+content clamps
+       - .gvb-blog-featured → own clamp(1400, 89.84vw, 1895)
+       - .gvb-impressum-card → calc-margin variant (below in 19b)
+       - .gvb-bedrucken-anlass → calc-margin variant (below in 19b)
+       - .gvb-header → fixed bar, own padding rule (below in 19b) */
   .gvb-hero,
   .gvb-faq,
   .gvb-contact,
@@ -5383,8 +5508,23 @@ html {
   .gvb-flaschen-intro,
   .gvb-uberuns-intro,
   .gvb-losungen-intro,
-  .gvb-intro-text {
-    max-width: min(calc(100% - 40px), 2560px) !important;
+  .gvb-intro-text,
+  .gvb-logos,
+  .gvb-testimonials,
+  .gvb-product-cards,
+  .gvb-branchen,
+  .gvb-uberuns-team,
+  .gvb-uberuns-vm,
+  .gvb-uberuns-personen,
+  .gvb-ueberzeugung,
+  .gvb-flaschen-cards,
+  .gvb-bedrucken-warum,
+  .gvb-download-cards,
+  .gvb-blog-all,
+  .gvb-edelstahl-features,
+  .gvb-borosilikat-features,
+  .gvb-borosilikat-verschluesse {
+    max-width: min(calc(100% - 40px), 1895px) !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
@@ -5402,67 +5542,59 @@ html {
   }
 
   /* Impressum: uses calc margin instead of max-width (WP flex-stretch pitfall).
-     At 1440px: (1440-1400)/2 = 20px each side — same as the natural inline margin. */
+     Now caps at 1895 (universal content cap). At 1440 viewport this gives
+     a negative margin which max() prevents — fall back to 20px gutter. */
   .gvb-impressum-card {
-    margin-left: calc((100% - 1400px) / 2) !important;
-    margin-right: calc((100% - 1400px) / 2) !important;
+    margin-left: max(20px, calc((100% - 1895px) / 2)) !important;
+    margin-right: max(20px, calc((100% - 1895px) / 2)) !important;
   }
 
-  /* Anlass: caps at 2560 (outer-shell ceiling), with a 20px breathing gap
+  /* Anlass: caps at 1895 (shared content cap), with a 20px breathing gap
      preserved until the cap hits. max() picks the larger of 20px or the
-     excess-gutter calc so the margin never goes negative below ~2600px
+     excess-gutter calc so the margin never goes negative below ~1935
      viewport. Uses calc-margin instead of max-width because WP flex-stretch
      ignores max-width on .wp-site-blocks direct children. */
   .gvb-bedrucken-anlass {
-    margin-left: max(20px, calc((100% - 2560px) / 2)) !important;
-    margin-right: max(20px, calc((100% - 2560px) / 2)) !important;
+    margin-left: max(20px, calc((100% - 1895px) / 2)) !important;
+    margin-right: max(20px, calc((100% - 1895px) / 2)) !important;
   }
 
-  /* Header: green bar stays full-width, logo + nav stay aligned to the 1440px content column.
-     Formula: 54px (design padding) + half the viewport excess beyond 1440px,
-     capped at 614px so logo/nav stop growing past the 2560px outer-shell ceiling.
-     At 1440 → 54px; at 2560 → 614px; at 3440+ → stays at 614px. */
+  /* Header: green bar stays full-width, logo + nav cluster tracks 56px
+     INSIDE the 1895 content cap (matches Figma 2200 — header is narrower
+     than hero box on each side). Logo sits ~56px right of hero left edge.
+     At 1440 → 54 (cluster 1332, untouched). Cap engages at viewport ~1891.
+     At 2200 → 208.5 (cluster 1783). At 2560 → 388.5 (cluster 1783). */
   .gvb-header {
-    padding-left: min(calc((100% - 1440px) / 2 + 54px), 614px) !important;
-    padding-right: min(calc((100% - 1440px) / 2 + 54px), 614px) !important;
+    padding-left: max(54px, calc((100% - 1895px) / 2 + 56px)) !important;
+    padding-right: max(54px, calc((100% - 1895px) / 2 + 56px)) !important;
   }
 
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SECTION 20 — FLUID TYPOGRAPHY (1440 → 2560)
+   SECTION 20 — TYPOGRAPHY LOCK (≥1440)
    ══════════════════════════════════════════════════════════════
-   System overview
-   ───────────────
-   Text scales linearly from its 1440 design value to (value × 1.778)
-   at 2560 viewport, then caps. Below 1440 viewport it holds at the
-   MIN (original design value) — mobile/tablet behaviour untouched.
+   Per April 2026 refactor: typography no longer scales 1440→2560.
+   Every clamp was flattened to its 1440 MIN value (matching Figma's
+   2200 design, where text sizes are identical to our 1440 baseline).
+   Sections 1–19 now use static `font-size: Xpx` declarations and
+   pattern PHP files use `"fontSize":"Xpx"` directly.
 
-   Canonical tokens: see `:root` in Section 1 (`--fs-h1`, `--fs-body`, …).
-   Use them for new rules.
-
-   How existing rules scale
-   ────────────────────────
-   1. CSS (Sections 1–19): every `font-size: Xpx` was converted in-place
-      to `clamp(Xpx, (X/14.4)vw, round(X × 1.778)px)`.
-   2. Pattern PHP files: every inline `"fontSize":"Xpx"` + matching
-      `style="font-size:Xpx"` was converted with the same formula.
-   3. Pre-existing clamps whose MAX was below target were bumped to
-      `MIN × 1.778`.
-
-   Why this section exists
-   ───────────────────────
-   The hero H1 patterns ship a specific inline clamp (max 65px) that
-   was authored for the 320→1440 range and uses a custom slope we
-   don't want to distort for small-screen legibility. Rather than
-   double-clamp or rewrite every hero pattern, this one !important
-   rule takes over above 1440 and bumps the ceiling to 116px
-   (65 × 1.778). Inline styles beat class-level CSS without !important.
+   Hero H1 inline clamps preserved
+   ────────────────────────────────
+   Hero patterns (faq-hero, blog-hero, industrie-hero-*, etc.) still
+   ship with a custom 320→1440 mobile slope:
+     clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px)
+   This stays — it gives smooth mobile-to-laptop scaling and caps at
+   65 at 1440 viewport. The override below pins H1 to 65 at ≥1440 as
+   a defensive guard (matches the clamp's natural MAX). hero-home.php
+   uses a static 65px directly (no mobile clamp); this rule is a no-op
+   for that file.
    ══════════════════════════════════════════════════════════════ */
 
 @media (min-width: 1440px) {
   .gvb-hero h1,
   .gvb-hero .wp-block-heading {
-    font-size: clamp(65px, 4.514vw, 116px) !important;
+    font-size: 65px !important;
   }
 }

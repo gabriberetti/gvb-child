@@ -25,42 +25,42 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<div class="wp-block-group gvb-cases__panels">
 
 		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow is-active" data-panel="0" data-bg="<?php echo esc_url( $img . '/cases-bg-1.png' ); ?>">
-			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"clamp(32px, 2.222vw, 57px)","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
-			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(32px, 2.222vw, 57px);font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
+			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"32px","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
+			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"clamp(40px, 2.778vw, 71px)","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
-			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(40px, 2.778vw, 71px);font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
+			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
+			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
 			<!-- /wp:heading -->
 		</div>
 
 		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="1" data-bg="<?php echo esc_url( $img . '/cases-bg-2.png' ); ?>">
-			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"clamp(32px, 2.222vw, 57px)","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
-			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(32px, 2.222vw, 57px);font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
+			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"32px","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
+			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"clamp(40px, 2.778vw, 71px)","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
-			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(40px, 2.778vw, 71px);font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
+			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
+			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
 			<!-- /wp:heading -->
 		</div>
 
 		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="2" data-bg="<?php echo esc_url( $img . '/cases-bg-3.png' ); ?>">
-			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"clamp(32px, 2.222vw, 57px)","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
-			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(32px, 2.222vw, 57px);font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
+			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"32px","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
+			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"clamp(40px, 2.778vw, 71px)","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
-			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(40px, 2.778vw, 71px);font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
+			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
+			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
 			<!-- /wp:heading -->
 		</div>
 
 		<div class="gvb-cases__panel is-layout-flow wp-block-group-is-layout-flow" data-panel="3" data-bg="<?php echo esc_url( $img . '/cases-bg-4.png' ); ?>">
-			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"clamp(32px, 2.222vw, 57px)","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
-			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(32px, 2.222vw, 57px);font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
+			<!-- wp:heading {"level":3,"style":{"typography":{"fontSize":"32px","fontWeight":"400","lineHeight":"1.15","letterSpacing":"0.16px"}},"textColor":"gvb-linen"} -->
+			<h3 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:32px;font-weight:400;line-height:1.15;letter-spacing:0.16px">Passt gut<br class="gvb-cases__h3-break"> zusammen.</h3>
 			<!-- /wp:heading -->
 
-			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"clamp(40px, 2.778vw, 71px)","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
-			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(40px, 2.778vw, 71px);font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
+			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
+			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
 			<!-- /wp:heading -->
 		</div>
 
