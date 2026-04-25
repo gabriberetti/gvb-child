@@ -219,7 +219,7 @@ add_filter( 'post_thumbnail_html', 'gvb_default_post_thumbnail', 10, 3 );
 /* ── 6. Open Graph / social link preview ─────────────────────── */
 
 function gvb_link_preview_image_url() {
-    return get_stylesheet_directory_uri() . '/assets/img/link-preview.png';
+    return get_stylesheet_directory_uri() . '/assets/img/link-preview.jpg';
 }
 
 /*
