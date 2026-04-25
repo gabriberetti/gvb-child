@@ -216,7 +216,70 @@ function gvb_default_post_thumbnail( $html, $post_id, $thumbnail_id ) {
 }
 add_filter( 'post_thumbnail_html', 'gvb_default_post_thumbnail', 10, 3 );
 
-/* ── 6. Text domain / i18n ───────────────────────────────────── */
+/* ── 6. Open Graph / social link preview ─────────────────────── */
+
+function gvb_link_preview_image_url() {
+    return get_stylesheet_directory_uri() . '/assets/svg/link-preview.png';
+}
+
+/*
+ * RankMath is active: feed it our fallback image via its filters so every
+ * page gets a preview even without a custom social image set per-post.
+ *
+ * Without RankMath: output a minimal but complete OG + Twitter block.
+ */
+if ( defined( 'RANK_MATH_VERSION' ) ) {
+
+    add_filter( 'rank_math/opengraph/facebook/image', function( $image ) {
+        return $image ?: gvb_link_preview_image_url();
+    } );
+
+    add_filter( 'rank_math/opengraph/twitter/image', function( $image ) {
+        return $image ?: gvb_link_preview_image_url();
+    } );
+
+} else {
+
+    add_action( 'wp_head', function() {
+
+        $image_url = gvb_link_preview_image_url();
+        $site_name = get_bloginfo( 'name' );
+        $title     = wp_get_document_title();
+        $desc      = get_bloginfo( 'description' );
+        $url       = ( is_ssl() ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+        if ( is_singular() ) {
+            global $post;
+            if ( has_excerpt( $post ) ) {
+                $desc = wp_strip_all_tags( get_the_excerpt( $post ) );
+            }
+            if ( has_post_thumbnail( $post ) ) {
+                $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post ), 'large' );
+                if ( $thumb ) {
+                    $image_url = $thumb[0];
+                }
+            }
+            $url = get_permalink( $post );
+        }
+
+        ?>
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="<?php echo esc_attr( $site_name ); ?>" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:url" content="<?php echo esc_url( $url ); ?>" />
+<meta property="og:title" content="<?php echo esc_attr( $title ); ?>" />
+<meta property="og:description" content="<?php echo esc_attr( $desc ); ?>" />
+<meta property="og:image" content="<?php echo esc_url( $image_url ); ?>" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="<?php echo esc_url( $image_url ); ?>" />
+        <?php
+    }, 5 );
+
+}
+
+/* ── 7. Text domain / i18n ───────────────────────────────────── */
 
 function gvb_theme_setup() {
     load_child_theme_textdomain( 'gvb', get_stylesheet_directory() . '/languages' );
