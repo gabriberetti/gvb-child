@@ -25,7 +25,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 					<span class="gvb-bottle-card__dot is-active" style="background:#D9D9D9" aria-hidden="true"></span>
 				</div>
 			</div>
-			<p class="gvb-verschluss-card__desc">Unser verlässlicher Standardverschluss. (bei jeder Flasche mit dabei)</p>
+			<p class="gvb-verschluss-card__desc">Unser verlässlicher Standardverschluss.</p>
 		</div>
 
 		<!-- Premium (4 colors) -->
@@ -66,27 +66,15 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<p class="gvb-verschluss-card__desc">Mit fest integriertem Dichtungsring garantiert maximale Sicherheit.</p>
 		</div>
 
-		<!-- Flip-Top (2 colors) -->
-		<div class="gvb-verschluss-card" data-bottle-card>
+		<!-- Flip-Top (single transparent only) -->
+		<div class="gvb-verschluss-card">
 			<div class="gvb-verschluss-card__image">
-				<div class="gvb-verschluss-card__track" data-bottle-track>
-					<div class="gvb-verschluss-card__slide">
-						<img src="<?php echo esc_url( $img . '/tritan-verschluss-fliptop-schwarz.png' ); ?>" alt="Flip-Top Verschluss – schwarz" />
-					</div>
-					<div class="gvb-verschluss-card__slide">
-						<img src="<?php echo esc_url( $img . '/tritan-verschluss-fliptop.jpg' ); ?>" alt="Flip-Top Verschluss – weiß" />
-					</div>
-				</div>
+				<img src="<?php echo esc_url( $img . '/tritan-verschluss-fliptop.jpg' ); ?>" alt="Flip-Top Verschluss" />
 			</div>
 			<div class="gvb-verschluss-card__header">
 				<h5 class="gvb-verschluss-card__title">Flip-Top</h5>
-				<div class="gvb-verschluss-colors" role="tablist" aria-label="Farbe wählen">
-					<button class="gvb-bottle-card__color-btn is-active" data-bottle-index="0" role="tab" aria-selected="true" aria-label="Farbe Schwarz">
-						<img src="<?php echo esc_url( $img . '/tritan-color-3.svg' ); ?>" alt="" />
-					</button>
-					<button class="gvb-bottle-card__color-btn" data-bottle-index="1" role="tab" aria-selected="false" aria-label="Farbe Weiß">
-						<img src="<?php echo esc_url( $img . '/tritan-color-8.svg' ); ?>" alt="" />
-					</button>
+				<div class="gvb-verschluss-colors">
+					<span class="gvb-bottle-card__dot is-active" style="background:#FFFFFF" aria-hidden="true"></span>
 				</div>
 			</div>
 			<p class="gvb-verschluss-card__desc">Optimal beim Sport, für Kinder und Patienten.</p>
