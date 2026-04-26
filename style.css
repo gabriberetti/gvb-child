@@ -2542,7 +2542,7 @@ html {
 
 /* ── Hero: tritan bottle ── */
 .gvb-hero__bg--tritan {
-  object-position: center center;
+  object-position: center 80%;
 }
 
 /* ── Hero: unternehmen — shift crop up so the bottle's top + sport cap
