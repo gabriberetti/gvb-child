@@ -2324,7 +2324,7 @@ html {
 
 /* ── Steps section ── */
 .gvb-steps {
-  padding: 0 20px 60px;
+  padding: 0 20px 0;
 }
 
 .gvb-steps__intro {
