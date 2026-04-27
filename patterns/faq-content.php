@@ -241,7 +241,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Ich habe noch keine Bestellbestätigung erhalten. Was kann ich tun?</summary>
-				<div class="gvb-faq__answer"><p>Schau bitte kurz in deinem Spam-Ordner nach. Falls du dort nichts findest, melde dich einfach bei uns per E-Mail oder über unser Kontaktformular – wir schicken dir die Bestätigung gerne nochmal zu.</p></div>
+				<div class="gvb-faq__answer"><p>Schau bitte kurz in deinem Spam-Ordner nach. Falls du dort nichts findest, melde dich einfach bei uns per E-Mail (<a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a>) oder über unser Kontaktformular – wir schicken dir die Bestätigung gerne nochmal zu.</p></div>
 			</details>
 
 		</div>
@@ -252,7 +252,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Was mache ich bei einer Reklamation?</summary>
-				<div class="gvb-faq__answer"><p>Melde dich einfach bei uns per E-Mail oder über unser Kontaktformular. Wir kümmern uns schnell und unkompliziert darum.</p></div>
+				<div class="gvb-faq__answer"><p>Melde dich einfach bei uns per E-Mail (<a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a>) oder über unser Kontaktformular. Wir kümmern uns schnell und unkompliziert darum.</p></div>
 			</details>
 
 		</div>
@@ -291,7 +291,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Was kann ich tun, wenn mein Paket nicht rechtzeitig angekommen ist?</summary>
-				<div class="gvb-faq__answer"><p>Melde dich einfach bei uns per E-Mail oder über unser Kontaktformular. Wir kümmern uns darum und finden schnell eine Lösung.</p></div>
+				<div class="gvb-faq__answer"><p>Melde dich einfach bei uns per E-Mail (<a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a>) oder über unser Kontaktformular. Wir kümmern uns darum und finden schnell eine Lösung.</p></div>
 			</details>
 
 		</div>
