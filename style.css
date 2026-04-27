@@ -1576,6 +1576,19 @@ html {
   margin-bottom: 32px;
 }
 
+/* Dropzone border — replace FF default blue with subtle grey to
+   match form input borders. Hover/drag-over keeps a slightly
+   stronger grey instead of FF's primary-blue accent. */
+.gvb-field--file-upload .ff_file_upload_holder,
+.gvb-field--file-upload.ff-dropzone .ff_file_upload_holder {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.gvb-field--file-upload .ff_file_upload_holder:hover,
+.gvb-field--file-upload.ff-dropzone .ff_file_upload_holder:hover {
+  border-color: rgba(0, 0, 0, 0.30) !important;
+}
+
 .gvb-field--file-upload .ff-el-help-message {
   display: block !important;
   margin-top: 8px;
