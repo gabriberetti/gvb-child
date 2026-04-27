@@ -30,7 +30,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<!-- /wp:heading -->
 
 			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
-			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
+			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Dein Unternehmen</h4>
 			<!-- /wp:heading -->
 		</div>
 
@@ -40,7 +40,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<!-- /wp:heading -->
 
 			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
-			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
+			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Dein Sportverein</h4>
 			<!-- /wp:heading -->
 		</div>
 
@@ -50,7 +50,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<!-- /wp:heading -->
 
 			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
-			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
+			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Dein Spa</h4>
 			<!-- /wp:heading -->
 		</div>
 
@@ -60,7 +60,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			<!-- /wp:heading -->
 
 			<!-- wp:heading {"level":4,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-linen"} -->
-			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Mustermarke</h4>
+			<h4 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:0.2px">Good Vibe Bottles<br>X Deine Uni</h4>
 			<!-- /wp:heading -->
 		</div>
 
