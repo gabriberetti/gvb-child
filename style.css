@@ -1717,17 +1717,29 @@ html {
   }
 
   .gvb-faq__item::details-content {
+    /* `display: block` is critical: the UA stylesheet sets ::details-content
+       to display:none when [open] is removed, which kills the close
+       transition. Forcing block keeps the box around so block-size and
+       opacity can animate down to 0. */
+    display: block;
     block-size: 0;
     opacity: 0;
-    overflow-y: clip;
-    transition: block-size 0.3s ease,
-                opacity 0.25s ease,
-                content-visibility 0.3s allow-discrete;
+    overflow: hidden;
+    /* content-visibility with allow-discrete keeps the content rendered
+       during the close animation; without it the content is yanked
+       instantly when [open] flips, which reads as a jump. */
+    content-visibility: hidden;
+    will-change: block-size, opacity;
+    /* 500ms ease-out cubic, applied symmetrically to both directions. */
+    transition: block-size 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                content-visibility 0.5s allow-discrete;
   }
 
   .gvb-faq__item[open]::details-content {
     block-size: auto;
     opacity: 1;
+    content-visibility: visible;
   }
 }
 
