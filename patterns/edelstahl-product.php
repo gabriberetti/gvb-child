@@ -39,7 +39,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 					<li>Geschmacks- und geruchsneutral</li>
 					<li>Doppelwandige Isolierung</li>
 					<li>Robust, langlebig und leicht</li>
-					<li>auch Pantone-Farben möglich (abhängig von der Bestellmenge)</li>
+					<li>Weitere Standard- oder Wunsch Pantone-Farbe auf Anfrage möglich.</li>
 				</ul>
 			</div>
 

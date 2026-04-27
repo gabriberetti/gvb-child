@@ -22,7 +22,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<span class="gvb-steps__number">1</span>
 				<div class="gvb-steps__text">
 					<h3>Dein Vibe.<br>Deine Trinkflasche.</h3>
-					<p>Je nach Trinkflasche hast du verschiedene Optionen zur Auswahl. Entscheide dich für Material, Modell, Farbe, Volumen und Verschluss und du bist schon fast fertig.</p>
+					<p>Je nach Trinkflasche hast du verschiedene Optionen zur Auswahl. Entscheide dich für Material, Modell, Größe, Farbe und Verschluss und du bist schon fast fertig.</p>
 				</div>
 			</div>
 			<div class="gvb-steps__image">
