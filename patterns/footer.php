@@ -75,7 +75,7 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 					<!-- wp:list {"className":"gvb-footer__nav-list","textColor":"gvb-green","style":{"typography":{"fontSize":"16px","lineHeight":"1.2","letterSpacing":"0.08px"},"spacing":{"blockGap":"8px"}}} -->
 					<ul class="wp-block-list gvb-footer__nav-list has-gvb-green-color has-text-color" style="font-size:16px;line-height:1.2;letter-spacing:0.08px">
 						<li><a href="/unternehmen/">Unternehmen</a></li>
-						<li><a href="/sportvereine/">Sport</a></li>
+						<li><a href="/sportvereine/">Sport & Freizeit</a></li>
 						<li><a href="/gesundheitswesen/">Gesundheit</a></li>
 						<li><a href="/hotel-wellness-und-spa/">Hotels</a></li>
 						<li><a href="/bildungseinrichtungen/">Bildung</a></li>
