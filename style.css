@@ -3070,6 +3070,25 @@ html {
   object-fit: contain;
 }
 
+/* The Wideneck closures are physically larger objects shot at the same
+   crop, so with object-fit: contain they render visually bigger than
+   the Slim variants in the same card. Scale them down to match. */
+.gvb-borosilikat-verschluesse .gvb-verschluss-card__image img[src*="wideneck"] {
+  transform: scale(0.78);
+}
+
+/* Bump the Edelstahl Slim closure slightly — the source photo crops
+   tighter than the Bambus Slim, so it reads a touch small without help. */
+.gvb-borosilikat-verschluesse .gvb-verschluss-card__image img[src$="-edelstahl.webp"] {
+  transform: scale(1.15);
+}
+
+/* Edelstahl Wideneck shoots a touch larger than the Bambus Wideneck —
+   trim it a little more so the four cards read at the same scale. */
+.gvb-borosilikat-verschluesse .gvb-verschluss-card__image img[src$="-edelstahl-wideneck.webp"] {
+  transform: scale(0.75);
+}
+
 /* Tritan-specific verschluss image adjustments */
 .gvb-tritan-verschluesse .gvb-verschluss-card__image {
   display: flex;
