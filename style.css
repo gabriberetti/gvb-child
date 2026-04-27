@@ -1226,10 +1226,12 @@ html {
 
 /* ── Submit button ────────────────────────────────────────────
    Figma: #F28C3B, border-radius ~52px, height 42px, w ~114px,
-          Bold 12px white, right-aligned
+          Bold 12px white, right-aligned.
+   Scoped to .ff-el-form-submit so it doesn't hijack the File
+   Upload dropzone trigger button (which also uses .ff-btn).
    ────────────────────────────────────────────────────────────── */
-.gvb-contact__form-col .ff-btn-md,
-.gvb-contact__form-col .ff-btn {
+.gvb-contact__form-col .ff-el-form-submit .ff-btn-md,
+.gvb-contact__form-col .ff-el-form-submit .ff-btn {
   background-color: var(--wp--preset--color--gvb-orange) !important;
   color: #ffffff !important;
   border: none !important;
@@ -1248,14 +1250,14 @@ html {
   box-shadow: none !important;
 }
 
-.gvb-contact__form-col .ff-btn-md,
-.gvb-contact__form-col .ff-btn {
+.gvb-contact__form-col .ff-el-form-submit .ff-btn-md,
+.gvb-contact__form-col .ff-el-form-submit .ff-btn {
   will-change: transform;
   transition: background-color 0.2s ease, transform 0.3s ease !important;
 }
 
-.gvb-contact__form-col .ff-btn-md:hover,
-.gvb-contact__form-col .ff-btn:hover {
+.gvb-contact__form-col .ff-el-form-submit .ff-btn-md:hover,
+.gvb-contact__form-col .ff-el-form-submit .ff-btn:hover {
   background-color: var(--wp--preset--color--gvb-orange-hover) !important;
   transform: scale(1.08) !important;
 }
@@ -1557,6 +1559,26 @@ html {
   line-height: 1.4;
   color: var(--wp--preset--color--gvb-graphite);
   margin-top: 4px;
+}
+
+/* ── File Upload field (Dropzone mode) ────────────────────────
+   FF admin: File Upload field → Container Class: gvb-field--file-upload
+   • Top spacing so it doesn't crush against the row above
+   • Scoped help-message override (some FF builds hide it inside
+     the dropzone wrapper — force display + position below)
+   ────────────────────────────────────────────────────────────── */
+.gvb-field--file-upload {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.gvb-field--file-upload .ff-el-help-message {
+  display: block !important;
+  margin-top: 8px;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--wp--preset--color--gvb-graphite);
 }
 
 /* ── Personalisierung checkbox ────────────────────────────────
