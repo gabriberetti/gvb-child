@@ -1361,11 +1361,13 @@ html {
   align-items: center;
   justify-content: center;
   padding: 0;
-  transition: background-color 0.2s ease;
+  will-change: transform;
+  transition: background-color 0.2s ease, transform 0.3s ease;
 }
 
 .gvb-expand-trigger__btn:hover {
   background-color: var(--wp--preset--color--gvb-orange-hover);
+  transform: scale(1.08);
 }
 
 /* + icon via pseudo-elements — rotates to × when open */
