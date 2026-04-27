@@ -29,7 +29,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<img src="<?php echo esc_url( $img . '/edelstahl-feature-2.jpg' ); ?>" alt="Doppelwandige Isolierung" />
 			</div>
 			<div class="gvb-edelstahl-feature-card__text">
-				<h5 class="gvb-edelstahl-feature-card__title">Doppelwandige Isolierung</h5>
+				<h5 class="gvb-edelstahl-feature-card__title">Doppelwandige Isolierung.</h5>
 				<p class="gvb-edelstahl-feature-card__desc">Tee, Kaffee oder kalte Getränke sind in unseren Edelstahlflaschen bestens aufgehoben. Dank doppelwandiger Isolierung bleibt dein Getränk über Stunden auf Temperatur und ist dann bereit, wenn du dich aufwärmen möchtest oder ins Schwitzen kommst.</p>
 			</div>
 		</li>
@@ -39,7 +39,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<img src="<?php echo esc_url( $img . '/edelstahl-feature-3.jpg' ); ?>" alt="Nachhaltigkeit mit Stil" />
 			</div>
 			<div class="gvb-edelstahl-feature-card__text">
-				<h5 class="gvb-edelstahl-feature-card__title">Nachhaltigkeit mit Stil</h5>
+				<h5 class="gvb-edelstahl-feature-card__title">Nachhaltigkeit mit Stil.</h5>
 				<p class="gvb-edelstahl-feature-card__desc">Mit unseren Edelstahlflaschen triffst du eine nachhaltige Entscheidung ohne Kompromisse. Hohe Qualität, Wiederverwendbarkeit und Langlebigkeit sorgen für Good Vibes in deinem Alltag und für die Umwelt. Damit die Welt Flasche für Flasche auf Einwegplastik verzichten kann.</p>
 			</div>
 		</li>

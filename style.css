@@ -2938,7 +2938,7 @@ html {
    list adds extra inner padding so the 4-image row stays visually
    narrower than the heading (doesn't go full-width). */
 .gvb-edelstahl-features {
-  padding: 40px 20px 80px;
+  padding: 40px 20px 40px;
 }
 
 .gvb-edelstahl-features__heading {
@@ -3145,7 +3145,7 @@ html {
    the same `gvb-borosilikat-*` class names). Styling mirrors the
    Edelstahl feature cards for visual consistency. */
 .gvb-borosilikat-features {
-  padding: 40px 20px 80px;
+  padding: 40px 20px 40px;
 }
 
 .gvb-borosilikat-features__heading {
