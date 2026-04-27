@@ -289,3 +289,22 @@ function gvb_theme_setup() {
     ) );
 }
 add_action( 'after_setup_theme', 'gvb_theme_setup' );
+
+/* ── 8. Allow print-design file uploads (.eps / .ai / .psd / .tif) ─ */
+
+add_filter( 'upload_mimes', function( $mimes ) {
+    $mimes['eps']      = 'application/postscript';
+    $mimes['ai']       = 'application/postscript';
+    $mimes['psd']      = 'image/vnd.adobe.photoshop';
+    $mimes['tif|tiff'] = 'image/tiff';
+    return $mimes;
+} );
+
+add_filter( 'fluentform/allowed_mimes', function( $mimes ) {
+    $mimes['eps']  = 'application/postscript';
+    $mimes['ai']   = 'application/postscript';
+    $mimes['psd']  = 'image/vnd.adobe.photoshop';
+    $mimes['tif']  = 'image/tiff';
+    $mimes['tiff'] = 'image/tiff';
+    return $mimes;
+} );
