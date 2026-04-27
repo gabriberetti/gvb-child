@@ -1094,6 +1094,12 @@ html {
 .gvb-contact__form-col .ff-t-container:last-child {
   margin-bottom: 0;
 }
+
+/* The row that holds the file-upload field sits directly above the
+   +/× expand toggle — drop its 24px gap so the toggle hugs the upload. */
+.gvb-contact__form-col .ff-t-container:has(input[type="file"]) {
+  margin-bottom: 0;
+}
 .gvb-contact__form-col .ff-el-form-control,
 .gvb-contact__form-col .ff-el-form-control[type="text"],
 .gvb-contact__form-col .ff-el-form-control[type="email"],
@@ -1227,11 +1233,13 @@ html {
 /* ── Submit button ────────────────────────────────────────────
    Figma: #F28C3B, border-radius ~52px, height 42px, w ~114px,
           Bold 12px white, right-aligned.
-   Scoped to .ff-el-form-submit so it doesn't hijack the File
-   Upload dropzone trigger button (which also uses .ff-btn).
+   Scoped to .ff-btn-submit (the actual class FF emits on the
+   submit <button>) so it doesn't hijack the File Upload dropzone
+   trigger (.ff_upload_btn .ff-btn — no .ff-btn-submit). Beats
+   FF's own inline <style> via wp_footer that applies the form's
+   default background_color (#1a7efb blue).
    ────────────────────────────────────────────────────────────── */
-.gvb-contact__form-col .ff-el-form-submit .ff-btn-md,
-.gvb-contact__form-col .ff-el-form-submit .ff-btn {
+.gvb-contact__form-col .ff-btn-submit {
   background-color: var(--wp--preset--color--gvb-orange) !important;
   color: #ffffff !important;
   border: none !important;
@@ -1243,21 +1251,15 @@ html {
   font-weight: 700 !important;
   font-family: inherit !important;
   cursor: pointer !important;
-  transition: background-color 0.2s ease !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   box-shadow: none !important;
-}
-
-.gvb-contact__form-col .ff-el-form-submit .ff-btn-md,
-.gvb-contact__form-col .ff-el-form-submit .ff-btn {
   will-change: transform;
   transition: background-color 0.2s ease, transform 0.3s ease !important;
 }
 
-.gvb-contact__form-col .ff-el-form-submit .ff-btn-md:hover,
-.gvb-contact__form-col .ff-el-form-submit .ff-btn:hover {
+.gvb-contact__form-col .ff-btn-submit:hover {
   background-color: var(--wp--preset--color--gvb-orange-hover) !important;
   transform: scale(1.08) !important;
 }
