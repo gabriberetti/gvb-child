@@ -297,7 +297,11 @@ Text Domain: gvb
 html {
   scroll-padding-top: 96px;
   scroll-behavior: smooth;
-  background-color: #459271;
+  /* Canvas fallback. Visible only in edge cases (FOUC during slow CSS
+     load, iOS bounce-scroll past page bounds, DevTools resize reflow).
+     Linen matches .wp-site-blocks's bg so any rare visibility blends in
+     instead of flashing brand-green. */
+  background-color: #EDE8DB;
   overscroll-behavior: none;
 }
 
@@ -3664,7 +3668,7 @@ html {
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 784px) {
 
   /* Featured: stack image above content, gap between articles */
   .gvb-blog-featured__list {
@@ -4263,7 +4267,7 @@ html {
   }
 }
 
-@media (max-width: 1024px) and (min-width: 769px) {
+@media (max-width: 1024px) and (min-width: 785px) {
   .gvb-bedrucken-anlass .gvb-overlay-card__title {
     font-size: 20px;
     line-height: 1.1;
@@ -4273,7 +4277,7 @@ html {
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 784px) {
 
   /* ── Hero: override 55% content offset on all hero types ──
      Generic .gvb-hero__content { margin-left: 0 } (section 15) is
