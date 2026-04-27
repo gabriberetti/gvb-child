@@ -113,11 +113,11 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 					</ul>
 				</div>
 				<div class="gvb-bottle-card__colors">
-					<span class="gvb-bottle-card__dot" style="background:#D9D9D9" aria-hidden="true"></span>
+					<span class="gvb-bottle-card__dot" style="background:#5C82D6" aria-hidden="true"></span>
 				</div>
 				<div class="gvb-bottle-card__meta">
 					<p>Größen: 500 ml, 750 ml, 1.000 ml</p>
-					<p>Standardverschluss (blau), Sportverschluss, Flip-Top</p>
+					<p>Standardverschluss (blau), Flip-Top</p>
 				</div>
 			</div>
 		</li>

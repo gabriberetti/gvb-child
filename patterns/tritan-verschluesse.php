@@ -14,15 +14,15 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 	<div class="gvb-borosilikat-verschluesse__cards">
 
-		<!-- Classic (single color, no slider) -->
+		<!-- Standardverschluss (single color, no slider) -->
 		<div class="gvb-verschluss-card">
 			<div class="gvb-verschluss-card__image">
-				<img src="<?php echo esc_url( $img . '/tritan-verschluss-classic.jpg' ); ?>" alt="Classic Verschluss" />
+				<img src="<?php echo esc_url( $img . '/tritan-verschluss-classic.jpg' ); ?>" alt="Standardverschluss" />
 			</div>
 			<div class="gvb-verschluss-card__header">
-				<h5 class="gvb-verschluss-card__title">Classic</h5>
+				<h5 class="gvb-verschluss-card__title">Standardverschluss</h5>
 				<div class="gvb-verschluss-colors">
-					<span class="gvb-bottle-card__dot is-active" style="background:#D9D9D9" aria-hidden="true"></span>
+					<span class="gvb-bottle-card__dot is-active" style="background:#5C82D6" aria-hidden="true"></span>
 				</div>
 			</div>
 			<p class="gvb-verschluss-card__desc">Unser verlässlicher Standardverschluss.</p>
