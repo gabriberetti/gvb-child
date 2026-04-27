@@ -1576,16 +1576,16 @@ html {
   margin-bottom: 32px;
 }
 
-/* Dropzone border — replace FF default blue with subtle grey to
-   match form input borders. Hover/drag-over keeps a slightly
-   stronger grey instead of FF's primary-blue accent. */
-.gvb-field--file-upload .ff_file_upload_holder,
-.gvb-field--file-upload.ff-dropzone .ff_file_upload_holder {
+/* Dropzone border — FF's default rule
+   (.fluentform .ff-dropzone .ff_upload_btn.ff-btn) sets a 1px
+   dashed border via var(--fluentform-primary) which is blue.
+   Override on the actual element (the inner span, not the outer
+   label) with a subtle grey matching the form's input borders. */
+.gvb-field--file-upload .ff_upload_btn.ff-btn {
   border-color: rgba(0, 0, 0, 0.15) !important;
 }
 
-.gvb-field--file-upload .ff_file_upload_holder:hover,
-.gvb-field--file-upload.ff-dropzone .ff_file_upload_holder:hover {
+.gvb-field--file-upload .ff_upload_btn.ff-btn:hover {
   border-color: rgba(0, 0, 0, 0.30) !important;
 }
 
