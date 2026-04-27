@@ -50,7 +50,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 			<div class="gvb-borosilikat-feature-card__text">
 				<h5 class="gvb-borosilikat-feature-card__title">Deine Flasche.<br>Dein Vibe.</h5>
-				<p class="gvb-borosilikat-feature-card__desc">Unsere Tritanflaschen personalisieren wir gerne für dich. Logo, Wunschdesign oder -motiv kommen im hochwertigen Druck oder als Lasergravur richtig zur Geltung.</p>
+				<p class="gvb-borosilikat-feature-card__desc">Unsere Tritanflaschen personalisieren wir gerne für dich. Logo, Wunschdesign oder -motiv kommen im hochwertigen Druck richtig zur Geltung.</p>
 			</div>
 		</li>
 
