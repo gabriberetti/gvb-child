@@ -1100,15 +1100,6 @@ html {
 .gvb-contact__form-col .ff-t-container:has(input[type="file"]) {
   margin-bottom: 0;
 }
-
-/* Some Fluent Forms layouts leave a hidden / empty .ff-t-container
-   in the markup (zero height, no form controls). Don't reserve the
-   24px row gap for it — kill the margin without removing the node so
-   conditional-logic targeting still works. */
-.gvb-contact__form-col .ff-t-container:not(:has(.ff-el-form-control, input, textarea, select, button)) {
-  margin-bottom: 0;
-}
-
 .gvb-contact__form-col .ff-el-form-control,
 .gvb-contact__form-col .ff-el-form-control[type="text"],
 .gvb-contact__form-col .ff-el-form-control[type="email"],
