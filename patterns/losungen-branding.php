@@ -20,7 +20,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<div class="gvb-branding__content">
 			<h2 class="gvb-branding__heading gvb-fade-up">Dein Vibe.<br>Deine Flasche.<br>Dein Branding.</h2>
 			<p class="gvb-branding__text gvb-fade-up">Gerne personalisieren wir deine Good Vibe Bottles. Auf jedem Modell lässt sich deine Marke ganz einfach sichtbar machen, ob auf der Flasche, am Verschluss oder auf der Schutzhülle.</p>
-			<p class="gvb-branding__text gvb-fade-up">Für jede unserer Flaschen finden wir die passende Art des Brandings. Vom hochwertigen Digitaldruck bis zur edlen Gravur sorgen wir dafür, dass dein Branding genau dort wirkt, wo es gesehen werden soll. Du wählst die Flasche und wir finden die passende Lösung für dich.</p>
+			<p class="gvb-branding__text gvb-fade-up">Vom hochwertigen Digitaldruck bis zur edlen Gravur sorgen wir dafür, dass dein Branding genau dort wirkt, wo es gesehen werden soll. Du wählst die Flasche und wir finden die passende Drucklösung, um dein Logo oder dein Design perfekt in Szene zu setzen.</p>
 			<a href="/unsere-flaschen/" class="gvb-btn-primary gvb-fade-up">Mehr erfahren</a>
 		</div>
 
