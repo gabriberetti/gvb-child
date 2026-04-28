@@ -26,7 +26,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie kann ich Flaschen mit meinem Logo oder Design bestellen?</summary>
-				<div class="gvb-faq__answer"><p>Ganz unkompliziert: Schick uns dein Logo oder Design per E-Mail (<a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a>) oder über unser Kontaktformular. Wir prüfen alles, beraten dich bei Bedarf und melden uns schnell mit einem passenden Angebot. Alle Details findest du auch in unserem Druckleitfaden.</p></div>
+				<div class="gvb-faq__answer"><p>Ganz unkompliziert: Schick uns dein Logo oder Design per E-Mail (<a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a>) oder über unser Kontaktformular. Wir prüfen alles, beraten dich bei Bedarf und melden uns schnell mit einem passenden Angebot. Alle Details findest du auch in unserem <a href="/download/">Druckleitfaden</a>.</p></div>
 			</details>
 
 		</div>

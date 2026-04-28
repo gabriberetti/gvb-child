@@ -32,7 +32,7 @@
 		<p>Die Speicherung erfolgt für maximal 14 Tage.</p>
 
 		<h3 class="gvb-datenschutz__heading">5. Kontaktaufnahme</h3>
-		<p>Wenn Sie uns per E-Mail oder Kontaktformular kontaktieren, verarbeiten wir Ihre Angaben zur Bearbeitung Ihrer Anfrage.</p>
+		<p>Wenn Sie uns per E-Mail (<a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a>) oder Kontaktformular kontaktieren, verarbeiten wir Ihre Angaben zur Bearbeitung Ihrer Anfrage.</p>
 		<p>Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Vertrag bzw. vorvertragliche Maßnahmen) oder Art. 6 Abs. 1 lit. f DSGVO.</p>
 		<p>Die Daten werden für bis zu 12 Monate gespeichert.</p>
 

@@ -37,7 +37,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie läuft die Bestellung bedruckter Flaschen ab?</summary>
-				<div class="gvb-faq__answer"><p>Ganz einfach: Du wählst deine gewünschte <a href="/unsere-flaschen/">Trinkflasche</a> und sendest uns dein Logo oder Design. Wir prüfen alles, beraten dich bei Bedarf und kümmern uns um die Umsetzung. Alle Details zum Ablauf findest du auch in unserem Druckleitfaden.</p></div>
+				<div class="gvb-faq__answer"><p>Ganz einfach: Du wählst deine gewünschte <a href="/unsere-flaschen/">Trinkflasche</a> und sendest uns dein Logo oder Design. Wir prüfen alles, beraten dich bei Bedarf und kümmern uns um die Umsetzung. Alle Details zum Ablauf findest du auch in unserem <a href="/download/">Druckleitfaden</a>.</p></div>
 			</details>
 
 			<details class="gvb-faq__item">
