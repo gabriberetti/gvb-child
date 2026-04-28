@@ -39,7 +39,7 @@
 	<div class="gvb-download-section">
 		<h2 class="gvb-download-section__heading">Druckleitfaden</h2>
 		<div class="gvb-download-section__list">
-			<a href="#" class="gvb-download-bar">
+			<a href="/wp-content/uploads/2026/04/Druckleitfaden-GVB.pdf" download class="gvb-download-bar">
 				<span class="gvb-download-bar__label">Druckleitfaden</span>
 				<span class="gvb-download-bar__action">
 					Download
