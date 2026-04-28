@@ -2464,24 +2464,15 @@ html {
   max-width: clamp(380px, 30vw, 900px);
 }
 
-/* Bigger step copy on 1920+ — the 14px description and 24px h3 read
-   too small on wide monitors. Bump to 18px / 28px for better balance
-   against the 140px number glyphs. Also tighten the left padding so
-   the text container hugs the number instead of drifting to the right. */
+/* Layout adjustments at ≥1920 (kept as hard step — these are positioning,
+   not type). Padding tightens so the text container hugs the number; "1"
+   gets a small left nudge because its glyph is narrower than 2/3. */
 @media (min-width: 1920px) {
   .gvb-steps__content {
     padding-left: 280px;
   }
-  /* "1" needs a small left nudge — its glyph is narrower than 2/3,
-     so visually it reads slightly off without this. */
   .gvb-steps__row:first-child .gvb-steps__number {
     left: 165px;
-  }
-  .gvb-steps__text h3 {
-    font-size: 28px;
-  }
-  .gvb-steps__text p {
-    font-size: 18px;
   }
 }
 
@@ -4295,6 +4286,24 @@ html {
   }
   .gvb-footer__nav-list {
     font-size: clamp(16px, calc(10px + 0.417vw), 18px) !important;
+  }
+
+  /* Steps section: section H2 + giant numerals + step h3 + step p.
+     Heading 40→53 (×1.333 like other section H2s). Numerals 140→158
+     (×1.13 — keeps them in proportion without overpowering). h3 24→28
+     and p 14→18 keep the previously-tuned final values but smoothly
+     interpolate 1440→1920 instead of snapping. */
+  .gvb-steps__heading {
+    font-size: clamp(40px, calc(1px + 2.708vw), 53px);
+  }
+  .gvb-steps__number {
+    font-size: clamp(140px, calc(86px + 3.75vw), 158px);
+  }
+  .gvb-steps__text h3 {
+    font-size: clamp(24px, calc(12px + 0.833vw), 28px);
+  }
+  .gvb-steps__text p {
+    font-size: clamp(14px, calc(2px + 0.833vw), 18px);
   }
 }
 
