@@ -147,6 +147,8 @@ function gvb_register_pattern_category() {
         'gvb/blog-all-articles' => array( 'file' => 'blog-all-articles.php', 'title' => 'Blog All Articles' ),
         'gvb/impressum-hero'    => array( 'file' => 'impressum-hero.php',    'title' => 'Impressum Hero' ),
         'gvb/impressum-content' => array( 'file' => 'impressum-content.php', 'title' => 'Impressum Content' ),
+        'gvb/datenschutz-hero'    => array( 'file' => 'datenschutz-hero.php',    'title' => 'Datenschutz Hero' ),
+        'gvb/datenschutz-content' => array( 'file' => 'datenschutz-content.php', 'title' => 'Datenschutz Content' ),
         'gvb/bedrucken-hero'           => array( 'file' => 'bedrucken-hero.php',           'title' => 'Bedrucken Hero' ),
         'gvb/bedrucken-intro'          => array( 'file' => 'bedrucken-intro.php',          'title' => 'Bedrucken Intro' ),
         'gvb/bedrucken-statement'      => array( 'file' => 'bedrucken-statement.php',      'title' => 'Bedrucken Statement' ),

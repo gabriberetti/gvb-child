@@ -112,6 +112,14 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 				<!-- wp:column -->
 				<div class="wp-block-column">
 					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
+					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:15px;font-weight:400;line-height:1"><a href="/datenschutz/">Datenschutz</a></h6>
+					<!-- /wp:heading -->
+				</div>
+				<!-- /wp:column -->
+
+				<!-- wp:column -->
+				<div class="wp-block-column">
+					<!-- wp:heading {"level":6,"className":"gvb-footer__nav-heading","textColor":"gvb-green","style":{"typography":{"fontSize":"15px","fontWeight":"400","letterSpacing":"-0.3px","lineHeight":"1"},"spacing":{"margin":{"bottom":"0px"}}}} -->
 					<h6 class="wp-block-heading gvb-footer__nav-heading has-gvb-green-color has-text-color" style="margin-bottom:0px;font-size:15px;font-weight:400;line-height:1"><a href="/faq/">FAQ</a></h6>
 					<!-- /wp:heading -->
 				</div>
