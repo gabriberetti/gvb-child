@@ -754,6 +754,10 @@ html {
   object-position: center 10%;
 }
 
+.gvb-cases__bg[src$="cases-bg-4.png"] {
+  object-position: center 15%;
+}
+
 .gvb-cases__tabs {
   position: relative;
   z-index: 2;
