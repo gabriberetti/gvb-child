@@ -4014,10 +4014,14 @@ html {
 .gvb-carousel-nav {
   display: none;
   position: absolute;
-  top: 55%;
+  top: 35%;
   z-index: 2;
   width: 36px;
   height: 36px;
+  /* Explicitly zero the margin so WP's `:where(.is-layout-flow) > *
+     { margin-block-start: 1.5rem }` block-gap rule doesn't leak onto
+     the next-chevron and offset it 24px below the prev-chevron. */
+  margin: 0;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -5061,10 +5065,12 @@ html {
 /* ──────────────────────────────────────────────────────────────────────
    Mobile-view boundary for layout-related rules — bumped from 425 → 480
    on 2026-04-28 so iPhone 14 Plus (428), Pro Max (430), and similar large
-   phones get the proper mobile single-column experience instead of the
-   tablet 2-up carousel/grid that was designed for actual iPad widths.
-   Affects: Anlass (carousel reset), Product cards (carousel reset),
-   Personalisieren (2×2 → 1-col grid).
+   phones get the proper mobile experience.
+   • Personalisieren stays a vertical stack (4 cards is fine to scroll).
+   • Anlass + Product cards become a 1-card horizontal carousel — cards
+     stay full-width (so they read at full design scale), but the user
+     swipes/clicks chevrons to flip between them instead of scrolling
+     past three big stacked cards.
    Contact form rules stay at ≤425 (Fluent-Forms-specific mobile spacing).
    ────────────────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
@@ -5074,9 +5080,10 @@ html {
     grid-template-columns: 1fr;
   }
 
-  /* ── Anlass: single column on phones — reset carousel + hide nav ── */
-  .gvb-bedrucken-anlass .gvb-carousel-nav {
-    display: none;
+  /* ── Anlass: 1-card carousel (inherit row/snap/overflow from ≤784 block,
+     just widen each card to 100%). Chevron nav stays visible. ── */
+  .gvb-bedrucken-anlass .gvb-overlay-card {
+    flex: 0 0 100%;
   }
 
   .gvb-bedrucken-anlass .gvb-overlay-card__title {
@@ -5087,33 +5094,9 @@ html {
     font-size: 11px;
   }
 
-  .gvb-bedrucken-anlass .gvb-overlay-cards {
-    flex-direction: column;
-    overflow-x: visible;
-    scroll-snap-type: none;
-    gap: 20px;
-  }
-
-  .gvb-bedrucken-anlass .gvb-overlay-card {
-    flex: 1 1 100%;
-    scroll-snap-align: none;
-  }
-
-  /* ── Product cards: single column on phones — reset carousel + hide nav ── */
-  .gvb-product-cards__track {
-    flex-wrap: wrap;
-    overflow-x: visible;
-    scroll-snap-type: none;
-  }
-
+  /* ── Product cards: 1-card carousel ── */
   .gvb-product-card {
-    flex: 0 0 auto !important;
-    width: 100%;
-    scroll-snap-align: none;
-  }
-
-  .gvb-product-cards .gvb-carousel-nav {
-    display: none;
+    flex: 0 0 100% !important;
   }
 
 }
