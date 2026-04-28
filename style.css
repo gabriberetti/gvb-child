@@ -4213,6 +4213,25 @@ html {
   display: block;
 }
 
+.gvb-bedrucken-warum__lede {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1.2px;
+  color: #2b2b2b;
+  margin: 0 0 32px;
+  padding: 0 24px;
+}
+
+/* Inline-text emphasis utility — orange + bold for accenting key
+   phrases inside body copy. Used in bedrucken-warum but kept generic
+   so it can be reused elsewhere. Inherits font-size + line-height
+   from the surrounding element so it doesn't break paragraph rhythm. */
+.gvb-highlight {
+  color: var(--wp--preset--color--gvb-orange);
+  font-weight: 700;
+}
+
 .gvb-bedrucken-warum__text p {
   font-size: 32px;
   font-weight: 400;
