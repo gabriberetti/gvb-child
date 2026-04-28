@@ -170,9 +170,10 @@ Text Domain: gvb
 }
 
 /* Laptop L tier (≥1440) — bottom wave nudges closer to the footer.
-   --top-wave-h bumps to 1100 for the 1441–1949 band (using the smaller
-   desktop-wave-top.svg, which renders best at this height). At ≥1950 the
-   SVG swaps to background-large-top.svg and --top-wave-h jumps to 5000+. */
+   --top-wave-h bumps to 1100 for the 1441–1919 band (using the smaller
+   desktop-wave-top.svg, which renders best at this height). At ≥1920 the
+   SVG swaps to background-large-top.svg and the wave knobs retune for
+   the wide tier (Figma 1920 design baseline). */
 @media (min-width: 1440px) {
   .wp-site-blocks {
     --top-wave-h: 1100px;
@@ -180,14 +181,15 @@ Text Domain: gvb
   }
 }
 
-/* Ultra-wide (≥1950) — switch the top-wave SVG from the simpler
-   desktop-wave-top.svg (used at smaller laptop widths) to the detailed
-   background-large-top.svg, whose shape was designed for wide viewports.
-   --top-wave-h bumps to match the SVG's much bigger natural viewBox.
-   Cascades up to 4K. */
-@media (min-width: 1950px) {
+/* Wide tier (≥1920) — Figma 1920 design baseline. Single transition where
+   the SVG swaps to background-large-top.svg AND the wave knobs retune
+   together (was previously split: 1950 SVG swap + 2200 knob retune; merged
+   2026-04-27 alongside the universal content-cap retarget to 1650). */
+@media (min-width: 1920px) {
   .wp-site-blocks {
-    --top-wave-h: 5000px;
+    --top-wave-h: 5300px;
+    --bg-h: 4100px;
+    --bottom-wave-offset: 750px;
     background-image:
       url('assets/svg/background-large-top.svg'),
       linear-gradient(
@@ -196,16 +198,6 @@ Text Domain: gvb
         #459271 var(--top-wave-start),
         transparent calc(var(--top-wave-start) + var(--top-wave-fade))
       );
-  }
-}
-
-/* Ultra-wide intermediate tier (≥2200, <2560) — bottom-green start point
-   creeps up further as the SVG stretches horizontally. */
-@media (min-width: 2200px) {
-  .wp-site-blocks {
-    --top-wave-h: 5300px;
-    --bg-h: 4100px;
-    --bottom-wave-offset: 750px;
   }
 }
 
@@ -517,15 +509,16 @@ html {
 }
 
 
-/* Footer inner content scales with the viewport up to 2000px (matches
-   the blog-featured row cap). Overrides WP's runtime constrained-layout
-   rule `.wp-container-core-group-is-layout-{hash} > * { max-width: 1200 }`
-   that comes from the pattern's `contentSize: 1200px`. Specificity 0,2,0
-   beats WP's (0,1,0) rule cleanly — no !important needed.
-   Pattern's 1200 contentSize still applies at viewports ≤1534 (clamp min),
-   so narrower screens are unchanged. */
+/* Footer inner content scales with the viewport up to 1650px (the new
+   universal content cap, matching Figma 1920 design baseline). Overrides
+   WP's runtime constrained-layout rule
+   `.wp-container-core-group-is-layout-{hash} > * { max-width: 1200 }` that
+   comes from the pattern's `contentSize: 1200px`. Specificity 0,2,0 beats
+   WP's (0,1,0) rule cleanly — no !important needed.
+   Cap reaches 1650 at viewport 1920. Pattern's 1200 contentSize still
+   applies at viewports ≤1396 (clamp min), so narrower screens unchanged. */
 .gvb-footer > .gvb-footer__inner {
-  max-width: clamp(1200px, 78.125vw, 1895px);
+  max-width: clamp(1200px, 85.94vw, 1650px);
   margin-left: auto;
   margin-right: auto;
 }
@@ -669,9 +662,9 @@ html {
   position: relative;
   overflow: hidden;
   /* Fluid floor: 604px at 1280 viewport (Figma's 1280 frame = our 1440 design)
-     → 774px at 2200 viewport (Figma's 2200 frame = our 2560 design).
+     → 774px at 1920 viewport (Figma's 1920 frame = our new design baseline).
      Clamped at both ends. Below 1024 the @media override sets 400px. */
-  min-height: clamp(604px, calc(367.5px + 18.48vw), 774px);
+  min-height: clamp(604px, calc(264px + 26.5625vw), 774px);
   /* Tighten WP's default block-gap (`:where(.wp-site-blocks) > * { margin-block-start: 1.5rem }`)
      from 24px → 8px so the hero sits closer to the navbar — matches Figma's design. */
   margin-top: 8px;
@@ -2278,19 +2271,21 @@ html {
 }
 
 /* Branding section scales fluidly with the viewport via clamp():
-   - Section caps at 1900 (overrides Section 19a's 1400)
-   - Image width grows from 501 → 750 between viewports ~1250 → ~1875
-   - Image height grows from 489 → 600 proportionally
-   - Content max-width grows from 603 → 900
-   No sudden jump at a media-query boundary — everything interpolates. */
+   - Section caps at 1650 (matches universal content cap, Figma 1920 baseline)
+   - Image width grows from 501 → 653 between viewports ~1473 → 1920
+   - Image height grows from 489 → 522 proportionally
+   - Content max-width grows from 603 → 783, capping at viewport 1920
+   At viewport 1920: image 653 + gap 52 + content 783 = 1488 → 162px slack
+   inside section cap 1650, distributed as 81px each side via __inner's
+   `justify-content: center`. ≤1440 unchanged. */
 .gvb-branding {
-  max-width: 1895px !important;
+  max-width: 1650px !important;
   margin-inline: auto !important;
 }
 
 .gvb-branding__image {
-  flex: 0 0 clamp(501px, 40vw, 750px);
-  height: clamp(489px, 32vw, 600px);
+  flex: 0 0 clamp(501px, 34.01vw, 653px);
+  height: clamp(489px, 27.19vw, 522px);
   border-radius: 16px;
   overflow: hidden;
 }
@@ -2307,7 +2302,7 @@ html {
   flex-direction: column;
   gap: 24px;
   align-items: flex-start;
-  max-width: clamp(603px, 47vw, 900px);
+  max-width: clamp(603px, 40.78vw, 783px);
 }
 
 .gvb-branding__heading {
@@ -3312,13 +3307,13 @@ html {
    child) AND the post-template (grandchild, gets capped by WP's default
    contentSize 1200) are both targeted, otherwise the post-template cap
    squeezes the row regardless of what we do on the query.
-   Grows from 1400 at 1440 viewport → 2300 at 2560 viewport — wide enough
-   to fit image (max 1134) + content (max 900) + gap (64) + padding (128)
-   with ~74px leftover that `justify-content: space-between` distributes
-   as a visible gap between content and image. */
+   Grows from 1400 at 1440 viewport → 1650 at 1920 viewport (matches the
+   new universal content cap, Figma 1920 baseline) — wide enough to fit
+   image (max 813) + content (max 645) + gap (64) + padding (128) = 1650,
+   exactly the section cap with no slack. ≤1440 unchanged. */
 .gvb-blog-featured > *,
 .gvb-blog-featured .wp-block-post-template {
-  max-width: clamp(1400px, 89.84vw, 1895px);
+  max-width: clamp(1400px, 85.94vw, 1650px);
   margin-left: auto;
   margin-right: auto;
 }
@@ -3360,7 +3355,7 @@ html {
 @media (min-width: 1440px) {
   .gvb-blog-featured__content {
     flex: 0 1 auto;
-    max-width: clamp(600px, 35.15vw, 900px);
+    max-width: clamp(600px, 33.59vw, 645px);
   }
 }
 
@@ -3401,11 +3396,11 @@ html {
 }
 
 /* Featured image — width stretches fluidly with the viewport (height stays
-   fixed at 432px). 638 at 1440 viewport → 1134 at 2560 viewport (tied to
-   the 2560 outer-shell cap). object-fit: cover re-crops the source as the
-   frame widens so the image doesn't distort. */
+   fixed at 432px). 638 at 1440 viewport → 813 at 1920 viewport (matches
+   the new universal content cap, Figma 1920 baseline). object-fit: cover
+   re-crops the source as the frame widens so the image doesn't distort. */
 .gvb-blog-featured__image img {
-  width: clamp(638px, 44.3vw, 1134px);
+  width: clamp(638px, 42.34vw, 813px);
   height: 432px;
   object-fit: cover;
   border-radius: 16px;
@@ -3416,17 +3411,17 @@ html {
 /* The <figure> is the actual flex item in the row — its width needs to
    match the <img> inside, otherwise WP's inline style="width: 638px" on
    the figure (from the post-featured-image block's width attribute)
-   stays at 638 while the img scales to 1134, and the image overflows
+   stays at 638 while the img scales to 813, and the image overflows
    the figure + the row on wide screens. !important beats the inline. */
 .gvb-blog-featured .wp-block-post-featured-image {
   flex-shrink: 0;
-  width: clamp(638px, 44.3vw, 1134px) !important;
-  max-width: clamp(638px, 44.3vw, 1134px) !important;
+  width: clamp(638px, 42.34vw, 813px) !important;
+  max-width: clamp(638px, 42.34vw, 813px) !important;
 }
 
 .gvb-blog-featured .wp-block-post-featured-image img {
-  width: clamp(638px, 44.3vw, 1134px) !important;
-  max-width: clamp(638px, 44.3vw, 1134px) !important;
+  width: clamp(638px, 42.34vw, 813px) !important;
+  max-width: clamp(638px, 42.34vw, 813px) !important;
   height: 432px !important;
   object-fit: cover;
   border-radius: 16px;
@@ -3818,7 +3813,7 @@ html {
   border-radius: 20px;
   padding: 48px 52px;
   box-shadow: 0 25px 33px -15px rgba(149, 149, 149, 0.25);
-  max-width: 1895px;
+  max-width: 1650px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -5607,7 +5602,7 @@ html {
 }
 
 /* (Removed: .gvb-product-cards { max-width: 1440px } — Section 19b's
-   universal 1895 cap now governs product-cards too.) */
+   universal 1650 cap now governs product-cards too.) */
 
 /* ──────────────────────────────────────────────────────────────
    19b. Card sections — WP writes inline margin: 0 20px on these,
@@ -5616,17 +5611,18 @@ html {
 
 @media (min-width: 1440px) {
 
-  /* UNIVERSAL CONTENT CAP — every content section caps at 1895 (Figma's
-     hero width, the design's content baseline). At 1440 viewport the rule
-     resolves to `min(1400, 1895) = 1400` so behaviour matches Section 19a's
-     1400 baseline. Above 1440, sections grow toward 1895 then cap. At 2560
-     viewport: 1895 wide, (2560-1895)/2 = 332.5px gutter each side — visually
-     matches Figma 2200's proportions. ≤1440 untouched.
+  /* UNIVERSAL CONTENT CAP — every content section caps at 1650 (Figma's
+     1920 frame hero width = our new design baseline). At 1440 viewport the
+     rule resolves to `min(1400, 1650) = 1400` so behaviour matches Section
+     19a's 1400 baseline. Above 1440, sections grow toward 1650 then cap at
+     viewport ≥1690. At 1920 viewport: 1650 wide, (1920-1650)/2 = 135px
+     gutter each side — matches the 86.14% content/viewport ratio Figma uses
+     at 1920. At 2560: 455px gutter each side. ≤1440 untouched.
      Specials NOT in this list (handled separately):
        - .gvb-brand-promise → full-bleed (green strip)
        - footer (.wp-block-template-part:last-child) → full-bleed
-       - .gvb-branding → own 1895 cap with fluid inner image+content clamps
-       - .gvb-blog-featured → own clamp(1400, 89.84vw, 1895)
+       - .gvb-branding → own 1650 cap with fluid inner image+content clamps
+       - .gvb-blog-featured → own clamp(1400, 85.94vw, 1650)
        - .gvb-impressum-card → calc-margin variant (below in 19b)
        - .gvb-bedrucken-anlass → calc-margin variant (below in 19b)
        - .gvb-header → fixed bar, own padding rule (below in 19b) */
@@ -5657,7 +5653,7 @@ html {
   .gvb-edelstahl-features,
   .gvb-borosilikat-features,
   .gvb-borosilikat-verschluesse {
-    max-width: min(calc(100% - 40px), 1895px) !important;
+    max-width: min(calc(100% - 40px), 1650px) !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
@@ -5675,31 +5671,31 @@ html {
   }
 
   /* Impressum: uses calc margin instead of max-width (WP flex-stretch pitfall).
-     Now caps at 1895 (universal content cap). At 1440 viewport this gives
+     Now caps at 1650 (universal content cap). At 1440 viewport this gives
      a negative margin which max() prevents — fall back to 20px gutter. */
   .gvb-impressum-card {
-    margin-left: max(20px, calc((100% - 1895px) / 2)) !important;
-    margin-right: max(20px, calc((100% - 1895px) / 2)) !important;
+    margin-left: max(20px, calc((100% - 1650px) / 2)) !important;
+    margin-right: max(20px, calc((100% - 1650px) / 2)) !important;
   }
 
-  /* Anlass: caps at 1895 (shared content cap), with a 20px breathing gap
+  /* Anlass: caps at 1650 (shared content cap), with a 20px breathing gap
      preserved until the cap hits. max() picks the larger of 20px or the
-     excess-gutter calc so the margin never goes negative below ~1935
+     excess-gutter calc so the margin never goes negative below ~1690
      viewport. Uses calc-margin instead of max-width because WP flex-stretch
      ignores max-width on .wp-site-blocks direct children. */
   .gvb-bedrucken-anlass {
-    margin-left: max(20px, calc((100% - 1895px) / 2)) !important;
-    margin-right: max(20px, calc((100% - 1895px) / 2)) !important;
+    margin-left: max(20px, calc((100% - 1650px) / 2)) !important;
+    margin-right: max(20px, calc((100% - 1650px) / 2)) !important;
   }
 
   /* Header: green bar stays full-width, logo + nav cluster tracks 56px
-     INSIDE the 1895 content cap (matches Figma 2200 — header is narrower
+     INSIDE the 1650 content cap (matches Figma 1920 — header is narrower
      than hero box on each side). Logo sits ~56px right of hero left edge.
-     At 1440 → 54 (cluster 1332, untouched). Cap engages at viewport ~1891.
-     At 2200 → 208.5 (cluster 1783). At 2560 → 388.5 (cluster 1783). */
+     At 1440 → 54 (cluster 1332, untouched). Cap engages at viewport ~1646.
+     At 1920 → 191 (cluster 1538). At 2560 → 511 (cluster 1538). */
   .gvb-header {
-    padding-left: max(54px, calc((100% - 1895px) / 2 + 56px)) !important;
-    padding-right: max(54px, calc((100% - 1895px) / 2 + 56px)) !important;
+    padding-left: max(54px, calc((100% - 1650px) / 2 + 56px)) !important;
+    padding-right: max(54px, calc((100% - 1650px) / 2 + 56px)) !important;
   }
 
 }
