@@ -49,16 +49,11 @@ Text Domain: gvb
 /* ══════════════════════════════════════════════════════════════
    1b. GLOBAL FOCUS RESET
    ──────────────────────────────────────────────────────────────
-   Aggressive suppression of all focus indicators. The modern
-   `*:focus:not(:focus-visible)` pattern was tried but failed in
-   Safari and on elements that receive programmatic focus (cases
-   tabs JS, etc.) — focus-visible was firing on click in those
-   cases, leaking blue browser-default rings.
-
-   Components that DO want a keyboard focus ring opt in explicitly
-   with a higher-specificity `.gvb-X:focus-visible { ... !important }`
-   rule (carousel chevrons, cases tabs). Class+pseudo (0,2,0) beats
-   the universal+pseudo (0,1,0) here even with both !important.
+   Aggressive suppression of all focus indicators on every element.
+   The modern `*:focus:not(:focus-visible)` pattern was tried and
+   reverted: focus-visible was firing on click in Safari + on
+   elements receiving programmatic .focus() (e.g. cases tabs JS),
+   leaking blue browser-default rings on click. Do not reintroduce.
    ══════════════════════════════════════════════════════════════ */
 
 *:focus,
@@ -806,10 +801,9 @@ html {
   border-color: rgba(237, 232, 219, 0.2);
 }
 
-.gvb-cases__tab:focus { outline: none; }
+.gvb-cases__tab:focus,
 .gvb-cases__tab:focus-visible {
-  outline: 2px solid var(--wp--preset--color--gvb-linen) !important;
-  outline-offset: 3px;
+  outline: none;
 }
 
 .gvb-cases__panels {
@@ -4109,7 +4103,7 @@ html {
 .gvb-carousel-nav--next { right: 16px; }
 
 .gvb-carousel-nav:hover { transform: scale(1.08); }
-.gvb-carousel-nav:focus-visible { outline: 2px solid var(--wp--preset--color--gvb-orange) !important; outline-offset: 2px; }
+.gvb-carousel-nav:focus-visible { outline: 2px solid var(--wp--preset--color--gvb-orange); outline-offset: 2px; }
 
 /* State-driven visibility: one source of truth on the carousel root */
 [data-carousel].is-at-start .gvb-carousel-nav--prev,
