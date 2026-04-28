@@ -725,7 +725,11 @@ html {
 .gvb-cases {
   position: relative;
   overflow: hidden;
-  min-height: 574px;
+  /* Fluid min-height: 574 at viewport 1440, 765 at viewport 1920 — keeps
+     the section's aspect ratio (~2.16:1) consistent with Figma's frame
+     so the bg images don't get cropped tight on wide monitors.
+     Caps at 765 above viewport 1920. ≤1440 unchanged (clamps to 574). */
+  min-height: clamp(574px, 39.86vw, 765px);
   display: flex;
   flex-direction: column;
 }
@@ -744,6 +748,13 @@ html {
   z-index: 0;
   border-radius: 20px;
   transition: opacity 0.15s ease;
+}
+
+/* Per-case object-position overrides — JS swaps the src so we target by
+   filename via the [src$=] attribute selector. Bottle in case 1 sits a
+   bit too high without this; shift the visible window down. */
+.gvb-cases__bg[src$="cases-bg-1.png"] {
+  object-position: center 10%;
 }
 
 .gvb-cases__tabs {
