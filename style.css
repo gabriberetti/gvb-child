@@ -2429,6 +2429,27 @@ html {
   max-width: clamp(380px, 30vw, 900px);
 }
 
+/* Bigger step copy on 1920+ — the 14px description and 24px h3 read
+   too small on wide monitors. Bump to 18px / 28px for better balance
+   against the 140px number glyphs. Also tighten the left padding so
+   the text container hugs the number instead of drifting to the right. */
+@media (min-width: 1920px) {
+  .gvb-steps__content {
+    padding-left: 280px;
+  }
+  /* "1" needs a small left nudge — its glyph is narrower than 2/3,
+     so visually it reads slightly off without this. */
+  .gvb-steps__row:first-child .gvb-steps__number {
+    left: 165px;
+  }
+  .gvb-steps__text h3 {
+    font-size: 28px;
+  }
+  .gvb-steps__text p {
+    font-size: 18px;
+  }
+}
+
 .gvb-steps__image {
   flex: 0 0 clamp(380px, 35.14vw, 700px);
   height: clamp(340px, 30vw, 432px);
