@@ -4232,6 +4232,66 @@ html {
   font-weight: 700;
 }
 
+/* Fluid type 1440→1920 (×1.333 proportional to viewport) on the card-
+   layered sections — personalisieren cards (Bedrucken + Lösungen + 5
+   industry pages) and anlass cards (Bedrucken + Lösungen). Section H2
+   headings scale alongside their cards so the h2 > h3 visual hierarchy
+   stays intact. Below 1440 untouched (clamps to MIN); caps at 1920
+   (clamps to MAX). */
+@media (min-width: 1440px) {
+  /* Personalisieren section H2 + card title (both 40px) → 53px */
+  .gvb-personalisieren__heading,
+  .gvb-personalisieren-card__title {
+    font-size: clamp(40px, calc(1px + 2.708vw), 53px);
+  }
+  .gvb-personalisieren-card__desc {
+    font-size: clamp(16px, calc(1px + 1.042vw), 21px);
+  }
+
+  /* Anlass section H2 (40px) → 53px to stay above the 41px card title */
+  .gvb-bedrucken-anlass__heading {
+    font-size: clamp(40px, calc(1px + 2.708vw), 53px);
+  }
+  .gvb-bedrucken-anlass .gvb-overlay-card__title {
+    font-size: clamp(31px, calc(1px + 2.083vw), 41px);
+  }
+  .gvb-bedrucken-anlass .gvb-overlay-card__desc {
+    font-size: clamp(16px, calc(1px + 1.042vw), 21px);
+  }
+
+  /* Cases section: h3 ("Passt gut zusammen.") + h4 ("Good Vibe Bottles
+     X …") use inline style="font-size:32/40px" from the pattern PHP, so
+     !important is needed to override on wide screens. h3 32→43, h4 40→53. */
+  .gvb-cases__panel h3.wp-block-heading {
+    font-size: clamp(32px, calc(-1px + 2.292vw), 43px) !important;
+  }
+  .gvb-cases__panel h4.wp-block-heading {
+    font-size: clamp(40px, calc(1px + 2.708vw), 53px) !important;
+  }
+
+  /* Product cards (homepage): title 32→43, text 16→21 */
+  .gvb-product-card__title {
+    font-size: clamp(32px, calc(-1px + 2.292vw), 43px);
+  }
+  .gvb-product-card__text {
+    font-size: clamp(16px, calc(1px + 1.042vw), 21px);
+  }
+
+  /* Navbar + footer chrome: small bump (×1.13, not the full ×1.333)
+     so they don't feel miniaturized next to scaled body content but
+     still defer visually to the main content. !important needed to
+     override inline font-size in parts/header.html and footer.php. */
+  .gvb-header__nav .wp-block-navigation-item__content {
+    font-size: clamp(15px, calc(9px + 0.417vw), 17px) !important;
+  }
+  .gvb-footer__nav-heading {
+    font-size: clamp(15px, calc(9px + 0.417vw), 17px) !important;
+  }
+  .gvb-footer__nav-list {
+    font-size: clamp(16px, calc(10px + 0.417vw), 18px) !important;
+  }
+}
+
 .gvb-bedrucken-warum__text p {
   font-size: 32px;
   font-weight: 400;

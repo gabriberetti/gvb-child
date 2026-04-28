@@ -82,23 +82,48 @@ color: gvb-linen (#EDE8DB)
 
 **Colors:** `gvb-green` (#459271), `gvb-orange` (#F28C3B), `gvb-orange-hover` (#E65620), `gvb-linen` (#EDE8DB), `gvb-graphite` (#2B2B2B), `gvb-white`, `gvb-black`, `gvb-divider` (#E9E9E9)
 
-**Typography:** `scale-variable` (Adobe Fonts, TypeKit ID: `ycw7tlm`). 1440-design sizes: display (65px), h1 (60px), h2 (40px), h3 (32px), h4 (24px), h5 (18px), h6 (30px), body (16px). **All font-sizes are fluid 1440→2560** — see *Fluid Typography* section below.
+**Typography:** `scale-variable` (Adobe Fonts, TypeKit ID: `ycw7tlm`). 1440-design sizes: display (65px), h1 (60px), h2 (40px), h3 (32px), h4 (24px), h5 (18px), h6 (30px), body (16px). **Most font-sizes are static at the 1440-design value across all viewports.** A selective fluid-scale 1440→1920 was added 2026-04-28 on specific card-layered sections + chrome — see *Fluid Typography* section below.
 
-### Fluid Typography (Section 20 of style.css — added April 2026)
+### Fluid Typography — partial 1440→1920 scaling (2026-04-28)
 
-Every `font-size` in the codebase follows the formula:
-```
-font-size: clamp(Xpx, (X/14.4)vw, round(X × 1.778)px);
-```
-Where `X` is the 1440-design value. Below 1440 viewport the clamp resolves to `X` (MIN) → mobile/tablet/laptop untouched. At 2560 the value hits `X × 1.778` — matching the outer-shell cap ratio. Beyond 2560 it caps.
+**Backstory:** an earlier April 2026 attempt scaled every font-size 1440→2560 (×1.778). It was reverted to static MIN values (Figma 2200 design uses the same type sizes as Figma 1280). Then on 2026-04-28 a **narrower fluid-scale 1440→1920** was reintroduced on a deliberate subset — only the card-layered sections that need to feel proportional on wide monitors, plus a small bump on chrome. Everything else stays static.
 
-**Where the clamps live**
-- **style.css**: 127 hardcoded `font-size: Xpx` declarations converted in-place. Also 9 pre-existing clamps had their MAX bumped to `MIN × 1.778` (e.g. `clamp(40px, ..., 40px)` → `clamp(40px, ..., 71px)`).
-- **Pattern PHP files** (38 files, 131 replacements): both `"fontSize":"40px"` in Gutenberg block JSON and matching `style="font-size:40px"` HTML attribute converted. Always edit both in sync.
-- **parts/header.html**: nav `fontSize` converted.
-- **Hero H1 exception**: every hero pattern ships with `style="font-size:clamp(35.641px, …, 65px)"` (custom slope for small-screen legibility). A single `!important` rule in Section 20 bumps the ceiling to `clamp(65px, 4.514vw, 116px)` at ≥1440.
+**Scope of current fluid scaling** (single `@media (min-width: 1440px)` block in style.css just before the FAQ accordion section):
 
-**Canonical tokens at `:root`** (Section 1 of style.css): `--fs-display`, `--fs-h1`, `--fs-h2`, `--fs-h3`, `--fs-h4`, `--fs-h5`, `--fs-h6`, `--fs-body`, `--fs-label`, `--fs-label-sm`. **Use tokens for new rules.** Existing rules keep their own inline clamp for grep-ability (`grep "40px"` still finds the h2-tier rules).
+| Selector | Sizes (1440 → 1920) | Ratio |
+|---|---|---|
+| `.gvb-personalisieren__heading`, `.gvb-personalisieren-card__title` | 40 → 53px | ×1.333 |
+| `.gvb-personalisieren-card__desc` | 16 → 21px | ×1.333 |
+| `.gvb-bedrucken-anlass__heading` | 40 → 53px | ×1.333 |
+| `.gvb-bedrucken-anlass .gvb-overlay-card__title` | 31 → 41px | ×1.333 |
+| `.gvb-bedrucken-anlass .gvb-overlay-card__desc` | 16 → 21px | ×1.333 |
+| `.gvb-cases__panel h3.wp-block-heading` (`!important`) | 32 → 43px | ×1.333 |
+| `.gvb-cases__panel h4.wp-block-heading` (`!important`) | 40 → 53px | ×1.333 |
+| `.gvb-product-card__title` | 32 → 43px | ×1.333 |
+| `.gvb-product-card__text` | 16 → 21px | ×1.333 |
+| `.gvb-header__nav .wp-block-navigation-item__content` (`!important`) | 15 → 17px | ×1.13 (chrome) |
+| `.gvb-footer__nav-heading` (`!important`) | 15 → 17px | ×1.13 (chrome) |
+| `.gvb-footer__nav-list` (`!important`) | 16 → 18px | ×1.13 (chrome) |
+
+**Why two ratios:**
+- **×1.333** (full proportional to viewport) on content sections — keeps them visually balanced with the wider container at 1920.
+- **×1.13** on navbar + footer — they're UI chrome, should defer visually to content. Convention is small or no scaling on these.
+
+**Why `!important` on some rules:** the cases section + navbar + footer all have inline `style="font-size:Xpx"` from the pattern PHP / parts/header.html. Inline beats CSS rules without `!important`. Could be cleaned up later by stripping the inline styles from PHP, but `!important` is consistent with the existing mobile rule pattern (e.g. `.gvb-cases__panel h3.wp-block-heading { font-size: 18px !important }` at ≤784).
+
+**Hero H1 exception (preserved from the freeze):** every hero pattern ships with `style="font-size:clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px)"` — a custom 320→1440 mobile slope. NOT touched by the new fluid system. The hero stays at 65px on desktop.
+
+**Mobile typography:** none of these clamps fire below 1440 — they all use a clean `clamp(MIN, …vw, MAX)` where the middle value at 1440 viewport equals MIN, so `<1440` resolves to MIN (the original static value). Mobile is untouched.
+
+**Canonical tokens at `:root`** (Section 1 of style.css): `--fs-display`, `--fs-h1`, `--fs-h2`, `--fs-h3`, `--fs-h4`, `--fs-h5`, `--fs-h6`, `--fs-body`, `--fs-label`, `--fs-label-sm`. **Currently static** (1440-design values). If/when the fluid scaling is extended site-wide, these tokens are the natural place to do it — make each token a clamp like the per-element rules above.
+
+**To extend fluid type to other elements** (if the team decides later):
+1. Identify the static font-size declaration (in style.css or inline in a pattern/header).
+2. Replace with `clamp(Xpx, calc(c + slope×vw), Xnewpx)` using:
+   - For ×1.333 ratio: slope = `(Xnew − X) / 480` × 100 → as `vw`. constant = `X − slope_decimal × 1440`.
+   - Quick formula: `clamp(X, calc((X−Xnew×3)px + (Xnew−X)/4.8 vw), Xnew)` when Xnew = X × 1.333.
+3. Inline-style overrides in PHP need `!important` — or strip the inline style from the pattern.
+4. Always anchor at 1440 → MIN and 1920 → MAX so mobile is untouched and desktop caps cleanly.
 
 **Cache-bust**: `functions.php` uses `filemtime( get_stylesheet_directory() . '/style.css' )` for the enqueue version, so every save auto-invalidates the browser cache. Never switch this back to a static `Version` string.
 
