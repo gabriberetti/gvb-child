@@ -2599,12 +2599,13 @@ html {
   object-position: center 69%;
 }
 
-/* ── Hero: unsere flaschen ──
+/* ── Hero: unsere flaschen + bedrucken (shared image + framing) ──
    The Figma source upscales the image to 127.58% width with negative
    left offset to crop horizontally. object-fit: cover only gives us
    vertical slack (image aspect ~1.5 vs container ~2.13 at 1920),
    so we use transform: scale + translateX to replicate that effect. */
-.gvb-hero__bg--flaschen {
+.gvb-hero__bg--flaschen,
+.gvb-hero__bg--bedrucken {
   transform: scale(1.25) translateX(-10%);
   transform-origin: center;
   object-position: center 67%;
