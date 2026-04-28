@@ -2586,13 +2586,28 @@ html {
 
 /* ── Hero: borosilikat bottle ── */
 .gvb-hero__bg--borosilikat {
-  object-position: center 30%;
-  transform: scaleX(-1);
+  object-position: center 65%;
 }
 
 /* ── Hero: tritan bottle ── */
 .gvb-hero__bg--tritan {
   object-position: center 80%;
+}
+
+/* ── Hero: edelstahl bottle ── */
+.gvb-hero__bg--edelstahl {
+  object-position: center 69%;
+}
+
+/* ── Hero: unsere flaschen ──
+   The Figma source upscales the image to 127.58% width with negative
+   left offset to crop horizontally. object-fit: cover only gives us
+   vertical slack (image aspect ~1.5 vs container ~2.13 at 1920),
+   so we use transform: scale + translateX to replicate that effect. */
+.gvb-hero__bg--flaschen {
+  transform: scale(1.25) translateX(-10%);
+  transform-origin: center;
+  object-position: center 67%;
 }
 
 /* ── Hero: unternehmen — shift crop up so the bottle's top + sport cap
@@ -3290,7 +3305,6 @@ html {
 
 /* ── Blog Hero ─────────────────────────────────────────────── */
 .gvb-hero--blog .gvb-hero__bg {
-  transform: scaleX(-1);
   /* Anchor crop near top so the girl's head stays visible at all hero
      heights (default `center center` would cut it off on wide viewports). */
   object-position: center 10%;
