@@ -833,12 +833,29 @@ html {
   flex-direction: column;
 }
 
+/* Background fills the BOTTOM HALF only (hard split at 50%).
+   Top half is transparent so any future image with transparency in the
+   upper region won't get a bg-color bleed-through behind the bottle.
+   Bottom half is painted in the modifier color to catch content overflow
+   below the wave-baked image and keep the card feeling continuous. */
 .gvb-product-card--dark {
-  background: var(--wp--preset--color--gvb-graphite);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 50%,
+    var(--wp--preset--color--gvb-graphite) 50%,
+    var(--wp--preset--color--gvb-graphite) 100%
+  );
 }
 
 .gvb-product-card--orange {
-  background: var(--wp--preset--color--gvb-orange);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 50%,
+    var(--wp--preset--color--gvb-orange) 50%,
+    var(--wp--preset--color--gvb-orange) 100%
+  );
 }
 
 .gvb-product-card__media {
@@ -5039,30 +5056,26 @@ html {
     margin-left: 0 !important;
   }
 
-  /* ── Personalisieren: single column on small phones ── */
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   Mobile-view boundary for layout-related rules — bumped from 425 → 480
+   on 2026-04-28 so iPhone 14 Plus (428), Pro Max (430), and similar large
+   phones get the proper mobile single-column experience instead of the
+   tablet 2-up carousel/grid that was designed for actual iPad widths.
+   Affects: Anlass (carousel reset), Product cards (carousel reset),
+   Personalisieren (2×2 → 1-col grid).
+   Contact form rules stay at ≤425 (Fluent-Forms-specific mobile spacing).
+   ────────────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+
+  /* ── Personalisieren: single column on phones ── */
   .gvb-personalisieren__grid {
     grid-template-columns: 1fr;
   }
 
-  /* ── Anlass: single column on small phones — reset carousel + hide nav ── */
+  /* ── Anlass: single column on phones — reset carousel + hide nav ── */
   .gvb-bedrucken-anlass .gvb-carousel-nav {
-    display: none;
-  }
-
-  /* ── Product cards: single column on small phones — reset carousel + hide nav ── */
-  .gvb-product-cards__track {
-    flex-wrap: wrap;
-    overflow-x: visible;
-    scroll-snap-type: none;
-  }
-
-  .gvb-product-card {
-    flex: 0 0 auto !important;
-    width: 100%;
-    scroll-snap-align: none;
-  }
-
-  .gvb-product-cards .gvb-carousel-nav {
     display: none;
   }
 
@@ -5084,6 +5097,23 @@ html {
   .gvb-bedrucken-anlass .gvb-overlay-card {
     flex: 1 1 100%;
     scroll-snap-align: none;
+  }
+
+  /* ── Product cards: single column on phones — reset carousel + hide nav ── */
+  .gvb-product-cards__track {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .gvb-product-card {
+    flex: 0 0 auto !important;
+    width: 100%;
+    scroll-snap-align: none;
+  }
+
+  .gvb-product-cards .gvb-carousel-nav {
+    display: none;
   }
 
 }
