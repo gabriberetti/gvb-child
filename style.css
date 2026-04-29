@@ -4284,11 +4284,7 @@ html {
 
 .gvb-bedrucken-anlass .gvb-overlay-card__media {
   position: relative;
-  /* Carousel range (426-784): square media — was 4/5 portrait, made the
-     card uncomfortably tall and the overlay text feel small in proportion.
-     ≤425 has its own height: 280px override that beats aspect-ratio so
-     this only affects the 426-784 carousel band. */
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   width: 100%;
   overflow: hidden;
 }
@@ -4309,9 +4305,7 @@ html {
   left: 24px;
   right: 24px;
   z-index: 1;
-  /* Bumped 31 → 36 at carousel range — text reads more confidently
-     against the now-square image area. */
-  font-size: 36px;
+  font-size: 31px;
   line-height: 1.1;
   color: var(--wp--preset--color--gvb-linen) !important;
 }
@@ -4334,9 +4328,6 @@ html {
 
 .gvb-bedrucken-anlass .gvb-overlay-card__desc {
   color: var(--wp--preset--color--gvb-linen);
-  /* Bumped 16 → 18 at carousel range for readability without growing
-     the card height much. */
-  font-size: 18px;
 }
 
 .gvb-bedrucken-anlass .gvb-overlay-card--dark-text .gvb-overlay-card__desc {
