@@ -4,18 +4,18 @@
  * Slug: gvb/en-contact-form
  * Categories: gvb
  *
- * Embeds the EN-translated Fluent Forms form. Update $form_id below
- * with the actual ID once the user duplicates form ID 4 in the Fluent
- * Forms admin (Tools → Duplicate). Field labels, placeholders,
- * validation messages and confirmation email all live in the plugin
- * admin and must be translated there.
+ * Embeds the EN-translated Fluent Forms form (form ID 5, duplicated
+ * from the German form ID 3 / 4 and translated in the Fluent Forms
+ * admin). Field labels, placeholders, validation messages and
+ * confirmation email live in the plugin admin and are translated
+ * there — only the form ID is wired here.
  *
  * Inline JS validation messages translated to EN here (overrides
  * browser HTML5 default English — already English on most browsers,
  * but ensures consistency for non-EN-locale browsers).
  */
 $img     = get_stylesheet_directory_uri() . '/assets/img';
-$form_id = 5; // TODO: confirm with user after Fluent Forms duplicate
+$form_id = 5; // EN form (duplicate of DE form, translated in admin)
 ?>
 
 <!-- wp:group {"tagName":"section","anchor":"contact","className":"gvb-contact","style":{"spacing":{"padding":{"top":"60px","bottom":"80px","left":"20px","right":"52px"}}},"layout":{"type":"default"}} -->
