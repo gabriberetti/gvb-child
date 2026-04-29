@@ -536,6 +536,31 @@ html {
   }
 }
 
+/* Footer stacks at 785-1199: brand row on top, nav row below — same
+   pattern GitHub/Stripe/Apple/NYT use. At this band the 33%/67% side-
+   by-side split squeezes the 7 nav columns into ~600px (FAQ overflows
+   off the right edge or wraps to a stranded row). Stacking gives the
+   nav full viewport width, so all 7 columns sit single-row neatly.
+   ≥1200: original horizontal layout. ≤784: already stacks via the
+   mobile block, untouched. */
+@media (max-width: 1199px) and (min-width: 785px) {
+  .gvb-footer__inner {
+    flex-direction: column !important;
+    gap: 48px !important;
+  }
+
+  .gvb-footer__brand,
+  .gvb-footer__nav-wrap {
+    flex-basis: 100% !important;
+    width: 100% !important;
+  }
+
+  /* Reverse visual order in this band: nav row on top, brand row below.
+     DOM order is preserved (brand stays first in markup for semantics). */
+  .gvb-footer__nav-wrap { order: 1; }
+  .gvb-footer__brand    { order: 2; }
+}
+
 
 /* Footer inner content scales with the viewport up to 1650px (the new
    universal content cap, matching Figma 1920 design baseline). Overrides
