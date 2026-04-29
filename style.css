@@ -5494,9 +5494,14 @@ html {
   }
 
   /* ── Steps number: nudge up on phones only so the numeral aligns
-     visually with the card title. Tablet (481–784) keeps top:50%. ── */
+     visually with the card title. Tablet (481–784) keeps top:50%.
+     Fixed pixel `top` (not %) so all 3 cards lock at the same offset —
+     each card's content height varies with title-line count, so a %
+     value drifts (card 2's 2-line title made the numeral sit lower
+     than card 1). Base rule's transform: translateY(-50%) keeps the
+     numeral's vertical centre on the 50px line. ── */
   .gvb-steps__number {
-    top: 32%;
+    top: 50px;
   }
 
   /* ── Anlass: 1-card carousel (inherit row/snap/overflow from ≤784 block,
