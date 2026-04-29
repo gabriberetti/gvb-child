@@ -26,7 +26,7 @@
 				<!-- wp:group {"className":"gvb-blog-card__body","layout":{"type":"flex","orientation":"vertical","justifyContent":"left"}} -->
 				<div class="wp-block-group gvb-blog-card__body">
 
-					<!-- wp:post-title {"level":5,"isLink":true,"style":{"typography":{"fontSize":"24px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.175px"}},"textColor":"gvb-graphite"} /-->
+					<!-- wp:post-title {"level":5,"isLink":true,"style":{"typography":{"fontSize":"24px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"0.2px"}},"textColor":"gvb-graphite"} /-->
 
 					<!-- wp:post-date {"format":"d.m.Y","style":{"typography":{"fontSize":"16px","lineHeight":"1.5","letterSpacing":"0.08px"}},"textColor":"gvb-orange"} /-->
 

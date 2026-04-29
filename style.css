@@ -1888,6 +1888,12 @@ html {
     margin-right: 12px !important;
   }
 
+  .gvb-single-hero {
+    min-height: 400px !important;
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+  }
+
   .gvb-hero__content {
     margin-left: 0;
   }
@@ -3697,8 +3703,26 @@ html {
    BLOG — SINGLE POST
    ══════════════════════════════════════════════════════════════ */
 
+/* ── Single article hero — mirrors .gvb-hero structure (rounded box, fluid
+   min-height, 20px inset). Article uses the WP Cover block instead of the
+   group+img+overlay structure of standard heroes (Cover gives us
+   useFeaturedImage:true to dynamically pull the post's featured image),
+   so the rules below normalise the visual to match the rest of the heroes. */
 .gvb-single-hero {
   position: relative;
+  margin-top: 8px;
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+  border-radius: 20px;
+  overflow: hidden;
+  /* Same fluid floor as .gvb-hero: 604px at 1280 viewport → 774px at 1920+. */
+  min-height: clamp(604px, calc(264px + 26.5625vw), 774px) !important;
+}
+
+/* Round the Cover bg image + dim so they clip to the rounded box. */
+.gvb-single-hero .wp-block-cover__background,
+.gvb-single-hero .wp-block-cover__image-background {
+  border-radius: 20px;
 }
 
 .gvb-single-hero .wp-block-cover__inner-container {
@@ -3708,10 +3732,10 @@ html {
 }
 
 .gvb-single-hero .wp-block-post-title {
-  font-size: 36px !important;
+  font-size: clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px) !important;
   font-weight: 700 !important;
-  line-height: 1.05 !important;
-  letter-spacing: -1.8px !important;
+  line-height: 1 !important;
+  letter-spacing: -1.95px !important;
   color: var(--wp--preset--color--gvb-linen) !important;
   margin: 0 0 16px !important;
 }
@@ -5849,6 +5873,7 @@ html {
        - .gvb-bedrucken-anlass → calc-margin variant (below in 19b)
        - .gvb-header → fixed bar, own padding rule (below in 19b) */
   .gvb-hero,
+  .gvb-single-hero,
   .gvb-faq,
   .gvb-contact,
   .gvb-cases,
