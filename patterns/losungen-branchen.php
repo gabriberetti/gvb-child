@@ -53,7 +53,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-industry-card gvb-fade-up">
 				<a class="gvb-industry-card__link" href="<?php echo esc_url( home_url( '/gesundheitswesen/' ) ); ?>" aria-label="Gesundheitswesen">Mehr erfahren</a>
-				<img src="<?php echo esc_url( $img . '/losungen-branchen-4.jpg' ); ?>" alt="Gesundheitswesen" />
+				<img src="<?php echo esc_url( $img . '/gesundpersonal.png' ); ?>" alt="Gesundheitswesen" />
 			<div class="gvb-industry-card__overlay"></div>
 			<div class="gvb-industry-card__content">
 				<h5>Gesundheits<br class="gvb-br-card">wesen</h5>

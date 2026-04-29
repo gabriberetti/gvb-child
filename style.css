@@ -2195,6 +2195,12 @@ html {
   z-index: 0;
 }
 
+/* Gesundheitswesen card — shift the cover crop hard left so the subject
+   sits where the card framing wants it. Other industry cards untouched. */
+.gvb-industry-card img[src*="gesundpersonal"] {
+  object-position: 5% center;
+}
+
 .gvb-industry-card__overlay {
   position: absolute;
   inset: 0;
