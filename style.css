@@ -1940,8 +1940,11 @@ html {
 
   /* Blog article H1 only — scale down on mobile/tablet. Long blog titles
      break the layout at the desktop 47–65px size. Scoped to .gvb-single-hero
-     so blog home, category, and all other heroes stay untouched. */
-  .gvb-single-hero .wp-block-post-title {
+     so blog home, category, and all other heroes stay untouched.
+     Doubled class to bump specificity (0,3,0) — the desktop rule at line
+     ~3847 has the same selector + !important and comes later in source,
+     so equal specificity loses to source-order without this bump. */
+  .gvb-single-hero .wp-block-post-title.wp-block-post-title {
     font-size: clamp(24px, 5vw, 36px) !important;
     letter-spacing: -0.8px !important;
   }
@@ -5502,12 +5505,28 @@ html {
 .gvb-br-mobile,
 .gvb-br-mobile-m,
 .gvb-br-mobile-s,
-.gvb-br-card {
+.gvb-br-card,
+.gvb-br-phone,
+.gvb-only-phone {
   display: none;
 }
 
 @media (max-width: 375px) {
   .gvb-br-mobile {
+    display: inline;
+  }
+}
+
+/* .gvb-br-phone — line break visible at ≤480 (covers all typical phone
+   viewports including iPhone 390 / Android 412 where .gvb-br-mobile
+   ≤375 doesn't fire). Used in hero H1 long compound German words.
+   .gvb-only-phone — same breakpoint, for visible content (e.g. a soft
+   hyphen "-" between mid-word breaks). */
+@media (max-width: 480px) {
+  .gvb-br-phone {
+    display: inline;
+  }
+  .gvb-only-phone {
     display: inline;
   }
 }
