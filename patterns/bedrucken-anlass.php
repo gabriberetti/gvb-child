@@ -35,7 +35,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<h3 class="gvb-overlay-card__title">Events &amp;<br>Marken-<br>auftritte</h3>
 			</div>
 			<div class="gvb-overlay-card__content">
-				<p class="gvb-overlay-card__desc">Unsere Flaschen sind das <br class="gvb-br-mobile-s">nachhaltige Give Away oder <br class="gvb-br-mobile-s">Goodie auf Events oder Messen.</p>
+				<p class="gvb-overlay-card__desc">Good Vibe Bottles sind das nachhaltige Give-away für Events und Messen. Sie werden täglich genutzt und machen deine Marke sichtbar. Gleichzeitig reduzierst du Einweg und setzt ein Zeichen für bewussten Konsum.</p>
 			</div>
 		</div>
 
