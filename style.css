@@ -3758,9 +3758,13 @@ html {
   color: var(--wp--preset--color--gvb-linen) !important;
 }
 
-/* Single post body content */
+/* Single post body content. Fluid cap: 800px floor (mobile/tablet/laptop)
+   → 1100px ceiling at viewport 1920+. Below 1440 stays at 800 (the prior
+   static value); above 1440 widens linearly so the column feels less
+   orphaned next to the wide hero. ~80–90 chars/line at 1100 — still
+   inside the readable range for 16–18px body text. */
 .gvb-single-body {
-  max-width: 800px;
+  max-width: clamp(800px, calc(-100px + 0.625vw), 1100px);
   margin-left: auto;
   margin-right: auto;
 }
