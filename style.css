@@ -2234,10 +2234,13 @@ html {
   padding: 80px 20px;
 }
 
-/* Unternehmen page only — drop the 80px top padding so the benefits
-   section sits tighter against the section above. Class added on the
-   pattern's <section> in industrie-benefits-unternehmen.php only. */
-.gvb-personalisieren.gvb-personalisieren--no-pt {
+/* Industry-page benefits variant — all 5 industrie-benefits-{slug}
+   patterns sit directly below the industry intro paragraph and need
+   the 80px top padding removed so they hug the section above. The
+   modifier captures intent (this is the industry variant of the
+   Personalisieren grid), so future industry-only styling can land
+   here in one place. */
+.gvb-personalisieren--industry {
   padding-top: 0;
 }
 
