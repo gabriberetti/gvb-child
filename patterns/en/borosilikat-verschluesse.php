@@ -31,7 +31,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				</div>
 			</div>
 			<h5 class="gvb-verschluss-card__title">Bamboo Wideneck</h5>
-			<p class="gvb-verschluss-card__desc">Bamboo closure with a natural look and a warm, premium feel.<br>Available for the Wideneck Edition.</p>
+			<p class="gvb-verschluss-card__desc">Bamboo closure with a natural look and a warm, premium feel.</p>
 		</div>
 
 		<div class="gvb-verschluss-col">
@@ -51,7 +51,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				</div>
 			</div>
 			<h5 class="gvb-verschluss-card__title">Stainless steel Wideneck</h5>
-			<p class="gvb-verschluss-card__desc">Clean, modern and durable high-quality stainless closure.<br>Available for the Wideneck Edition.</p>
+			<p class="gvb-verschluss-card__desc">Clean, modern and durable high-quality stainless closure.</p>
 		</div>
 
 	</div>

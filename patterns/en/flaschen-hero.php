@@ -17,7 +17,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<div class="wp-block-group gvb-hero__content" style="margin-left:auto">
 
 		<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px)","fontWeight":"700","lineHeight":"1","letterSpacing":"-1.95px"}},"textColor":"gvb-linen"} -->
-		<h1 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px);font-weight:700;line-height:1;letter-spacing:-1.95px">Good vibes with<br>every bottle.</h1>
+		<h1 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(35.641px, 2.228rem + ((1vw - 3.2px) * 2.621), 65px);font-weight:700;line-height:1;letter-spacing:-1.95px">Good vibes<br>with<br>every<br>bottle.</h1>
 		<!-- /wp:heading -->
 
 	</div>
