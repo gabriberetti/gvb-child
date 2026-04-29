@@ -42,7 +42,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie reinige ich meine Trinkflaschen am besten?</summary>
-				<div class="gvb-faq__answer"><p>Alle unsere <a href="/unsere-flaschen/">Trinkflaschen</a> sind spülmaschinenfest. Für eine längere Lebensdauer empfehlen wir die Reinigung per Hand. Dichtungen sollten regelmäßig gereinigt werden.</p></div>
+				<div class="gvb-faq__answer"><p>Alle unsere <a href="/unsere-flaschen/">Trinkflaschen</a> sind spülmaschinenfest. Für eine längere Lebensdauer empfehlen wir die Reinigung per Hand. Dichtungen sollten regelmäßig gereinigt werden. Mehr Tipps findest du in unserem <a href="/trinkflasche-reinigen/">Blogartikel zur Reinigung</a>.</p></div>
 			</details>
 
 		</div>

@@ -42,7 +42,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Kann ich die Trinkflaschen auch in der Spülmaschine waschen?</summary>
-				<div class="gvb-faq__answer"><p>Ja, alle unsere Trinkflaschen sind für die Reinigung in der Spülmaschine geeignet. Für eine längere Haltbarkeit empfehlen wir niedrige Temperaturen oder Handwäsche.</p></div>
+				<div class="gvb-faq__answer"><p>Ja, alle unsere Trinkflaschen sind für die Reinigung in der Spülmaschine geeignet. Für eine längere Haltbarkeit empfehlen wir niedrige Temperaturen oder Handwäsche. Weitere Tipps findest du in unserem <a href="/trinkflasche-reinigen/">Blogartikel zur Reinigung</a>.</p></div>
 			</details>
 
 		</div>
