@@ -2708,6 +2708,12 @@ html {
   object-position: center 69%;
 }
 
+/* ── Hero: gesundheitswesen — mirror so the subject sits on the left
+   side of the frame (text overlay sits on the right). ── */
+.gvb-hero__bg--gesundheitswesen {
+  transform: scaleX(-1);
+}
+
 /* ── Hero: unsere flaschen + bedrucken (shared image + framing) ──
    The Figma source upscales the image to 127.58% width with negative
    left offset to crop horizontally. object-fit: cover only gives us
