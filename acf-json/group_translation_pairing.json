@@ -17,7 +17,6 @@
                 "id": ""
             },
             "post_type": [
-                "page",
                 "en_post"
             ],
             "post_status": "",
@@ -44,7 +43,6 @@
                 "id": ""
             },
             "post_type": [
-                "page",
                 "post"
             ],
             "post_status": "",
@@ -58,13 +56,6 @@
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "page"
-            }
-        ],
         [
             {
                 "param": "post_type",
@@ -87,7 +78,7 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
-    "description": "Reciprocal page-pair links used by the language switcher and hreflang tags. Set _en_page_id on German content; set _de_page_id on English content.",
+    "description": "Reciprocal blog-post pairing for the language switcher + hreflang. Static page pairs are hardcoded in functions.php (gvb_page_pair_map) — this field only shows on Posts and English Posts. Set _en_page_id on German posts; set _de_page_id on English posts.",
     "show_in_rest": 0,
     "modified": 1777680000
 }

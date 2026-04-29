@@ -444,7 +444,141 @@ function gvb_register_en_post_type() {
 }
 add_action( 'init', 'gvb_register_en_post_type' );
 
-/* ── 9. SEO: hreflang + language_attributes + og:locale ──────── */
+/* ── 8.5. Translation pairing — pages (hardcoded), posts (ACF) ─── */
+
+/**
+ * Hardcoded DE → EN page slug map.
+ *
+ * The 17 static pages are paired here in code rather than via ACF because
+ * they're a fixed, known set that essentially never changes. This keeps
+ * the pairings self-documenting in the codebase, removes the 15-min admin
+ * task of clicking pairings into each page, and ships via git so they're
+ * version-controlled with the rest of the EN setup.
+ *
+ * Format: [ DE_post_name (slug) => EN_post_name (slug under /en/ parent) ]
+ *
+ * Front-page special case: not in this array. Detected via
+ * get_option('page_on_front'); its EN counterpart is the page with slug
+ * 'en' that hosts the EN home. See gvb_get_page_pair_id() for the logic.
+ *
+ * If a slug ever changes, edit this array and git push — no admin work.
+ *
+ * Blog posts (DE `post` ↔ EN `en_post`) use the ACF Translation Pairing
+ * field instead of this map — see gvb_counterpart_url() below.
+ */
+function gvb_page_pair_map() {
+    return array(
+        'unsere-flaschen'         => 'our-bottles',
+        'edelstahl'               => 'stainless-steel',
+        'borosilikatglas'         => 'borosilicate-glass',
+        'tritan'                  => 'tritan',
+        'unsere-losungen'         => 'solutions',
+        'uber-uns'                => 'about',
+        'bedrucken'               => 'printing',
+        'unternehmen'             => 'corporate',
+        'sportvereine'            => 'sports-clubs',
+        'gesundheitswesen'        => 'healthcare',
+        'hotel-wellness-und-spa'  => 'hotel-wellness-spa',
+        'bildungseinrichtungen'   => 'education',
+        'faq'                     => 'faq',
+        'download'                => 'downloads',
+        'impressum'               => 'imprint',
+        'datenschutz'             => 'privacy',
+    );
+}
+
+/**
+ * Look up a page's counterpart ID using the hardcoded slug map.
+ *
+ * Handles three cases:
+ *   1. DE front page  → EN home page (slug 'en')
+ *   2. EN home (slug 'en') → DE front page (whatever Settings → Reading says)
+ *   3. Any other DE/EN page → reverse/forward lookup in gvb_page_pair_map()
+ *
+ * @param int  $post_id Page ID.
+ * @param bool $is_en   Whether $post_id is the English-side page.
+ * @return int Counterpart page ID, or 0 if not resolvable.
+ */
+function gvb_get_page_pair_id( $post_id, $is_en ) {
+    // DE front page → EN home (page with slug 'en')
+    if ( ! $is_en && (int) $post_id === (int) get_option( 'page_on_front' ) ) {
+        $en_home = get_page_by_path( 'en' );
+        return $en_home ? (int) $en_home->ID : 0;
+    }
+
+    $current_slug = get_post_field( 'post_name', $post_id );
+    if ( ! $current_slug ) {
+        return 0;
+    }
+
+    // EN home (slug 'en') → DE front page
+    if ( $is_en && 'en' === $current_slug ) {
+        $front_id = (int) get_option( 'page_on_front' );
+        return $front_id ?: 0;
+    }
+
+    $map = gvb_page_pair_map();
+
+    if ( $is_en ) {
+        // EN slug → DE slug (reverse lookup)
+        $de_slug = array_search( $current_slug, $map, true );
+        if ( false === $de_slug ) {
+            return 0;
+        }
+        $de_page = get_page_by_path( $de_slug );
+        return $de_page ? (int) $de_page->ID : 0;
+    }
+
+    // DE slug → EN page (lives at /en/{en_slug})
+    if ( ! isset( $map[ $current_slug ] ) ) {
+        return 0;
+    }
+    $en_page = get_page_by_path( 'en/' . $map[ $current_slug ] );
+    return $en_page ? (int) $en_page->ID : 0;
+}
+
+/**
+ * Resolve the translation counterpart URL for a given post.
+ *
+ * Strategy:
+ *   - Pages           → hardcoded gvb_page_pair_map() (zero admin work)
+ *   - Posts (post/en_post) → ACF Translation Pairing field
+ *
+ * Returns empty string if no counterpart can be resolved. Callers should
+ * fall back to the language home root (`/` or `/en/`) for graceful UX.
+ *
+ * @param int|null $post_id Optional. Defaults to the queried object.
+ * @return string Counterpart URL, or '' if not resolvable.
+ */
+function gvb_counterpart_url( $post_id = null ) {
+    if ( null === $post_id ) {
+        $post_id = get_queried_object_id();
+    }
+    if ( ! $post_id ) {
+        return '';
+    }
+
+    $is_en     = gvb_is_english_page( $post_id );
+    $post_type = get_post_type( $post_id );
+
+    if ( 'page' === $post_type ) {
+        $pair_id = gvb_get_page_pair_id( $post_id, $is_en );
+        return ( $pair_id && 'publish' === get_post_status( $pair_id ) )
+            ? get_permalink( $pair_id )
+            : '';
+    }
+
+    if ( in_array( $post_type, array( 'post', 'en_post' ), true ) && function_exists( 'get_field' ) ) {
+        $pair_id = $is_en
+            ? gvb_acf_to_post_id( get_field( '_de_page_id', $post_id ) )
+            : gvb_acf_to_post_id( get_field( '_en_page_id', $post_id ) );
+        return ( $pair_id && 'publish' === get_post_status( $pair_id ) )
+            ? get_permalink( $pair_id )
+            : '';
+    }
+
+    return '';
+}
 
 /**
  * Normalize an ACF Post Object field value to an integer post ID.
@@ -470,6 +604,8 @@ function gvb_acf_to_post_id( $value ) {
     return (int) $value;
 }
 
+/* ── 9. SEO: hreflang + language_attributes + og:locale ──────── */
+
 /**
  * Output reciprocal hreflang link tags in the document <head>.
  *
@@ -478,15 +614,11 @@ function gvb_acf_to_post_id( $value ) {
  *   <link rel="alternate" hreflang="x-default" href="..." /> (mirrors DE — primary market)
  *   <link rel="alternate" hreflang="en"       href="..." />
  *
- * Page pairing comes from ACF fields (Translation Pairing field group):
- *   - On DE pages/posts:  `_en_page_id` → EN counterpart (page or en_post)
- *   - On EN pages/posts:  `_de_page_id` → DE counterpart (page or post)
+ * Counterpart resolution lives in gvb_counterpart_url():
+ *   - Pages → hardcoded slug map (no admin work needed)
+ *   - Posts → ACF Translation Pairing field (filled per-post by editor)
  *
- * Both fields must use Return Format = Post ID (or Post Object — handled by
- * gvb_acf_to_post_id()). Self-referencing + reciprocal annotation are
- * mandatory per Google's hreflang spec.
- *
- * If ACF is not active or the pair is unset, only the self-referencing tag
+ * If the counterpart is missing/unpublished, only the self-referencing tag
  * is emitted (graceful degradation — no broken hreflang cluster).
  *
  * Skips on archive/search/404; only fires for is_singular() and the static
@@ -502,23 +634,12 @@ function gvb_hreflang_tags() {
         return; // "latest posts" homepage with no static page assigned — skip.
     }
 
-    $is_en = gvb_is_english_page( $current_id );
+    $is_en    = gvb_is_english_page( $current_id );
+    $self_url = get_permalink( $current_id );
+    $pair_url = gvb_counterpart_url( $current_id );
 
-    if ( function_exists( 'get_field' ) ) {
-        $de_id = $is_en
-            ? gvb_acf_to_post_id( get_field( '_de_page_id', $current_id ) )
-            : (int) $current_id;
-        $en_id = $is_en
-            ? (int) $current_id
-            : gvb_acf_to_post_id( get_field( '_en_page_id', $current_id ) );
-    } else {
-        // ACF not active — only self-reference (still valid SEO, just no pair).
-        $de_id = $is_en ? 0 : (int) $current_id;
-        $en_id = $is_en ? (int) $current_id : 0;
-    }
-
-    $de_url = ( $de_id && 'publish' === get_post_status( $de_id ) ) ? get_permalink( $de_id ) : '';
-    $en_url = ( $en_id && 'publish' === get_post_status( $en_id ) ) ? get_permalink( $en_id ) : '';
+    $de_url = $is_en ? $pair_url : $self_url;
+    $en_url = $is_en ? $self_url : $pair_url;
 
     if ( $de_url ) {
         printf( '<link rel="alternate" hreflang="de-DE" href="%s" />' . "\n", esc_url( $de_url ) );
@@ -574,9 +695,9 @@ add_action( 'wp_head', 'gvb_og_locale', 6 );
  *
  * Outputs a small <nav> with two language links. The active link
  * carries `aria-current="page"` and self-references; the inactive link
- * points to the equivalent translated page (via ACF Translation Pairing
- * fields) or, as fallback, to the language home root (`/` for DE,
- * `/en/` for EN).
+ * points to the equivalent translated page (resolved via
+ * gvb_counterpart_url() — hardcoded map for pages, ACF for posts) or,
+ * as fallback, to the language home root (`/` for DE, `/en/` for EN).
  *
  * Both links carry `lang` + `hreflang` attributes so screen readers
  * announce the language correctly and search engines understand the
@@ -594,17 +715,10 @@ function gvb_lang_switcher_shortcode() {
     $current_id = get_queried_object_id();
     $is_en      = gvb_is_english_page( $current_id );
 
-    // Counterpart URL via ACF pairing
-    $pair_id = 0;
-    if ( $current_id && function_exists( 'get_field' ) ) {
-        $pair_id = $is_en
-            ? gvb_acf_to_post_id( get_field( '_de_page_id', $current_id ) )
-            : gvb_acf_to_post_id( get_field( '_en_page_id', $current_id ) );
+    $pair_url = $current_id ? gvb_counterpart_url( $current_id ) : '';
+    if ( ! $pair_url ) {
+        $pair_url = $is_en ? home_url( '/' ) : home_url( '/en/' );
     }
-
-    $pair_url = ( $pair_id && 'publish' === get_post_status( $pair_id ) )
-        ? get_permalink( $pair_id )
-        : ( $is_en ? home_url( '/' ) : home_url( '/en/' ) );
 
     // Self URL for the active link (matches canonical — no surprise reload target)
     $self_url = $current_id ? get_permalink( $current_id ) : ( $is_en ? home_url( '/en/' ) : home_url( '/' ) );
