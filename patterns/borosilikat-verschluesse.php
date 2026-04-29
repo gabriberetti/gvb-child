@@ -20,7 +20,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 					<img src="<?php echo esc_url( $img . '/borosilikat-verschluss-bambus.webp' ); ?>" alt="Bambusverschluss Slim" />
 				</div>
 			</div>
-			<h5 class="gvb-verschluss-card__title">Bambus</h5>
+			<h5 class="gvb-verschluss-card__title">Bambus Slim Edition</h5>
 			<p class="gvb-verschluss-card__desc">Bambusverschluss in edler Optik.</p>
 		</div>
 
@@ -30,7 +30,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 					<img src="<?php echo esc_url( $img . '/borosilikat-verschluss-bambus-wideneck.webp' ); ?>" alt="Bambusverschluss Wideneck" />
 				</div>
 			</div>
-			<h5 class="gvb-verschluss-card__title">Bambus Wideneck</h5>
+			<h5 class="gvb-verschluss-card__title">Bambus Wideneck Edition</h5>
 		</div>
 
 		<div class="gvb-verschluss-col">
@@ -39,7 +39,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 					<img src="<?php echo esc_url( $img . '/borosilikat-verschluss-edelstahl.webp' ); ?>" alt="Edelstahlverschluss Slim" />
 				</div>
 			</div>
-			<h5 class="gvb-verschluss-card__title">Edelstahl</h5>
+			<h5 class="gvb-verschluss-card__title">Edelstahl Slim Edition</h5>
 			<p class="gvb-verschluss-card__desc">Hochwertiger Edelstahlverschluss.</p>
 		</div>
 
@@ -49,7 +49,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 					<img src="<?php echo esc_url( $img . '/borosilikat-verschluss-edelstahl-wideneck.webp' ); ?>" alt="Edelstahlverschluss Wideneck" />
 				</div>
 			</div>
-			<h5 class="gvb-verschluss-card__title">Edelstahl Wideneck</h5>
+			<h5 class="gvb-verschluss-card__title">Edelstahl Wideneck Edition</h5>
 		</div>
 
 	</div>
