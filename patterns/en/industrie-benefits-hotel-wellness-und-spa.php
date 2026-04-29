@@ -16,7 +16,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--dark gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
-				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/hotel-card-1.png' ); ?>" alt="Serve in style" />
+				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/hotel-stilvoll.png' ); ?>" alt="Serve in style" />
 				<h3 class="gvb-personalisieren-card__title">Serve<br>in style.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">

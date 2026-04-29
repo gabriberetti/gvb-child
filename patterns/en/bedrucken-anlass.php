@@ -25,7 +25,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<div class="gvb-overlay-cards" id="gvb-anlass-track" data-carousel-track>
 		<div class="gvb-overlay-card gvb-overlay-card--dark-text gvb-fade-up">
 			<div class="gvb-overlay-card__media">
-				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/bedrucken-anlass-1.png' ); ?>" alt="" />
+				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/anlassnew1.png' ); ?>" alt="" />
 				<h3 class="gvb-overlay-card__title">Employer<br>Branding &amp;<br>Onboarding</h3>
 			</div>
 			<div class="gvb-overlay-card__content">
@@ -39,7 +39,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<h3 class="gvb-overlay-card__title">Events &amp;<br>Brand<br>Presence</h3>
 			</div>
 			<div class="gvb-overlay-card__content">
-				<p class="gvb-overlay-card__desc">Our bottles are a sustainable giveaway that leaves a lasting impression &ndash; at events, trade fairs or brand activations.</p>
+				<p class="gvb-overlay-card__desc">Good Vibe Bottles are the sustainable give-away for events and trade fairs. They get used daily and keep your brand visible. At the same time, you reduce single-use and make a statement for conscious consumption.</p>
 			</div>
 		</div>
 

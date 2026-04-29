@@ -68,8 +68,12 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<!-- /wp:group -->
 
 	<div class="gvb-cases__mobile-nav" aria-hidden="true">
-		<button class="gvb-cases__nav gvb-cases__nav--prev" aria-label="Previous case">&#8249;</button>
-		<button class="gvb-cases__nav gvb-cases__nav--next" aria-label="Next case">&#8250;</button>
+		<button class="gvb-cases__nav gvb-cases__nav--prev" aria-label="Previous case">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+		</button>
+		<button class="gvb-cases__nav gvb-cases__nav--next" aria-label="Next case">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+		</button>
 	</div>
 
 </div>
