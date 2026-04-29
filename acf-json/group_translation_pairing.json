@@ -1,0 +1,93 @@
+{
+    "key": "group_translation_pairing",
+    "title": "Translation Pairing",
+    "fields": [
+        {
+            "key": "field_en_page_id",
+            "label": "English counterpart",
+            "name": "_en_page_id",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "On a German page/post, select its English equivalent. Leave blank on English content.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page",
+                "en_post"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_de_page_id",
+            "label": "German counterpart",
+            "name": "_de_page_id",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "On an English page/post, select its German equivalent. Leave blank on German content.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page",
+                "post"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 1,
+            "ui": 1,
+            "bidirectional": 0,
+            "bidirectional_target": []
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "en_post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Reciprocal page-pair links used by the language switcher and hreflang tags. Set _en_page_id on German content; set _de_page_id on English content.",
+    "show_in_rest": 0,
+    "modified": 1777680000
+}
