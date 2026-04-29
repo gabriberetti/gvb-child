@@ -4808,6 +4808,13 @@ html {
     flex-direction: row;
     flex-wrap: nowrap;
     overflow-x: auto;
+    /* Explicit overflow-y: hidden opts out of the CSS spec rule that
+       implicitly promotes overflow-y to `auto` when overflow-x is set
+       to auto/scroll. Without this, any tiny vertical overflow inside
+       the cards (from the title bottom: 100px + content margin-top:
+       -100px overlap math) shows a stray vertical scrollbar in the
+       track. */
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     gap: 16px;
     padding-bottom: 4px;
