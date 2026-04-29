@@ -757,11 +757,9 @@ html {
   min-height: clamp(574px, 39.86vw, 765px);
   display: flex;
   flex-direction: column;
-  /* margin (not padding) because the pattern sets `padding-bottom: 39px`
-     inline via WP block styles — inline always wins over CSS unless
-     !important. Margin-bottom has no inline conflict and creates a clean
-     40px gap below the section (above whatever comes next). */
-  margin-bottom: 40px;
+  /* Bottom margin removed (was 40px) — section now sits flush with
+     whatever comes next. */
+  margin-bottom: 0;
 }
 
 .gvb-cases__h3-break,
@@ -2463,7 +2461,7 @@ html {
 
 /* ── Steps section ── */
 .gvb-steps {
-  padding: 0 20px 0;
+  padding: 40px 20px 0;
 }
 
 .gvb-steps__intro {
@@ -3264,7 +3262,7 @@ html {
    list adds extra inner padding so the 4-image row stays visually
    narrower than the heading (doesn't go full-width). */
 .gvb-edelstahl-features {
-  padding: 40px 20px 40px;
+  padding: 80px 20px 40px;
 }
 
 .gvb-edelstahl-features__heading {
@@ -3490,7 +3488,7 @@ html {
    the same `gvb-borosilikat-*` class names). Styling mirrors the
    Edelstahl feature cards for visual consistency. */
 .gvb-borosilikat-features {
-  padding: 40px 20px 40px;
+  padding: 80px 20px 40px;
 }
 
 .gvb-borosilikat-features__heading {
