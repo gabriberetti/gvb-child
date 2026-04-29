@@ -2814,10 +2814,14 @@ html {
   padding: 20px 0;
 }
 
+/* Row height + image dimensions scale proportionally from Figma 1280
+   (506×432) → our 1440 baseline (×1.125 = 570×486) and continue to
+   ~700×600 around viewport 1768+. Same 39.58vw formula as the steps
+   image so both sections behave consistently. */
 .gvb-uberuns-vm__row {
   display: flex;
   gap: 20px;
-  height: 432px;
+  height: clamp(380px, 33.75vw, 600px);
 }
 
 .gvb-uberuns-vm__content {
@@ -2834,28 +2838,41 @@ html {
   flex-direction: column;
   gap: 50px;
   width: 100%;
+  /* Cap text width to mirror Figma 1280's 531px text-block width
+     proportionally on our 1440 baseline (×1.125 = 597) and continuing
+     to 663 at viewport 1920+. The 41.5vw slope passes through Figma's
+     531 at viewport 1280 cleanly. Without this cap, text fills the
+     orange card and grows too wide as the card swells past 1440. */
+  max-width: clamp(420px, 41.5vw, 663px);
 }
 
+/* H2 typography from Figma 1280's 40px / 1.08 / 0.5% letter-spacing
+   scaled ×1.125 to our 1440 baseline → 45px. `em` letter-spacing
+   auto-tracks the font-size at every viewport. Fluid clamp at 1440+
+   below scales 45 → 50 between 1440 → 1920. */
 .gvb-uberuns-vm__text h2 {
-  font-size: 40px;
+  font-size: 45px;
   font-weight: 700;
   line-height: 1.08;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.005em;
   color: var(--wp--preset--color--gvb-linen);
   margin: 0;
 }
 
+/* P stays at 16 across all viewports (Figma 1280's literal value —
+   body comfort size doesn't scale, per the steps section decision).
+   Letter-spacing as `em` to mirror Figma's 0.5% percentage spec. */
 .gvb-uberuns-vm__text p {
   font-size: 16px;
   line-height: 1.2;
-  letter-spacing: 0.08px;
+  letter-spacing: 0.005em;
   color: var(--wp--preset--color--gvb-linen);
   margin: 0;
 }
 
 .gvb-uberuns-vm__image {
-  flex: 0 0 506px;
-  height: 432px;
+  flex: 0 0 clamp(380px, 39.58vw, 700px);
+  height: clamp(340px, 33.75vw, 600px);
   border-radius: 16px;
   overflow: hidden;
 }
@@ -2869,6 +2886,21 @@ html {
 /* ── Team photo ── */
 .gvb-uberuns-team {
   padding: 20px 52px 40px;
+}
+
+/* Mirror of .gvb-uberuns-personen h2 — used as a "tablet-and-below"
+   variant so the heading appears ABOVE the team image in the column-stack
+   layout. Hidden on desktop; the @media (max-width: 1199px) block toggles
+   this on and the personen H2 off so each viewport reads in the right
+   order. */
+.gvb-uberuns-team__heading {
+  display: none;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1.8px;
+  color: var(--wp--preset--color--gvb-graphite);
+  margin: 0 0 24px;
 }
 
 .gvb-uberuns-team__img {
@@ -4392,6 +4424,9 @@ html {
   .gvb-steps__text h3 {
     font-size: clamp(45px, calc(30px + 1.042vw), 50px);
   }
+  .gvb-uberuns-vm__text h2 {
+    font-size: clamp(45px, calc(30px + 1.042vw), 50px);
+  }
 }
 
 .gvb-bedrucken-warum__text p {
@@ -4562,6 +4597,50 @@ html {
   /* Scale heading down so long German words never overflow the narrower card */
   .gvb-steps__text h3 {
     font-size: 20px;
+  }
+
+  /* ── Vision/Mission: stack vertically on tablet/iPad band too.
+     The base CSS sets row height via clamp(380, 33.75vw, 600) which
+     resolves to MIN 380 below viewport ~1126 — too short for the
+     content text. Stack column + auto height + image scaled to a
+     reasonable tablet size. The mobile @≤784 block below overrides
+     image height + content padding for narrower phones. ── */
+  .gvb-uberuns-vm__row {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .gvb-uberuns-vm__image {
+    flex: none;
+    width: 100%;
+    height: clamp(280px, 35vw, 420px);
+    /* Force image to render AFTER content in the stack regardless of
+       DOM order. Row 2's HTML has <image> before <content> (so desktop
+       can render image-left), but in column-stack we want every row
+       to read content → image (text → image → text → image rhythm). */
+    order: 2;
+  }
+
+  .gvb-uberuns-vm__content {
+    padding: 40px 32px;
+    order: 1;
+  }
+
+  /* Reset text max-width — the cap from the base rule is calibrated
+     for the wider desktop card; in column-stack the card is full-width
+     so text should fill it (with content padding still owning gutter). */
+  .gvb-uberuns-vm__text {
+    max-width: none;
+  }
+
+  /* "Wer sind wir": swap heading position so it sits ABOVE the team
+     image at tablet/mobile (image stacks below heading instead of
+     above text). Show team's variant heading, hide the personen one. */
+  .gvb-uberuns-team__heading {
+    display: block;
+  }
+  .gvb-uberuns-personen h2 {
+    display: none;
   }
 }
 
@@ -5092,6 +5171,12 @@ html {
   }
 
   .gvb-uberuns-personen h2 {
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  /* Mobile sizing for the team-variant heading (mirrors personen H2). */
+  .gvb-uberuns-team__heading {
     font-size: 28px;
     letter-spacing: -0.5px;
   }
