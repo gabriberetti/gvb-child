@@ -1954,19 +1954,21 @@ html {
 
   .gvb-cases__nav {
     pointer-events: all;
-    background: rgba(255, 255, 255, 0.20);
+    /* Match the .gvb-carousel-nav style used on Anlass + Product cards:
+       solid linen circle with graphite chevron + drop shadow. */
+    background: var(--wp--preset--color--gvb-linen);
     border: none;
-    color: var(--wp--preset--color--gvb-linen);
-    font-size: 28px;
+    color: var(--wp--preset--color--gvb-graphite);
     line-height: 1;
     width: 44px;
     height: 44px;
     border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
   }
 
   .gvb-cases__nav:disabled {
