@@ -1768,9 +1768,12 @@ html {
   padding-left: 32px;
 }
 
+/* Note: ul/ol intentionally omitted from this selector list. CSS opacity
+   multiplies through the cascade — applying 0.7 to both <ul> and <li>
+   would render list items at 0.7 × 0.7 = 0.49, lighter than paragraphs.
+   Setting opacity only on p + li keeps bullets and paragraphs at the
+   same effective tone. */
 .gvb-faq__answer p,
-.gvb-faq__answer ul,
-.gvb-faq__answer ol,
 .gvb-faq__answer li {
   font-size: 16px;
   line-height: 1.2;
