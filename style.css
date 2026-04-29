@@ -1951,9 +1951,13 @@ html {
 
   /* Blog article hero — uniform dark overlay on mobile so the title stays
      legible. Matches the .gvb-hero__overlay rgba(0,0,0,0.28) used elsewhere.
-     Overrides the inline side-gradient set on the cover block. */
+     Overrides the inline side-gradient set on the cover block.
+     opacity:1 needed because WP's .has-background-dim-50 class sets
+     opacity:0.5 on the span — without this our rgba would render at
+     ~0.14 effective alpha (basically invisible). */
   .gvb-single-hero .wp-block-cover__background {
     background: rgba(0, 0, 0, 0.28) !important;
+    opacity: 1 !important;
   }
 
   .gvb-hero__content {
