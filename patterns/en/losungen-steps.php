@@ -37,7 +37,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<!-- Step 2: image left, content right -->
 		<div class="gvb-steps__row gvb-fade-up">
 			<div class="gvb-steps__image">
-				<img src="<?php echo esc_url( $img . '/losungen-step-2.jpg' ); ?>" alt="Send us your logo or design" />
+				<img src="<?php echo esc_url( $img . '/losungen-step-2.png' ); ?>" alt="Send us your logo or design" />
 			</div>
 			<div class="gvb-steps__content">
 				<span class="gvb-steps__number">2</span>
