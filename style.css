@@ -4204,7 +4204,7 @@ html {
 /* ── Druckverfahren section ── */
 
 .gvb-druckverfahren {
-  padding: 80px 52px 80px;
+  padding: 0 52px 80px;
 }
 
 .gvb-druckverfahren__header {
