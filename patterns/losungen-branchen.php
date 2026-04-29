@@ -62,11 +62,11 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		</div>
 
 		<div class="gvb-industry-card gvb-fade-up">
-				<a class="gvb-industry-card__link" href="<?php echo esc_url( home_url( '/bildungseinrichtungen/' ) ); ?>" aria-label="Bildungseinrichtungen">Mehr erfahren</a>
-				<img src="<?php echo esc_url( $img . '/losungen-branchen-5.jpg' ); ?>" alt="Bildungseinrichtungen" />
+				<a class="gvb-industry-card__link" href="<?php echo esc_url( home_url( '/bildungseinrichtungen/' ) ); ?>" aria-label="Bildungswesen">Mehr erfahren</a>
+				<img src="<?php echo esc_url( $img . '/losungen-branchen-5.jpg' ); ?>" alt="Bildungswesen" />
 			<div class="gvb-industry-card__overlay"></div>
 			<div class="gvb-industry-card__content">
-				<h5>Bildungs<br class="gvb-br-card">einrichtungen</h5>
+				<h5>Bildungswesen</h5>
 				<a href="<?php echo esc_url( home_url( '/bildungseinrichtungen/' ) ); ?>" class="gvb-btn-sm">Mehr erfahren</a>
 			</div>
 		</div>
