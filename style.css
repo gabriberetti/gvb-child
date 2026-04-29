@@ -6187,3 +6187,13 @@ html {
   }
 }
 
+/* Product cards — at Laptop tier (≤1024) zero out the inline 20px lateral
+   padding from patterns/product-cards.php so cards get 40px more usable
+   width. Wider tiers keep the universal cap + 1690 override untouched. */
+@media (max-width: 1024px) {
+  .gvb-product-cards {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
