@@ -5467,12 +5467,23 @@ html {
 /* Mobile line breaks: hidden on desktop, visible at specific breakpoints */
 .gvb-br-mobile,
 .gvb-br-mobile-m,
-.gvb-br-mobile-s {
+.gvb-br-mobile-s,
+.gvb-br-card {
   display: none;
 }
 
 @media (max-width: 375px) {
   .gvb-br-mobile {
+    display: inline;
+  }
+}
+
+/* .gvb-br-card — used in industry-card H5 to break long German compound
+   words (Gesundheits/wesen, Bildungs/einrichtungen) at narrow viewports
+   where the single word would overflow the card. Active ≤480 covers all
+   phones; desktop stays single-line. */
+@media (max-width: 480px) {
+  .gvb-br-card {
     display: inline;
   }
 }

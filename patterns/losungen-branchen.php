@@ -56,7 +56,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<img src="<?php echo esc_url( $img . '/losungen-branchen-4.jpg' ); ?>" alt="Gesundheitswesen" />
 			<div class="gvb-industry-card__overlay"></div>
 			<div class="gvb-industry-card__content">
-				<h5>Gesundheitswesen</h5>
+				<h5>Gesundheits<br class="gvb-br-card">wesen</h5>
 				<a href="<?php echo esc_url( home_url( '/gesundheitswesen/' ) ); ?>" class="gvb-btn-sm">Mehr erfahren</a>
 			</div>
 		</div>
@@ -66,7 +66,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<img src="<?php echo esc_url( $img . '/losungen-branchen-5.jpg' ); ?>" alt="Bildungseinrichtungen" />
 			<div class="gvb-industry-card__overlay"></div>
 			<div class="gvb-industry-card__content">
-				<h5>Bildungseinrichtungen</h5>
+				<h5>Bildungs<br class="gvb-br-card">einrichtungen</h5>
 				<a href="<?php echo esc_url( home_url( '/bildungseinrichtungen/' ) ); ?>" class="gvb-btn-sm">Mehr erfahren</a>
 			</div>
 		</div>
