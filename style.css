@@ -787,6 +787,18 @@ html {
   object-position: center 10%;
 }
 
+/* TEST (mobile/tablet only): swap all 4 case bgs to higher-res
+   Cases_1-4.jpg via `content: url()` so the JS-driven src attribute
+   logic stays intact (JS continues swapping src normally on tab
+   change). Delete this block when testing is complete OR when the
+   new images replace the originals cases-bg-1..4.png. */
+@media (max-width: 1199px) {
+  .gvb-cases__bg[src$="cases-bg-1.png"] { content: url('assets/img/Cases_1.jpg'); }
+  .gvb-cases__bg[src$="cases-bg-2.png"] { content: url('assets/img/Cases_2.jpg'); }
+  .gvb-cases__bg[src$="cases-bg-3.png"] { content: url('assets/img/Cases_3.jpg'); }
+  .gvb-cases__bg[src$="cases-bg-4.png"] { content: url('assets/img/Cases_4.jpg'); }
+}
+
 .gvb-cases__bg[src$="cases-bg-4.png"] {
   object-position: center 15%;
 }
