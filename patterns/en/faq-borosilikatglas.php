@@ -37,12 +37,12 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">How much do our bottles cost?</summary>
-				<div class="gvb-faq__answer"><p>The price of our bottles depends on the selected <a href="/en/our-bottles/">model</a>, accessories, order quantity and any <a href="/en/printing/">personalisation</a>. We offer tiered pricing across all products: the higher the quantity, the lower the unit price. You can download our current price list <a href="/en/downloads/">here</a>. The minimum order quantity is 50 units. For a tailored offer, simply send us a request via our contact form.</p></div>
+				<div class="gvb-faq__answer"><p>The price of our bottles depends on the selected <a href="/en/our-bottles/">model</a>, accessories, order quantity and any <a href="/en/printing/">personalisation</a>. We offer tiered pricing across all products: the higher the quantity, the lower the unit price. You can download our current price list <a href="/en/downloads/#price-list">here</a>. The minimum order quantity is 50 units. For a tailored offer, simply send us a request via our contact form.</p></div>
 			</details>
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">How does the ordering process for printed bottles work?</summary>
-				<div class="gvb-faq__answer"><p>Simple. Choose your <a href="/en/our-bottles/">bottle</a> and send us your logo or design. We review everything, advise you if needed and take care of the rest. You&rsquo;ll find all details in our <a href="/en/downloads/">printing guide</a>.</p></div>
+				<div class="gvb-faq__answer"><p>Simple. Choose your <a href="/en/our-bottles/">bottle</a> and send us your logo or design. We review everything, advise you if needed and take care of the rest. You&rsquo;ll find all details in our <a href="/en/downloads/#printing-guide">printing guide</a>.</p></div>
 			</details>
 
 		</div>

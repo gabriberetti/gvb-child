@@ -14,7 +14,7 @@
 <!-- wp:html -->
 <section class="gvb-download-cards">
 
-	<div class="gvb-download-section">
+	<div class="gvb-download-section" id="price-list">
 		<h2 class="gvb-download-section__heading">Price list</h2>
 		<div class="gvb-download-section__list">
 			<a href="/wp-content/uploads/2026/04/Price-list-GVB_Stainless-steel-bottles.pdf" download class="gvb-download-bar">
@@ -41,7 +41,7 @@
 		</div>
 	</div>
 
-	<div class="gvb-download-section">
+	<div class="gvb-download-section" id="printing-guide">
 		<h2 class="gvb-download-section__heading">Printing guide</h2>
 		<div class="gvb-download-section__list">
 			<a href="/wp-content/uploads/2026/04/Printing-Guideline-GVB-1.pdf" download class="gvb-download-bar">

@@ -28,7 +28,7 @@
 
 			<details class="gvb-faq__item is-open" open>
 				<summary class="gvb-faq__question">How much do our bottles cost?</summary>
-				<div class="gvb-faq__answer"><p>The price of our bottles depends on the selected <a href="/en/our-bottles/">model</a>, accessories, order quantity and any <a href="/en/printing/">personalisation</a>. We offer tiered pricing across all products &ndash; including accessories and printing. The higher the quantity, the lower the unit price. You can download our current price list <a href="/en/downloads/">here</a>.</p><p>The minimum order quantity for both printed and unprinted bottles is 50 units. For a tailored offer &ndash; especially for printed bottles &ndash; simply send us a request via our contact form. We&rsquo;ll get back to you with the right details shortly.</p></div>
+				<div class="gvb-faq__answer"><p>The price of our bottles depends on the selected <a href="/en/our-bottles/">model</a>, accessories, order quantity and any <a href="/en/printing/">personalisation</a>. We offer tiered pricing across all products &ndash; including accessories and printing. The higher the quantity, the lower the unit price. You can download our current price list <a href="/en/downloads/#price-list">here</a>.</p><p>The minimum order quantity for both printed and unprinted bottles is 50 units. For a tailored offer &ndash; especially for printed bottles &ndash; simply send us a request via our contact form. We&rsquo;ll get back to you with the right details shortly.</p></div>
 			</details>
 
 			<details class="gvb-faq__item">
@@ -107,7 +107,7 @@
 
 			<details class="gvb-faq__item is-open" open>
 				<summary class="gvb-faq__question">How does the ordering process for printed bottles work?</summary>
-				<div class="gvb-faq__answer"><p>Simple. Choose your <a href="/en/our-bottles/">bottle</a> and send us your logo or design. We review everything, advise you if needed and take care of the rest. You&rsquo;ll find all details in our <a href="/en/downloads/">printing guide</a>.</p></div>
+				<div class="gvb-faq__answer"><p>Simple. Choose your <a href="/en/our-bottles/">bottle</a> and send us your logo or design. We review everything, advise you if needed and take care of the rest. You&rsquo;ll find all details in our <a href="/en/downloads/#printing-guide">printing guide</a>.</p></div>
 			</details>
 
 			<details class="gvb-faq__item">
@@ -161,7 +161,7 @@
 
 			<details class="gvb-faq__item is-open" open>
 				<summary class="gvb-faq__question">What accessories are available?</summary>
-				<div class="gvb-faq__answer"><p>Our <a href="/en/tritan/">Tritan</a> bottles come with different closure options:</p><ul style="padding-left:1.25em;margin:8px 0;"><li>Flip-top closure &ndash; ideal for a quick sip on the go</li><li>Standard closure (blue) &ndash; reliable and leak-proof</li><li>2K premium closure &ndash; ergonomic and durable</li><li>Sports closure &ndash; ergonomic and non-slip for one-hand operation</li></ul><p>The premium and sports closures are also suitable for carbonated drinks. For <a href="/en/borosilicate-glass/">glass bottles</a>, you can choose between bamboo and stainless steel closures &ndash; depending on your preferred look. Fabric sleeves are also available for added protection and style. Accessories are also available separately, with the relevant minimum order quantities applying (see <a href="/en/downloads/">price list</a>).</p></div>
+				<div class="gvb-faq__answer"><p>Our <a href="/en/tritan/">Tritan</a> bottles come with different closure options:</p><ul style="padding-left:1.25em;margin:8px 0;"><li>Flip-top closure &ndash; ideal for a quick sip on the go</li><li>Standard closure (blue) &ndash; reliable and leak-proof</li><li>2K premium closure &ndash; ergonomic and durable</li><li>Sports closure &ndash; ergonomic and non-slip for one-hand operation</li></ul><p>The premium and sports closures are also suitable for carbonated drinks. For <a href="/en/borosilicate-glass/">glass bottles</a>, you can choose between bamboo and stainless steel closures &ndash; depending on your preferred look. Fabric sleeves are also available for added protection and style. Accessories are also available separately, with the relevant minimum order quantities applying (see <a href="/en/downloads/#price-list">price list</a>).</p></div>
 			</details>
 
 		</div>
@@ -239,7 +239,7 @@
 
 			<details class="gvb-faq__item is-open" open>
 				<summary class="gvb-faq__question">How can I order bottles with my logo?</summary>
-				<div class="gvb-faq__answer"><p>Simply send your design via email to <a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a> or use our contact form. We&rsquo;ll review everything and get back to you with a tailored offer. You&rsquo;ll find all details in our <a href="/en/downloads/">printing guide</a>.</p></div>
+				<div class="gvb-faq__answer"><p>Simply send your design via email to <a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a> or use our contact form. We&rsquo;ll review everything and get back to you with a tailored offer. You&rsquo;ll find all details in our <a href="/en/downloads/#printing-guide">printing guide</a>.</p></div>
 			</details>
 
 			<details class="gvb-faq__item">

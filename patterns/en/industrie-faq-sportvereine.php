@@ -37,7 +37,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">What accessories are available?</summary>
-				<div class="gvb-faq__answer"><p>Our <a href="/en/tritan/">Tritan</a> bottles are available with different closures: flip-top &ndash; for quick drinking on the go, standard closure &ndash; classic and leak-proof, 2K premium closure &ndash; robust and high-quality, sports closure &ndash; one-hand operation for active use. Additional accessories like fabric sleeves are available. Accessories are also available separately, with the relevant minimum order quantities applying (see <a href="/en/downloads/">price list</a>).</p></div>
+				<div class="gvb-faq__answer"><p>Our <a href="/en/tritan/">Tritan</a> bottles are available with different closures: flip-top &ndash; for quick drinking on the go, standard closure &ndash; classic and leak-proof, 2K premium closure &ndash; robust and high-quality, sports closure &ndash; one-hand operation for active use. Additional accessories like fabric sleeves are available. Accessories are also available separately, with the relevant minimum order quantities applying (see <a href="/en/downloads/#price-list">price list</a>).</p></div>
 			</details>
 
 			<details class="gvb-faq__item">
