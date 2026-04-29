@@ -2234,6 +2234,13 @@ html {
   padding: 80px 20px;
 }
 
+/* Unternehmen page only — drop the 80px top padding so the benefits
+   section sits tighter against the section above. Class added on the
+   pattern's <section> in industrie-benefits-unternehmen.php only. */
+.gvb-personalisieren.gvb-personalisieren--no-pt {
+  padding-top: 0;
+}
+
 .gvb-personalisieren__heading {
   font-size: 40px;
   font-weight: 700;
