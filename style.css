@@ -1938,6 +1938,14 @@ html {
     margin-right: 12px !important;
   }
 
+  /* Blog article H1 only — scale down on mobile/tablet. Long blog titles
+     break the layout at the desktop 47–65px size. Scoped to .gvb-single-hero
+     so blog home, category, and all other heroes stay untouched. */
+  .gvb-single-hero .wp-block-post-title {
+    font-size: clamp(24px, 5vw, 36px) !important;
+    letter-spacing: -0.8px !important;
+  }
+
   .gvb-hero__content {
     margin-left: 0;
   }
