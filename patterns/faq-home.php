@@ -21,7 +21,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie viel kosten unsere Trinkflaschen?</summary>
-				<div class="gvb-faq__answer"><p>Die Preise hängen vom gewählten <a href="/unsere-flaschen/">Modell</a>, dem Zubehör, der Bestellmenge und einer möglichen <a href="/unsere-losungen/bedrucken/">Personalisierung</a> ab. Für alle Produkte bieten wir Preisstaffelungen an: Je höher die Bestellmenge, desto geringer der Stückpreis. Unsere aktuelle Preisliste findest du <a href="/download/">hier</a>. Die Mindestbestellmenge liegt bei 50 Stück. Für ein individuelles Angebot schick uns einfach eine Anfrage über das Kontaktformular.</p></div>
+				<div class="gvb-faq__answer"><p>Die Preise hängen vom gewählten <a href="/unsere-flaschen/">Modell</a>, dem Zubehör, der Bestellmenge und einer möglichen <a href="/unsere-losungen/bedrucken/">Personalisierung</a> ab. Für alle Produkte bieten wir Preisstaffelungen an: Je höher die Bestellmenge, desto geringer der Stückpreis. Unsere aktuelle Preisliste findest du <a href="/download/#preisliste">hier</a>. Die Mindestbestellmenge liegt bei 50 Stück. Für ein individuelles Angebot schick uns einfach eine Anfrage über das Kontaktformular.</p></div>
 			</details>
 
 			<details class="gvb-faq__item">
@@ -42,7 +42,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie läuft die Bestellung bedruckter Flaschen ab?</summary>
-				<div class="gvb-faq__answer"><p>Ganz einfach: Du wählst deine gewünschte <a href="/unsere-flaschen/">Trinkflasche</a> und sendest uns dein Logo oder Design. Wir prüfen alles, beraten dich bei Bedarf und kümmern uns um die Umsetzung. Alle Details zum Ablauf findest du auch in unserem <a href="/download/">Druckleitfaden</a>.</p></div>
+				<div class="gvb-faq__answer"><p>Ganz einfach: Du wählst deine gewünschte <a href="/unsere-flaschen/">Trinkflasche</a> und sendest uns dein Logo oder Design. Wir prüfen alles, beraten dich bei Bedarf und kümmern uns um die Umsetzung. Alle Details zum Ablauf findest du auch in unserem <a href="/download/#druckleitfaden">Druckleitfaden</a>.</p></div>
 			</details>
 
 		</div>

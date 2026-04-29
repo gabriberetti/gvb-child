@@ -9,7 +9,7 @@
 <!-- wp:html -->
 <section class="gvb-download-cards">
 
-	<div class="gvb-download-section">
+	<div class="gvb-download-section" id="preisliste">
 		<h2 class="gvb-download-section__heading">Preisliste</h2>
 		<div class="gvb-download-section__list">
 			<a href="/wp-content/uploads/2026/04/Preisliste-GVB_Edelstahlflaschen.pdf" download class="gvb-download-bar">
@@ -36,7 +36,7 @@
 		</div>
 	</div>
 
-	<div class="gvb-download-section">
+	<div class="gvb-download-section" id="druckleitfaden">
 		<h2 class="gvb-download-section__heading">Druckleitfaden</h2>
 		<div class="gvb-download-section__list">
 			<a href="/wp-content/uploads/2026/04/Druckleitfaden-GVB.pdf" download class="gvb-download-bar">
