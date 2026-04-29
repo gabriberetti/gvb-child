@@ -21,7 +21,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				</div>
 			</div>
 			<h5 class="gvb-verschluss-card__title">Bambus</h5>
-			<p class="gvb-verschluss-card__desc">Bambusverschluss in edler Optik.<br>Verfügbar für die Slim Edition.</p>
+			<p class="gvb-verschluss-card__desc">Bambusverschluss in edler Optik.</p>
 		</div>
 
 		<div class="gvb-verschluss-col">
@@ -31,7 +31,6 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				</div>
 			</div>
 			<h5 class="gvb-verschluss-card__title">Bambus Wideneck</h5>
-			<p class="gvb-verschluss-card__desc">Bambusverschluss in edler Optik.</p>
 		</div>
 
 		<div class="gvb-verschluss-col">
@@ -41,7 +40,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				</div>
 			</div>
 			<h5 class="gvb-verschluss-card__title">Edelstahl</h5>
-			<p class="gvb-verschluss-card__desc">Hochwertiger Edelstahlverschluss.<br>Verfügbar für die Slim Edition.</p>
+			<p class="gvb-verschluss-card__desc">Hochwertiger Edelstahlverschluss.</p>
 		</div>
 
 		<div class="gvb-verschluss-col">
@@ -51,7 +50,6 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				</div>
 			</div>
 			<h5 class="gvb-verschluss-card__title">Edelstahl Wideneck</h5>
-			<p class="gvb-verschluss-card__desc">Hochwertiger Edelstahlverschluss.</p>
 		</div>
 
 	</div>
