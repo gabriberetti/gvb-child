@@ -6090,6 +6090,14 @@ html {
     margin-right: auto !important;
   }
 
+  /* Product cards override — bump cap from 1650 → 1690 (40px wider) so
+     the 3-card row gets a bit more breathing room on wide screens.
+     Below 1690 viewport the rule still resolves to calc(100% - 40px),
+     so the 20px-each-side gutter is untouched at small/mid widths. */
+  .gvb-product-cards {
+    max-width: min(calc(100% - 40px), 1690px) !important;
+  }
+
   /* Intro paragraphs (and any direct children) use a fluid reading-width
      cap — 1200 baseline (theme contentSize) up to 1600 on 2560 screens.
      Targeted at (0,2,1) specificity to beat the WP constrained-layout rule
