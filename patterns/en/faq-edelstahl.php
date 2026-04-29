@@ -42,7 +42,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">How does the ordering process for printed bottles work?</summary>
-				<div class="gvb-faq__answer"><p>Simple. Choose your <a href="/en/our-bottles/">bottle</a> and send us your logo or design. We review everything, advise you if needed and take care of the rest. You&rsquo;ll find all details in our printing guide.</p></div>
+				<div class="gvb-faq__answer"><p>Simple. Choose your <a href="/en/our-bottles/">bottle</a> and send us your logo or design. We review everything, advise you if needed and take care of the rest. You&rsquo;ll find all details in our <a href="/en/downloads/">printing guide</a>.</p></div>
 			</details>
 
 		</div>

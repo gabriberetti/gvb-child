@@ -26,7 +26,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">How can I order bottles with my logo?</summary>
-				<div class="gvb-faq__answer"><p>Simply send your design via email to <a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a> or use our contact form. We&rsquo;ll review everything and get back to you with a tailored offer. You&rsquo;ll find all details in our printing guide.</p></div>
+				<div class="gvb-faq__answer"><p>Simply send your design via email to <a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a> or use our contact form. We&rsquo;ll review everything and get back to you with a tailored offer. You&rsquo;ll find all details in our <a href="/en/downloads/">printing guide</a>.</p></div>
 			</details>
 
 		</div>
