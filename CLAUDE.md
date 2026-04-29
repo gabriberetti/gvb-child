@@ -333,9 +333,11 @@ Implementation pattern:
 
 ## Blog Setup
 
+- **Blog homepage** (`templates/home.html`) — `header → blog-hero → blog-intro → blog-featured → blog-all-articles → contact-form → faq-blog → brand-promise → footer`
 - **Featured zone (top 3):** Query Loop filtered to sticky posts — client marks posts as sticky in the editor
 - **All articles grid:** Default Query Loop, auto-paginated, newest first
-- **Single article template** (`single.html`): fully automatic — client never edits it
+- **Single article template** (`templates/single.html`): fully automatic — client never edits it. Hero mirrors `.gvb-hero` (rounded 20px inset, fluid `min-height: clamp(604, …, 774)`, in Section 19b's cap group). H1 uses `clamp(35.641px, …, 65px)` + `-1.95px` tracking like every other hero. Body cap fluid `clamp(800px, calc(-100px + 0.625vw), 1100px)` — when changing, also bump the `contentSize` on `<main class="gvb-single-body">` AND inner `<wp:post-content>` so WP's auto-generated child max-width rules don't pin children at the old contentSize (the WP constrained-layout pitfall). Flow: `header → hero → post-content → faq-blog → brand-promise → footer`.
+- **Category archive template** (`templates/category.html`) — added 2026-04-29. Mirrors home.html, skips `blog-intro` + `blog-featured`. Uses `patterns/category-hero.php` (renders category name via `<wp:query-title type="archive" showPrefix="false">`, reuses `hero-blog.webp` + `.gvb-hero--blog` styling) and `patterns/category-all-articles.php` (Query Loop with `"inherit":true` so it auto-filters to the current category). Both registered in `functions.php`.
 - **Post categories:** Nachhaltigkeit / Trinkkultur / GVB News
 - **Fallback thumbnail:** `functions.php` adds default image via `post_thumbnail_html` filter if no featured image is set
 
