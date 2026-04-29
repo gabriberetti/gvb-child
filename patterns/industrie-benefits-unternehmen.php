@@ -20,7 +20,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<h3 class="gvb-personalisieren-card__title">Mehr<br>Nachhaltigkeit.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
-				<p class="gvb-personalisieren-card__desc">Mit unseren wiederverwendbaren Trinkflaschen reduzierst du Einwegplastik im Büro und setzt ein klares Zeichen für nachhaltiges Handeln. So wird Umweltbewusstsein Teil deines Unternehmensalltags.</p>
+				<p class="gvb-personalisieren-card__desc">Mit unseren wiederverwendbaren Trinkflaschen reduzierst du Einwegplastik, im Büro und setzt ein klares Zeichen für nachhaltiges Handeln. So wird Umweltbewusstsein Teil deines Unternehmensalltags.</p>
 			</div>
 		</div>
 
