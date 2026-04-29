@@ -39,7 +39,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 					<li>Geschmacks- und geruchsneutral</li>
 					<li>Doppelwandige Isolierung</li>
 					<li>Robust, langlebig und leicht</li>
-					<li>Weitere Standard- oder Wunsch Pantone-Farbe auf Anfrage möglich.</li>
+					<li>Weitere Standard- oder Wunsch Pantone-Farbe auf Anfrage möglich</li>
 				</ul>
 			</div>
 
@@ -57,7 +57,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 			<div class="gvb-bottle-card__meta">
 				<p>Größe: 750 ml</p>
-				<p>inklusive Edelstahlverschluss</p>
+				<p>Inkl. Edelstahlverschluss</p>
 			</div>
 
 		</div>

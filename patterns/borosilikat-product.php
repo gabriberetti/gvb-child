@@ -86,7 +86,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<span class="gvb-bottle-card__dot" aria-hidden="true"></span>
 				<div class="gvb-bottle-card__meta">
 					<p>Größe: 450 ml</p>
-					<p>inklusive Bambusverschluss mit integriertem Sieb</p>
+					<p>Inkl. Bambusverschluss mit integriertem Sieb</p>
 				</div>
 			</div>
 		</li>
@@ -112,7 +112,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<span class="gvb-bottle-card__dot" aria-hidden="true"></span>
 				<div class="gvb-bottle-card__meta">
 					<p>Größe: 900 ml</p>
-					<p>inklusive Deckel mit Dichteinsatz</p>
+					<p>Inkl. Deckel mit Dichteinsatz</p>
 				</div>
 			</div>
 		</li>
