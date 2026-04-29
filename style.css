@@ -2414,24 +2414,46 @@ html {
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 50px 50px 50px clamp(180px, 17.7vw, 450px);
+  /* padding-left: locks at 285px at viewport 1440 and above (was 255 —
+     bumped +30 for extra breathing room from the number). Below 1440
+     scales fluidly. The slope (19.79vw) hits 285 exactly at viewport 1440. */
+  padding: 50px 50px 50px clamp(180px, 19.79vw, 285px);
+}
+
+/* "2" and "3" glyphs are visually wider than "1", so they extend further
+   right and the text-from-number gap looks tighter. Bump padding-left
+   for non-first rows to equalize the visual gap. Desktop only — mobile
+   below 1199 uses its own padding via @media (max-width: 1199px) which
+   has lower specificity, so we wrap to avoid bleeding into mobile. */
+@media (min-width: 1200px) {
+  .gvb-steps__row:not(:first-child) .gvb-steps__content {
+    padding-left: clamp(200px, 21.875vw, 315px);
+  }
 }
 
 .gvb-steps__number {
   position: absolute;
-  left: clamp(60px, 6.94vw, 150px);
+  /* MAX = value at viewport 1440 — locks number position above 1440
+     so number-to-text gap stays constant on wide screens. */
+  left: clamp(60px, 6.94vw, 100px);
   top: 43%;
   transform: translateY(-50%);
-  font-size: 140px;
+  /* Translates Figma 1280's 193px → our 1440's 217px (×1.125 baseline)
+     proportionally. Base scales fluidly 1200→1440 (~181→217) on the same
+     15.08vw slope as the tablet @media so the boundary at 1200 is smooth.
+     Above 1440 the @media (min-width: 1440) clamp continues 217 → 256. */
+  font-size: clamp(180px, 15.08vw, 217px);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.05;
   color: var(--wp--preset--color--gvb-orange);
-  letter-spacing: clamp(-8.68px, -0.6vw, -6px);
+  /* -4.5% per Figma — em auto-scales with font-size, no clamp needed. */
+  letter-spacing: -0.045em;
   user-select: none;
 }
 
 .gvb-steps__row:first-child .gvb-steps__number {
-  left: clamp(90px, 10.4vw, 200px);
+  /* Same lock-at-1440 logic as the base number rule above. */
+  left: clamp(90px, 10.4vw, 150px);
 }
 
 .gvb-steps__row:nth-child(1) .gvb-steps__text {
@@ -2439,51 +2461,58 @@ html {
 }
 
 .gvb-steps__row:nth-child(2) .gvb-steps__text {
-  transform: translateY(clamp(-9px, -0.02vw, 0px));
+  /* Was ~0 (centered); push +10 down at 1440+ for slightly lower seat
+     to better align with the larger 217px numeral. */
+  transform: translateY(clamp(0px, 0.694vw, 10px));
 }
 
 .gvb-steps__row:nth-child(3) .gvb-steps__text {
-  transform: translateY(clamp(-50px, -3.49vw, -34px));
+  /* Was -50 at 1440; bumped to -20 to drop the text ~30px lower for
+     better visual centering with the larger 217px numeral. */
+  transform: translateY(clamp(-20px, -1.389vw, -10px));
 }
 
+/* Text block max-width preserves Figma 1280's 372px text-column width
+   proportionally on our 1440 baseline (×1.125 = ~419), and continues
+   scaling toward ~495 at viewport 1920+. The 29vw slope passes through
+   the Figma 1280's 372 at viewport 1280 cleanly. */
 .gvb-steps__text {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  /* Heading↔paragraph gap: Figma 1280's 24 × 1.125 = 27. */
+  gap: 27px;
+  max-width: clamp(419px, 29vw, 495px);
 }
 
+/* Heading typography from Figma 1280's h2 spec (40px / 1.05 / -0.5%) scaled
+   ×1.125 to our 1440 baseline → 45px. Letter-spacing as `em` so it auto-
+   tracks the font-size at every viewport. */
 .gvb-steps__text h3 {
-  font-size: 24px;
+  font-size: 45px;
   font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: 0.16px;
+  line-height: 1.05;
+  letter-spacing: -0.005em;
   color: var(--wp--preset--color--gvb-linen);
   margin: 0;
 }
 
+/* Paragraph stays at 16 across all viewports (Figma 1280's literal value).
+   No fluid scaling — body comfort size is constant. */
 .gvb-steps__text p {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0.08px;
   color: var(--wp--preset--color--gvb-linen);
   margin: 0;
-  max-width: clamp(380px, 30vw, 900px);
 }
 
-/* Layout adjustments at ≥1920 (kept as hard step — these are positioning,
-   not type). Padding tightens so the text container hugs the number; "1"
-   gets a small left nudge because its glyph is narrower than 2/3. */
-@media (min-width: 1920px) {
-  .gvb-steps__content {
-    padding-left: 280px;
-  }
-  .gvb-steps__row:first-child .gvb-steps__number {
-    left: 165px;
-  }
-}
-
+/* Image uses an explicit fluid width that preserves Figma 1280's image:row
+   ratio (506:1245 = 40.6%) at every viewport. 39.58vw resolves to 506 at
+   viewport 1280 (matching Figma exactly) and 570 at our 1440 baseline,
+   capping at 700 around viewport 1768+. Below 1199 the @media block
+   reassigns flex; below 784 rows stack vertically. */
 .gvb-steps__image {
-  flex: 0 0 clamp(380px, 35.14vw, 700px);
+  flex: 0 0 clamp(380px, 39.58vw, 700px);
   height: clamp(340px, 30vw, 432px);
   border-radius: 20px;
   overflow: hidden;
@@ -4325,13 +4354,10 @@ html {
     font-size: clamp(40px, calc(1px + 2.708vw), 53px);
   }
   .gvb-steps__number {
-    font-size: clamp(140px, calc(86px + 3.75vw), 158px);
+    font-size: clamp(217px, calc(100px + 8.125vw), 256px);
   }
   .gvb-steps__text h3 {
-    font-size: clamp(24px, calc(12px + 0.833vw), 28px);
-  }
-  .gvb-steps__text p {
-    font-size: clamp(14px, calc(2px + 0.833vw), 18px);
+    font-size: clamp(45px, calc(30px + 1.042vw), 50px);
   }
 }
 
@@ -4487,7 +4513,12 @@ html {
   }
 
   .gvb-steps__number {
-    font-size: 60px;
+    /* Was a static 60px which created a 217→60 (=157px) jump at the
+       1200/1199 boundary. Now scales on the same 15.08vw slope as the
+       desktop base, so at 1199 it lands at ~181 and meets the desktop
+       value smoothly. MIN 150 keeps the numeral visually prominent on
+       tablet — matches the mobile @≤784 static size below. */
+    font-size: clamp(150px, 15.08vw, 181px);
     left: clamp(16px, 5vw, 60px);
   }
 
@@ -4937,7 +4968,10 @@ html {
      (Step 2 has image first in HTML for desktop alternation)       */
   .gvb-steps__content {
     order: 1;
-    padding: 40px 32px 40px 120px;
+    /* padding-left + number `left` were both bumped +25 from the previous
+       (190 → 215, 60 → 85) to push the cluster further toward card center.
+       Gap between number and text preserved. */
+    padding: 40px 32px 40px 215px;
     min-height: 200px;
   }
 
@@ -4946,12 +4980,15 @@ html {
   }
 
   .gvb-steps__number {
-    font-size: 120px;
-    left: 24px;
+    font-size: 150px;
+    left: 85px;
+    /* Center on the true horizontal middle (50%) — overrides the
+       desktop's 43% which biases the larger numerals slightly upward. */
+    top: 50%;
   }
 
   .gvb-steps__row:first-child .gvb-steps__number {
-    left: 24px;
+    left: 85px;
   }
 
   .gvb-steps__row:nth-child(1) .gvb-steps__text,
@@ -5361,6 +5398,14 @@ html {
     font-size: 80px;
     left: 12px;
     letter-spacing: -4px;
+  }
+
+  /* "1" first-child override from @media ≤784 (left: 85) has higher
+     specificity than the rule above, so we re-pin it here at left: 12
+     too — otherwise the smaller padding-left (76) at this viewport
+     causes "1" to overlap the text. */
+  .gvb-steps__row:first-child .gvb-steps__number {
+    left: 12px;
   }
 
   /* ── Bedrucken 4-col cards: single column on small phones ── */
