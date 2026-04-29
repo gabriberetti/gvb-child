@@ -227,6 +227,28 @@ Text Domain: gvb
 }
 
 /* ══════════════════════════════════════════════════════════════
+   2b. SECTION GAP RESET (Figma-aligned, 2026-04-29)
+   ──────────────────────────────────────────────────────────────
+   WP core injects `:where(.wp-site-blocks) > * { margin-block-start:
+   1.5rem }` (24px) between every top-level section. Figma designs
+   each section with its own padding-top/bottom — adding the WP gap
+   on top double-counts the spacing and pushes sections farther apart
+   than intended. Zeroing it here lets each section's own padding
+   own the rhythm.
+
+   Same `:where()` selector matches WP's own (specificity 0,0,0),
+   wins by source order. Class-level overrides like
+   `.gvb-hero { margin-top: 8px }` and `.gvb-blog-all { margin-top:
+   120px }` still win via specificity (0,1,0 > 0,0,0). If a specific
+   section needs an explicit gap above, add a `margin-top` to that
+   class — don't undo this reset.
+   ══════════════════════════════════════════════════════════════ */
+
+:where(.wp-site-blocks) > * {
+  margin-block-start: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
    3. HEADER
    ══════════════════════════════════════════════════════════════ */
 
@@ -1031,6 +1053,11 @@ html {
    ══════════════════════════════════════════════════════════════ */
 
 .gvb-logos {
+  /* TEMP: section fully hidden while real client logos are pending.
+     The inner `.gvb-logos__track` was previously hidden alone, but the
+     section's 48px top/bottom padding was still creating visible empty
+     space between sections. Bring back when logos go live. */
+  display: none;
   padding: 48px 52px;
 }
 
