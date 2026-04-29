@@ -3049,7 +3049,7 @@ html {
 /* ── Product showcase ── */
 /* ── Unified bottle product card (Edelstahl, Borosilikat, Tritan) ── */
 .gvb-bottle-showcase {
-  padding: 40px 17px;
+  padding: 0 17px 40px;
 }
 
 .gvb-bottle-showcase__list {
