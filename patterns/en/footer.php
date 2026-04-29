@@ -69,7 +69,7 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 						<li><a href="/en/borosilicate-glass/">Borosilicate glass</a></li>
 						<li><a href="/en/tritan/">Tritan</a></li>
 						<li class="gvb-footer__nav-divider"><a href="/en/downloads/">Price list</a></li>
-						<li><a href="/wp-content/uploads/2026/04/Druckleitfaden-GVB.pdf" download>Printing guide</a></li>
+						<li><a href="/wp-content/uploads/2026/04/Printing-Guideline-GVB-1.pdf" download>Printing guide</a></li>
 					</ul>
 					<!-- /wp:list -->
 				</div>
