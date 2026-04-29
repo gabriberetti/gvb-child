@@ -78,7 +78,7 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 						<li><a href="/sportvereine/">Sport & Freizeit</a></li>
 						<li><a href="/gesundheitswesen/">Gesundheit</a></li>
 						<li><a href="/hotel-wellness-und-spa/">Hotels</a></li>
-						<li><a href="/bildungseinrichtungen/">Bildung</a></li>
+						<li><a href="/bildungseinrichtungen/">Bildungswesen</a></li>
 						<li class="gvb-footer__nav-divider"><a href="/bedrucken/">Bedrucken</a></li>
 					</ul>
 					<!-- /wp:list -->
