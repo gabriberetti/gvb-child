@@ -1946,6 +1946,13 @@ html {
     letter-spacing: -0.8px !important;
   }
 
+  /* Blog article hero — uniform dark overlay on mobile so the title stays
+     legible. Matches the .gvb-hero__overlay rgba(0,0,0,0.28) used elsewhere.
+     Overrides the inline side-gradient set on the cover block. */
+  .gvb-single-hero .wp-block-cover__background {
+    background: rgba(0, 0, 0, 0.28) !important;
+  }
+
   .gvb-hero__content {
     margin-left: 0;
   }
