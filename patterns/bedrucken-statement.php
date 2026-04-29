@@ -8,7 +8,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 ?>
 
 <!-- wp:html -->
-<section class="gvb-personalisieren">
+<section class="gvb-personalisieren gvb-personalisieren--industry">
 
 	<h2 class="gvb-personalisieren__heading gvb-fade-up">Dein Marke. Dein Statement.</h2>
 
