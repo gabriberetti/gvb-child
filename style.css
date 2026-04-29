@@ -105,7 +105,7 @@ Text Domain: gvb
                               footer-height + brand-promise-height so the
                               wave's bottom lands at brand-promise's top. */
   --top-wave-start: 70px;
-  --top-wave-h: 1000px;
+  --top-wave-h: 950px;
   --top-wave-zoom: 1;
   --top-wave-fade: 0px;
   --bg-h: 4000px;
@@ -182,7 +182,7 @@ Text Domain: gvb
    the wide tier (Figma 1920 design baseline). */
 @media (min-width: 1440px) {
   .wp-site-blocks {
-    --top-wave-h: 1100px;
+    --top-wave-h: 1000px;
     --bottom-wave-offset: 800px;
   }
 }
