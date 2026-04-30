@@ -5597,12 +5597,16 @@ html {
     flex: 0 0 100%;
   }
 
+  /* Anlass overlay: bumped from 16/11 → 25/13 for legibility on phones.
+     Desc was below the 12px minimum legibility threshold. Card is
+     full-width at ≤480 (1-card carousel) so there's room for the
+     larger title too. */
   .gvb-bedrucken-anlass .gvb-overlay-card__title {
-    font-size: 16px !important;
+    font-size: 25px !important;
   }
 
   .gvb-bedrucken-anlass .gvb-overlay-card__desc {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   /* ── Product cards: 1-card carousel ── */
