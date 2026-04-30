@@ -739,11 +739,11 @@ html {
   /* X 100 anchors source-right at container-right so the centred
      subject lands on the left of the frame. Y 85 pushes the subject
      visually up (high Y anchors source-bottom near container-bottom,
-     so the subject lifts within the frame). Scale 1.30 zooms in;
+     so the subject lifts within the frame). Scale 1.45 zooms in;
      with object-fit: cover the image stays edge-to-edge so nothing
      reveals off-image. */
   object-position: 100% 85% !important;
-  transform: scale(1.30);
+  transform: scale(1.45);
 }
 
 /* Shift subject higher in the visible crop on Impressum hero (Simon
