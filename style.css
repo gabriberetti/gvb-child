@@ -4787,6 +4787,13 @@ html {
     line-height: 1.1;
     bottom: 40px;
   }
+  /* Title bottom moves up to 40px in this band but base content
+     `margin-top: -50px` would still pull the cream over the title's
+     last line. Match the negatives + add 8px breathing room so the
+     title sits cleanly above the desc. */
+  .gvb-bedrucken-anlass .gvb-overlay-card__content {
+    margin-top: -32px;
+  }
 }
 
 
