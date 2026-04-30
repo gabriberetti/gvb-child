@@ -739,6 +739,14 @@ html {
   object-position: 30% center !important;
 }
 
+/* Shift subject higher in the visible crop on Impressum hero (Simon
+   Fortmüller portrait). Hero is ~647px tall at viewport 1440. Higher
+   Y_pos = visible window slides DOWN the source = subject appears
+   HIGHER in frame. 60% ≈ 65px above default center. */
+.gvb-hero__bg--impressum {
+  object-position: center 60%;
+}
+
 .gvb-hero--losungen .gvb-hero__content,
 .gvb-hero--bedrucken .gvb-hero__content,
 .gvb-hero--industrie .gvb-hero__content,
