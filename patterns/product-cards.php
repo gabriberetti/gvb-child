@@ -51,7 +51,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<h2 class="gvb-product-card__title">Nachhaltigkeit,<br>die bleibt.</h2>
 			</div>
 			<div class="gvb-product-card__content">
-				<p class="gvb-product-card__text">Unsere Trinkflaschen sind vor allem eines: ein echter Gewinn für die Umwelt. Wir retten vielleicht nicht den Planeten, aber machen ihn ein Stückchen besser.</p>
+				<p class="gvb-product-card__text">Unsere Trinkflaschen sind vor allem<br>eines: ein echter Gewinn für die<br>Umwelt. Wir retten vielleicht nicht den Planeten, aber machen ihn ein Stückchen besser.</p>
 			</div>
 		</div>
 
