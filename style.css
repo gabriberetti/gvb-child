@@ -854,8 +854,13 @@ html {
 .gvb-cases__tab.is-active {
   font-weight: 600;
   color: var(--wp--preset--color--gvb-linen);
-  border-color: rgba(237, 232, 219, 0.55);
-  background: rgba(237, 232, 219, 0.08);
+  /* Bumped from 0.55 → 1 (crisp linen border) and 0.08 → 0.30 (more
+     solid pill fill) so the active state reads stronger on any bg.
+     Text-shadow keeps linen letters readable even when the cases bg
+     image is light/white in the active card area. */
+  border-color: rgba(237, 232, 219, 1);
+  background: rgba(237, 232, 219, 0.30);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 
 .gvb-cases__tab:hover:not(.is-active) {
@@ -5061,9 +5066,19 @@ html {
     height: 280px;
   }
 
+  /* Mobile bottle img: lock HEIGHT to the 280px container and let width
+     derive from the aspect ratio. Defeats per-SKU `width: 72-78%; top: -6%`
+     etc. that made tall bottles overflow the container's overflow:hidden
+     box, cropping the bottoms. !important needed because per-SKU selectors
+     (.gvb-bottle-card--slim .gvb-bottle-card__image img) have higher
+     specificity than this 0,2,1 rule. */
   .gvb-bottle-card__image img {
-    width: 60%;
-    left: 20%;
+    height: 100% !important;
+    width: auto !important;
+    max-height: 100% !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
   }
 
   .gvb-bottle-card__content {
@@ -5088,6 +5103,12 @@ html {
   .gvb-edelstahl-feature-card__image {
     width: 140px;
     height: 140px;
+  }
+
+  /* Edelstahl features: bump desc font from base 13 → 15 on mobile/tablet
+     for readability. Desktop unchanged. */
+  .gvb-edelstahl-feature-card__desc {
+    font-size: 15px;
   }
 
   /* Verschluss cards: single column, responsive image */
