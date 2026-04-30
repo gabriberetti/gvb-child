@@ -206,6 +206,37 @@ function gvb_register_pattern_category() {
             ) );
         }
     }
+
+    // Auto-register English mirror patterns from patterns/en/
+    // Slug derived from filename: patterns/en/edelstahl-hero.php → gvb/en-edelstahl-hero
+    // Title pulled from each file's "Title:" docblock when present.
+    $en_dir = get_stylesheet_directory() . '/patterns/en/';
+    if ( is_dir( $en_dir ) ) {
+        foreach ( glob( $en_dir . '*.php' ) as $en_file ) {
+            $slug_base = basename( $en_file, '.php' );
+            $en_slug   = 'gvb/en-' . $slug_base;
+            if ( $registry->is_registered( $en_slug ) ) {
+                continue;
+            }
+
+            // Extract Title from file's leading docblock
+            $header = file_get_contents( $en_file, false, null, 0, 512 );
+            if ( $header && preg_match( '/Title:\s*(.+)$/m', $header, $m ) ) {
+                $title = trim( $m[1] );
+            } else {
+                $title = 'EN ' . ucwords( str_replace( array( '-', '_' ), ' ', $slug_base ) );
+            }
+
+            ob_start();
+            include $en_file;
+            $content = ob_get_clean();
+            register_block_pattern( $en_slug, array(
+                'title'      => $title,
+                'categories' => array( 'gvb' ),
+                'content'    => $content,
+            ) );
+        }
+    }
 }
 add_action( 'init', 'gvb_register_pattern_category' );
 
@@ -289,7 +320,8 @@ function gvb_theme_setup() {
     load_child_theme_textdomain( 'gvb', get_stylesheet_directory() . '/languages' );
 
     register_nav_menus( array(
-        'gvb-header-nav' => __( 'Header Navigation', 'gvb' ),
+        'gvb-header-nav'    => __( 'Header Navigation (DE)', 'gvb' ),
+        'gvb-header-nav-en' => __( 'Header Navigation (EN)', 'gvb' ),
     ) );
 }
 add_action( 'after_setup_theme', 'gvb_theme_setup' );
@@ -312,3 +344,405 @@ add_filter( 'fluentform/allowed_mimes', function( $mimes ) {
     $mimes['tiff'] = 'image/tiff';
     return $mimes;
 } );
+
+/* ── 9. English page detection helper ────────────────────────── */
+
+/**
+ * Determine whether a given post is part of the English-language section.
+ *
+ * Returns true when:
+ *   - The post is an `en_post` (English blog post CPT), OR
+ *   - The post is a page that is itself slug=`en` or has an ancestor with slug=`en`
+ *     (i.e. lives under /en/).
+ *
+ * Used by hreflang injection, the `language_attributes` filter, og:locale
+ * meta tags, and the language switcher pattern.
+ *
+ * @param int|null $post_id Optional. Defaults to the queried object.
+ * @return bool
+ */
+function gvb_is_english_page( $post_id = null ) {
+    if ( null === $post_id ) {
+        $post_id = get_queried_object_id();
+    }
+    if ( ! $post_id ) {
+        return false;
+    }
+
+    $post_type = get_post_type( $post_id );
+
+    // English blog posts (custom post type)
+    if ( 'en_post' === $post_type ) {
+        return true;
+    }
+
+    // English pages — self or ancestor has slug `en`
+    if ( 'page' === $post_type ) {
+        $candidates   = get_post_ancestors( $post_id );
+        $candidates[] = (int) $post_id; // include self in case this IS the /en/ parent
+        foreach ( $candidates as $candidate_id ) {
+            if ( 'en' === get_post_field( 'post_name', $candidate_id ) ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+/* ── 10. English Posts CPT + en_category taxonomy ────────────── */
+
+/**
+ * Register the `en_post` custom post type for English blog posts and the
+ * `en_category` taxonomy that mirrors the German `category` taxonomy.
+ *
+ * URL structure:
+ *   - Archive:  /en/blog/
+ *   - Single:   /en/blog/{slug}/
+ *   - Category: /en/blog/category/{slug}/
+ *
+ * NOTE: After deploying, visit Settings → Permalinks once (or call
+ * flush_rewrite_rules()) to register the rewrite rules. Visiting the
+ * Permalinks screen is sufficient — no field needs to change.
+ */
+function gvb_register_en_post_type() {
+    register_post_type( 'en_post', array(
+        'labels' => array(
+            'name'               => __( 'English Posts', 'gvb' ),
+            'singular_name'      => __( 'English Post', 'gvb' ),
+            'menu_name'          => __( 'English Posts', 'gvb' ),
+            'add_new'            => __( 'Add New', 'gvb' ),
+            'add_new_item'       => __( 'Add New English Post', 'gvb' ),
+            'edit_item'          => __( 'Edit English Post', 'gvb' ),
+            'new_item'           => __( 'New English Post', 'gvb' ),
+            'view_item'          => __( 'View English Post', 'gvb' ),
+            'search_items'       => __( 'Search English Posts', 'gvb' ),
+            'not_found'          => __( 'No English posts found', 'gvb' ),
+            'not_found_in_trash' => __( 'No English posts found in Trash', 'gvb' ),
+            'all_items'          => __( 'All English Posts', 'gvb' ),
+        ),
+        'public'        => true,
+        'show_in_rest'  => true,
+        'has_archive'   => 'en/blog',
+        'rewrite'       => array( 'slug' => 'en/blog', 'with_front' => false ),
+        'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'author', 'revisions' ),
+        'menu_icon'     => 'dashicons-admin-site-alt3',
+        'menu_position' => 6, // Between Posts (5) and Pages (20)
+    ) );
+
+    register_taxonomy( 'en_category', 'en_post', array(
+        'labels' => array(
+            'name'          => __( 'English Categories', 'gvb' ),
+            'singular_name' => __( 'English Category', 'gvb' ),
+            'menu_name'     => __( 'Categories', 'gvb' ),
+        ),
+        'hierarchical'      => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'rewrite'           => array( 'slug' => 'en/blog/category', 'with_front' => false ),
+    ) );
+}
+add_action( 'init', 'gvb_register_en_post_type' );
+
+/* ── 8.5. Translation pairing — pages (hardcoded), posts (ACF) ─── */
+
+/**
+ * Hardcoded DE → EN page slug map.
+ *
+ * The 17 static pages are paired here in code rather than via ACF because
+ * they're a fixed, known set that essentially never changes. This keeps
+ * the pairings self-documenting in the codebase, removes the 15-min admin
+ * task of clicking pairings into each page, and ships via git so they're
+ * version-controlled with the rest of the EN setup.
+ *
+ * Format: [ DE_post_name (slug) => EN_post_name (slug under /en/ parent) ]
+ *
+ * Front-page special case: not in this array. Detected via
+ * get_option('page_on_front'); its EN counterpart is the page with slug
+ * 'en' that hosts the EN home. See gvb_get_page_pair_id() for the logic.
+ *
+ * If a slug ever changes, edit this array and git push — no admin work.
+ *
+ * Blog posts (DE `post` ↔ EN `en_post`) use the ACF Translation Pairing
+ * field instead of this map — see gvb_counterpart_url() below.
+ */
+function gvb_page_pair_map() {
+    return array(
+        'unsere-flaschen'         => 'our-bottles',
+        'edelstahl'               => 'stainless-steel',
+        'borosilikatglas'         => 'borosilicate-glass',
+        'tritan'                  => 'tritan',
+        'unsere-losungen'         => 'solutions',
+        'uber-uns'                => 'about',
+        'bedrucken'               => 'printing',
+        'unternehmen'             => 'corporate',
+        'sportvereine'            => 'sports-clubs',
+        'gesundheitswesen'        => 'healthcare',
+        'hotel-wellness-und-spa'  => 'hotel-wellness-spa',
+        'bildungseinrichtungen'   => 'education',
+        'faq'                     => 'faq',
+        'download'                => 'downloads',
+        'impressum'               => 'imprint',
+        'datenschutz'             => 'privacy',
+    );
+}
+
+/**
+ * Look up a page's counterpart ID using the hardcoded slug map.
+ *
+ * Handles three cases:
+ *   1. DE front page  → EN home page (slug 'en')
+ *   2. EN home (slug 'en') → DE front page (whatever Settings → Reading says)
+ *   3. Any other DE/EN page → reverse/forward lookup in gvb_page_pair_map()
+ *
+ * @param int  $post_id Page ID.
+ * @param bool $is_en   Whether $post_id is the English-side page.
+ * @return int Counterpart page ID, or 0 if not resolvable.
+ */
+function gvb_get_page_pair_id( $post_id, $is_en ) {
+    // DE front page → EN home (page with slug 'en')
+    if ( ! $is_en && (int) $post_id === (int) get_option( 'page_on_front' ) ) {
+        $en_home = get_page_by_path( 'en' );
+        return $en_home ? (int) $en_home->ID : 0;
+    }
+
+    $current_slug = get_post_field( 'post_name', $post_id );
+    if ( ! $current_slug ) {
+        return 0;
+    }
+
+    // EN home (slug 'en') → DE front page
+    if ( $is_en && 'en' === $current_slug ) {
+        $front_id = (int) get_option( 'page_on_front' );
+        return $front_id ?: 0;
+    }
+
+    $map = gvb_page_pair_map();
+
+    if ( $is_en ) {
+        // EN slug → DE slug (reverse lookup)
+        $de_slug = array_search( $current_slug, $map, true );
+        if ( false === $de_slug ) {
+            return 0;
+        }
+        $de_page = get_page_by_path( $de_slug );
+        return $de_page ? (int) $de_page->ID : 0;
+    }
+
+    // DE slug → EN page (lives at /en/{en_slug})
+    if ( ! isset( $map[ $current_slug ] ) ) {
+        return 0;
+    }
+    $en_page = get_page_by_path( 'en/' . $map[ $current_slug ] );
+    return $en_page ? (int) $en_page->ID : 0;
+}
+
+/**
+ * Resolve the translation counterpart URL for a given post.
+ *
+ * Strategy:
+ *   - Pages           → hardcoded gvb_page_pair_map() (zero admin work)
+ *   - Posts (post/en_post) → ACF Translation Pairing field
+ *
+ * Returns empty string if no counterpart can be resolved. Callers should
+ * fall back to the language home root (`/` or `/en/`) for graceful UX.
+ *
+ * @param int|null $post_id Optional. Defaults to the queried object.
+ * @return string Counterpart URL, or '' if not resolvable.
+ */
+function gvb_counterpart_url( $post_id = null ) {
+    if ( null === $post_id ) {
+        $post_id = get_queried_object_id();
+    }
+    if ( ! $post_id ) {
+        return '';
+    }
+
+    $is_en     = gvb_is_english_page( $post_id );
+    $post_type = get_post_type( $post_id );
+
+    if ( 'page' === $post_type ) {
+        $pair_id = gvb_get_page_pair_id( $post_id, $is_en );
+        return ( $pair_id && 'publish' === get_post_status( $pair_id ) )
+            ? get_permalink( $pair_id )
+            : '';
+    }
+
+    if ( in_array( $post_type, array( 'post', 'en_post' ), true ) && function_exists( 'get_field' ) ) {
+        $pair_id = $is_en
+            ? gvb_acf_to_post_id( get_field( '_de_page_id', $post_id ) )
+            : gvb_acf_to_post_id( get_field( '_en_page_id', $post_id ) );
+        return ( $pair_id && 'publish' === get_post_status( $pair_id ) )
+            ? get_permalink( $pair_id )
+            : '';
+    }
+
+    return '';
+}
+
+/**
+ * Normalize an ACF Post Object field value to an integer post ID.
+ *
+ * ACF Post Object fields can return either an integer (when "Return Format"
+ * is set to "Post ID") or a WP_Post object (when set to "Post Object").
+ * This helper accepts both shapes plus arrays for multi-select variants.
+ *
+ * @param mixed $value Raw return value from get_field().
+ * @return int Post ID, or 0 if invalid/empty.
+ */
+function gvb_acf_to_post_id( $value ) {
+    if ( empty( $value ) ) {
+        return 0;
+    }
+    if ( is_object( $value ) && isset( $value->ID ) ) {
+        return (int) $value->ID;
+    }
+    if ( is_array( $value ) ) {
+        $first = reset( $value );
+        return is_object( $first ) ? (int) $first->ID : (int) $first;
+    }
+    return (int) $value;
+}
+
+/* ── 9. SEO: hreflang + language_attributes + og:locale ──────── */
+
+/**
+ * Output reciprocal hreflang link tags in the document <head>.
+ *
+ * Tags emitted (when applicable):
+ *   <link rel="alternate" hreflang="de-DE"    href="..." />
+ *   <link rel="alternate" hreflang="x-default" href="..." /> (mirrors DE — primary market)
+ *   <link rel="alternate" hreflang="en"       href="..." />
+ *
+ * Counterpart resolution lives in gvb_counterpart_url():
+ *   - Pages → hardcoded slug map (no admin work needed)
+ *   - Posts → ACF Translation Pairing field (filled per-post by editor)
+ *
+ * If the counterpart is missing/unpublished, only the self-referencing tag
+ * is emitted (graceful degradation — no broken hreflang cluster).
+ *
+ * Skips on archive/search/404; only fires for is_singular() and the static
+ * front page.
+ */
+function gvb_hreflang_tags() {
+    if ( ! is_singular() && ! is_front_page() ) {
+        return;
+    }
+
+    $current_id = get_queried_object_id();
+    if ( ! $current_id ) {
+        return; // "latest posts" homepage with no static page assigned — skip.
+    }
+
+    $is_en    = gvb_is_english_page( $current_id );
+    $self_url = get_permalink( $current_id );
+    $pair_url = gvb_counterpart_url( $current_id );
+
+    $de_url = $is_en ? $pair_url : $self_url;
+    $en_url = $is_en ? $self_url : $pair_url;
+
+    if ( $de_url ) {
+        printf( '<link rel="alternate" hreflang="de-DE" href="%s" />' . "\n", esc_url( $de_url ) );
+        printf( '<link rel="alternate" hreflang="x-default" href="%s" />' . "\n", esc_url( $de_url ) );
+    }
+    if ( $en_url ) {
+        printf( '<link rel="alternate" hreflang="en" href="%s" />' . "\n", esc_url( $en_url ) );
+    }
+}
+add_action( 'wp_head', 'gvb_hreflang_tags', 5 );
+
+/**
+ * Set HTML lang attribute to "en-US" on English pages.
+ *
+ * Falls through to the WordPress default ("de-DE" per Settings → General)
+ * for everything else, so DE pages remain unchanged.
+ *
+ * @param string $output Default `lang="..." dir="..."` attribute string.
+ * @return string
+ */
+function gvb_language_attributes( $output ) {
+    if ( gvb_is_english_page( get_queried_object_id() ) ) {
+        return 'lang="en-US" dir="ltr"';
+    }
+    return $output;
+}
+add_filter( 'language_attributes', 'gvb_language_attributes' );
+
+/**
+ * Emit OpenGraph og:locale + og:locale:alternate per language.
+ *
+ * Ensures social shares (Facebook, LinkedIn, etc.) advertise the correct
+ * primary locale and the available translation.
+ *
+ * NOTE: RankMath also emits og:locale (default priority 10). We hook at
+ * priority 6 so our tag appears first; OG parsers typically honour the first
+ * occurrence. If duplicate tags become an issue in QA, filter
+ * `rank_math/frontend/locale` to return our locale and remove this emit.
+ */
+function gvb_og_locale() {
+    $is_en   = gvb_is_english_page( get_queried_object_id() );
+    $primary = $is_en ? 'en_US' : 'de_DE';
+    $alt     = $is_en ? 'de_DE' : 'en_US';
+    printf( '<meta property="og:locale" content="%s" />' . "\n", esc_attr( $primary ) );
+    printf( '<meta property="og:locale:alternate" content="%s" />' . "\n", esc_attr( $alt ) );
+}
+add_action( 'wp_head', 'gvb_og_locale', 6 );
+
+/* ── 10. Language switcher shortcode ─────────────────────────── */
+
+/**
+ * Render the DE / EN language switcher.
+ *
+ * Outputs a small <nav> with two language links. The active link
+ * carries `aria-current="page"` and self-references; the inactive link
+ * points to the equivalent translated page (resolved via
+ * gvb_counterpart_url() — hardcoded map for pages, ACF for posts) or,
+ * as fallback, to the language home root (`/` for DE, `/en/` for EN).
+ *
+ * Both links carry `lang` + `hreflang` attributes so screen readers
+ * announce the language correctly and search engines understand the
+ * link semantics.
+ *
+ * Usage in template part / pattern:
+ *   <!-- wp:shortcode -->[gvb_lang_switcher]<!-- /wp:shortcode -->
+ *
+ * Usage in PHP:
+ *   echo do_shortcode( '[gvb_lang_switcher]' );
+ *
+ * @return string
+ */
+function gvb_lang_switcher_shortcode() {
+    $current_id = get_queried_object_id();
+    $is_en      = gvb_is_english_page( $current_id );
+
+    $pair_url = $current_id ? gvb_counterpart_url( $current_id ) : '';
+    if ( ! $pair_url ) {
+        $pair_url = $is_en ? home_url( '/' ) : home_url( '/en/' );
+    }
+
+    // Self URL for the active link (matches canonical — no surprise reload target)
+    $self_url = $current_id ? get_permalink( $current_id ) : ( $is_en ? home_url( '/en/' ) : home_url( '/' ) );
+
+    $de_href   = $is_en ? $pair_url : $self_url;
+    $en_href   = $is_en ? $self_url : $pair_url;
+    $de_class  = $is_en ? 'gvb-lang-switcher__link' : 'gvb-lang-switcher__link is-active';
+    $en_class  = $is_en ? 'gvb-lang-switcher__link is-active' : 'gvb-lang-switcher__link';
+    $de_aria   = $is_en ? '' : ' aria-current="page"';
+    $en_aria   = $is_en ? ' aria-current="page"' : '';
+
+    return sprintf(
+        '<nav class="gvb-lang-switcher" aria-label="%s">' .
+        '<a class="%s" href="%s" lang="de" hreflang="de-DE"%s>DE</a>' .
+        '<span class="gvb-lang-switcher__divider" aria-hidden="true">/</span>' .
+        '<a class="%s" href="%s" lang="en" hreflang="en"%s>EN</a>' .
+        '</nav>',
+        esc_attr__( 'Language', 'gvb' ),
+        esc_attr( $de_class ),
+        esc_url( $de_href ),
+        $de_aria,
+        esc_attr( $en_class ),
+        esc_url( $en_href ),
+        $en_aria
+    );
+}
+add_shortcode( 'gvb_lang_switcher', 'gvb_lang_switcher_shortcode' );
