@@ -2772,10 +2772,6 @@ html {
    ══════════════════════════════════════════════════════════════ */
 
 /* ── Hero: image mirrored, content RIGHT (same as Lösungen) ── */
-.gvb-hero__bg--uberuns {
-  transform: scaleX(-1);
-}
-
 /* ── Hero: borosilikat bottle ── */
 .gvb-hero__bg--borosilikat {
   object-position: center 65%;
