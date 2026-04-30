@@ -4334,6 +4334,25 @@ html {
   background: var(--wp--preset--color--gvb-green);
 }
 
+/* Fixed card height at ≥1025 (Figma 1280 baseline = 574 → 646 at our
+   1440 design, bumped to 700 for breathing room). Media fills the
+   remaining space above the content block — drops its 4/5 aspect-ratio
+   constraint and uses flex sizing. Tablet/mobile keep the aspect-ratio
+   approach (untouched). */
+@media (min-width: 1025px) {
+  .gvb-bedrucken-anlass .gvb-overlay-card {
+    height: 700px;
+  }
+  .gvb-bedrucken-anlass .gvb-overlay-card__media {
+    aspect-ratio: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+  .gvb-bedrucken-anlass .gvb-overlay-card__content {
+    flex: 0 0 auto;
+  }
+}
+
 .gvb-bedrucken-anlass .gvb-overlay-card--dark-text {
   background: var(--wp--preset--color--gvb-linen);
 }
@@ -4355,9 +4374,13 @@ html {
 }
 
 /* Title overlaid at the bottom of the image */
+/* Title's bottom-edge sits at the cream top edge (= media bottom - 50px,
+   matching the content margin-top: -50). Combined with the content's
+   padding-top: 0, title sits directly above desc — no gap, no cream
+   behind title (it's on the transparent image area). */
 .gvb-bedrucken-anlass .gvb-overlay-card__title {
   position: absolute;
-  bottom: 80px;
+  bottom: 50px;
   left: 24px;
   right: 24px;
   z-index: 1;
@@ -4370,9 +4393,12 @@ html {
   color: var(--wp--preset--color--gvb-graphite) !important;
 }
 
-/* Desc sits below the image area */
+/* Desc sits at the very top of the cream content area, directly under
+   the title (which is absolutely positioned with bottom: 50px in __media,
+   so title bottom-edge meets cream top-edge at the -50 overlap line).
+   padding-top: 0 keeps the visual seam tight. */
 .gvb-bedrucken-anlass .gvb-overlay-card__content {
-  padding: 16px 24px 24px;
+  padding: 0 24px 24px;
   display: flex;
   flex-direction: column;
   gap: 10px;
