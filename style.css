@@ -4001,6 +4001,13 @@ html {
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 784px) {
 
+  /* Add 80px top padding on mobile so the featured-articles section
+     breathes from the intro above. Pattern PHP sets padding-top:0
+     inline → !important needed. Desktop unchanged. */
+  .gvb-blog-featured {
+    padding-top: 80px !important;
+  }
+
   /* Featured: stack image above content, gap between articles */
   .gvb-blog-featured__list {
     gap: 48px;
