@@ -39,7 +39,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<h3 class="gvb-overlay-card__title">Events &amp;<br>Brand<br>Presence</h3>
 			</div>
 			<div class="gvb-overlay-card__content">
-				<p class="gvb-overlay-card__desc">Good Vibe Bottles are the sustainable give-away for events and trade fairs. They get used daily and keep your brand visible. At the same time, you reduce single-use and make a statement for conscious consumption.</p>
+				<p class="gvb-overlay-card__desc">Good Vibe Bottles are a sustainable give-away for events. They get used and keep your brand visible &ndash; a statement for conscious consumption.</p>
 			</div>
 		</div>
 
