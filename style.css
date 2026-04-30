@@ -5170,9 +5170,12 @@ html {
     height: 140px;
   }
 
-  /* Edelstahl features: bump desc font from base 13 → 15 on mobile/tablet
-     for readability. Desktop unchanged. */
-  .gvb-edelstahl-feature-card__desc {
+  /* Feature cards: bump desc font from base 13 → 15 on mobile/tablet
+     for readability. Desktop unchanged. Applied to all three product
+     pages — Edelstahl, Borosilikat, and Tritan (Tritan reuses the
+     borosilikat class set). */
+  .gvb-edelstahl-feature-card__desc,
+  .gvb-borosilikat-feature-card__desc {
     font-size: 15px;
   }
 
