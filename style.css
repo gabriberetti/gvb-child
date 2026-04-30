@@ -1618,6 +1618,11 @@ html {
   margin-bottom: 6px;
 }
 
+:lang(en) .gvb-field--material.ff-t-container
+  .ff-t-column-2:not(:has(.ff-el-group:not(.ff_excluded)))::before {
+  content: 'Model';
+}
+
 .gvb-field--material.ff-t-container
   .ff-t-column-2:not(:has(.ff-el-group:not(.ff_excluded)))::after {
   content: '';
@@ -1653,6 +1658,11 @@ html {
   letter-spacing: 0.08px;
   color: var(--wp--preset--color--gvb-graphite);
   margin-bottom: 6px;
+}
+
+:lang(en) .gvb-field--verschluss.ff-t-container
+  .ff-t-column-1:not(:has(.ff-el-group:not(.ff_excluded)))::before {
+  content: 'Closure';
 }
 
 .gvb-field--verschluss.ff-t-container
