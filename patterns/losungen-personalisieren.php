@@ -50,7 +50,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<h3 class="gvb-personalisieren-card__title">Praktisch &<br>gut für alle.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
-				<p class="gvb-personalisieren-card__desc">Trinkflaschen sind kein Wegwerfprodukt. Sie werden aktiv genutzt und genau das macht sie so wirkungsvoll. Außerdem unterstützen ganz nebenbei gesunde Routinen im Alltag und sorgen für echte Sichtbarkeit und eine positive Präsenz für deine Marke.</p>
+				<p class="gvb-personalisieren-card__desc">Trinkflaschen sind kein Wegwerfprodukt. Sie werden aktiv genutzt und genau das macht sie so wirkungsvoll. Außerdem unterstützen sie ganz nebenbei gesunde Routinen im Alltag und sorgen für echte Sichtbarkeit und eine positive Präsenz für deine Marke.</p>
 			</div>
 		</div>
 

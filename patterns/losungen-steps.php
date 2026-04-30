@@ -39,7 +39,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<span class="gvb-steps__number">2</span>
 				<div class="gvb-steps__text">
 					<h3>Schicke uns dein<br>Logo oder Design.</h3>
-					<p>Darf es persönlicher sein? Schicke uns dein Logo oder Design via Kontaktformular und wir kümmern uns um die Bedruckung deiner Trinkflasche. Als Experten für verschiedene Druckverfahren, wissen wir genau, welches das richtige für dein Motiv ist, um es richtig in Szene zu setzen.</p>
+					<p>Darf es persönlicher sein? Schicke uns dein Logo oder Design via Kontaktformular und wir kümmern uns um die Bedruckung deiner Trinkflasche. Als Experten für verschiedene Druckverfahren wissen wir genau, welche das richtige für dein Motiv ist, um es optimal in Szene zu setzen.</p>
 				</div>
 			</div>
 		</div>
