@@ -444,6 +444,52 @@ function gvb_register_en_post_type() {
 }
 add_action( 'init', 'gvb_register_en_post_type' );
 
+/**
+ * Inject `is_featured = 1` meta_query into the EN blog featured-zone Query Loop.
+ *
+ * WordPress's built-in sticky_posts feature is hardcoded to the `post` post
+ * type, so `"sticky":"only"` on a Query Loop with postType=en_post returns
+ * nothing. We replace it with an ACF boolean field `is_featured` (defined in
+ * acf-json/group_en_post_featured.json) and inject the meta_query here when
+ * the rendered Query Loop block carries the `gvb-blog-featured__query` class.
+ *
+ * Identification: the EN featured pattern (patterns/en/blog-featured.php) sets
+ * `className: "gvb-blog-featured__query"` on its <!-- wp:query --> block. The
+ * other Query Loops on the EN blog (all-articles, category-archive) use
+ * different classNames so they're unaffected.
+ *
+ * @param array     $query_args Default query arguments built by Query Loop block.
+ * @param \WP_Block $block      The block instance — we read parsed_block attrs from it.
+ * @return array Possibly-modified query arguments.
+ */
+function gvb_filter_en_blog_featured_query( $query_args, $block ) {
+    if ( ! isset( $block->parsed_block['attrs']['className'] ) ) {
+        return $query_args;
+    }
+    $class = (string) $block->parsed_block['attrs']['className'];
+    if ( false === strpos( $class, 'gvb-blog-featured__query' ) ) {
+        return $query_args;
+    }
+
+    // Drop the no-op sticky filter (CPTs don't support sticky_posts).
+    if ( isset( $query_args['post__in'] ) ) {
+        unset( $query_args['post__in'] );
+    }
+
+    // Filter to en_post entries with is_featured = 1 (set via ACF True/False
+    // field in the post sidebar).
+    $query_args['meta_query'] = array(
+        array(
+            'key'     => 'is_featured',
+            'value'   => '1',
+            'compare' => '=',
+        ),
+    );
+
+    return $query_args;
+}
+add_filter( 'query_loop_block_query_vars', 'gvb_filter_en_blog_featured_query', 10, 2 );
+
 /* ── 8.5. Translation pairing — pages (hardcoded), posts (ACF) ─── */
 
 /**

@@ -1,0 +1,45 @@
+{
+    "key": "group_en_post_featured",
+    "title": "Featured",
+    "fields": [
+        {
+            "key": "field_en_post_is_featured",
+            "label": "Featured article",
+            "name": "is_featured",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Tick to feature this post in the featured zone at the top of /en/blog/. WordPress's built-in sticky-post mechanism does not apply to custom post types, so this ACF flag plus a Query Loop filter (functions.php) drives the EN featured zone instead.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Featured",
+            "ui_off_text": "Not featured",
+            "message": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "en_post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Adds an is_featured boolean to English blog posts. Ticked posts appear in the featured zone of /en/blog/. The Query Loop filter that reads this meta key lives in functions.php (gvb_filter_en_blog_featured_query).",
+    "show_in_rest": 0,
+    "modified": 1777680000
+}

@@ -4,18 +4,23 @@
  * Slug: gvb/en-blog-featured
  * Categories: gvb
  *
- * Queries the en_post CPT (English blog posts). Sticky-post filter
- * doesn't apply to CPTs — featured posts will need an ACF boolean field
- * `is_featured` once en_post entries are populated, or the query can
- * filter on a meta key. For initial launch (no posts yet), the query
- * returns nothing and the no-results placeholder is shown.
+ * Queries the en_post CPT (English blog posts) for posts marked as
+ * featured. WordPress's built-in sticky_posts feature is hardcoded to
+ * the `post` post type, so we use an ACF boolean field `is_featured`
+ * instead (defined in acf-json/group_en_post_featured.json). The
+ * meta_query is injected into this block's query at render time by
+ * gvb_filter_en_blog_featured_query() in functions.php — the filter
+ * keys off the `gvb-blog-featured__query` className on this block.
+ *
+ * If no posts are marked featured, the no-results placeholder shows
+ * (an empty paragraph, so the section collapses silently).
  */
 ?>
 
 <!-- wp:group {"className":"gvb-blog-featured","style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"}}},"layout":{"type":"default"}} -->
 <div class="wp-block-group gvb-blog-featured">
 
-	<!-- wp:query {"query":{"perPage":3,"pages":0,"offset":0,"postType":"en_post","order":"desc","orderBy":"date","sticky":"only","inherit":false},"className":"gvb-blog-featured__query"} -->
+	<!-- wp:query {"query":{"perPage":3,"pages":0,"offset":0,"postType":"en_post","order":"desc","orderBy":"date","sticky":"","inherit":false},"className":"gvb-blog-featured__query"} -->
 	<div class="wp-block-query gvb-blog-featured__query">
 
 		<!-- wp:post-template {"className":"gvb-blog-featured__list","layout":{"type":"default"}} -->
