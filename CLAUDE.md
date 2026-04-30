@@ -74,6 +74,8 @@ color: gvb-linen (#EDE8DB)
 
 **Hero content** uses `margin-left: 55% !important` (right-side positioning) via `.gvb-hero--industrie .gvb-hero__content` rule in `style.css`. At `≤784px`, **all** specific hero selectors (`--losungen`, `--bedrucken`, `--industrie`, `--faq`, `--uberuns`, `--blog`) must be re-declared with `margin-left: 0 !important` in the mobile block — the generic `.gvb-hero__content { margin-left: 0 }` reset is not sufficient because `!important` specificity wins. This is already handled in section 16 of `style.css`.
 
+**Hero `object-position` per page** — when a photo's subject (face, bottle, etc.) sits off-centre and gets cropped by the hero's `object-fit: cover`, add a `.gvb-hero__bg--{slug} { object-position: ... }` rule. Convention: hero pattern HTML already includes the per-page bg modifier class (e.g. `gvb-hero__bg--impressum`). Y-position semantics with `object-fit: cover`: lower Y % = visible window slides UP source (subject appears LOWER in frame); higher Y % = visible window slides DOWN source (subject appears HIGHER in frame). Current overrides: `--blog { center 10% }` (girl's head stays in frame), `--borosilikat { center 30% }` (bottle near top of crop), `--tritan { center 80% }` (bottle base inside frame), `--impressum { center 60% }` (Simon Fortmüller portrait pushed up ~65px), `--losungen { 30% center !important }` (X-axis nudge to feature bottle). Default (no override) = `center center` (50% 50%).
+
 **Benefits sections** reuse `.gvb-personalisieren` + `.gvb-personalisieren-card` CSS (no new classes per page).
 
 **FAQ sections** (industry pages): single orange block, linen heading "Du hast Fragen? Wir haben Antworten.", `-1.8px` letter-spacing, 2-column layout (2 items left / 3 items right).
