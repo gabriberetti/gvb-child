@@ -16,8 +16,8 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<!-- wp:group {"className":"gvb-hero__content gvb-hero__content--blog","layout":{"type":"constrained","contentSize":"608px"}} -->
 	<div class="wp-block-group gvb-hero__content gvb-hero__content--blog">
 
-		<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"clamp(65px, 4.514vw, 116px)","fontWeight":"700","lineHeight":"1","letterSpacing":"-1.95px"}},"textColor":"gvb-linen"} -->
-		<h1 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(65px, 4.514vw, 116px);font-weight:700;line-height:1;letter-spacing:-1.95px">Blog</h1>
+		<!-- wp:heading {"level":1,"style":{"typography":{"fontSize":"65px","fontWeight":"700","lineHeight":"1","letterSpacing":"-1.95px"}},"textColor":"gvb-linen"} -->
+		<h1 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:65px;font-weight:700;line-height:1;letter-spacing:-1.95px">Blog</h1>
 		<!-- /wp:heading -->
 
 	</div>

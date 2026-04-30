@@ -29,7 +29,7 @@
 				<path d="M16 2L2 8V18C2 26 8.5 33.2 16 35C23.5 33.2 30 26 30 18V8L16 2Z" fill="currentColor"/>
 				<path d="M10 17L14 21L22 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 			</svg>
-			<span style="font-size:clamp(17px, 1.181vw, 30px);font-weight:700;letter-spacing:-0.3px">Logoipsum</span>
+			<span style="font-size:17px;font-weight:700;letter-spacing:-0.3px">Logoipsum</span>
 		</div>
 
 		<!-- Logo 3: four rounded squares -->
@@ -55,7 +55,7 @@
 				<line x1="29.9" y1="6.1" x2="24.2" y2="11.8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
 				<line x1="11.8" y1="24.2" x2="6.1" y2="29.9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
 			</svg>
-			<span style="font-size:clamp(17px, 1.181vw, 30px);font-weight:700;letter-spacing:-0.3px">Logoipsum</span>
+			<span style="font-size:17px;font-weight:700;letter-spacing:-0.3px">Logoipsum</span>
 		</div>
 
 		<!-- Logo 5: pill -->

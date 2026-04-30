@@ -9,8 +9,8 @@
 <!-- wp:group {"className":"gvb-faq","backgroundColor":"gvb-orange","style":{"spacing":{"padding":{"top":"48px","bottom":"48px","left":"34px","right":"34px"},"margin":{"left":"20px","right":"20px"}},"border":{"radius":"20px"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group gvb-faq has-gvb-orange-background-color has-background" style="border-radius:20px;margin-left:20px;margin-right:20px;padding-top:48px;padding-right:34px;padding-bottom:48px;padding-left:34px">
 
-	<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"clamp(40px, 2.778vw, 71px)","fontWeight":"700","lineHeight":"1.08","letterSpacing":"-1.8px"}},"textColor":"gvb-linen"} -->
-	<h2 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:clamp(40px, 2.778vw, 71px);font-weight:700;line-height:1.08;letter-spacing:-1.8px">Got questions? We have answers.</h2>
+	<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"40px","fontWeight":"700","lineHeight":"1.08","letterSpacing":"-1.8px"}},"textColor":"gvb-linen"} -->
+	<h2 class="wp-block-heading has-gvb-linen-color has-text-color" style="font-size:40px;font-weight:700;line-height:1.08;letter-spacing:-1.8px">Got questions? We have answers.</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:columns {"className":"gvb-faq__grid","style":{"spacing":{"blockGap":{"left":"28px"},"margin":{"top":"48px"}}}} -->
