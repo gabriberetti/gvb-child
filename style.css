@@ -5527,6 +5527,17 @@ html {
     grid-template-columns: 1fr;
   }
 
+  /* ── Tritan + Edelstahl hero: shift bottle subject right on phones
+     so the H1 title (left side) doesn't overlap the bottle. Vertical
+     positions match the desktop values (80%/69%). Tune by changing the
+     X percentage — higher pushes further right. ── */
+  .gvb-hero__bg--tritan {
+    object-position: 20% 80%;
+  }
+  .gvb-hero__bg--edelstahl {
+    object-position: 0% 69%;
+  }
+
   /* ── Steps number: nudge up on phones only so the numeral aligns
      visually with the card title. Tablet (481–784) keeps top:50%.
      Fixed pixel `top` (not %) so all 3 cards lock at the same offset —
