@@ -5197,6 +5197,11 @@ html {
        Gap between number and text preserved. */
     padding: 40px 32px 40px 215px;
     min-height: 200px;
+    /* Override the base `align-items: center` on mobile so the title
+       locks at padding-top instead of floating with content length.
+       Cards with longer content grow taller (min-height is a floor)
+       — title + number stay aligned across all 3 cards. */
+    align-items: flex-start;
   }
 
   .gvb-steps__image {
@@ -5227,8 +5232,16 @@ html {
     height: 240px;
   }
 
+  /* Steps H3: 24 → 20 on mobile/tablet — matches the iPad-band rule
+     (785-1024) for consistent cascade. Long German titles fit cleaner. */
   .gvb-steps__text h3 {
-    font-size: 24px;
+    font-size: 20px;
+  }
+
+  /* Steps paragraph: shrink 16 → 14 on mobile/tablet for tighter fit
+     inside the green card. Desktop unchanged. */
+  .gvb-steps__text p {
+    font-size: 14px;
   }
 
   /* ── Über uns ── */
@@ -5559,15 +5572,15 @@ html {
     object-position: 0% 69%;
   }
 
-  /* ── Steps number: nudge up on phones only so the numeral aligns
-     visually with the card title. Tablet (481–784) keeps top:50%.
-     Fixed pixel `top` (not %) so all 3 cards lock at the same offset —
-     each card's content height varies with title-line count, so a %
-     value drifts (card 2's 2-line title made the numeral sit lower
-     than card 1). Base rule's transform: translateY(-50%) keeps the
-     numeral's vertical centre on the 50px line. ── */
+  /* ── Steps number: align the numeral's CAP with the title's CAP on
+     phones. Title padding-top is 28px; the 80px numeral has ~5px of
+     leading so its visible cap sits below box-top. Top:22 compensates
+     so the visible glyph cap matches the title's cap visually.
+     transform:none defeats the base translateY(-50%) so `top` is the
+     box-top (not the centre line). ── */
   .gvb-steps__number {
-    top: 50px;
+    top: 16px;
+    transform: none;
   }
 
   /* ── Anlass: 1-card carousel (inherit row/snap/overflow from ≤784 block,
