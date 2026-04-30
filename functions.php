@@ -746,3 +746,30 @@ function gvb_lang_switcher_shortcode() {
     );
 }
 add_shortcode( 'gvb_lang_switcher', 'gvb_lang_switcher_shortcode' );
+
+/* ── 11. Site-logo link rewrite on English pages ─────────────── */
+
+/**
+ * Rewrite the core/site-logo block's anchor on English pages so the
+ * logo links to /en/ instead of the WP home_url() (German homepage).
+ *
+ * The site-logo block hardcodes home_url() into its rendered <a href>;
+ * since we don't run a multilingual plugin, we patch the markup at
+ * render time. Only fires on EN pages — DE pages are untouched.
+ */
+function gvb_site_logo_en_home( $block_content, $block ) {
+    if ( empty( $block_content ) || empty( $block['blockName'] ) || $block['blockName'] !== 'core/site-logo' ) {
+        return $block_content;
+    }
+    if ( ! gvb_is_english_page( get_queried_object_id() ) ) {
+        return $block_content;
+    }
+    $en_home = esc_url( home_url( '/en/' ) );
+    return preg_replace(
+        '/(<a\b[^>]*\bhref=)(["\'])[^"\']*\2/i',
+        '$1$2' . $en_home . '$2',
+        $block_content,
+        1
+    );
+}
+add_filter( 'render_block', 'gvb_site_logo_en_home', 10, 2 );
