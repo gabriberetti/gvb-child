@@ -23,7 +23,7 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 
-			<details class="gvb-faq__item is-open" open>
+			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie viel kosten unsere Trinkflaschen?</summary>
 				<div class="gvb-faq__answer"><p>Die Preise hängen vom gewählten <a href="/unsere-flaschen/">Modell</a>, dem Zubehör, der Bestellmenge und einer möglichen <a href="/unsere-losungen/bedrucken/">Personalisierung</a> ab. Für alle Produkte bieten wir Preisstaffelungen an: Je höher die Bestellmenge, desto geringer der Stückpreis. Unsere aktuelle Preisliste findest du <a href="/download/">hier</a>.</p><p>Die Mindestbestellmenge liegt bei 50 Stück. Für ein individuelles Angebot schick uns einfach eine Anfrage über das Kontaktformular.</p></div>
 			</details>
@@ -102,7 +102,7 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 
-			<details class="gvb-faq__item is-open" open>
+			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie läuft die Bestellung bedruckter Flaschen ab?</summary>
 				<div class="gvb-faq__answer"><p>Ganz einfach: Du wählst deine gewünschte <a href="/unsere-flaschen/">Trinkflasche</a> und sendest uns dein Logo oder Design. Wir prüfen alles, beraten dich bei Bedarf und kümmern uns um die Umsetzung. Alle Details zum Ablauf findest du auch in unserem <a href="/download/">Druckleitfaden</a>.</p></div>
 			</details>
@@ -156,7 +156,7 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 
-			<details class="gvb-faq__item is-open" open>
+			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Welches Flaschenzubehör gibt es?</summary>
 				<div class="gvb-faq__answer"><p>Unsere <a href="/unsere-flaschen/tritan/">Tritan</a> Trinkflaschen sind mit verschiedenen Verschlüssen erhältlich:</p><ul style="padding-left:1.25em;margin:8px 0;"><li>Flip-Top – für schnelles Trinken unterwegs</li><li>Standard-Drehverschluss – klassisch und auslaufsicher</li><li>2K-Premiumverschluss – robust und hochwertig</li><li>Sportverschluss – Einhandbedienung für aktive Nutzung</li></ul><p>Zusätzlich gibt es Zubehör wie Stoffhüllen. Zubehör ist auch separat zu Trinkflaschen erhältlich, wobei die jeweiligen Mindestbestellmengen gelten (siehe <a href="/download/">Preisliste</a>).</p></div>
 			</details>
@@ -195,7 +195,7 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 
-			<details class="gvb-faq__item is-open" open>
+			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie reinige ich meine Trinkflaschen am besten?</summary>
 				<div class="gvb-faq__answer"><p>Alle unsere <a href="/unsere-flaschen/">Trinkflaschen</a> sind spülmaschinenfest. Für eine längere Lebensdauer empfehlen wir die Reinigung per Hand. Dichtungen sollten regelmäßig gereinigt werden. Mehr Tipps findest du in unserem <a href="/trinkflasche-reinigen/">Blogartikel zur Reinigung</a>.</p></div>
 			</details>
@@ -234,7 +234,7 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 
-			<details class="gvb-faq__item is-open" open>
+			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie kann ich Flaschen mit meinem Logo oder Design bestellen?</summary>
 				<div class="gvb-faq__answer"><p>Schick uns dein Logo oder Design per E-Mail (<a href="mailto:office@goodvibebottles.com">office@goodvibebottles.com</a>) oder über unser Kontaktformular. Wir prüfen alles und melden uns schnell mit einem passenden Angebot. Alle Details findest du auch in unserem <a href="/download/">Druckleitfaden</a>.</p></div>
 			</details>
@@ -278,7 +278,7 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 
-			<details class="gvb-faq__item is-open" open>
+			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Wie lange dauert die Lieferung?</summary>
 				<div class="gvb-faq__answer"><p>Unbedruckte Flaschen sind in der Regel innerhalb von 2–4 Werktagen bei dir. Bedruckte Flaschen benötigen je nach Projekt etwa 2–4 Wochen. Die genaue Lieferzeit stimmen wir individuell mit dir ab.</p></div>
 			</details>
