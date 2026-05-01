@@ -4834,12 +4834,12 @@ html {
   }
 
   /* Lösungen hero: nudge bottle right of centre on mobile. Desktop
-     uses X 100% (subject parked left of frame for text). Mobile X 50%
-     recentres so bottle lands mid-right of the visible frame — half
-     back from the previous 0% which pushed too far right.
+     uses X 100% (subject parked left of frame for text). Mobile X 30%
+     puts the bottle two-thirds of the way to the right edge —
+     dialled in between the over-shot 0% and centred 50%.
      Y 85% kept for vertical lift. */
   .gvb-hero__bg--losungen {
-    object-position: 50% 85% !important;
+    object-position: 30% 85% !important;
   }
 
   /* ── Contact: restore lateral padding on mobile ── */
