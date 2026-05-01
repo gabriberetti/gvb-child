@@ -4833,13 +4833,13 @@ html {
     background: rgba(0, 0, 0, 0.28);
   }
 
-  /* Lösungen hero: push the bottle to the right edge of the visible
-     frame on mobile. With object-fit:cover, X 0% anchors source-left
-     to container-left, so the source's right portion is cropped and
-     the subject (bottle) lands on the right side of the visible frame.
-     Inverse of the desktop X 100% rule. Y 85% kept for vertical lift. */
+  /* Lösungen hero: nudge bottle right of centre on mobile. Desktop
+     uses X 100% (subject parked left of frame for text). Mobile X 50%
+     recentres so bottle lands mid-right of the visible frame — half
+     back from the previous 0% which pushed too far right.
+     Y 85% kept for vertical lift. */
   .gvb-hero__bg--losungen {
-    object-position: 0% 85% !important;
+    object-position: 50% 85% !important;
   }
 
   /* ── Contact: restore lateral padding on mobile ── */
@@ -5529,7 +5529,7 @@ html {
      for narrower mobile viewports. */
   .wp-site-blocks {
     --top-wave-start: 0px;
-    --top-wave-h: 1200px;
+    --top-wave-h: 1100px;
     --top-wave-fade: 0px;
     --bg-h: 4200px;
     --bottom-wave-offset: 1200px;
@@ -5565,7 +5565,7 @@ html {
 /* Mobile L (376–425) */
 @media (max-width: 425px) {
   .wp-site-blocks {
-    --top-wave-h: 1200px;
+    --top-wave-h: 1100px;
     --bg-h: 6000px;
   }
 }
@@ -5573,7 +5573,7 @@ html {
 /* Mobile M (321–375) */
 @media (max-width: 375px) {
   .wp-site-blocks {
-    --top-wave-h: 1200px;
+    --top-wave-h: 1100px;
     --bg-h: 5900px;
   }
 }
@@ -5581,7 +5581,7 @@ html {
 /* Mobile S (≤320) */
 @media (max-width: 320px) {
   .wp-site-blocks {
-    --top-wave-h: 1200px;
+    --top-wave-h: 1100px;
     --bg-h: 6500px;
   }
 }
