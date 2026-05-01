@@ -2050,10 +2050,29 @@ html {
 }
 
 /* FAQ page only — push the bottom-wave further down so it sits below
-   the brand-promise section (lands ~at the bottom of the section above
-   it) instead of behind brand-promise's top edge. */
+   the brand-promise section instead of behind its top edge. Per-tier
+   tunes because page height changes a lot per viewport (FAQ has a tall
+   accordion content area; the wave needs to land just under it across
+   bands). 1440+ is "perfect" at 300, smaller viewports need bigger
+   offsets to lift the wave further away from the page bottom. */
 body.page-faq .wp-site-blocks {
   --bottom-wave-offset: 300px;
+}
+@media (max-width: 1024px) {
+  body.page-faq .wp-site-blocks { --bottom-wave-offset: 500px; }
+}
+@media (max-width: 768px) {
+  body.page-faq .wp-site-blocks { --bottom-wave-offset: 1200px; }
+}
+@media (max-width: 480px) {
+  body.page-faq .wp-site-blocks { --bottom-wave-offset: 1100px; }
+}
+@media (max-width: 425px) {
+  /* Mobile L (≤425) and Mobile M (≤375) share the same 900px tune. */
+  body.page-faq .wp-site-blocks { --bottom-wave-offset: 900px; }
+}
+@media (max-width: 320px) {
+  body.page-faq .wp-site-blocks { --bottom-wave-offset: 950px; }
 }
 
 /* Brand-promise green background bleeds full viewport width at every size
