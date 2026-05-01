@@ -4833,6 +4833,15 @@ html {
     background: rgba(0, 0, 0, 0.28);
   }
 
+  /* Lösungen hero: push the bottle to the right edge of the visible
+     frame on mobile. With object-fit:cover, X 0% anchors source-left
+     to container-left, so the source's right portion is cropped and
+     the subject (bottle) lands on the right side of the visible frame.
+     Inverse of the desktop X 100% rule. Y 85% kept for vertical lift. */
+  .gvb-hero__bg--losungen {
+    object-position: 0% 85% !important;
+  }
+
   /* ── Contact: restore lateral padding on mobile ── */
   .gvb-contact {
     padding-left: 20px !important;
