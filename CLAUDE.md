@@ -28,6 +28,15 @@ Requires Node ≥20.10.0, npm ≥10.2.3.
 
 There is no linting or test suite configured.
 
+### Body slug class (`gvb_body_class_slug` in functions.php — added 2026-05-01)
+
+WP core's `body_class()` emits `.page-id-X` (env-specific — Local IDs differ from prod) and `.page-template-{file}`, but NO slug-based class for `page` post types. The `gvb_body_class_slug` filter adds:
+
+- `.page-{slug}` on every singular page (e.g. `.page-faq`, `.page-uber-uns`)
+- `.page-{parent-slug}-{slug}` for nested pages (e.g. `.page-en-faq` on `/en/faq/`)
+
+Use these for portable scoped CSS — `.page-faq .foo { … }` works on Local + prod without ID lookups. Existing examples: `.page-faq .gvb-brand-promise.has-gvb-green-background-color` (transparent override), `body.page-faq .wp-site-blocks { --bottom-wave-offset: 300px }`. Filter sits at the very end of `functions.php`.
+
 ## Architecture
 
 All custom code lives in `app/public/wp-content/themes/gvb-child/`.
