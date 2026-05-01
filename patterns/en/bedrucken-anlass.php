@@ -25,7 +25,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 	<div class="gvb-overlay-cards" id="gvb-anlass-track" data-carousel-track>
 		<div class="gvb-overlay-card gvb-overlay-card--dark-text gvb-fade-up">
 			<div class="gvb-overlay-card__media">
-				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/anlassnew1.png' ); ?>" alt="" />
+				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/anla1.png' ); ?>" alt="" />
 				<h3 class="gvb-overlay-card__title">Employer<br>Branding &amp;<br>Onboarding</h3>
 			</div>
 			<div class="gvb-overlay-card__content">
@@ -35,7 +35,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-overlay-card gvb-fade-up">
 			<div class="gvb-overlay-card__media">
-				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/bedrucken-anlass-2.png' ); ?>" alt="" />
+				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/anla2.png' ); ?>" alt="" />
 				<h3 class="gvb-overlay-card__title">Events &amp;<br>Brand<br>Presence</h3>
 			</div>
 			<div class="gvb-overlay-card__content">
@@ -45,7 +45,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 
 		<div class="gvb-overlay-card gvb-overlay-card--dark-text gvb-fade-up">
 			<div class="gvb-overlay-card__media">
-				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/bedrucken-anlass-3.png' ); ?>" alt="" />
+				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/anla3.png' ); ?>" alt="" />
 				<h3 class="gvb-overlay-card__title">Merchandise</h3>
 			</div>
 			<div class="gvb-overlay-card__content">
