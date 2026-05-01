@@ -2375,17 +2375,19 @@ body.page-faq .wp-site-blocks {
   gap: 20px;
 }
 
+/* Personalisieren card — product-card overlay pattern (2026-05-01).
+   Card has a fixed aspect ratio so heights match in the grid. Image
+   fills the card. __content overlays the bottom with title + desc
+   stacked via flex column + gap. As desc wraps to more lines,
+   __content grows UPWARD (its `bottom: 0` anchor stays put), so the
+   title gets pushed up — card height unchanged.
+   Same mechanic as `.gvb-product-card` (project_card_scaling_system.md). */
 .gvb-personalisieren-card {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   aspect-ratio: 1 / 1;
   min-height: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 12px;
-  padding: 0 60px 36px 32px;
 }
 
 .gvb-personalisieren-card__media {
@@ -2404,7 +2406,12 @@ body.page-faq .wp-site-blocks {
 .gvb-personalisieren-card__title {
   position: relative;
   z-index: 2;
-  font-size: 40px;
+  /* Card-width-proportional: 6.56% of card width (Figma 1280: 40/610).
+     Card width in 2-col grid = (vw-60)/2 → title = 3.28vw - 1.97px.
+     Floor 20 keeps it readable at narrow tablets; max 40 at viewport
+     1280 (Figma reference). Above 1440 the existing fluid block
+     scales 40→53. Below 481 the ≤480 mobile clamp takes over. */
+  font-size: clamp(20px, calc(3.28vw - 1.97px), 40px);
   font-weight: 700;
   line-height: 1;
   color: var(--wp--preset--color--gvb-linen);
@@ -2412,94 +2419,47 @@ body.page-faq .wp-site-blocks {
 }
 
 .gvb-personalisieren-card__content {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 60px 36px 32px;
 }
 
 .gvb-personalisieren-card__desc {
-  font-size: 16px;
+  /* Card-width-proportional: 2.62% of card width (Figma 1280: 16/610).
+     Card width in 2-col grid = (vw-60)/2 → desc = 1.31vw - 0.787px.
+     Floor 13 (readable at narrow tablets); max 16 at viewport 1280.
+     Above 1440 the existing fluid block scales 16→21. Below 481 the
+     ≤480 mobile clamp takes over. */
+  font-size: clamp(13px, calc(1.31vw - 0.787px), 16px);
   line-height: 1.2;
-  letter-spacing: 0.08px;
+  /* letter-spacing matches Figma 1280 design (0.5px) — was 0.08px. */
+  letter-spacing: 0.5px;
   color: #fff;
   margin: 0;
 }
 
 @media (max-width: 1024px) {
-  /* ── Personalisieren cards: stacked layout from 769–1024px ──
-     Same split as mobile (image block on top, coloured text block below)
-     so text never overflows the image. Sizes are slightly larger than
-     the ≤768px rules, which override them for smaller screens. */
-  .gvb-personalisieren-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 0;
-    padding: 0;
-    aspect-ratio: unset;
-    border-radius: 20px;
-    overflow: hidden;
-  }
-
-  .gvb-personalisieren-card--dark {
-    background: var(--wp--preset--color--gvb-graphite);
-  }
-
-  .gvb-personalisieren-card--orange {
-    background: var(--wp--preset--color--gvb-orange);
-  }
-
-  /* Media becomes a real positioned block — the image fills it, title sits at the bottom.
-     display: block !important overrides the base display: contents so the media wrapper
-     becomes the containing block for the absolutely positioned image.
-     Without this, inset: 0 on the image anchors to the card and fills the entire card,
-     making the content appear overlaid on the image.
-     aspect-ratio: 4/3 lets the image block resize proportionally with the card width
-     in the 2-column grid (769–1024px). At ≤768px the mobile block overrides with a
-     fixed height so the image doesn't become huge in single-column layout. */
-  .gvb-personalisieren-card__media {
-    display: block !important;
-    position: relative !important;
-    aspect-ratio: 4 / 3;
-    height: auto;
-    width: 100%;
-    flex-shrink: 0;
-    overflow: hidden;
-  }
-
-  .gvb-personalisieren-card__img {
-    position: absolute !important;
-    inset: 0 !important;
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-  }
-
+  /* ── Personalisieren cards at ≤1024 ──
+     Same overlay pattern as desktop. Font-size handled by base rule's
+     card-width-proportional clamps (3.28vw / 1.31vw) — no static
+     override here, so titles + desc shrink as the card width shrinks
+     (proportional to Figma 1280 design). Padding tightened for the
+     narrower cards in this band. */
   .gvb-personalisieren-card__title {
-    position: absolute;
-    bottom: 20px;
-    left: 24px;
-    right: 24px;
-    padding: 0;
-    font-size: 24px;
     line-height: 1.1;
   }
 
-  /* Content: colour block below image — inherits card background.
-     z-index reset to auto: the base rule has z-index:2 (needed for the desktop
-     overlay layout), but in the stacked layout the content is physically below
-     the media block so z-index:2 would paint it above the image layer. */
   .gvb-personalisieren-card__content {
-    position: relative;
-    z-index: auto;
-    padding: 20px 24px 32px;
-    min-height: 0;
+    padding: 0 24px 24px;
   }
 
   .gvb-personalisieren-card__desc {
-    font-size: 15px;
     line-height: 1.4;
     letter-spacing: 0.1px;
   }
@@ -5515,15 +5475,14 @@ body.page-faq .wp-site-blocks {
     font-size: 28px;
   }
 
-  /* Cards: stacked layout — photo+title on top, desc colour block below */
+  /* ── Personalisieren cards at ≤768 — REVERT to stacked layout ──
+     Below 768 the overlay layout doesn't leave enough room for readable
+     typography. Switch back to the classic stacked structure:
+     image-top + colour-block-below containing title + desc.
+     Cards become vertical-tall instead of square — text stays at
+     comfortable sizes. */
   .gvb-personalisieren-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 0;
-    padding: 0;
     aspect-ratio: unset;
-    border-radius: 20px;
     overflow: hidden;
   }
 
@@ -5535,50 +5494,56 @@ body.page-faq .wp-site-blocks {
     background: var(--wp--preset--color--gvb-orange);
   }
 
-  /* Media: fixed height cap at mobile — single-column cards are full viewport width
-     so aspect-ratio: 4/3 (from the ≤1024px block) would make the image far too tall.
-     300px is a sensible cap; aspect-ratio is overridden by the explicit height.
-     !important on display/position mirrors the ≤1024px block — keeps the media as
-     the containing block so the image (inset:0) stays inside it, not the full card. */
+  /* Override base display:contents — __media becomes a real positioned
+     block holding the image at the TOP of the card. */
   .gvb-personalisieren-card__media {
     display: block !important;
     position: relative !important;
     height: 300px;
-    aspect-ratio: unset;
-    flex-shrink: 0;
+    width: 100%;
     overflow: hidden;
   }
 
   .gvb-personalisieren-card__img {
     position: absolute !important;
     inset: 0 !important;
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top;
   }
 
-  .gvb-personalisieren-card__title {
-    position: absolute;
-    bottom: 16px;
-    left: 20px;
-    right: 20px;
-    padding: 0;
-    font-size: 22px;
-    line-height: 1.1;
-  }
-
-  /* Content: just the desc in the colour block */
+  /* __content sits BELOW the image as a colour block (not overlay).
+     Position relative so it serves as the positioning context for the
+     absolutely-positioned title above it. Desc flows naturally. */
   .gvb-personalisieren-card__content {
-    position: relative;
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
     z-index: auto;
-    padding: 16px 20px 28px;
+    display: block;
+    padding: 0 20px 24px;
     min-height: 0;
   }
 
+  /* Title overlays the bottom of the image area — even though it's
+     a DOM child of __content, we position it absolutely with a
+     negative `top` so it overflows up out of __content into the
+     image. z-index keeps it above the image. Title is taken out of
+     normal flow so __content's height = desc only (no flex gap to
+     account for the title). */
+  .gvb-personalisieren-card__title {
+    position: absolute;
+    bottom: 100%;
+    left: 20px;
+    right: 20px;
+    margin-bottom: 8px;
+    line-height: 1.1;
+    z-index: 2;
+  }
+
   .gvb-personalisieren-card__desc {
-    font-size: 14px;
     line-height: 1.4;
     letter-spacing: 0.2px;
   }
@@ -5769,6 +5734,17 @@ body.page-faq .wp-site-blocks {
   /* ── Personalisieren: single column on phones ── */
   .gvb-personalisieren__grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Personalisieren card typography on phones — drop 2px from the
+     ≤784 baseline (22/14 → 20/12 at viewport 480), then scale linearly
+     down to 18/11 at viewport 320 so long German titles still fit
+     comfortably on the smallest phones. */
+  .gvb-personalisieren-card__title {
+    font-size: clamp(18px, calc(14px + 1.25vw), 20px);
+  }
+  .gvb-personalisieren-card__desc {
+    font-size: clamp(11px, calc(9px + 0.625vw), 12px);
   }
 
   /* ── Tritan + Edelstahl hero: shift bottle subject right on phones
