@@ -736,14 +736,11 @@ html {
 }
 
 .gvb-hero__bg--losungen {
-  /* X 100 anchors source-right at container-right so the centred
-     subject lands on the left of the frame. Y 85 pushes the subject
-     visually up (high Y anchors source-bottom near container-bottom,
-     so the subject lifts within the frame). Scale 1.45 zooms in;
-     with object-fit: cover the image stays edge-to-edge so nothing
-     reveals off-image. */
+  /* New image (2026-05-01): scale removed (was 1.45). object-fit: cover
+     fills the container at natural framing. object-position kept for
+     X-axis subject placement — adjust if subject needs reframing. */
   object-position: 100% 85% !important;
-  transform: scale(1.45);
+  transform: none;
 }
 
 /* FAQ hero: zoom + push subject toward LEFT of frame.
@@ -5853,6 +5850,14 @@ html {
   /* ── Global typography + button scale for mobile ── */
   h1, .has-h-1-font-size { font-size: 34px !important; }
   h2, .has-h-2-font-size { font-size: 26px !important; }
+
+  /* Lösungen hero: at phone width push subject further right than the
+     tablet override (X 30% → X 10%). Lower X slides the visible window
+     LEFT over the wider source image, so the fixed-position subject
+     appears further to the RIGHT within the visible frame. */
+  .gvb-hero__bg--losungen {
+    object-position: 10% 85% !important;
+  }
   .has-display-font-size  { font-size: 38px !important; }
 
   .gvb-btn--primary,
