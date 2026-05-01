@@ -884,3 +884,40 @@ function gvb_site_logo_en_home( $block_content, $block ) {
     );
 }
 add_filter( 'render_block', 'gvb_site_logo_en_home', 10, 2 );
+
+/**
+ * Add a slug-based class to body — `.page-{slug}` — on every page.
+ *
+ * WP core's body_class() emits `.page-id-X` (env-specific) and
+ * `.page-template-{file}` but no slug class for `page` post types.
+ * This makes scoped CSS like `.page-faq .gvb-brand-promise { … }`
+ * portable between Local and prod where IDs differ.
+ *
+ * For EN pages (under parent `en`) we also add the parent-slug class
+ * (`.page-faq` AND `.page-en-faq` on /en/faq/) so a single rule can
+ * target either or both.
+ */
+function gvb_body_class_slug( $classes ) {
+    if ( ! is_singular() ) {
+        return $classes;
+    }
+    $post = get_queried_object();
+    if ( ! $post || empty( $post->post_name ) ) {
+        return $classes;
+    }
+    $slug = sanitize_html_class( $post->post_name );
+    if ( $slug && ! in_array( 'page-' . $slug, $classes, true ) ) {
+        $classes[] = 'page-' . $slug;
+    }
+    if ( $post->post_parent ) {
+        $parent = get_post( $post->post_parent );
+        if ( $parent && $parent->post_name ) {
+            $compound = sanitize_html_class( $parent->post_name . '-' . $post->post_name );
+            if ( $compound && ! in_array( 'page-' . $compound, $classes, true ) ) {
+                $classes[] = 'page-' . $compound;
+            }
+        }
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'gvb_body_class_slug' );
