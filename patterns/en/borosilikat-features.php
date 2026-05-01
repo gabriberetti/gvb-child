@@ -50,7 +50,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 			</div>
 			<div class="gvb-borosilikat-feature-card__text">
 				<h5 class="gvb-borosilikat-feature-card__title">Your bottle.<br>Your vibe.</h5>
-				<p class="gvb-borosilikat-feature-card__desc">Make it yours. We personalise your bottle with high-quality printing or laser engraving &ndash; so your design stands out.</p>
+				<p class="gvb-borosilikat-feature-card__desc">Make it yours. We personalise your bottle with high-quality printing &ndash; so your design stands out.</p>
 			</div>
 		</li>
 
