@@ -746,6 +746,17 @@ html {
   transform: scale(1.45);
 }
 
+/* FAQ hero: zoom + push subject toward LEFT of frame.
+   - object-position: 100% center → max left via cropping
+   - translateX(-13%) → further shifts the scaled image left,
+     exposing more of its right side so subject moves further left.
+   Risk: too negative a translateX exposes the container bg on the right.
+   object-fit: cover keeps edges flush at scale(1.40). */
+.gvb-hero__bg--faq {
+  object-position: 100% center;
+  transform: scale(1.40) translateX(-13%);
+}
+
 /* Shift subject higher in the visible crop on Impressum hero (Simon
    Fortmüller portrait). Hero is ~647px tall at viewport 1440. Higher
    Y_pos = visible window slides DOWN the source = subject appears
