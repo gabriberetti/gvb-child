@@ -17,11 +17,11 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 	<div class="wp-block-group gvb-brand-promise__content">
 
 		<!-- wp:heading {"textAlign":"center","level":2,"style":{"typography":{"fontSize":"60px","fontWeight":"700","lineHeight":"1.03"}},"textColor":"gvb-linen"} -->
-		<h2 class="wp-block-heading has-text-align-center has-gvb-linen-color has-text-color" style="font-size:60px;font-weight:700;line-height:1.03">Want to make it personal?</h2>
+		<h2 class="wp-block-heading has-text-align-center has-gvb-linen-color has-text-color" style="font-size:60px;font-weight:700;line-height:1.03">Taking it personal?</h2>
 		<!-- /wp:heading -->
 
 		<!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":"24px","lineHeight":"1.2","letterSpacing":"0.12px"}},"textColor":"gvb-linen"} -->
-		<p class="has-text-align-center has-gvb-linen-color has-text-color" style="font-size:24px;line-height:1.2;letter-spacing:0.12px">Personalise your bottles your way.</p>
+		<p class="has-text-align-center has-gvb-linen-color has-text-color" style="font-size:24px;line-height:1.2;letter-spacing:0.12px">Here&rsquo;s how to customise your bottles.</p>
 		<!-- /wp:paragraph -->
 
 		<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
