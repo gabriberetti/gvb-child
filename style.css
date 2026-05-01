@@ -5603,36 +5603,47 @@ html {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   Product cards — 2-card carousel band (481–784) "reset" scaling
+   Product cards — 2-card carousel band (481–784) card-width-proportional
    ══════════════════════════════════════════════════════════════════════
-   At top of band (784) values restart at full Figma 1280 defaults
-   (40/16/12/32). Scale DOWN proportionally with viewport to floors at
-   481. Formula = Figma value × viewport / 784, clamped at floors.
-     Title         clamp(24px, 5.10vw, 40px)   [40 × vw / 784]
-     Body          clamp(12px, 2.04vw, 16px)   [16 × vw / 784]
-     Gap           clamp(8px,  1.53vw, 12px)   [12 × vw / 784]
-     Padding-btm   clamp(20px, 4.08vw, 32px)   [32 × vw / 784]
-   Worked examples:
-     784 → 40 / 16 / 12 / 32
-     600 → 31 / 12.2 / 9.2 / 24.5
-     481 → 24.5 / 12 (floor) / 8 (floor) / 20 (floor)
+   Cards in this band are NEVER at Figma's 400px size — they top out
+   at ~364px (viewport 784) and shrink to ~212px (viewport 481). So
+   the "reset to Figma 40 at band top" approach forced the title
+   above Figma's 10%-of-card ratio. Switched to STRICT card-width-
+   proportional: each value = its Figma 400px-card ratio × actual
+   card width. Card width formula: (viewport - 56) / 2 (40px section
+   padding + 16px inter-card gap, then split in half).
+     Title (10%): clamp(20px, calc(-2.8px + 5vw),  40px)
+     Body  (4%):  clamp(11px, calc(-1.12px + 2vw), 16px)
+     Gap   (3%):  clamp(6px,  calc(-0.84px + 1.5vw), 12px)
+     PadB  (8%):  clamp(16px, calc(-2.24px + 4vw),  32px)
+   Worked examples (card width / title at 10% of card):
+     784 (card 364)  → 36.4 / 14.6 / 10.9 / 29.1
+     700 (card 322)  → 32.2 / 12.9 /  9.7 / 25.8
+     600 (card 272)  → 27.2 / 11 (floor) / 8.2 / 21.8
+     553 (card 248)  → 24.9 / 11 (floor) / 7.5 / 19.9
+     481 (card 212)  → 21.2 / 11 (floor) / 6.4 (floor) / 17 (floor)
+   At every viewport the title:card ratio equals Figma's 10%, so
+   typography scales in lockstep with the card image.
    Block is AFTER the big @media (max-width: 784px) above so it
-   overrides the body 14px / line-height 1.4 set there for the
-   carousel layout. Above 784 the @media (min-width: 785px) Figma-
-   1280 formula takes over (different anchor → small jump at the
-   layout switch is expected). Below 481 the ≤480 mobile clamp takes
-   over with its own restart at 40/16/12/32 at viewport 480. */
+   overrides the body 14px / line-height 1.4 set there. Above 784
+   the @media (min-width: 785px) Figma-1280 formula takes over
+   (different anchor — small jump at the layout switch is expected).
+   Below 481 the ≤480 mobile clamp takes over with its own restart at
+   40/16/12/32 at viewport 480. */
 @media (min-width: 481px) and (max-width: 784px) {
   .gvb-product-card__title {
-    font-size: clamp(24px, 5.10vw, 40px);
+    /* !important needed to beat the global mobile reset
+       `@media (max-width: 784px) { h2 { font-size: 30px !important } }`
+       further up the file. */
+    font-size: clamp(20px, calc(-2.8px + 5vw), 40px) !important;
   }
   .gvb-product-card__text {
-    font-size: clamp(12px, 2.04vw, 16px);
+    font-size: clamp(11px, calc(-1.12px + 2vw), 16px);
     line-height: 1.4;
   }
   .gvb-product-card__content {
-    gap: clamp(8px, 1.53vw, 12px);
-    padding-bottom: clamp(20px, 4.08vw, 32px);
+    gap: clamp(6px, calc(-0.84px + 1.5vw), 12px);
+    padding-bottom: clamp(16px, calc(-2.24px + 4vw), 32px);
   }
 }
 
