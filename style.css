@@ -2160,8 +2160,10 @@ body.page-faq .wp-site-blocks {
 
   .gvb-losungen-intro p {
     font-size: 18px !important;
-    text-align: left !important;
     line-height: 1.5 !important;
+    /* No text-align override — inline `has-text-align-center` class
+       on the <p> stays in effect. Matches .gvb-flaschen-intro and
+       .gvb-intro-text mobile behaviour. */
   }
 
   .gvb-testimonials {
