@@ -89,6 +89,35 @@ function gvb_enqueue_scripts() {
         );
     }
 
+    /* Language soft-redirect (Option B — non-DE-browser visitors → EN
+       on first visit). Loaded in <head> (the `false` 5th arg) so the
+       redirect fires before content paints, avoiding a flash of DE
+       before jumping to EN. The DE → EN URL map below comes from
+       gvb_page_pair_map() — one source of truth across PHP + JS. */
+    wp_enqueue_script(
+        'gvb-lang-redirect',
+        $theme_uri . '/assets/js/lang-redirect.js',
+        array(),
+        filemtime( $theme_dir . '/assets/js/lang-redirect.js' ),
+        false
+    );
+
+    if ( function_exists( 'gvb_page_pair_map' ) ) {
+        $pair_map = gvb_page_pair_map();
+        $js_map   = array(
+            // DE front page → EN home.
+            '/' => '/en/',
+        );
+        foreach ( $pair_map as $de_slug => $en_slug ) {
+            $js_map[ '/' . $de_slug ] = '/en/' . $en_slug . '/';
+        }
+        wp_add_inline_script(
+            'gvb-lang-redirect',
+            'window.GVB_LANG_MAP = ' . wp_json_encode( $js_map ) . ';',
+            'before'
+        );
+    }
+
 }
 add_action( 'wp_enqueue_scripts', 'gvb_enqueue_scripts' );
 
