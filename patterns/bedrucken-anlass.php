@@ -22,9 +22,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<div class="gvb-overlay-card gvb-overlay-card--dark-text gvb-fade-up">
 			<div class="gvb-overlay-card__media">
 				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/anla1.png' ); ?>" alt="" />
-				<h3 class="gvb-overlay-card__title">Employer<br>Branding &amp;<br>Onboarding</h3>
 			</div>
 			<div class="gvb-overlay-card__content">
+				<h3 class="gvb-overlay-card__title">Employer<br>Branding &amp;<br>Onboarding</h3>
 				<p class="gvb-overlay-card__desc">Good Vibe Bottles sind <br class="gvb-br-mobile">perfekt für Welcome Kits, <br class="gvb-br-mobile">zur Begrüßung neuer Kolleginnen und <br class="gvb-br-mobile">Kollegen und unterstützen<br class="gvb-br-mobile-s"> gleichzeitig <br class="gvb-br-mobile-m">Employer Branding <br class="gvb-br-mobile-s">bei potenziellen Mitarbeitenden.</p>
 			</div>
 		</div>
@@ -32,9 +32,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<div class="gvb-overlay-card gvb-fade-up">
 			<div class="gvb-overlay-card__media">
 				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/anla2.png' ); ?>" alt="" />
-				<h3 class="gvb-overlay-card__title">Events &amp;<br>Marken-<br>auftritte</h3>
 			</div>
 			<div class="gvb-overlay-card__content">
+				<h3 class="gvb-overlay-card__title">Events &amp;<br>Marken-<br>auftritte</h3>
 				<p class="gvb-overlay-card__desc">Good Vibe Bottles sind ein nachhaltiges Give-away für Events. Sie werden genutzt und machen deine Marke sichtbar, ein Zeichen für bewussten Konsum.</p>
 			</div>
 		</div>
@@ -42,9 +42,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<div class="gvb-overlay-card gvb-overlay-card--dark-text gvb-fade-up">
 			<div class="gvb-overlay-card__media">
 				<img class="gvb-overlay-card__img" src="<?php echo esc_url( $img . '/anla3.png' ); ?>" alt="" />
-				<h3 class="gvb-overlay-card__title">Merchandise</h3>
 			</div>
 			<div class="gvb-overlay-card__content">
+				<h3 class="gvb-overlay-card__title">Merchandise</h3>
 				<p class="gvb-overlay-card__desc">Good Vibe Bottles sind die <br class="gvb-br-mobile">perfekte Ergänzung als Merchandise <br class="gvb-br-mobile">für deinen Shop, deine Marke und <br class="gvb-br-mobile">überall wo es Good Vibes braucht.</p>
 			</div>
 		</div>
