@@ -17,7 +17,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<div class="gvb-personalisieren-card gvb-personalisieren-card--dark gvb-fade-up">
 			<div class="gvb-personalisieren-card__media">
 				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/bildung-card-1.png' ); ?>" alt="Sustainability you can experience" />
-				<h3 class="gvb-personalisieren-card__title">Sustainability you<br>can experience.</h3>
+				<h3 class="gvb-personalisieren-card__title">Sustainability<br>you can experience.</h3>
 			</div>
 			<div class="gvb-personalisieren-card__content">
 				<p class="gvb-personalisieren-card__desc">Educational institutions play an important role in building environmental awareness. Our reusable bottles help reduce single-use plastic and make sustainability tangible in everyday life. This supports environmental education and strengthens identification with your institution.</p>
