@@ -5229,6 +5229,15 @@ body.page-faq .wp-site-blocks {
     transform: translateX(-50%) !important;
   }
 
+  /* Premium Karaffe: zoom out a touch on mobile (its silhouette is
+     wider/heavier than the slim bottles, so default 100% height felt
+     too dominant). Constrain via a smaller max-height. */
+  .gvb-bottle-card--karaffe .gvb-bottle-card__image img {
+    max-height: 86% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
   .gvb-bottle-card__content {
     padding: 32px 24px;
   }
