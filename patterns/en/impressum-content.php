@@ -17,7 +17,7 @@
 		<h2 class="gvb-impressum-card__company">Good Vibe Bottles GmbH</h2>
 		<div class="gvb-impressum-card__details">
 			<p>Harrachstra&szlig;e 52 / Top 18, 4020 Linz, Austria</p>
-			<p>Authorised representative (Managing Director): Philipp Gump</p>
+			<p>Authorised representative (Managing Director): Philipp Gumpl</p>
 			<p>office@goodvibebottles.com</p>
 			<p>+43 664 91 65 074</p>
 			<p>Commercial register number: FN 670175 t &mdash; Commercial Court: Handelsgericht Linz</p>
