@@ -19,7 +19,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				<img class="gvb-personalisieren-card__img" src="<?php echo esc_url( $img . '/unternehmen-card-1.png' ); ?>" alt="Make sustainability visible" />
 			</div>
 			<div class="gvb-personalisieren-card__content">
-				<h3 class="gvb-personalisieren-card__title">Make sustainability<br>visible.</h3>
+				<h3 class="gvb-personalisieren-card__title">Make<br>Sustainability visible.</h3>
 				<p class="gvb-personalisieren-card__desc">With our reusable bottles, you can reduce single-use plastic in your workplace and turn sustainability into part of your daily routine.</p>
 			</div>
 		</div>
