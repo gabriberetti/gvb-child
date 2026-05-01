@@ -445,6 +445,42 @@ function gvb_register_en_post_type() {
 add_action( 'init', 'gvb_register_en_post_type' );
 
 /**
+ * Reorder rewrite rules so `en_category` archive URLs match before
+ * the `en_post` attachment rule.
+ *
+ * Why: registering en_post with slug 'en/blog' auto-creates an
+ * attachment rule `en/blog/[^/]+/([^/]+)/?$` that matches
+ * `/en/blog/category/{slug}/` first (interpreting it as
+ * attachment '{slug}' inside post 'category') → 404 on every
+ * EN category archive.
+ *
+ * Solution: hoist all rules whose query string contains
+ * `en_category=` to the top of the rules array so they're
+ * evaluated before the broader en_post pattern. URLs unchanged;
+ * only evaluation order changes.
+ *
+ * After deploying, run `wp rewrite flush` (or visit
+ * Settings → Permalinks) once to commit the new ordering to
+ * the .htaccess / rewrite cache.
+ */
+function gvb_reorder_en_category_rules( $rules ) {
+    if ( ! is_array( $rules ) ) {
+        return $rules;
+    }
+    $en_category_rules = array();
+    $other_rules       = array();
+    foreach ( $rules as $regex => $query ) {
+        if ( is_string( $query ) && strpos( $query, 'en_category=' ) !== false ) {
+            $en_category_rules[ $regex ] = $query;
+        } else {
+            $other_rules[ $regex ] = $query;
+        }
+    }
+    return array_merge( $en_category_rules, $other_rules );
+}
+add_filter( 'rewrite_rules_array', 'gvb_reorder_en_category_rules', 99 );
+
+/**
  * Inject `is_featured = 1` meta_query into the EN blog featured-zone Query Loop.
  *
  * WordPress's built-in sticky_posts feature is hardcoded to the `post` post
