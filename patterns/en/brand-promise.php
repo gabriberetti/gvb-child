@@ -17,7 +17,7 @@ $svg = get_stylesheet_directory_uri() . '/assets/svg';
 	<div class="wp-block-group gvb-brand-promise__content">
 
 		<!-- wp:heading {"textAlign":"center","level":2,"className":"gvb-fade-up","style":{"typography":{"fontSize":"60px","fontWeight":"700","lineHeight":"1.03"}},"textColor":"gvb-linen"} -->
-		<h2 class="wp-block-heading has-text-align-center has-gvb-linen-color has-text-color gvb-fade-up" style="font-size:60px;font-weight:700;line-height:1.03">Stayed hydrated today?</h2>
+		<h2 class="wp-block-heading has-text-align-center has-gvb-linen-color has-text-color gvb-fade-up" style="font-size:60px;font-weight:700;line-height:1.03">Hydrated today?</h2>
 		<!-- /wp:heading -->
 
 		<!-- wp:paragraph {"align":"center","className":"gvb-fade-up","style":{"typography":{"fontSize":"24px","lineHeight":"1.2","letterSpacing":"0.12px"}},"textColor":"gvb-linen"} -->
