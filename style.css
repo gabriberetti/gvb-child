@@ -4637,6 +4637,16 @@ body.page-faq .wp-site-blocks {
   .gvb-uberuns-vm__text h2 {
     font-size: clamp(45px, calc(30px + 1.042vw), 50px);
   }
+
+  /* Flaschen cards desc: at desktop+ widths Chrome's `text-wrap: pretty`
+     (now the default for <p> in newer Chrome) was rebalancing line
+     lengths, breaking line 1 short to avoid orphans on the last line.
+     For our 3-card grid the cards are ≥420px and the desc fits well
+     within them — we want greedy fill so line 1 packs as many words as
+     possible. Override to `wrap` (the classic greedy algorithm). */
+  .gvb-flaschen-cards__desc {
+    text-wrap: wrap;
+  }
 }
 
 .gvb-bedrucken-warum__text p {
