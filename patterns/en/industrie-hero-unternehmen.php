@@ -10,7 +10,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 <!-- wp:group {"className":"gvb-hero gvb-hero--industrie","style":{"spacing":{"padding":{"top":"120px","bottom":"120px","left":"64px","right":"64px"},"margin":{"left":"20px","right":"20px"}},"border":{"radius":"20px"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group gvb-hero gvb-hero--industrie" style="border-radius:20px;margin-left:20px;margin-right:20px;padding-top:120px;padding-right:64px;padding-bottom:120px;padding-left:64px">
 
-	<img class="gvb-hero__bg gvb-hero__bg--unternehmen" src="<?php echo esc_url( $img . '/hero-unternehmen.jpg' ); ?>" alt="" aria-hidden="true" />
+	<img class="gvb-hero__bg gvb-hero__bg--unternehmen" src="<?php echo esc_url( $img . '/hero-unternehmen.webp' ); ?>" alt="" aria-hidden="true" />
 	<div class="gvb-hero__overlay" style="background:linear-gradient(109deg, rgba(0,0,0,0) 43%, rgba(0,0,0,0.18) 58%, rgba(0,0,0,0.2) 96%)"></div>
 
 	<!-- wp:group {"className":"gvb-hero__content","style":{"spacing":{"margin":{"left":"auto"}}},"layout":{"type":"constrained","contentSize":"608px"}} -->
