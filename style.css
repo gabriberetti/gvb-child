@@ -981,11 +981,33 @@ html {
 }
 
 .gvb-product-card__content {
-  position: relative;
+  /* Bottom-anchored: body bottom always 32px from card bottom; title
+     sits above body with a fixed 12px gap. As body wraps to more
+     lines, title moves UP (bottom→top text flow), card visual
+     unchanged. Title now lives inside __content (in the pattern) and
+     stacks above the body via the flex column + gap. */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
-  flex: 0 0 auto;
-  margin-top: -28.7%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   padding: 0 13% 32px 7%;
+}
+
+/* 3-grid band (785–1440): cards shrink with viewport, so gap +
+   padding-bottom shrink proportionally too. Above 1440 the clamps
+   cap at 12 / 32 — matches the tuned 1440 baseline (Figma 1280).
+   Below 785 (carousel + mobile) the base 12/32 stays in effect; the
+   mobile reset+rescale lives in the @media (max-width: 480px) block
+   later in this file. */
+@media (min-width: 785px) {
+  .gvb-product-card__content {
+    gap: clamp(8px, 0.83vw, 12px);
+    padding-bottom: clamp(20px, 2.22vw, 32px);
+  }
 }
 
 .gvb-product-card__content--center {
@@ -999,15 +1021,11 @@ html {
 }
 
 .gvb-product-card__title {
-  position: absolute;
-  bottom: 23.8%;
-  left: 7%;
-  right: 13%;
-  z-index: 2;
-  /* Fluid 32px @ ≤768 → 40px @ 1440. Cards scale with viewport in
-     this band (≈316px wide @ 1024 vs ≈456px @ 1440), so a static
-     40px feels oversized at 1024. Above 1440 the @media block below
-     extends the scale 40 → 53 by viewport 1920. */
+  /* Lives inside __content (flex column), above body with 12px gap.
+     No absolute positioning — title moves up automatically as the
+     body wraps to more lines. */
+  /* Fluid 32px @ ≤768 → 40px @ 1440. Above 1440 the @media block
+     below extends the scale 40 → 53 by viewport 1920. */
   font-size: clamp(32px, calc(23px + 1.19vw), 40px);
   font-weight: 700;
   line-height: 1.08;
@@ -5771,6 +5789,25 @@ html {
     text-align: center;
   }
 
+  /* ── Product cards (1-card carousel band): card "restarts" big at
+     480 (full width), so reset typography + spacing to the 1440
+     baseline AT 480 viewport, then scale ALL down proportionally as
+     viewport shrinks to 320. Title needs !important to beat the
+     global h2 reset above. ── */
+  .gvb-product-card__title {
+    /* 25 @ 320 → 40 @ 480 */
+    font-size: clamp(25px, calc(-5px + 9.375vw), 40px) !important;
+  }
+  .gvb-product-card__text {
+    /* 11 @ 320 → 16 @ 480 */
+    font-size: clamp(11px, calc(1px + 3.125vw), 16px);
+  }
+  .gvb-product-card__content {
+    /* gap 8→12, padding-bottom 21→32 across 320→480 */
+    gap: clamp(8px, 2.5vw, 12px);
+    padding-bottom: clamp(21px, calc(-1px + 6.875vw), 32px);
+  }
+
   /* ── Steps: compact number + tighter padding ── */
   .gvb-steps__content {
     padding: 28px 20px 28px 76px;
@@ -5830,6 +5867,31 @@ html {
     height: auto;
     gap: 8px;
     padding: 20px 24px;
+  }
+
+  /* ── Verschlüsse section (Borosilikat + Tritan) ──
+     Borosilikat's image is locked at height: 347px via the
+     col-scoped rule at line ~3531 (specificity 0,3,0 beats the
+     mobile generic 4/3 rule). Release it here for phone widths.
+     Tritan markup has no .gvb-verschluss-col, so the height-release
+     rule is a no-op there — but the shared heading + title classes
+     also need to scale down on both pages. ── */
+  .gvb-borosilikat-verschluesse .gvb-verschluss-col .gvb-verschluss-card__image {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .gvb-borosilikat-verschluesse__heading {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+
+  .gvb-verschluss-card__title {
+    font-size: 20px;
+  }
+
+  .gvb-verschluss-card__desc {
+    font-size: 14px;
   }
 }
 
