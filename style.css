@@ -3972,7 +3972,7 @@ html {
    orphaned next to the wide hero. ~80–90 chars/line at 1100 — still
    inside the readable range for 16–18px body text. */
 .gvb-single-body {
-  max-width: clamp(800px, calc(-100px + 0.625vw), 1100px);
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
