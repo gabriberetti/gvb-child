@@ -26,9 +26,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<div class="gvb-product-card gvb-product-card--dark gvb-fade-up">
 			<div class="gvb-product-card__media">
 				<img class="gvb-product-card__bg" src="<?php echo esc_url( $img . '/card-besser-trinken.png' ); ?>" alt="" />
-				<h2 class="gvb-product-card__title">Drink<br>better.</h2>
 			</div>
 			<div class="gvb-product-card__content">
+				<h2 class="gvb-product-card__title">Drink<br>better.</h2>
 				<p class="gvb-product-card__text">Make the right choice. With our bottles made from sustainable materials and real good vibes, drinking just feels better.</p>
 			</div>
 		</div>
@@ -37,9 +37,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<div class="gvb-product-card gvb-product-card--orange gvb-fade-up">
 			<div class="gvb-product-card__media">
 				<img class="gvb-product-card__bg" src="<?php echo esc_url( $img . '/card-genau-dein-vibe.png' ); ?>" alt="" />
-				<h2 class="gvb-product-card__title">Your vibe,<br>exactly.</h2>
 			</div>
 			<div class="gvb-product-card__content">
+				<h2 class="gvb-product-card__title">Your vibe,<br>exactly.</h2>
 				<p class="gvb-product-card__text">Good vibes are for everyone. That&rsquo;s why our bottles are flexible and easy to personalise.</p>
 			</div>
 		</div>
@@ -48,9 +48,9 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		<div class="gvb-product-card gvb-product-card--dark gvb-fade-up">
 			<div class="gvb-product-card__media">
 				<img class="gvb-product-card__bg" src="<?php echo esc_url( $img . '/card-nachhaltigkeit.png' ); ?>" alt="" />
-				<h2 class="gvb-product-card__title">Sustainability<br>that lasts.</h2>
 			</div>
 			<div class="gvb-product-card__content">
+				<h2 class="gvb-product-card__title">Sustainability<br>that lasts.</h2>
 				<p class="gvb-product-card__text">Our bottles are, above all, a real win for the environment. We may not save the planet &ndash; but we make it a little better.</p>
 			</div>
 		</div>

@@ -997,19 +997,6 @@ html {
   padding: 0 13% 32px 7%;
 }
 
-/* 3-grid band (785–1440): cards shrink with viewport, so gap +
-   padding-bottom shrink proportionally too. Above 1440 the clamps
-   cap at 12 / 32 — matches the tuned 1440 baseline (Figma 1280).
-   Below 785 (carousel + mobile) the base 12/32 stays in effect; the
-   mobile reset+rescale lives in the @media (max-width: 480px) block
-   later in this file. */
-@media (min-width: 785px) {
-  .gvb-product-card__content {
-    gap: clamp(8px, 0.83vw, 12px);
-    padding-bottom: clamp(20px, 2.22vw, 32px);
-  }
-}
-
 .gvb-product-card__content--center {
   display: flex;
   flex-direction: column;
@@ -1023,10 +1010,11 @@ html {
 .gvb-product-card__title {
   /* Lives inside __content (flex column), above body with 12px gap.
      No absolute positioning — title moves up automatically as the
-     body wraps to more lines. */
-  /* Fluid 32px @ ≤768 → 40px @ 1440. Above 1440 the @media block
-     below extends the scale 40 → 53 by viewport 1920. */
-  font-size: clamp(32px, calc(23px + 1.19vw), 40px);
+     body wraps to more lines.
+     Base = 32px (carousel band 481–784). 3-grid band 785+ overridden
+     by the @media (min-width: 785px) block above with proportional
+     scaling. ≤480 mobile has its own restart+rescale clamp. */
+  font-size: 32px;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: 0.2px;
@@ -1047,6 +1035,35 @@ html {
   letter-spacing: 0.08px;
   color: #fff;
   margin: 0;
+}
+
+/* 3-grid band (785–1440): scale typography + spacing proportionally
+   with viewport, anchored at Figma 1280 values. Formula = Figma
+   value × (viewport / 1280), capped at Figma max.
+     Title         clamp(25px, 3.125vw,  40px)   [40 × vw / 1280]
+     Body          clamp(12px, 1.25vw,   16px)   [16 × vw / 1280]
+     Gap           clamp(8px,  0.9375vw, 12px)   [12 × vw / 1280]
+     Padding-btm   clamp(20px, 2.5vw,    32px)   [32 × vw / 1280]
+   At 1024 viewport: title 32, body 12.8, gap 9.6, padding-bottom
+   25.6 — exact Figma 1280 × 0.8 conversion. At 785: title 25, body
+   floor 12, gap 8, pad 20. Above 1280 all clamps hit max and stay
+   there to 1440 baseline. Body has 12px floor (strict proportion
+   gives 10 at 785 which is below readability).
+   Carousel band 481–784 uses the base values (title 32, body 16,
+   gap 12, padding-bottom 32) — user feedback: looks good, don't touch.
+   IMPORTANT: this @media block must come AFTER the base rules above
+   — same specificity, source-order-later wins. */
+@media (min-width: 785px) {
+  .gvb-product-card__title {
+    font-size: clamp(25px, 3.125vw, 40px);
+  }
+  .gvb-product-card__text {
+    font-size: clamp(12px, 1.25vw, 16px);
+  }
+  .gvb-product-card__content {
+    gap: clamp(8px, 0.9375vw, 12px);
+    padding-bottom: clamp(20px, 2.5vw, 32px);
+  }
 }
 
 .gvb-btn--white {
@@ -5583,6 +5600,40 @@ html {
     background-image: url('assets/svg/background-mobile-bottom.svg');
   }
 
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Product cards — 2-card carousel band (481–784) "reset" scaling
+   ══════════════════════════════════════════════════════════════════════
+   At top of band (784) values restart at full Figma 1280 defaults
+   (40/16/12/32). Scale DOWN proportionally with viewport to floors at
+   481. Formula = Figma value × viewport / 784, clamped at floors.
+     Title         clamp(24px, 5.10vw, 40px)   [40 × vw / 784]
+     Body          clamp(12px, 2.04vw, 16px)   [16 × vw / 784]
+     Gap           clamp(8px,  1.53vw, 12px)   [12 × vw / 784]
+     Padding-btm   clamp(20px, 4.08vw, 32px)   [32 × vw / 784]
+   Worked examples:
+     784 → 40 / 16 / 12 / 32
+     600 → 31 / 12.2 / 9.2 / 24.5
+     481 → 24.5 / 12 (floor) / 8 (floor) / 20 (floor)
+   Block is AFTER the big @media (max-width: 784px) above so it
+   overrides the body 14px / line-height 1.4 set there for the
+   carousel layout. Above 784 the @media (min-width: 785px) Figma-
+   1280 formula takes over (different anchor → small jump at the
+   layout switch is expected). Below 481 the ≤480 mobile clamp takes
+   over with its own restart at 40/16/12/32 at viewport 480. */
+@media (min-width: 481px) and (max-width: 784px) {
+  .gvb-product-card__title {
+    font-size: clamp(24px, 5.10vw, 40px);
+  }
+  .gvb-product-card__text {
+    font-size: clamp(12px, 2.04vw, 16px);
+    line-height: 1.4;
+  }
+  .gvb-product-card__content {
+    gap: clamp(8px, 1.53vw, 12px);
+    padding-bottom: clamp(20px, 4.08vw, 32px);
+  }
 }
 
 /* ── Mobile sub-breakpoint --bg-h overrides ──────────────────────────
