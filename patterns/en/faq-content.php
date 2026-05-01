@@ -200,7 +200,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">How should I clean my bottles?</summary>
-				<div class="gvb-faq__answer"><p>All <a href="/en/our-bottles/">bottles</a> are dishwasher-safe. For longer durability &ndash; especially for printed bottles &ndash; we recommend gentle hand washing. Seals and glass bottle closures should also be cleaned regularly by hand.</p></div>
+				<div class="gvb-faq__answer"><p>All <a href="/en/our-bottles/">bottles</a> are dishwasher-safe. For longer durability &ndash; especially for printed bottles &ndash; we recommend gentle hand washing. Seals and glass bottle closures should also be cleaned regularly by hand. You&rsquo;ll find more tips in our <a href="/en/blog/how-to-clean-your-water-bottle-properly-keep-it-clean-and-hygienic/">cleaning blog article</a>.</p></div>
 			</details>
 
 		</div>
@@ -211,7 +211,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Can I wash bottles in the dishwasher?</summary>
-				<div class="gvb-faq__answer"><p>Yes, all bottles can be cleaned in the dishwasher. For best results, we recommend low temperatures or hand washing.</p></div>
+				<div class="gvb-faq__answer"><p>Yes, all bottles can be cleaned in the dishwasher. For best results, we recommend low temperatures or hand washing. You&rsquo;ll find more tips in our <a href="/en/blog/how-to-clean-your-water-bottle-properly-keep-it-clean-and-hygienic/">cleaning blog article</a>.</p></div>
 			</details>
 
 		</div>
