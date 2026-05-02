@@ -865,34 +865,41 @@ add_action( 'wp_head', 'gvb_og_locale', 6 );
  * @return string
  */
 function gvb_lang_switcher_shortcode() {
-    /* Detect EN context from the URL, not from get_queried_object_id():
-       in the header (where this shortcode renders) the queried object is
-       often unreliable, especially on the /en/ home where Polylang's
-       front-page swap and our locale filter race the main query. The URL
-       is the unambiguous source of truth. */
-    $uri   = $_SERVER['REQUEST_URI'] ?? '';
-    $is_en = ( strpos( $uri, '/en/' ) === 0 || $uri === '/en' );
+    /* Detect EN context from the URL — get_queried_object_id() is
+       unreliable in the header context where this shortcode renders. */
+    $uri        = $_SERVER['REQUEST_URI'] ?? '';
+    $path_only  = parse_url( $uri, PHP_URL_PATH ) ?: $uri;
+    $normalized = '/' . trim( $path_only, '/' );
+    $is_en      = ( strpos( $path_only, '/en/' ) === 0 || $normalized === '/en' );
 
-    $current_id = get_queried_object_id();
-
-    /* Build URLs from raw siteurl, bypassing Polylang's home_url +
-       _get_page_link filters which rewrite every URL using the *current*
-       request language — wrong for the counterpart link. */
     $site_root = rtrim( get_option( 'siteurl' ), '/' );
 
-    $pair_url = ( $current_id && in_array( get_post_type( $current_id ), array( 'page' ), true ) )
-        ? gvb_counterpart_url( $current_id )
-        : '';
-    if ( ! $pair_url ) {
+    /* Homepage shortcut — both / and /en/ are simple to construct
+       statically, and avoid a subtle bug: on /en/ Polylang's front-page
+       swap hasn't fired by header-render time, so get_queried_object_id()
+       still returns the DE front page (ID 16). gvb_counterpart_url(16)
+       would then return the EN counterpart (i.e. /en/) — the wrong
+       direction for the DE switcher link.
+       For all other URLs, use gvb_counterpart_url + the canonical
+       constructor as before. */
+    if ( $normalized === '/' || $normalized === '/en' ) {
         $pair_url = $site_root . ( $is_en ? '/' : '/en/' );
-    }
-
-    // Self URL for the active link — use raw URL construction for pages,
-    // request URI for everything else.
-    if ( $current_id && 'page' === get_post_type( $current_id ) ) {
-        $self_url = gvb_construct_canonical_page_url( $current_id );
+        $self_url = $site_root . ( $is_en ? '/en/' : '/' );
     } else {
-        $self_url = $site_root . ( $uri ?: ( $is_en ? '/en/' : '/' ) );
+        $current_id = get_queried_object_id();
+
+        $pair_url = ( $current_id && 'page' === get_post_type( $current_id ) )
+            ? gvb_counterpart_url( $current_id )
+            : '';
+        if ( ! $pair_url ) {
+            $pair_url = $site_root . ( $is_en ? '/' : '/en/' );
+        }
+
+        if ( $current_id && 'page' === get_post_type( $current_id ) ) {
+            $self_url = gvb_construct_canonical_page_url( $current_id );
+        } else {
+            $self_url = $site_root . $uri;
+        }
     }
 
     $de_href   = $is_en ? $pair_url : $self_url;
