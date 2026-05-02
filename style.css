@@ -4756,10 +4756,16 @@ body.page-downloads .wp-site-blocks {
   .gvb-bedrucken-anlass__heading {
     font-size: clamp(40px, calc(1px + 2.708vw), 53px);
   }
-  /* Card title + desc 1440+ scaling: REMOVED here — base rule now sets
-     Figma 1280 values (32 / 14) at our 1440 baseline per the card
-     scaling system. Above-1440 fluid scale will be re-introduced as
-     part of the full 3-band scaling refactor (Step 2). */
+  /* Anlass card title + desc — gentle fluid scale 1440 → 1920 (~×1.20)
+     so overlay typography keeps proportions on wide monitors.
+     Title 36 → 43, desc 15.65 → 19. Caps at 1920+.
+     Below 1440 the base rule's clamp(20px, 2.5vw, 36px) takes over. */
+  .gvb-bedrucken-anlass .gvb-overlay-card__title {
+    font-size: clamp(36px, calc(15px + 1.458vw), 43px);
+  }
+  .gvb-bedrucken-anlass .gvb-overlay-card__desc {
+    font-size: clamp(15.65px, calc(5.60px + 0.698vw), 19px);
+  }
 
   /* Cases section: h3 ("Passt gut zusammen.") + h4 ("Good Vibe Bottles
      X …") use inline style="font-size:32/40px" from the pattern PHP, so
