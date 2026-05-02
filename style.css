@@ -2279,20 +2279,18 @@ body.page-downloads .wp-site-blocks {
     margin-top: 0;
   }
 
-  /* Lösungen intro: reduce side padding + font size so text fills the width */
+  /* Lösungen intro mobile: align with the canonical .gvb-flaschen-intro
+     mobile rules (used by Flaschen, Edelstahl, Borosilikat, Tritan,
+     Bedrucken + 5 industry pages). Section gets the same 48px 20px
+     padding; paragraph gets 20px font-size with no other overrides
+     — line-height + letter-spacing inherit from the inline style on
+     the <p>, matching every other intro. */
   .gvb-losungen-intro {
-    padding-left: 24px !important;
-    padding-right: 24px !important;
-    padding-top: 60px !important;
-    padding-bottom: 60px !important;
+    padding: 48px 20px !important;
   }
 
   .gvb-losungen-intro p {
-    font-size: 18px !important;
-    line-height: 1.5 !important;
-    /* No text-align override — inline `has-text-align-center` class
-       on the <p> stays in effect. Matches .gvb-flaschen-intro and
-       .gvb-intro-text mobile behaviour. */
+    font-size: 20px;
   }
 
   .gvb-testimonials {
