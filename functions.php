@@ -649,6 +649,47 @@ function gvb_get_page_pair_id( $post_id, $is_en ) {
 }
 
 /**
+ * Build a page URL using the raw site URL + post slug.
+ *
+ * Polylang's `_get_page_link` / `home_url` filters rewrite every page
+ * URL using the *current* request language. That's wrong for our
+ * counterpart-link use case: when a visitor is on /en/, we want the
+ * DE counterpart link to point to `/`, not `/en/`. Going through
+ * get_permalink() at that moment yields `/en/<de-slug>/` because the
+ * Polylang filter prepends the current-language prefix.
+ *
+ * This helper bypasses those filters by reading `siteurl` directly
+ * (an unfiltered DB option) and assembling the URL from the post's
+ * slug + parent hierarchy. Special-cases:
+ *   - DE front page → `/`
+ *   - EN home (slug "en") → `/en/`
+ *   - EN sub-page (any descendant of slug "en") → `/en/<slug>/`
+ *   - Any other DE page → `/<slug>/`
+ *
+ * @param int $page_id Page post ID.
+ * @return string Canonical URL of the page in its own language.
+ */
+function gvb_construct_canonical_page_url( $page_id ) {
+    $base   = rtrim( get_option( 'siteurl' ), '/' );
+    $is_en  = gvb_is_english_page( $page_id );
+    $slug   = get_post_field( 'post_name', $page_id );
+
+    if ( ! $is_en ) {
+        // DE page — front page returns '/', everything else uses /<slug>/
+        if ( (int) $page_id === (int) get_option( 'page_on_front' ) ) {
+            return $base . '/';
+        }
+        return $base . '/' . $slug . '/';
+    }
+
+    // EN — root /en/ or /en/<slug>/
+    if ( 'en' === $slug ) {
+        return $base . '/en/';
+    }
+    return $base . '/en/' . $slug . '/';
+}
+
+/**
  * Resolve the translation counterpart URL for a given post.
  *
  * Strategy:
@@ -674,9 +715,10 @@ function gvb_counterpart_url( $post_id = null ) {
 
     if ( 'page' === $post_type ) {
         $pair_id = gvb_get_page_pair_id( $post_id, $is_en );
-        return ( $pair_id && 'publish' === get_post_status( $pair_id ) )
-            ? get_permalink( $pair_id )
-            : '';
+        if ( ! $pair_id || 'publish' !== get_post_status( $pair_id ) ) {
+            return '';
+        }
+        return gvb_construct_canonical_page_url( $pair_id );
     }
 
     if ( in_array( $post_type, array( 'post', 'en_post' ), true ) && function_exists( 'get_field' ) ) {
