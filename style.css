@@ -2042,37 +2042,55 @@ html {
   position: relative;
 }
 
-/* FAQ page only — remove the green background on brand-promise (testing).
-   Targets the WP color class with !important to defeat the inline-applied
-   has-gvb-green-background-color. Scoped via the body's .page-faq class. */
-.page-faq .gvb-brand-promise.has-gvb-green-background-color {
+/* FAQ + Download pages — remove the green background on brand-promise.
+   Targets the WP color class with !important to defeat the inline
+   has-gvb-green-background-color. Scoped via body slug classes:
+   - .page-faq covers DE (slug: faq) AND EN (slug: faq, same slug)
+   - .page-download covers DE Download
+   - .page-downloads covers EN Download (different slug — plural). */
+.page-faq .gvb-brand-promise.has-gvb-green-background-color,
+.page-download .gvb-brand-promise.has-gvb-green-background-color,
+.page-downloads .gvb-brand-promise.has-gvb-green-background-color {
   background-color: transparent !important;
 }
 
-/* FAQ page only — push the bottom-wave further down so it sits below
-   the brand-promise section instead of behind its top edge. Per-tier
-   tunes because page height changes a lot per viewport (FAQ has a tall
-   accordion content area; the wave needs to land just under it across
-   bands). 1440+ is "perfect" at 300, smaller viewports need bigger
-   offsets to lift the wave further away from the page bottom. */
-body.page-faq .wp-site-blocks {
+/* FAQ + Download pages — push the bottom-wave further down so it sits
+   below the brand-promise section instead of behind its top edge.
+   Per-tier tunes because page height changes a lot per viewport (FAQ
+   accordion + Download list both grow tall on mobile; the wave needs
+   to land just under them across bands). 1440+ is "perfect" at 300,
+   smaller viewports need bigger offsets to lift the wave further from
+   the page bottom. Same selector triplet as the brand-promise rule. */
+body.page-faq .wp-site-blocks,
+body.page-download .wp-site-blocks,
+body.page-downloads .wp-site-blocks {
   --bottom-wave-offset: 300px;
 }
 @media (max-width: 1024px) {
-  body.page-faq .wp-site-blocks { --bottom-wave-offset: 500px; }
+  body.page-faq .wp-site-blocks,
+  body.page-download .wp-site-blocks,
+  body.page-downloads .wp-site-blocks { --bottom-wave-offset: 500px; }
 }
 @media (max-width: 768px) {
-  body.page-faq .wp-site-blocks { --bottom-wave-offset: 1200px; }
+  body.page-faq .wp-site-blocks,
+  body.page-download .wp-site-blocks,
+  body.page-downloads .wp-site-blocks { --bottom-wave-offset: 1200px; }
 }
 @media (max-width: 480px) {
-  body.page-faq .wp-site-blocks { --bottom-wave-offset: 1100px; }
+  body.page-faq .wp-site-blocks,
+  body.page-download .wp-site-blocks,
+  body.page-downloads .wp-site-blocks { --bottom-wave-offset: 1100px; }
 }
 @media (max-width: 425px) {
   /* Mobile L (≤425) and Mobile M (≤375) share the same 900px tune. */
-  body.page-faq .wp-site-blocks { --bottom-wave-offset: 900px; }
+  body.page-faq .wp-site-blocks,
+  body.page-download .wp-site-blocks,
+  body.page-downloads .wp-site-blocks { --bottom-wave-offset: 900px; }
 }
 @media (max-width: 320px) {
-  body.page-faq .wp-site-blocks { --bottom-wave-offset: 950px; }
+  body.page-faq .wp-site-blocks,
+  body.page-download .wp-site-blocks,
+  body.page-downloads .wp-site-blocks { --bottom-wave-offset: 950px; }
 }
 
 /* Brand-promise green background bleeds full viewport width at every size
