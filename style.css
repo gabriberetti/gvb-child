@@ -2081,6 +2081,33 @@ body.page-downloads .wp-site-blocks {
   body.page-download .wp-site-blocks,
   body.page-downloads .wp-site-blocks { --bottom-wave-offset: 500px; }
 }
+
+/* Tablet/Laptop band (785-1024) — shrink hero H1 a few px so long
+   industry titles ("Umweltbewusste und nachhaltige Unternehmen") fit
+   within the 55%-offset content area without overflowing.
+   Original fluid clamp resolves to ~54px at 1024 / ~46px at 785;
+   this override drops to 50/40. !important needed to beat the
+   inline font-size set in each hero pattern. */
+@media (max-width: 1024px) and (min-width: 785px) {
+  .gvb-hero h1,
+  .gvb-hero .wp-block-heading {
+    /* At 1024: 48 (was 50, -2). At 785: 40 (unchanged). */
+    font-size: clamp(40px, calc(13.73px + 3.347vw), 48px) !important;
+  }
+
+  /* Shift hero content left a bit (55% → 45%) so long industry H1s
+     get more breathing room. Desktop ≥1025 keeps the original 55%
+     for the hero photo-on-left + text-on-right layout. */
+  .gvb-hero--losungen .gvb-hero__content,
+  .gvb-hero--bedrucken .gvb-hero__content,
+  .gvb-hero--industrie .gvb-hero__content,
+  .gvb-hero--faq .gvb-hero__content,
+  .gvb-hero--download .gvb-hero__content,
+  .gvb-hero--impressum .gvb-hero__content,
+  .gvb-hero--datenschutz .gvb-hero__content {
+    margin-left: 45% !important;
+  }
+}
 @media (max-width: 768px) {
   body.page-faq .wp-site-blocks,
   body.page-download .wp-site-blocks,
@@ -2176,10 +2203,14 @@ body.page-downloads .wp-site-blocks {
     min-height: 400px;
     margin-left: 12px !important;
     margin-right: 12px !important;
-    /* Tighten heavy desktop padding (110/120) for mobile rhythm.
-       Apple/iOS-aligned: 48-64pt for hero verticals on phones. */
+    /* Tighten heavy desktop padding (110/120 vertical, 64 lateral) for
+       mobile rhythm. Apple/iOS-aligned: 48-64pt verticals on phones,
+       lateral 32px to give long German titles room without cramping
+       against the 20px card border-radius. */
     padding-top: 48px !important;
     padding-bottom: 64px !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
   }
 
   .gvb-single-hero {
@@ -5932,6 +5963,18 @@ body.page-downloads .wp-site-blocks {
   .wp-site-blocks {
     --top-wave-h: 1100px;
     --bg-h: 6500px;
+  }
+}
+
+/* Hero H1 shrink on the smallest phones (≤400) — long German
+   titles (Sportvereine, Bildung etc.) overflow at the H1's clamp
+   floor of 35.641. Drop a few px so the title fits in the
+   ~243px usable width (after the 32px hero side padding). !important
+   needed because the hero patterns set the font-size inline. */
+@media (max-width: 400px) {
+  .gvb-hero h1,
+  .gvb-hero .wp-block-heading {
+    font-size: 33px !important;
   }
 }
 
