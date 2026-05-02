@@ -2207,6 +2207,17 @@ body.page-downloads .wp-site-blocks {
     padding-bottom: 64px !important;
   }
 
+  /* Industry benefits + Bedrucken statement (--industry variant of
+     Personalisieren): tighter bottom padding on mobile (80 → 40)
+     to keep the page rhythm compact on phones. Top remains 0
+     (inherited from .gvb-personalisieren--industry base rule).
+     !important required because the base `.gvb-personalisieren {
+     padding: 80px 20px }` rule is LATER in source and would otherwise
+     win via cascade order. */
+  .gvb-personalisieren--industry {
+    padding-bottom: 20px !important;
+  }
+
   /* Blog article H1 only — scale down on mobile/tablet. Long blog titles
      break the layout at the desktop 47–65px size. Scoped to .gvb-single-hero
      so blog home, category, and all other heroes stay untouched.
@@ -5907,16 +5918,31 @@ body.page-downloads .wp-site-blocks {
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
 
-  /* ── Contact form: container is block on mobile (Fluent Forms default),
-     so spacing comes from each cell's group margin, not flex row-gap ── */
-  .gvb-contact__form-col .ff-t-cell {
-    margin-bottom: 16px;
+  /* ── Contact form: stack two-column rows on phones ──
+     FF keeps .ff-t-container as display:flex at every viewport
+     (newer FF versions don't drop to block layout). Long dropdown
+     values like "Edelstahlflasche" / "Wideneck Edition" / "Premium
+     Karaffe / Deckel mit Dichteinsatz" overflow the ~150px cell
+     width on a 390px Android, getting ellipsized.
+
+     Force the row to flex-column at ≤480 so each cell becomes
+     full-width (~350px on a 390px phone) — long values fit cleanly.
+
+     Use gap: 24px to match the form's canonical vertical rhythm:
+       - .ff-t-container has margin-bottom: 24px between rows
+       - .ff-el-group (single-field rows) has margin-bottom: 24px
+       - now stacked cells inside a row also get 24px gap
+     → consistent 24px vertical spacing throughout the mobile form. */
+  .gvb-contact__form-col .ff-t-container {
+    flex-direction: column;
+    gap: 24px;
   }
 
-  .gvb-contact__form-col .ff-t-cell:last-child {
-    margin-bottom: 0;
+  .gvb-contact__form-col .ff-t-cell {
+    width: 100% !important;
+    flex: 1 1 100% !important;
   }
 
   /* Remove the desktop 6px offset on Verschluss placeholder — at mobile
