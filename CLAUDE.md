@@ -35,7 +35,7 @@ WP core's `body_class()` emits `.page-id-X` (env-specific — Local IDs differ f
 - `.page-{slug}` on every singular page (e.g. `.page-faq`, `.page-uber-uns`)
 - `.page-{parent-slug}-{slug}` for nested pages (e.g. `.page-en-faq` on `/en/faq/`)
 
-Use these for portable scoped CSS — `.page-faq .foo { … }` works on Local + prod without ID lookups. Existing examples: `.page-faq .gvb-brand-promise.has-gvb-green-background-color` (transparent override), `body.page-faq .wp-site-blocks { --bottom-wave-offset: 300px }` (with per-viewport tunes 500/1200/1100/900/950 across 1024→320 because FAQ accordion height differs a lot per band — full table in `project_wave_split_layer.md`). Filter sits at the very end of `functions.php`.
+Use these for portable scoped CSS — `.page-faq .foo { … }` works on Local + prod without ID lookups. Existing examples: brand-promise transparent override + per-viewport `--bottom-wave-offset` tunes (300/500/1200/1100/900/950 across 1440→320) shared between FAQ + Download via the selector triplet `.page-faq, .page-download, .page-downloads` (FAQ DE + EN share slug `faq`, but Download has different DE/EN slugs — DE: `download` singular, EN: `downloads` plural — so all 3 classes needed). Full per-viewport table in `project_wave_split_layer.md`. **Always verify DE/EN slugs match before assuming one `.page-{slug}` covers both** — `ssh hostinger-gvb 'wp post list --post_type=page --fields=ID,post_name,post_parent'`. Filter sits at the very end of `functions.php`.
 
 ## Architecture
 
