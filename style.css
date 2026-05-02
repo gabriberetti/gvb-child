@@ -810,6 +810,13 @@ html {
   margin-bottom: 0;
 }
 
+/* Homepage only — add breathing room below the cases section. Other
+   pages (Lösungen + 5 industry sub-pages, Bedrucken) keep the default
+   flush-to-next-section spacing. Scoped via WP's body.home class. */
+body.home .gvb-cases {
+  margin-bottom: 80px;
+}
+
 .gvb-cases__h3-break,
 .gvb-mobile-br {
   display: none;
