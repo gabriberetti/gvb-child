@@ -37,7 +37,7 @@
 
 			<details class="gvb-faq__item">
 				<summary class="gvb-faq__question">Welches Flaschenzubehör gibt es?</summary>
-				<div class="gvb-faq__answer"><p>Unsere <a href="/unsere-flaschen/tritan/">Tritan</a> Trinkflaschen sind mit verschiedenen Verschlüssen erhältlich: Flip-Top – für schnelles Trinken unterwegs, Standard-Drehverschluss – klassisch und auslaufsicher, 2K-Premiumverschluss – robust und hochwertig, Sportverschluss – Einhandbedienung für aktive Nutzung. Zusätzlich gibt es Zubehör wie Stoffhüllen. Zubehör ist auch separat zu Trinkflaschen erhältlich, wobei die jeweiligen Mindestbestellmengen gelten (siehe <a href="/download/">Preisliste</a>).</p></div>
+				<div class="gvb-faq__answer"><p>Unsere <a href="/unsere-flaschen/tritan/">Tritan</a> Trinkflaschen sind mit verschiedenen Verschlüssen erhältlich: Flip-Top – für schnelles Trinken unterwegs, Standard-Drehverschluss – klassisch und auslaufsicher, 2K-Premiumverschluss – robust und hochwertig, Sportverschluss – Einhandbedienung für aktive Nutzung. Zusätzlich gibt es Zubehör wie Stoffhüllen. Zubehör ist auch separat zu Trinkflaschen erhältlich, wobei die jeweiligen Mindestbestellmengen gelten (siehe <a href="/download/#preisliste">Preisliste</a>).</p></div>
 			</details>
 
 			<details class="gvb-faq__item">
