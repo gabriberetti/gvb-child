@@ -885,6 +885,44 @@ function gvb_site_logo_en_home( $block_content, $block ) {
 }
 add_filter( 'render_block', 'gvb_site_logo_en_home', 10, 2 );
 
+/* ── 12. Frontend locale switch for /en/ pages ───────────────── */
+
+/**
+ * Override the WordPress locale to en_US on EN frontend requests.
+ *
+ * Borlabs Cookie (Professional plan) and other locale-aware plugins
+ * read get_locale() to decide which language tier to serve. Without
+ * a multilingual plugin (WPML/Polylang/TranslatePress), Borlabs
+ * falls back to get_locale() — so on /en/ pages we make WP itself
+ * return en_US, and Borlabs picks up the English consent dialog.
+ *
+ * Scope:
+ *   - Frontend only (admin stays de_DE for WP UI; REST stays de_DE
+ *     so admin/REST flows aren't affected).
+ *   - URL-based check on REQUEST_URI: filter fires very early, before
+ *     query resolution — gvb_is_english_page() needs a post ID and
+ *     isn't usable here.
+ *
+ * Side-effects: any other locale-aware plugin/theme code on /en/
+ * frontend requests will also see en_US. For our setup that means:
+ *   - RankMath outputs en locale meta tags on EN pages (correct).
+ *   - Fluent Forms still uses form ID 5 for EN (independent of locale).
+ *   - Theme has no __() calls so no theme-side i18n impact.
+ *
+ * @param string $locale The locale WP determined.
+ * @return string
+ */
+add_filter( 'locale', function ( $locale ) {
+    if ( is_admin() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+        return $locale;
+    }
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    if ( strpos( $uri, '/en/' ) === 0 || $uri === '/en' ) {
+        return 'en_US';
+    }
+    return $locale;
+} );
+
 /**
  * Add a slug-based class to body — `.page-{slug}` — on every page.
  *
