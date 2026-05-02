@@ -193,7 +193,7 @@ Text Domain: gvb
    2026-04-27 alongside the universal content-cap retarget to 1650). */
 @media (min-width: 1920px) {
   .wp-site-blocks {
-    --top-wave-h: 5000px;
+    --top-wave-h: 4800px;
     --bg-h: 4100px;
     --bottom-wave-offset: 750px;
     background-image:
