@@ -28,11 +28,11 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 		</div>
 
 		<div class="gvb-industry-card gvb-fade-up">
-				<a class="gvb-industry-card__link" href="<?php echo esc_url( home_url( '/sportvereine/' ) ); ?>" aria-label="Sportvereine">Mehr erfahren</a>
-				<img src="<?php echo esc_url( $img . '/losungen-branchen-2.jpg' ); ?>" alt="Sportvereine" />
+				<a class="gvb-industry-card__link" href="<?php echo esc_url( home_url( '/sportvereine/' ) ); ?>" aria-label="Veranstaltungen, Sportvereine und Freizeitaktivitäten">Mehr erfahren</a>
+				<img src="<?php echo esc_url( $img . '/losungen-branchen-2.jpg' ); ?>" alt="Veranstaltungen und Sportvereine" />
 			<div class="gvb-industry-card__overlay"></div>
 			<div class="gvb-industry-card__content">
-				<h5>Sportvereine</h5>
+				<h5>Veranstaltungen, Sportvereine und Freizeitaktivitäten</h5>
 				<a href="<?php echo esc_url( home_url( '/sportvereine/' ) ); ?>" class="gvb-btn-sm">Mehr erfahren</a>
 			</div>
 		</div>
