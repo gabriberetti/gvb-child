@@ -2176,12 +2176,35 @@ body.page-downloads .wp-site-blocks {
     min-height: 400px;
     margin-left: 12px !important;
     margin-right: 12px !important;
+    /* Tighten heavy desktop padding (110/120) for mobile rhythm.
+       Apple/iOS-aligned: 48-64pt for hero verticals on phones. */
+    padding-top: 48px !important;
+    padding-bottom: 64px !important;
   }
 
   .gvb-single-hero {
     min-height: 400px !important;
     margin-left: 12px !important;
     margin-right: 12px !important;
+  }
+
+  /* Mobile section-padding tightening (Apple HIG-aligned).
+     Desktop inline values (80/120 etc.) are too generous for phone
+     viewports. These overrides cut the cumulative section gaps from
+     up to 200px → 48-96px range, closer to iOS/Material conventions
+     for distinct content zones on small screens.
+     Lateral padding untouched — only vertical. */
+  .gvb-intro-text {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  .gvb-contact {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  .gvb-brand-promise.alignfull {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
   }
 
   /* Blog article H1 only — scale down on mobile/tablet. Long blog titles
