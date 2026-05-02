@@ -60,10 +60,23 @@
 
 	/* ─── Browser language detection ────────────────────────────── */
 
-	var lang = ( navigator.language || navigator.userLanguage || '' ).toLowerCase();
+	/* Check the FULL preference list (navigator.languages), not just
+	   navigator.language. Common false-positive: a German user with an
+	   English-default phone has navigator.language = 'en-US' but
+	   navigator.languages = ['en-US', 'de-DE'] — the single-value check
+	   misses the German preference and wrongly auto-redirects to EN.
+	   Fall back to navigator.language / userLanguage if .languages is
+	   unavailable (older browsers, some embedded webviews). */
+	var langs = ( navigator.languages && navigator.languages.length )
+		? navigator.languages
+		: [ navigator.language || navigator.userLanguage || '' ];
+
+	var prefersDe = langs.some( function ( l ) {
+		return /^de\b/i.test( l || '' );
+	} );
 
 	// German speakers stay on DE (covers de, de-DE, de-AT, de-CH, etc.).
-	if ( lang.indexOf( 'de' ) === 0 ) return;
+	if ( prefersDe ) return;
 
 	/* ─── Resolve EN equivalent path ────────────────────────────── */
 
