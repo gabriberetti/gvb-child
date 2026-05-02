@@ -649,47 +649,6 @@ function gvb_get_page_pair_id( $post_id, $is_en ) {
 }
 
 /**
- * Build a page URL using the raw site URL + post slug.
- *
- * Polylang's `_get_page_link` / `home_url` filters rewrite every page
- * URL using the *current* request language. That's wrong for our
- * counterpart-link use case: when a visitor is on /en/, we want the
- * DE counterpart link to point to `/`, not `/en/`. Going through
- * get_permalink() at that moment yields `/en/<de-slug>/` because the
- * Polylang filter prepends the current-language prefix.
- *
- * This helper bypasses those filters by reading `siteurl` directly
- * (an unfiltered DB option) and assembling the URL from the post's
- * slug + parent hierarchy. Special-cases:
- *   - DE front page → `/`
- *   - EN home (slug "en") → `/en/`
- *   - EN sub-page (any descendant of slug "en") → `/en/<slug>/`
- *   - Any other DE page → `/<slug>/`
- *
- * @param int $page_id Page post ID.
- * @return string Canonical URL of the page in its own language.
- */
-function gvb_construct_canonical_page_url( $page_id ) {
-    $base   = rtrim( get_option( 'siteurl' ), '/' );
-    $is_en  = gvb_is_english_page( $page_id );
-    $slug   = get_post_field( 'post_name', $page_id );
-
-    if ( ! $is_en ) {
-        // DE page — front page returns '/', everything else uses /<slug>/
-        if ( (int) $page_id === (int) get_option( 'page_on_front' ) ) {
-            return $base . '/';
-        }
-        return $base . '/' . $slug . '/';
-    }
-
-    // EN — root /en/ or /en/<slug>/
-    if ( 'en' === $slug ) {
-        return $base . '/en/';
-    }
-    return $base . '/en/' . $slug . '/';
-}
-
-/**
  * Resolve the translation counterpart URL for a given post.
  *
  * Strategy:
@@ -715,10 +674,9 @@ function gvb_counterpart_url( $post_id = null ) {
 
     if ( 'page' === $post_type ) {
         $pair_id = gvb_get_page_pair_id( $post_id, $is_en );
-        if ( ! $pair_id || 'publish' !== get_post_status( $pair_id ) ) {
-            return '';
-        }
-        return gvb_construct_canonical_page_url( $pair_id );
+        return ( $pair_id && 'publish' === get_post_status( $pair_id ) )
+            ? get_permalink( $pair_id )
+            : '';
     }
 
     if ( in_array( $post_type, array( 'post', 'en_post' ), true ) && function_exists( 'get_field' ) ) {
@@ -865,42 +823,16 @@ add_action( 'wp_head', 'gvb_og_locale', 6 );
  * @return string
  */
 function gvb_lang_switcher_shortcode() {
-    /* Detect EN context from the URL — get_queried_object_id() is
-       unreliable in the header context where this shortcode renders. */
-    $uri        = $_SERVER['REQUEST_URI'] ?? '';
-    $path_only  = parse_url( $uri, PHP_URL_PATH ) ?: $uri;
-    $normalized = '/' . trim( $path_only, '/' );
-    $is_en      = ( strpos( $path_only, '/en/' ) === 0 || $normalized === '/en' );
+    $current_id = get_queried_object_id();
+    $is_en      = gvb_is_english_page( $current_id );
 
-    $site_root = rtrim( get_option( 'siteurl' ), '/' );
-
-    /* Homepage shortcut — both / and /en/ are simple to construct
-       statically, and avoid a subtle bug: on /en/ Polylang's front-page
-       swap hasn't fired by header-render time, so get_queried_object_id()
-       still returns the DE front page (ID 16). gvb_counterpart_url(16)
-       would then return the EN counterpart (i.e. /en/) — the wrong
-       direction for the DE switcher link.
-       For all other URLs, use gvb_counterpart_url + the canonical
-       constructor as before. */
-    if ( $normalized === '/' || $normalized === '/en' ) {
-        $pair_url = $site_root . ( $is_en ? '/' : '/en/' );
-        $self_url = $site_root . ( $is_en ? '/en/' : '/' );
-    } else {
-        $current_id = get_queried_object_id();
-
-        $pair_url = ( $current_id && 'page' === get_post_type( $current_id ) )
-            ? gvb_counterpart_url( $current_id )
-            : '';
-        if ( ! $pair_url ) {
-            $pair_url = $site_root . ( $is_en ? '/' : '/en/' );
-        }
-
-        if ( $current_id && 'page' === get_post_type( $current_id ) ) {
-            $self_url = gvb_construct_canonical_page_url( $current_id );
-        } else {
-            $self_url = $site_root . $uri;
-        }
+    $pair_url = $current_id ? gvb_counterpart_url( $current_id ) : '';
+    if ( ! $pair_url ) {
+        $pair_url = $is_en ? home_url( '/' ) : home_url( '/en/' );
     }
+
+    // Self URL for the active link (matches canonical — no surprise reload target)
+    $self_url = $current_id ? get_permalink( $current_id ) : ( $is_en ? home_url( '/en/' ) : home_url( '/' ) );
 
     $de_href   = $is_en ? $pair_url : $self_url;
     $en_href   = $is_en ? $self_url : $pair_url;
@@ -989,69 +921,6 @@ add_filter( 'locale', function ( $locale ) {
         return 'en_US';
     }
     return $locale;
-} );
-
-/* ── 13. Disable Polylang canonical redirect on /en/ URLs ─────── */
-
-/**
- * Skip Polylang's canonical-URL redirect on every /en/* URL.
- *
- * Polylang's directory mode strips the /en/ prefix from the URL
- * before looking up the page by slug. For pages whose slug collides
- * between DE and EN (e.g. both /faq/ and /en/faq/ use slug "faq",
- * both /tritan/ and /en/tritan/ use slug "tritan"), Polylang's
- * non-hierarchical lookup finds the older DE page first, sees a
- * language mismatch, and redirects /en/<slug>/ → /<slug>/.
- *
- * Our EN pages live as a hierarchical tree with post_parent=140
- * (the "en" page) — WordPress's own hierarchical permalink system
- * resolves /en/<slug>/ to the correct EN page. We don't need (and
- * actively conflict with) Polylang's canonical redirect.
- *
- * Returning false from this filter disables Polylang's redirect
- * on the matching request. WP's native routing then takes over and
- * resolves the URL correctly.
- *
- * @see https://polylang.pro/doc/filter-reference/#pll_check_canonical_url
- */
-add_filter( 'pll_check_canonical_url', function ( $redirect_url ) {
-    $uri = $_SERVER['REQUEST_URI'] ?? '';
-    if ( strpos( $uri, '/en/' ) === 0 || $uri === '/en' ) {
-        return false;
-    }
-    return $redirect_url;
-}, 10, 1 );
-
-/**
- * Make Polylang's /en/* rewrite use the hierarchical pagename.
- *
- * Polylang registers a rewrite rule:
- *   (en)/(.?.+?)/?$  →  index.php?lang=en&pagename=$matches[2]
- *
- * On a URL like /en/faq/ that resolves to query vars
- * `lang=en, pagename=faq`. WP then looks up the page with slug "faq"
- * non-hierarchically — finds the older DE page (ID 66) before our
- * EN page (ID 171), serves the wrong post.
- *
- * Our EN pages live under post_parent=140 (the "en" page), so their
- * hierarchical pagename is `en/<slug>` not just `<slug>`. Prepend
- * "en/" here so the lookup is hierarchical and resolves to the EN
- * page directly. WP's get_page_by_path() handles hierarchical
- * pagenames correctly — only the non-hierarchical lookup was broken.
- *
- * Skip if pagename already includes a slash (already hierarchical),
- * or starts with 'en/' (already prefixed by some other path).
- */
-add_filter( 'request', function ( $vars ) {
-    if (
-        ! empty( $vars['lang'] )
-        && $vars['lang'] === 'en'
-        && ! empty( $vars['pagename'] )
-        && strpos( $vars['pagename'], '/' ) === false
-    ) {
-        $vars['pagename'] = 'en/' . $vars['pagename'];
-    }
-    return $vars;
 } );
 
 /**
