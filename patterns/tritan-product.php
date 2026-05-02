@@ -60,7 +60,7 @@ $img = get_stylesheet_directory_uri() . '/assets/img';
 				</div>
 				<div class="gvb-bottle-card__meta">
 					<p>Größe: 800 ml</p>
-					<p>inklusive Premiumverschluss, Sportverschluss mit Aufpreis</p>
+					<p>inkl. Premiumverschluss, Sportverschluss mit Aufpreis</p>
 				</div>
 			</div>
 		</li>
