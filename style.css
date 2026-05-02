@@ -2186,6 +2186,13 @@ body.page-downloads .wp-site-blocks {
     min-height: 400px !important;
     margin-left: 12px !important;
     margin-right: 12px !important;
+    /* Override the inline 64px lateral padding (set in templates/
+       single.html + single-en_post.html). On a 360px phone the
+       inline padding leaves only ~208px of content width — long
+       German compounds like "Borosilikatglas" can't fit and break
+       mid-word. 20px lateral restores ~296px content width. */
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 
   /* Mobile section-padding tightening (Apple HIG-aligned).
@@ -2227,6 +2234,16 @@ body.page-downloads .wp-site-blocks {
   .gvb-single-hero .wp-block-post-title.wp-block-post-title {
     font-size: clamp(24px, 5vw, 36px) !important;
     letter-spacing: -0.8px !important;
+    /* German compounds (Borosilikatglas, Bildungseinrichtungen, etc.)
+       can still overflow narrow phones even after the 64→20px padding
+       cut. hyphens: auto reads the <html lang> attribute and breaks at
+       proper hyphenation points (Boro-silikat-glas) instead of randomly
+       mid-word. overflow-wrap: break-word is a fallback for words that
+       have no hyphenation dictionary entry — only triggers as last
+       resort, never before whitespace breaks. */
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    overflow-wrap: break-word;
   }
 
   /* Blog article hero — uniform dark overlay on mobile so the title stays
