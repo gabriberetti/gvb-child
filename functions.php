@@ -955,6 +955,38 @@ add_filter( 'pll_check_canonical_url', function ( $redirect_url ) {
 }, 10, 1 );
 
 /**
+ * Make Polylang's /en/* rewrite use the hierarchical pagename.
+ *
+ * Polylang registers a rewrite rule:
+ *   (en)/(.?.+?)/?$  →  index.php?lang=en&pagename=$matches[2]
+ *
+ * On a URL like /en/faq/ that resolves to query vars
+ * `lang=en, pagename=faq`. WP then looks up the page with slug "faq"
+ * non-hierarchically — finds the older DE page (ID 66) before our
+ * EN page (ID 171), serves the wrong post.
+ *
+ * Our EN pages live under post_parent=140 (the "en" page), so their
+ * hierarchical pagename is `en/<slug>` not just `<slug>`. Prepend
+ * "en/" here so the lookup is hierarchical and resolves to the EN
+ * page directly. WP's get_page_by_path() handles hierarchical
+ * pagenames correctly — only the non-hierarchical lookup was broken.
+ *
+ * Skip if pagename already includes a slash (already hierarchical),
+ * or starts with 'en/' (already prefixed by some other path).
+ */
+add_filter( 'request', function ( $vars ) {
+    if (
+        ! empty( $vars['lang'] )
+        && $vars['lang'] === 'en'
+        && ! empty( $vars['pagename'] )
+        && strpos( $vars['pagename'], '/' ) === false
+    ) {
+        $vars['pagename'] = 'en/' . $vars['pagename'];
+    }
+    return $vars;
+} );
+
+/**
  * Add a slug-based class to body — `.page-{slug}` — on every page.
  *
  * WP core's body_class() emits `.page-id-X` (env-specific) and
