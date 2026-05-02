@@ -4823,8 +4823,14 @@ body.page-downloads .wp-site-blocks {
   .gvb-steps__text h3 {
     font-size: clamp(45px, calc(30px + 1.042vw), 50px);
   }
+  /* About-us Vision/Mission card — match the canonical 1440→1920
+     ×1.333 wide-monitor scale used by .gvb-personalisieren-card and
+     .gvb-overlay-card (cards section convention). H2 45→60, body 16→21. */
   .gvb-uberuns-vm__text h2 {
-    font-size: clamp(45px, calc(30px + 1.042vw), 50px);
+    font-size: clamp(45px, 3.125vw, 60px);
+  }
+  .gvb-uberuns-vm__text p {
+    font-size: clamp(16px, calc(1px + 1.042vw), 21px);
   }
 
   /* Flaschen cards desc: at desktop+ widths Chrome's `text-wrap: pretty`
