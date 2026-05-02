@@ -865,16 +865,35 @@ add_action( 'wp_head', 'gvb_og_locale', 6 );
  * @return string
  */
 function gvb_lang_switcher_shortcode() {
-    $current_id = get_queried_object_id();
-    $is_en      = gvb_is_english_page( $current_id );
+    /* Detect EN context from the URL, not from get_queried_object_id():
+       in the header (where this shortcode renders) the queried object is
+       often unreliable, especially on the /en/ home where Polylang's
+       front-page swap and our locale filter race the main query. The URL
+       is the unambiguous source of truth. */
+    $uri   = $_SERVER['REQUEST_URI'] ?? '';
+    $is_en = ( strpos( $uri, '/en/' ) === 0 || $uri === '/en' );
 
-    $pair_url = $current_id ? gvb_counterpart_url( $current_id ) : '';
+    $current_id = get_queried_object_id();
+
+    /* Build URLs from raw siteurl, bypassing Polylang's home_url +
+       _get_page_link filters which rewrite every URL using the *current*
+       request language — wrong for the counterpart link. */
+    $site_root = rtrim( get_option( 'siteurl' ), '/' );
+
+    $pair_url = ( $current_id && in_array( get_post_type( $current_id ), array( 'page' ), true ) )
+        ? gvb_counterpart_url( $current_id )
+        : '';
     if ( ! $pair_url ) {
-        $pair_url = $is_en ? home_url( '/' ) : home_url( '/en/' );
+        $pair_url = $site_root . ( $is_en ? '/' : '/en/' );
     }
 
-    // Self URL for the active link (matches canonical — no surprise reload target)
-    $self_url = $current_id ? get_permalink( $current_id ) : ( $is_en ? home_url( '/en/' ) : home_url( '/' ) );
+    // Self URL for the active link — use raw URL construction for pages,
+    // request URI for everything else.
+    if ( $current_id && 'page' === get_post_type( $current_id ) ) {
+        $self_url = gvb_construct_canonical_page_url( $current_id );
+    } else {
+        $self_url = $site_root . ( $uri ?: ( $is_en ? '/en/' : '/' ) );
+    }
 
     $de_href   = $is_en ? $pair_url : $self_url;
     $en_href   = $is_en ? $self_url : $pair_url;
