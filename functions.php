@@ -923,6 +923,37 @@ add_filter( 'locale', function ( $locale ) {
     return $locale;
 } );
 
+/* ── 13. Disable Polylang canonical redirect on /en/ URLs ─────── */
+
+/**
+ * Skip Polylang's canonical-URL redirect on every /en/* URL.
+ *
+ * Polylang's directory mode strips the /en/ prefix from the URL
+ * before looking up the page by slug. For pages whose slug collides
+ * between DE and EN (e.g. both /faq/ and /en/faq/ use slug "faq",
+ * both /tritan/ and /en/tritan/ use slug "tritan"), Polylang's
+ * non-hierarchical lookup finds the older DE page first, sees a
+ * language mismatch, and redirects /en/<slug>/ → /<slug>/.
+ *
+ * Our EN pages live as a hierarchical tree with post_parent=140
+ * (the "en" page) — WordPress's own hierarchical permalink system
+ * resolves /en/<slug>/ to the correct EN page. We don't need (and
+ * actively conflict with) Polylang's canonical redirect.
+ *
+ * Returning false from this filter disables Polylang's redirect
+ * on the matching request. WP's native routing then takes over and
+ * resolves the URL correctly.
+ *
+ * @see https://polylang.pro/doc/filter-reference/#pll_check_canonical_url
+ */
+add_filter( 'pll_check_canonical_url', function ( $redirect_url ) {
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    if ( strpos( $uri, '/en/' ) === 0 || $uri === '/en' ) {
+        return false;
+    }
+    return $redirect_url;
+}, 10, 1 );
+
 /**
  * Add a slug-based class to body — `.page-{slug}` — on every page.
  *
