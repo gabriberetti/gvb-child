@@ -5978,6 +5978,23 @@ body.page-downloads .wp-site-blocks {
   }
 }
 
+/* ≤375 (Mobile M and below): drop another 2px so titles fit at the
+   smallest viewports. */
+@media (max-width: 375px) {
+  .gvb-hero h1,
+  .gvb-hero .wp-block-heading {
+    font-size: 31px !important;
+  }
+}
+
+/* ≤320 (Mobile S): another 2px drop for the tightest phones. */
+@media (max-width: 320px) {
+  .gvb-hero h1,
+  .gvb-hero .wp-block-heading {
+    font-size: 29px !important;
+  }
+}
+
 @media (max-width: 480px) {
 
   /* ── Contact form: stack two-column rows on phones ──
